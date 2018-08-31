@@ -1,0 +1,44 @@
+{
+    "name": "e-com-club market place",
+    "authors": [
+        {
+            "name": "Talisson Trindade",
+            "email": "talissonf@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.8",
+        "slim/slim": "^3.8",
+        "monolog/monolog": "^1.22",
+        "phpmailer/phpmailer": "^5.2",
+        "tuupola/slim-basic-auth": "^2.2",
+        "davidepastore/slim-validation": "^0.5.0",
+        "bairwell/middleware-cors": "^0.3.7",
+        "kevinlebrun/slug.php": "1.*",
+        "wixel/gump": "dev-master",
+        "nikic/fast-route": "^1.2",
+        "slim/http-cache": "^0.4.0",
+        "illuminate/database": "^5.4",
+        "oscarotero/psr7-middlewares": "^3.21",
+        "claviska/simpleimage": "^3.3",
+        "tuupola/slim-jwt-auth": "^2.3",
+        "firebase/php-jwt": "^5.0",
+        "vlucas/phpdotenv": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Market\\": "src/Market"
+        }
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php -r \"file_exists('.env') || copy('.env', '.env'); \""
+        ],
+        "start": "php -S localhost:8000 -t public public/index.php"
+    },
+    "license": "proprietary",
+    "homepage": "https://market.e-com.plus/pt_br/"
+}
