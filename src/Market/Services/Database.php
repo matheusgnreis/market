@@ -1,6 +1,6 @@
 <?php
 
-namespace MeuMaquinario\Services;
+namespace Market\Services;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 

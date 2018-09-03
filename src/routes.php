@@ -1,9 +1,9 @@
 <?php
+use Market\Controller\AppsController;
 
-$rotas = function (){
-   
+$rotas = function () {
+    $this->get('apps', AppsController::class . ':getAll');
 };
 
 // Api Routes
-$app->group('/v1', $rotas);
-
+$app->group('/', $rotas);

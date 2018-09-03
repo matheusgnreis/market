@@ -1,6 +1,6 @@
 <?php
 
-namespace MeuMaquinario\Services;
+namespace App\Services;
 
 // ======================================================================== #
 //
