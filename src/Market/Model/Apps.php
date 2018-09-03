@@ -1,5 +1,5 @@
 <?php
-namespace Market\Controller;
+namespace Market\Model;
 
 class Apps extends \Illuminate\Database\Eloquent\Model
 {
