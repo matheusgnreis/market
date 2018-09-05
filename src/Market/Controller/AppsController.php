@@ -67,7 +67,6 @@ class AppsController
         $body = $request->getParsedBody();
 
         $app = Apps::create([
-            'id' => $body['id'],
             'partner_id' => $body['partner_id'],
             'title' => $body['title'],
             'slug' => $body['slug'],
@@ -111,7 +110,6 @@ class AppsController
 
         $body = $request->getParsedBody();
         $update = $app->update([
-            'id' => isset($body['id']) ? $body['id'] : $app->id,
             'partner_id' => isset($body['partner_id']) ? $body['partner_id'] : $app->partner_id,
             'title' => isset($body['title']) ? $body['title'] : $app->title,
             'slug' => isset($body['slug']) ? $body['slug'] : $app->slug,
