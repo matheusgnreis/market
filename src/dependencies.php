@@ -40,7 +40,7 @@ $container['cache'] = function () {
 $container['view'] = function ($c) {
 
     $view = new \Slim\Views\Twig(__DIR__.'/Market/View', [
-        'cache' => 'path/to/cache'
+        'cache' => 'cache/twig/cache'
     ]);
     
     // Instantiate and add Slim specific extension
