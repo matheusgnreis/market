@@ -8,7 +8,7 @@ class Themes extends Model
     /** db table */
     protected $table = 'themes';
     /** The attributes that are mass assignable. */
-    protected $fillable = ['id', 'partner_id', 'title', 'slug', 'thumbnail', 'description', 'json_body', 'paid', 'version', 'version_date', 'avg_stars', 'evaluations', 'link_documentation', 'link_video', 'value_license_basic', 'value_license_extend'];
+    protected $fillable = ['id', 'partner_id', 'title', 'slug', 'category', 'thumbnail', 'description', 'json_body', 'paid', 'version', 'version_date', 'avg_stars', 'evaluations', 'link_documentation', 'link_video', 'value_license_basic', 'value_license_extend'];
     /** The attributes that will be hidden */
     protected $hidden = [];
     /** Indicates if the model should be timestamped. */
