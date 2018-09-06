@@ -1,9 +1,13 @@
 <?php
 use Market\Controller\AppsController;
+use Market\Controller\HomeController;
 
-$rotas = function () {
-    $this->get('apps', AppsController::class . ':getAll');
+$rotas = function (){
+    $this->get('/', function(){ echo "redirect lang default."; });
+    $this->get('/{lang}', HomeController::class . ':index');
+    $this->get('/{lang}/apps', HomeController::class . ':');
+    $this->get('/{lang}/themes', HomeController::class . ':');
 };
 
 // Api Routes
-$app->group('/', $rotas);
+$app->group('', $rotas)->add($langRedirect);
