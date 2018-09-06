@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="../css/vendor/simple-line-icons.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<!-- favicon -->
+	<link rel="icon" href="https://e-com.club/mass/ftp/tutoriais/favicon.png">
+	<title>{{dictionary.title}} | {{dictionary.word_dashboard}}</title>
+
+</head>
+<body>
+  {% import 'macros.twig' as macro_main %}
+  {% import 'macro-dashboard.twig' as macro_dashboad %}
+	{% import 'macro-dasboard-uploaditem.twig' as macro_dash_up %}
+	<!-- SIDE MENU -->
+	{{macro_dashboad.all_menu(dictionary,user)}}
+	<!-- /SIDE MENU -->
+
+    <!-- DASHBOARD BODY -->
+    <div class="dashboard-body">
+        <!-- DASHBOARD HEADER -->
+        {{macro_dashboad.dashboard_header(dictionary)}}
+        <!-- DASHBOARD HEADER -->
+
+        <!-- DASHBOARD CONTENT -->
+        <div class="dashboard-content">
+            <!-- HEADLINE -->
+            <div class="headline simple primary">
+                <h4>Upload Item</h4>
+            </div>
+            <!-- /HEADLINE -->
+
+			<!-- FORM BOX ITEMS -->
+			<div class="form-box-items full">
+				<!-- FORM BOX ITEM -->
+				<div class="form-box-item full">
+					<h4>Item Specifications</h4>
+					<hr class="line-separator">
+					<form id="upload_form">
+						{# if selected app send categorys app else categories theme#}
+						<div class="input-container half">
+							<input type="checkbox" id="item_is_app" name="item_app" checked>
+							<label for="item_is_app" class="label-check">
+								<span class="checkbox primary"><span></span></span>
+								{{dictionary.word_app}}
+							</label>
+						</div>
+						<div class="input-container half">
+							<input type="checkbox" id="item_is_theme" name="item_is_theme">
+							<label for="item_is_theme" class="label-check">
+								<span class="checkbox primary"><span></span></span>
+								{{dictionary.word_theme}}
+								<input id="inv-item_is_theme" />
+							</label>
+						</div>
+						<!-- input used to know if this add app or theme -->
+						<input type="text" id="inp-item_is_app" name="item_name" value="{{is_app}}" style="display:none;">
+
+
+
+						{% for i in 1.. total_cat_app %}
+						<div id="enable-app" style="display:block;">
+							{% if loop.index > 1 %}
+							<div id="cat-app-{{i}}" style="display:none;">
+							<!-- INPUT CONTAINER -->
+							{{macro_dash_up.select_category(app_category,1,i)}}
+							<!--button id="add_category">+ category </button-->
+							<!-- /INPUT CONTAINER -->
+							</div>
+							{% else %}
+							<div id="cat-app-{{i}}" style="display:block;">
+							<!-- INPUT CONTAINER -->
+							{{macro_dash_up.select_category(app_category,1,i)}}
+							<!--button id="add_category">+ category </button-->
+							<!-- /INPUT CONTAINER -->
+							</div>
+							{% endif %}
+						</div>
+						{% endfor %}
+						<input type="text" id="total_cat_app"  value="{{total_cat_app}}" style="display:none;">
+						<input type="text" id="total_cat_theme"  value="{{total_cat_theme}}" style="display:none;">
+
+						{% for i in 1.. total_cat_theme %}
+						<div id="enable-theme" style="display:none;">
+							{% if loop.index > 1 %}
+							<div id="cat-app-{{i}}" style="display:none;">
+								<!-- INPUT CONTAINER -->
+								{{macro_dash_up.select_category(theme_category,0,i)}}
+								<!--button id="add_category">+ category </button-->
+								<!-- /INPUT CONTAINER -->
+							</div>
+						{% else %}
+							<div id="cat-theme-{{i}}" style="display:block;">
+								<!-- INPUT CONTAINER -->
+								{{macro_dash_up.select_category(theme_category,0,i)}}
+								<!--button id="add_category">+ category </button-->
+								<!-- /INPUT CONTAINER -->
+							</div>
+							{% endif %}
+						</div>
+						{% endfor %}
+
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container">
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container half">
+							<button class="button mid dark" id="add-category"> Add Category </button>
+						</div>
+						<!-- /INPUT CONTAINER -->
+						<!-- INPUT CONTAINER -->
+						<div class="input-container half">
+							<button class="button mid dark" id="rm-category"> Remove Category </button>
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container">
+							<label id="name-required" for="item_name" class="rl-label required">Name of the Item (Max 40 Characters)</label>
+							<input type="text" id="item_name" name="item_name" placeholder="Enter them item name here...">
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container half">
+							<label id="version-required" for="item_numversion" class="rl-label required">Num Version</label>
+							<input type="text" id="item_numversion" name="item_numversion" placeholder="Ex: 1.0.1">
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container half">
+							<label for="item_dateversion" class="rl-label">Date Version</label>
+							<!--input type="text" id="item_dateversion" name="item_dateversion" placeholder="Enter num version item  here..."-->
+							<input type="text" id="calendar" id="in-calendar"/>
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container">
+							<label id="desc-required" for="item_description" class="rl-label required">Item Description</label>
+							<textarea id="item_description" name="item_description" placeholder="Enter them item description here..."></textarea>
+						</div>
+						<div id="enable-app" style="display:block;">
+							<!-- div only app -->
+						<!-- INPUT CONTAINER -->
+						<div class="input-container">
+							<label for="item_scripturl" class="rl-label">Script url</label>
+							<input type="text" id="item_scripturl" name="item_scripturl" placeholder="Enter script url item  here...">
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container">
+							<label for="item_github" class="rl-label">GitHub</label>
+							<input type="text" id="item_github" name="item_github" placeholder="Enter GitHub item  here...">
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container half" id="type_app">
+							<label for="type-app" class="rl-label required">Type of app</label>
+							<label for="type-app" class="select-block" id="type_app">
+								<select name="type-app" id="type-app">
+									<option value="1">Dashboard</option>
+									<option value="2">Storefront</option>
+									<option value="3">Module Package</option>
+									<option value="4">External</option>
+								</select>
+								<!-- SVG ARROW -->
+								<svg class="svg-arrow">
+									<use xlink:href="#svg-arrow"></use>
+								</svg>
+								<!-- /SVG ARROW -->
+							</label>
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container half" id="module-type" >
+							<label for="module-type" class="rl-label" id="module-type">Module Type</label>
+							<label for="module-type" class="select-block" id="module-type">
+								<select name="module-type" id="module-type" disabled style="display:none;">
+									<option value="al">al</option>
+									<option value="pd">pd</option>
+									<option value="sc">sc</option>
+									<option value="sh">sh</option>
+									<option value="pa">pa</option>
+									<option value="ck">ck</option>
+									<option value="cf">cf</option>
+									<option value="rg">rg</option>
+									<option value="lg">lg</option>
+									<option value="ct">ct</option>
+									<option value="nw">nw</option>
+								</select>
+								<!-- SVG ARROW -->
+								<svg class="svg-arrow">
+									<use xlink:href="#svg-arrow"></use>
+								</svg>
+								<!-- /SVG ARROW -->
+							</label>
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container">
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container half">
+							<label class="rl-label">Authentication</label>
+							<div class="input-container half">
+								<input type="checkbox" id="yes-id" name="yes_id">
+								<label for="yes-id" class="label-check-auth">
+									<span class="checkbox primary"><span></span></span>
+									YES
+								</label>
+							</div>
+							<div class="input-container half">
+								<input type="checkbox" id="no-id" name="no_id" checked>
+								<label for="no-id" class="label-check-auth">
+									<span class="checkbox primary"><span></span></span>
+									NO
+								</label>
+							</div>
+							<input id="authentication" value="0" style="display:none;"/>
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+
+
+						<!-- INPUT CONTAINER -->
+						{#{macro_dash_up.up_file()}#}
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						{#{macro_dash_up.up_image()}#}
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						{#{macro_dash_up.up_screenshots()}#}
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						{# not implemented
+						<div class="input-container half">
+							<label for="files_included" class="rl-label required">Files Included</label>
+							<input type="text" id="files_included" name="files_included" placeholder="Enter them files included here...">
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container half">
+							<label for="item_dimensions" class="rl-label required">Item Dimensions</label>
+							<input type="text" id="item_dimensions" name="item_dimensions" placeholder="Enter them item dimensions here...">
+						</div>
+						#}
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container">
+							<label for="item_website" class="rl-label">WebSite</label>
+							<input type="text" id="item_website" name="item_website" placeholder="Enter item website here...">
+						</div>
+
+					<!-- div only app -->
+					</div>
+
+
+
+
+
+					<!-- INPUT CONTAINER -->
+					<div class="input-container">
+					</div>
+					<!-- /INPUT CONTAINER -->
+
+					<div id="enable-theme" style="display:none;">
+					<!-- INPUT CONTAINER -->
+					<div class="input-container">
+						<label for="item_website" class="rl-label">Documentation </label>
+						<input type="text" id="item_linkdoc" name="item_linkdoc" placeholder="Enter item link documentation link here...">
+					</div>
+					<!-- /INPUT CONTAINER -->
+					</div>
+					<hr class="line-separator">
+
+						<!-- INPUT CONTAINER -->
+						<div class="input-container">
+							<label for="item_linkvideo" class="rl-label">Link Video</label>
+							<input type="text" id="item_linkvideo" name="item_linkvideo" placeholder="Enter link video item here...">
+						</div>
+						<!-- /INPUT CONTAINER -->
+
+						{{macro_dash_up.plans(total_plans_app, dictionary)}}
+						{{macro_dash_up.faqs(total_faqs,dictionary)}}
+
+
+
+						<div class="clearfix"></div>
+
+						<!-- INPUT CONTAINER -->
+						{#not implemented
+						<div class="input-container half">
+							<label for="sv" class="rl-label required">Minimum Software Version</label>
+							<label for="sv" class="select-block">
+								<select name="sv" id="sv">
+									<option value="0">Adobe Suite CS6</option>
+									<option value="1">Adobe Suite CS7</option>
+								</select>
+								<!-- SVG ARROW -->
+								<svg class="svg-arrow">
+									<use xlink:href="#svg-arrow"></use>
+								</svg>
+								<!-- /SVG ARROW -->
+							</label>
+						</div>
+
+						<!-- /INPUT CONTAINER -->
+
+						<!-- INPUT CONTAINER -->
+
+						<div class="input-container">
+							<label for="item_tags" class="rl-label required">Item Tags</label>
+							<input type="text" id="item_tags" name="item_tags" placeholder="Enter them item tags separated by a comma...">
+						</div>
+						#}
+						<!-- /INPUT CONTAINER -->
+						<hr class="line-separator">
+						<button class="button big dark">Submit Item <span class="primary">.</span></button>
+						<hr class="line-separator">
+					</form>
+					<div class="input-container">
+						<label for="item_linkvideo" class="rl-label">Files</label>
+					</div>
+					{{ macro_dash_up.form_send() }}
+				</div>
+				<!-- /FORM BOX ITEM -->
+			</div>
+			<!-- /FORM BOX ITEMS -->
+
+			{#not implemented
+			<!-- FORM BOX ITEMS -->
+			<div class="form-box-items wrap-1-3 right">
+
+				<!-- FORM BOX ITEM -->
+				<div class="form-box-item full">
+					<h4>Upload Queue</h4>
+					<hr class="line-separator">
+					<!-- PG BAR LIST -->
+					<div class="pg-bar-list">
+						<!-- PG BAR LIST ITEM -->
+						<div class="pg-bar-list-item">
+							<div class="pg-bar-list-item-info">
+								<p class="text-header">Professional Business Card</p>
+								<p class="text-header">86%</p>
+								<p class="timestamp">4 days ago</p>
+							</div>
+							<!-- BADGE PROGRESS -->
+							<div class="pg1"></div>
+							<!-- /BADGE PROGRESS -->
+						</div>
+						<!-- /PG BAR LIST ITEM -->
+
+						<!-- PG BAR LIST ITEM -->
+						<div class="pg-bar-list-item">
+							<div class="pg-bar-list-item-info">
+								<p class="text-header">Professional Business Card</p>
+								<p class="text-header">92%</p>
+								<p class="timestamp">12 days ago</p>
+							</div>
+							<!-- BADGE PROGRESS -->
+							<div class="pg2"></div>
+							<!-- /BADGE PROGRESS -->
+						</div>
+						<!-- /PG BAR LIST ITEM -->
+					</div>
+					<!-- /PG BAR LIST -->
+				</div>
+				<!-- /FORM BOX ITEM -->
+
+
+
+				<!-- FORM BOX ITEM -->
+				<div class="form-box-item full">
+					<h4>Upload Guidelines</h4>
+					<hr class="line-separator">
+					<!-- PLAIN TEXT BOX -->
+					<div class="plain-text-box">
+						<!-- PLAIN TEXT BOX ITEM -->
+						<div class="plain-text-box-item">
+							<p class="text-header">File Upload:</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+						</div>
+						<!-- /PLAIN TEXT BOX ITEM -->
+
+						<!-- PLAIN TEXT BOX ITEM -->
+						<div class="plain-text-box-item">
+							<p class="text-header">Photos and Images:</p>
+							<p>Lorem ipsum dolor sit amet.<br>Consectetur adipisicing elit, sed do.</p>
+							<p>Eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						</div>
+						<!-- /PLAIN TEXT BOX ITEM -->
+
+						<!-- PLAIN TEXT BOX ITEM -->
+						<div class="plain-text-box-item">
+							<p class="text-header">Guide with Links:</p>
+							<p><a href="#" class="primary">Click here for the link.</a></p>
+						</div>
+						<!-- /PLAIN TEXT BOX ITEM -->
+					</div>
+					<!-- /PLAIN TEXT BOX -->
+				</div>
+				<!-- /FORM BOX ITEM -->
+
+			</div>
+			<!-- /FORM BOX ITEMS -->
+			#}
+			<div class="clearfix"></div>
+        </div>
+        <!-- DASHBOARD CONTENT -->
+    </div>
+    <!-- /DASHBOARD BODY -->
+
+	<div class="shadow-film closed"></div>
+
+<!-- SVG ARROW -->
+<svg style="display: none;">
+	<symbol id="svg-arrow" viewBox="0 0 3.923 6.64014" preserveAspectRatio="xMinYMin meet">
+		<path d="M3.711,2.92L0.994,0.202c-0.215-0.213-0.562-0.213-0.776,0c-0.215,0.215-0.215,0.562,0,0.777l2.329,2.329
+			L0.217,5.638c-0.215,0.215-0.214,0.562,0,0.776c0.214,0.214,0.562,0.215,0.776,0l2.717-2.718C3.925,3.482,3.925,3.135,3.711,2.92z"/>
+	</symbol>
+</svg>
+<!-- /SVG ARROW -->
+
+<!-- SVG PLUS -->
+<svg style="display: none;">
+	<symbol id="svg-plus" viewBox="0 0 13 13" preserveAspectRatio="xMinYMin meet">
+		<rect x="5" width="3" height="13"/>
+		<rect y="5" width="13" height="3"/>
+	</symbol>
+</svg>
+<!-- /SVG PLUS -->
+
+<!-- SVG MINUS -->
+<svg style="display: none;">
+	<symbol id="svg-minus" viewBox="0 0 13 13" preserveAspectRatio="xMinYMin meet">
+		<rect y="5" width="13" height="3"/>
+	</symbol>
+</svg>
+<!-- /SVG MINUS -->
+
+<!-- jQuery -->
+<script src="../js/vendor/jquery-3.1.0.min.js"></script>
+<!-- XM Pie Chart -->
+<script src="../js/vendor/jquery.xmpiechart.min.js"></script>
+<!-- XM LineFill -->
+<script src="../js/vendor/jquery.xmlinefill.min.js"></script>
+<!-- Side Menu -->
+<script src="../js/side-menu.js"></script>
+<!-- Dashboard Header -->
+<script src="../js/dashboard-header.js"></script>
+<!-- Dashboard UploadItem -->
+<script src="../js/dashboard-uploaditem.js"></script>
+{{macro_main.scripts()}}
+</body>
+</html>

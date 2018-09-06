@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="../css/vendor/simple-line-icons.css">
+	<link rel="stylesheet" href="../css/vendor/tooltipster.css">
+	<link rel="stylesheet" href="../css/style.css">
+
+  <link rel="stylesheet" href="../css/vendor/magnific-popup.css">
+	<!-- favicon -->
+	<link rel="icon" href="favicon.ico">
+	<title>{{ dictionary.title }} | {{app_info.name}}</title>
+</head>
+<body>
+  {% import 'macros.twig' as macro_main %}
+  {% import 'macro-item.twig' as macro_item %}
+  <!-- header -->
+  	{{macro_main.all_header(login,dictionary,user,app_category,theme_category)}}
+  <!-- /header -->
+
+
+	<!-- SECTION HEADLINE -->
+	<div class="section-headline-wrap">
+		<div class="section-headline" id="addons-buy">
+			<h2>{{app_info.name}}</h2>
+			<input id="id-item" style="display:none" value="{{app_info.id}}"></input>
+			<input id="item-is-app" style="display:none" value="{{info_page.app}}"></input>
+			<!--p>Home<span class="separator">/</span>Web Design<span class="separator">/</span><span class="current-section">HTML Templates</span></p-->
+		</div>
+	</div>
+	<!-- /SECTION HEADLINE -->
+
+	<!-- SECTION -->
+	<div class="section-wrap">
+		<div class="section">
+			<!-- SIDEBAR -->
+			<div class="sidebar right">
+
+
+				<!-- SIDEBAR ITEM -->
+				<div class="sidebar-item">
+					{% if info_page.app == 0 %}
+					<h6 style="text-align: center;"> Link Doc </h6>
+					{% else %}
+					<h6 style="text-align: center;">Web site</h6>
+					{% endif %}
+					<hr class="line-separator">
+					<a href="{{app_info.website}}"><h6 style="text-align: center;">{{app_info.website}}</h6></a>
+					<div class="clearfix"></div>
+				</div>
+				<!-- /SIDEBAR ITEM -->
+
+        <!-- SIDEBAR ITEM -->
+        {% if info_page.app == 0 %}
+				<div class="sidebar-item" id="template">
+          {% for i in array_images %}
+					<a href="{{info_footer.path_file}}#template{{i.id}}" id="{{i.id}}" for="{{i.id}}" class="button mid dark spaced"><span class="primary">Templete {{i.id}}</span></a>
+          {% endfor %}
+					<div class="clearfix"></div>
+				</div>
+        {% endif %}
+				<!-- /SIDEBAR ITEM -->
+
+        <!-- SIDEBAR ITEM -->
+				<div class="sidebar-item" id="item-page">
+					<p class="price large" id="coin"><span id="coin">{{dictionary.coin}}$</span></p>
+					<hr class="line-separator">
+					<form id="aux_form" name="aux_form"></form>
+					{% for plan in plans %}
+					<!-- CHECKBOX -->
+					<input type="radio" id="{{plan.id}}" name="{{plan.id}}" form="aux_form" {{plan.checked}} class="checkbox-plan">
+					<label class="b-label linked-check" for="{{plan.id}}">
+						<span class="checkbox primary"><span></span></span>
+						{{plan.name}}
+						<input id="i-{{plan.id}}" style="display:none" value="{{plan.value}}"></input>
+						<input id="s-{{plan.id}}" style="display:none" value="{{plan.id}}"></input>
+					</label>
+					<!-- /CHECKBOX -->
+					<p class="license-text" data-license="{{plan.id}}" >{{plan.desc}}</p>
+					{% endfor %}
+					{# not implemented
+					<!-- CHECKBOX -->
+					<input type="radio" id="regular-license" name="regular-license" form="aux_form" checked>
+					<label class="b-label linked-check" for="regular-license">
+						<span class="checkbox primary"><span></span></span>
+						Regular License
+					</label>
+					<!-- /CHECKBOX -->
+					<p class="license-text" data-license="regular-license" style="display: block;">Lorem ipsum dolor sit amet, sectetur adipisicing elit, sed do eiusmod tempor cididunt ut labore.</p>
+
+					<!-- CHECKBOX -->
+					<input type="radio" id="extended-license" name="extended-license" form="aux_form">
+					<label class="b-label linked-check" for="extended-license">
+						<span class="checkbox primary"><span></span></span>
+						Extended License
+					</label>
+					<!-- /CHECKBOX -->
+					<p class="license-text" data-license="extended-license">Lorem ipsum dolor sit amet, sectetur adipisicing elit, sed do eiusmod tempor cididunt ut labore.</p>
+					#}
+          <a href="#" class="button mid dark spaced" id="buy-item"><span class="primary">{{dictionary.buy_now}}</span></a>
+					<!--a href="#" class="button mid primary half">Add to Cart</a>
+					<a href="#" class="button mid secondary wicon half"><span class="icon-heart"></span>652</a-->
+					<div class="clearfix"></div>
+
+					<form id="addons-buy-item" action="scripts/buy" method="post">
+		        <input type="hidden" id="addons-app-id" name="id_app" />
+		        <input type="hidden" id="addons-app-is_app" name="is_app" />
+						<input type="hidden" id="addons-app-id_plan" name="id_plan" />
+						<input type="hidden" id="addons-app-value" name="value" />
+						<input type="hidden" id="addons-app-id_template" name="id_template" />
+
+					</form>
+				</div>
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				{#{macro_item.author_bio()}#}
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				{#{macro_item.product_info()}#}
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				{#{macro_item.author_reputation()}#}
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				{#{macro_item.author_outher_items()}#}
+				<!-- /SIDEBAR ITEM -->
+			</div>
+			<!-- /SIDEBAR -->
+
+      <!-- CONTENT -->
+			<div class="content left" id="addons-items">
+      				<!-- POST -->
+				<article class="post">
+					{% if info_page.app == 1 %}
+					<!-- POST IMAGE -->
+					{{macro_item.image_main(image_main,info_page)}}
+					<!-- /POST IMAGE -->
+					{% else %}
+						{% for i in array_images %}
+							{% if loop.index0 > 0 %}
+							<div id="image-{{i.id}}" style="display:none;">
+								{{macro_item.image_main(i,info_page)}}
+							</div>
+							{% else %}
+								<div id="image-{{i.id}}" style="display: block;">
+									{{macro_item.image_main(i,info_page)}}
+								</div>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+					{# themes not outher images #}
+					{% if info_page.app == 1 %}
+
+					<!-- POST IMAGE SLIDES -->
+					<div class="post-image-slides">
+						<!-- IMAGE SLIDES WRAP -->
+						{{macro_item.outher_images_item(image_main,array_images)}}
+						<!-- IMAGE SLIDES WRAP -->
+					</div>
+					<!-- /POST IMAGE SLIDES -->
+					{% endif %}
+
+
+					<h3 style="text-align: left;">Video</h3>
+					<hr class="line-separator">
+					<div>
+						<iframe width="560" height="315" src="{{app_info.video}}"
+						frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+					</div>
+					<hr class="line-separator">
+
+					<!-- POST CONTENT -->
+					<div class="post-content">
+						<!-- POST PARAGRAPH -->
+						{{macro_item.item_description(dictionary,app_info.description)}}
+						<!-- /POST PARAGRAPH -->
+
+						<!-- POST PARAGRAPH -->
+						{#{macro_item.item_small_description()}#}
+						<!-- /POST PARAGRAPH -->
+
+						<!-- POST PARAGRAPH -->
+						{#{macro_item.list_unordered()}#}
+						<!-- /POST PARAGRAPH -->
+
+						<!-- POST PARAGRAPH -->
+						{#{macro_item.list_ordered()}#}
+						<!-- /POST PARAGRAPH -->
+
+						<div class="clearfix"></div>
+					</div>
+					<!-- /POST CONTENT -->
+
+					<hr class="line-separator">
+
+					<!-- SHARE -->
+					<div class="share-links-wrap">
+						<p class="text-header small">Share this:</p>
+						<!-- SHARE LINKS -->
+						<ul class="share-links hoverable">
+							<li><a href="#" class="fb"></a></li>
+							<li><a href="#" class="twt"></a></li>
+							<li><a href="#" class="db"></a></li>
+							<li><a href="#" class="rss"></a></li>
+							<li><a href="#" class="gplus"></a></li>
+						</ul>
+						<!-- /SHARE LINKS -->
+					</div>
+					<!-- /SHARE -->
+				</article>
+				<!-- /POST -->
+
+				<!-- POST TAB -->
+				<div class="post-tab">
+
+					<!-- TAB HEADER -->
+					<div class="tab-header primary">
+            {#not implemented
+						<!-- TAB ITEM -->
+						<div class="tab-item selected">
+							<p class="text-header">Comments (35)</p>
+						</div>
+            #}
+						<!-- /TAB ITEM -->
+
+						<!-- TAB ITEM -->
+            {#not implemented
+						<div class="tab-item">
+							<p class="text-header">Buyers Corner</p>
+						</div>
+            #}
+						<!-- /TAB ITEM -->
+
+						<!-- TAB ITEM -->
+						<div class="tab-item selected ">
+							<p class="text-header">Item FAQs</p>
+						</div>
+						<!-- /TAB ITEM -->
+						{{macro_item.faqs(faqs)}}
+					</div>
+					<!-- /TAB HEADER -->
+
+          {# not implemented
+					<!-- TAB CONTENT -->
+					<div class="tab-content void">
+						<!-- COMMENTS -->
+						<div class="comment-list">
+							<!-- COMMENT -->
+							<div class="comment-wrap">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_06.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+								<div class="comment">
+									<p class="text-header">View as Customer</p>
+									<!-- PIN -->
+									<span class="pin greyed">Purchased</span>
+									<!-- /PIN -->
+									<p class="timestamp">5 Hours Ago</p>
+									<a href="#" class="report">Report</a>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magnada. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in henderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+								</div>
+							</div>
+							<!-- /COMMENT -->
+
+							<!-- LINE SEPARATOR -->
+							<hr class="line-separator">
+							<!-- /LINE SEPARATOR -->
+
+							<!-- COMMENT -->
+							<div class="comment-wrap">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_11.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+								<div class="comment">
+									<p class="text-header">View as Author (Reply Option)</p>
+									<p class="timestamp">8 Hours Ago</p>
+									<a href="#" class="report">Report</a>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magnada. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+								</div>
+							</div>
+							<!-- /COMMENT -->
+
+							<!-- COMMENT REPLY -->
+							<div class="comment-wrap comment-reply">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_09.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+
+								<!-- COMMENT REPLY FORM -->
+								<form class="comment-reply-form">
+									<textarea name="treply1" placeholder="Write your comment here..."></textarea>
+									<!-- CHECKBOX -->
+									<input type="checkbox" id="notif1" name="notif1" checked>
+									<label for="notif1">
+										<span class="checkbox primary"><span></span></span>
+										Receive email notifications
+									</label>
+									<!-- /CHECKBOX -->
+									<button class="button primary">Post Comment</button>
+								</form>
+								<!-- /COMMENT REPLY FORM -->
+							</div>
+							<!-- /COMMENT REPLY -->
+
+							<!-- LINE SEPARATOR -->
+							<hr class="line-separator">
+							<!-- /LINE SEPARATOR -->
+
+							<!-- COMMENT -->
+							<div class="comment-wrap">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_12.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+								<div class="comment">
+									<p class="text-header">View as Author (Replies)</p>
+									<p class="timestamp">10 Hours Ago</p>
+									<a href="#" class="report">Report</a>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magnada. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+								</div>
+
+								<!-- COMMENT -->
+								<div class="comment-wrap">
+									<!-- USER AVATAR -->
+									<a href="user-profile.html">
+										<figure class="user-avatar medium">
+											<img src="../images/avatars/avatar_09.jpg" alt="">
+										</figure>
+									</a>
+									<!-- /USER AVATAR -->
+									<div class="comment">
+										<p class="text-header">Odin_Design</p>
+										<!-- PIN -->
+										<span class="pin">Author</span>
+										<!-- /PIN -->
+										<p class="timestamp">2 Hours Ago</p>
+										<a href="#" class="report">Report</a>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magnada. Ut enim ad minim veniam, quis nostrud exercitation</p>
+									</div>
+								</div>
+								<!-- /COMMENT -->
+
+								<!-- COMMENT -->
+								<div class="comment-wrap">
+									<!-- USER AVATAR -->
+									<a href="user-profile.html">
+										<figure class="user-avatar medium">
+											<img src="../images/avatars/avatar_12.jpg" alt="">
+										</figure>
+									</a>
+									<!-- /USER AVATAR -->
+									<div class="comment">
+										<p class="text-header">Customer Reply</p>
+										<p class="timestamp">2 Hours Ago</p>
+										<a href="#" class="report">Report</a>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magnada. Ut enim ad minim veniam onsectetur elit</p>
+									</div>
+								</div>
+								<!-- /COMMENT -->
+
+								<!-- COMMENT REPLY -->
+								<div class="comment-wrap comment-reply">
+									<!-- USER AVATAR -->
+									<a href="user-profile.html">
+										<figure class="user-avatar medium">
+											<img src="../images/avatars/avatar_09.jpg" alt="">
+										</figure>
+									</a>
+									<!-- /USER AVATAR -->
+
+									<!-- COMMENT REPLY FORM -->
+									<form class="comment-reply-form">
+										<textarea name="treply2" placeholder="Write your comment here..."></textarea>
+										<!-- CHECKBOX -->
+										<input type="checkbox" id="notif2" name="notif2" checked>
+										<label for="notif2">
+											<span class="checkbox primary"><span></span></span>
+											Receive email notifications
+										</label>
+										<!-- /CHECKBOX -->
+										<button class="button primary">Post Comment</button>
+									</form>
+									<!-- /COMMENT REPLY FORM -->
+								</div>
+								<!-- /COMMENT REPLY -->
+							</div>
+							<!-- /COMMENT -->
+
+							<!-- LINE SEPARATOR -->
+							<hr class="line-separator">
+							<!-- /LINE SEPARATOR -->
+
+							<!-- COMMENT -->
+							<div class="comment-wrap">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_03.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+								<div class="comment">
+									<p class="text-header">View as Customer</p>
+									<p class="timestamp">6 Days Ago</p>
+									<a href="#" class="report">Report</a>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magnada. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+								</div>
+							</div>
+							<!-- /COMMENT -->
+
+							<!-- LINE SEPARATOR -->
+							<hr class="line-separator">
+							<!-- /LINE SEPARATOR -->
+
+							<!-- PAGER -->
+							<div class="pager primary">
+								<div class="pager-item"><p>1</p></div>
+								<div class="pager-item active"><p>2</p></div>
+								<div class="pager-item"><p>3</p></div>
+								<div class="pager-item"><p>...</p></div>
+								<div class="pager-item"><p>17</p></div>
+							</div>
+							<!-- /PAGER -->
+
+							<div class="clearfix"></div>
+
+							<!-- LINE SEPARATOR -->
+							<hr class="line-separator">
+							<!-- /LINE SEPARATOR -->
+
+							<h3>Leave a Comment</h3>
+
+							<!-- COMMENT REPLY -->
+							<div class="comment-wrap comment-reply">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_09.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+
+								<!-- COMMENT REPLY FORM -->
+								<form class="comment-reply-form">
+									<textarea name="treply1" placeholder="Write your comment here..."></textarea>
+									<button class="button primary">Post Comment</button>
+								</form>
+								<!-- /COMMENT REPLY FORM -->
+							</div>
+							<!-- /COMMENT REPLY -->
+						</div>
+						<!-- /COMMENTS -->
+					</div>
+					<!-- /TAB CONTENT -->
+          #}
+
+          {# not implemented
+					<!-- TAB CONTENT -->
+					<div class="tab-content void">
+						<!-- COMMENTS -->
+						<div class="comment-list">
+							<!-- COMMENT -->
+							<div class="comment-wrap">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_02.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+								<div class="comment">
+									<p class="text-header">MeganV.</p>
+									<!-- PIN -->
+									<span class="pin greyed">Purchased</span>
+									<!-- /PIN -->
+									<p class="timestamp">5 Hours Ago</p>
+									<a href="#" class="report">Report</a>
+									<p>I’ve recently bought your theme and let me say it’s fantastic! I have a small question regarding the main files and how to install the theme. Could you help me? Thanks!</p>
+								</div>
+							</div>
+							<!-- /COMMENT -->
+
+							<!-- COMMENT REPLY -->
+							<div class="comment-wrap comment-reply">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_09.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+
+								<!-- COMMENT REPLY FORM -->
+								<form class="comment-reply-form">
+									<textarea name="treply10" placeholder="Write your comment here..."></textarea>
+									<!-- CHECKBOX -->
+									<input type="checkbox" id="notif10" name="notif10" checked>
+									<label for="notif10">
+										<span class="checkbox primary"><span></span></span>
+										Receive email notifications
+									</label>
+									<!-- /CHECKBOX -->
+									<button class="button primary">Post Comment</button>
+								</form>
+								<!-- /COMMENT REPLY FORM -->
+							</div>
+							<!-- /COMMENT REPLY -->
+
+							<!-- LINE SEPARATOR -->
+							<hr class="line-separator">
+							<!-- /LINE SEPARATOR -->
+
+							<!-- COMMENT -->
+							<div class="comment-wrap">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_19.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+								<div class="comment">
+									<p class="text-header">Cloud Templates</p>
+									<!-- PIN -->
+									<span class="pin greyed">Purchased</span>
+									<!-- /PIN -->
+									<p class="timestamp">8 Hours Ago</p>
+									<a href="#" class="report">Report</a>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magnada. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+								</div>
+							</div>
+							<!-- /COMMENT -->
+
+							<!-- COMMENT REPLY -->
+							<div class="comment-wrap comment-reply">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_09.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+
+								<!-- COMMENT REPLY FORM -->
+								<form class="comment-reply-form">
+									<textarea name="treply20" placeholder="Write your comment here..."></textarea>
+									<!-- CHECKBOX -->
+									<input type="checkbox" id="notif20" name="notif20" checked>
+									<label for="notif20">
+										<span class="checkbox primary"><span></span></span>
+										Receive email notifications
+									</label>
+									<!-- /CHECKBOX -->
+									<button class="button primary">Post Comment</button>
+								</form>
+								<!-- /COMMENT REPLY FORM -->
+							</div>
+							<!-- /COMMENT REPLY -->
+
+							<!-- LINE SEPARATOR -->
+							<hr class="line-separator">
+							<!-- /LINE SEPARATOR -->
+
+							<!-- COMMENT -->
+							<div class="comment-wrap">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_18.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+								<div class="comment">
+									<p class="text-header">Lucy Diamond</p>
+									<!-- PIN -->
+									<span class="pin greyed">Purchased</span>
+									<!-- /PIN -->
+									<p class="timestamp">10 Hours Ago</p>
+									<a href="#" class="report">Report</a>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magnada. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+								</div>
+
+								<!-- COMMENT -->
+								<div class="comment-wrap">
+									<!-- USER AVATAR -->
+									<a href="user-profile.html">
+										<figure class="user-avatar medium">
+											<img src="../images/avatars/avatar_09.jpg" alt="">
+										</figure>
+									</a>
+									<!-- /USER AVATAR -->
+									<div class="comment">
+										<p class="text-header">Odin_Design</p>
+										<!-- PIN -->
+										<span class="pin">Author</span>
+										<!-- /PIN -->
+										<p class="timestamp">2 Hours Ago</p>
+										<a href="#" class="report">Report</a>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magnada. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+									</div>
+								</div>
+								<!-- /COMMENT -->
+
+								<!-- COMMENT -->
+								<div class="comment-wrap">
+									<!-- USER AVATAR -->
+									<a href="user-profile.html">
+										<figure class="user-avatar medium">
+											<img src="../images/avatars/avatar_18.jpg" alt="">
+										</figure>
+									</a>
+									<!-- /USER AVATAR -->
+									<div class="comment">
+										<p class="text-header">Lucy Diamond</p>
+										<!-- PIN -->
+										<span class="pin greyed">Purchased</span>
+										<!-- /PIN -->
+										<p class="timestamp">2 Hours Ago</p>
+										<a href="#" class="report">Report</a>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magnada. Ut enim ad minim veniam onsectetur elit.</p>
+									</div>
+								</div>
+								<!-- /COMMENT -->
+
+								<!-- COMMENT REPLY -->
+								<div class="comment-wrap comment-reply">
+									<!-- USER AVATAR -->
+									<a href="user-profile.html">
+										<figure class="user-avatar medium">
+											<img src="../images/avatars/avatar_09.jpg" alt="">
+										</figure>
+									</a>
+									<!-- /USER AVATAR -->
+
+									<!-- COMMENT REPLY FORM -->
+									<form class="comment-reply-form">
+										<textarea name="treply30" placeholder="Write your comment here..."></textarea>
+										<!-- CHECKBOX -->
+										<input type="checkbox" id="notif30" name="notif30" checked>
+										<label for="notif30">
+											<span class="checkbox primary"><span></span></span>
+											Receive email notifications
+										</label>
+										<!-- /CHECKBOX -->
+										<button class="button primary">Post Comment</button>
+									</form>
+									<!-- /COMMENT REPLY FORM -->
+								</div>
+								<!-- /COMMENT REPLY -->
+							</div>
+							<!-- /COMMENT -->
+
+							<!-- LINE SEPARATOR -->
+							<hr class="line-separator">
+							<!-- /LINE SEPARATOR -->
+
+							<!-- PAGER -->
+							<div class="pager primary">
+								<div class="pager-item"><p>1</p></div>
+								<div class="pager-item active"><p>2</p></div>
+								<div class="pager-item"><p>3</p></div>
+								<div class="pager-item"><p>...</p></div>
+								<div class="pager-item"><p>17</p></div>
+							</div>
+							<!-- /PAGER -->
+
+							<div class="clearfix"></div>
+
+							<!-- LINE SEPARATOR -->
+							<hr class="line-separator">
+							<!-- /LINE SEPARATOR -->
+
+							<h3>Leave a Comment</h3>
+
+							<!-- COMMENT REPLY -->
+							<div class="comment-wrap comment-reply">
+								<!-- USER AVATAR -->
+								<a href="user-profile.html">
+									<figure class="user-avatar medium">
+										<img src="../images/avatars/avatar_09.jpg" alt="">
+									</figure>
+								</a>
+								<!-- /USER AVATAR -->
+
+								<!-- COMMENT REPLY FORM -->
+								<form class="comment-reply-form">
+									<textarea name="treply100" placeholder="Write your comment here..."></textarea>
+									<button class="button primary">Post Comment</button>
+								</form>
+								<!-- /COMMENT REPLY FORM -->
+							</div>
+							<!-- /COMMENT REPLY -->
+						</div>
+						<!-- /COMMENTS -->
+					</div>
+					<!-- /TAB CONTENT -->
+          #}
+
+					<!-- TAB CONTENT -->
+          {#not implemented obs: important
+					{{macro_item.faqs()}}
+          #}
+					<!-- /TAB CONTENT -->
+				</div>
+				<!-- /POST TAB -->
+			</div>
+			<!-- CONTENT -->
+		</div>
+	</div>
+	<!-- /SECTION -->
+
+	<!-- FOOTER -->
+  {{macro_main.footer(dictionary,info_footer)}}
+	<!-- /FOOTER -->
+
+	<div class="shadow-film closed"></div>
+
+<!-- SVG ARROW -->
+<svg style="display: none;">
+	<symbol id="svg-arrow" viewBox="0 0 3.923 6.64014" preserveAspectRatio="xMinYMin meet">
+		<path d="M3.711,2.92L0.994,0.202c-0.215-0.213-0.562-0.213-0.776,0c-0.215,0.215-0.215,0.562,0,0.777l2.329,2.329
+			L0.217,5.638c-0.215,0.215-0.214,0.562,0,0.776c0.214,0.214,0.562,0.215,0.776,0l2.717-2.718C3.925,3.482,3.925,3.135,3.711,2.92z"/>
+	</symbol>
+</svg>
+<!-- /SVG ARROW -->
+
+<!-- SVG STAR -->
+<svg style="display: none;">
+	<symbol id="svg-star" viewBox="0 0 10 10" preserveAspectRatio="xMinYMin meet">
+		<polygon points="4.994,0.249 6.538,3.376 9.99,3.878 7.492,6.313 8.082,9.751 4.994,8.129 1.907,9.751
+	2.495,6.313 -0.002,3.878 3.45,3.376 "/>
+	</symbol>
+</svg>
+<!-- /SVG STAR -->
+
+<!-- SVG PLUS -->
+<svg style="display: none;">
+	<symbol id="svg-plus" viewBox="0 0 13 13" preserveAspectRatio="xMinYMin meet">
+		<rect x="5" width="3" height="13"/>
+		<rect y="5" width="13" height="3"/>
+	</symbol>
+</svg>
+<!-- /SVG PLUS -->
+
+<!-- SVG CHECK -->
+<svg style="display: none;">
+	<symbol id="svg-check" viewBox="0 0 15 12" preserveAspectRatio="xMinYMin meet">
+		<polygon points="12.45,0.344 5.39,7.404 2.562,4.575 0.429,6.708 3.257,9.536 3.257,9.536
+			5.379,11.657 14.571,2.465 "/>
+	</symbol>
+</svg>
+<!-- /SVG CHECK -->
+
+<!-- jQuery -->
+<script src="../js/vendor/jquery-3.1.0.min.js"></script>
+<!-- Tooltipster -->
+<script src="../js/vendor/jquery.tooltipster.min.js"></script>
+<!-- ImgLiquid -->
+<script src="../js/vendor/imgLiquid-min.js"></script>
+<!-- XM Tab -->
+<script src="../js/vendor/jquery.xmtab.min.js"></script>
+<!-- Tweet -->
+<script src="../js/vendor/twitter/jquery.tweet.min.js"></script>
+<!-- Side Menu -->
+<script src="../js/side-menu.js"></script>
+<!-- Liquid -->
+<script src="../js/liquid.js"></script>
+<!-- Checkbox Link -->
+<!--(not used)script src="../js/checkbox-link.js"></script-->
+<!-- Image Slides -->
+<script src="../js/image-slides.js"></script>
+<!-- Post Tab -->
+<script src="../js/post-tab.js"></script>
+<!-- XM Accordion -->
+<script src="../js/vendor/jquery.xmaccordion.min.js"></script>
+<!-- XM Pie Chart -->
+<script src="../js/vendor/jquery.xmpiechart.min.js"></script>
+<!-- Item V1 -->
+<script src="../js/item-v1.js"></script>
+<!-- Tooltip -->
+<script src="../js/tooltip.js"></script>
+<!-- User Quickview Dropdown -->
+<script src="../js/user-board.js"></script>
+<!-- Footer -->
+<script src="../js/footer.js"></script>
+{{macro_main.scripts()}}
+</body>
+</html>

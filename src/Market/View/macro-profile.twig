@@ -1,0 +1,170 @@
+<!-- header autor -->
+{% macro autor_header(dictionary,info_author) %}
+	<!-- SECTION HEADLINE -->
+	<div class="section-headline-wrap">
+		<div class="section-headline">
+			<h2>{{dictionary.word_profile_author}}</h2>
+			<!--(not implemented) p>Home<span class="separator">/</span><span class="current-section">Author's Profile</span></p-->
+		</div>
+	</div>
+	<!-- /SECTION HEADLINE -->
+
+	<!-- AUTHOR PROFILE BANNER -->
+	<div class="author-profile-banner"></div>
+	<!-- /AUTHOR PROFILE BANNER -->
+
+	<!-- AUTHOR PROFILE META -->
+	<div class="author-profile-meta-wrap">
+		<div class="author-profile-meta">
+			<!-- AUTHOR PROFILE INFO -->
+			<div class="author-profile-info">
+				<!-- AUTHOR PROFILE INFO ITEM -->
+				<div class="author-profile-info-item">
+					<p class="text-header">{{dictionary.word_member_since}}</p>
+					<p>{{info_author.member_since}}</p>
+				</div>
+				<!-- /AUTHOR PROFILE INFO ITEM -->
+
+				{# not implemented
+				<!-- AUTHOR PROFILE INFO ITEM -->
+				<div class="author-profile-info-item">
+					<p class="text-header">{{dictionary.word_total_sales}}</p>
+					<p>{{info_author.total_sales}}</p>
+				</div>
+				<!-- /AUTHOR PROFILE INFO ITEM -->
+				#}
+
+				<!-- AUTHOR PROFILE INFO ITEM -->
+        {#comments
+				<div class="author-profile-info-item">
+					<p class="text-header">Freelance Work:</p>
+					<p>Available</p>
+				</div>
+        #}
+				<!-- /AUTHOR PROFILE INFO ITEM -->
+
+				<!-- AUTHOR PROFILE INFO ITEM -->
+				<div class="author-profile-info-item">
+					<p class="text-header">Website:</p>
+					<p><a href="http://{{info_author.web_site}}" class="primary">{{info_author.web_site}}</a></p>
+				</div>
+				<!-- /AUTHOR PROFILE INFO ITEM -->
+			</div>
+			<!-- /AUTHOR PROFILE INFO -->
+		</div>
+	</div>
+	<!-- /AUTHOR PROFILE META -->
+{% endmacro %}
+<!-- bio author -->
+{% macro bio_author(dictionary,info_author) %}
+  <div class="sidebar-item author-bio">
+    <!-- USER AVATAR -->
+    <a href="#" class="user-avatar-wrap medium">
+      <figure class="user-avatar medium">
+        <img src="{{info_author.path_image}}" alt="">
+      </figure>
+    </a>
+    <!-- /USER AVATAR -->
+    <p class="text-header">{{info_author.name}}</p>
+    <p class="text-oneline">{{info_author.occupation}}<br>{{info_author.location}}</p>
+    <!-- SHARE LINKS -->
+		{#not implemented in moment
+    <ul class="share-links">
+      <li><a href="#" class="fb"></a></li>
+      <li><a href="#" class="twt"></a></li>
+      <!--(not implemented)li><a href="#" class="db"></a></li-->
+    </ul>
+		#}
+    <!-- /SHARE LINKS -->
+    <!-- (not implemented)a href="#" class="button mid dark spaced">Add to <span class="primary">Followers</span></a -->
+    <!--(not implemented)a href="#" class="button mid dark-light">Send a Private Message</a-->
+  </div>
+{% endmacro %}
+<!-- -->
+{% macro profile_board(dictionary,info_author) %}
+  <ul class="dropdown hover-effect" id="addons-board-profile">
+    <li class="dropdown-item active" id="board-profile-page">
+      <a href="profile-page?id={{info_author.id}}">{{dictionary.word_profile_author}}</a> <!-- add href profile-page with id partner -->
+    </li>
+    <li class="dropdown-item" id="board-author-itens-page">
+      <a href="author-items-page?id={{info_author.id}}" >{{dictionary.word_author_items}} ({{info_author.number_apps_themes}})</a> <!-- add href  -->
+    </li>
+		{# comments
+    <li class="dropdown-item" id="board-profile-reviws-page">
+      <a href="author-profile-reviews.html">Customer Reviews (42)</a>
+    </li>
+
+    <!-- not implemented -->
+    <li class="dropdown-item">
+      <a href="author-profile-messages.html">Message Board</a>
+    </li>
+    <li class="dropdown-item">
+      <a href="author-profile-followers.html">Followers (5)</a>
+    </li>
+    <li class="dropdown-item">
+      <a href="author-profile-following.html">Following (2)</a>
+    </li>
+		<!-- not implemented -->
+
+    <li class="dropdown-item">
+      <a href="author-badges.html">{{dictionary.word_author_badges}} ({{info_author.number_badges}})</a>
+    </li>
+		#}
+  </ul>
+{% endmacro %}
+<!-- -->
+{% macro board_reputation(dictionary,info_author) %}
+{# not implemented in moment
+  {% import 'macros.twig' as macro_main %}
+  <div class="sidebar-item author-reputation full">
+    <h4>{{dictionary.word_reputation}}</h4>
+    <hr class="line-separator">
+
+    <!-- PIE CHART -->
+    <div class="pie-chart pie-chart1">
+      <p class="text-header percent">24<span>%</span></p>
+      <p class="text-header percent-info">{{dictionary.word_recommended}}</p>
+      <!-- RATING -->
+      <ul class="rating">
+        {{macro_main.star_on(info_author.stars)}}
+        {{macro_main.star_off(5 - info_author.stars)}}
+      </ul>
+      <!-- /RATING -->
+    </div>
+    <!-- /PIE CHART -->
+    <a href="#" class="button mid dark-light">{{dictionary.word_read_all_reviews}}</a>
+  </div>
+  <!-- SIDEBAR ITEM -->
+	#}
+{% endmacro %}
+<!-- -->
+{% macro comments_user(dictionary,name,date,comment,is_buyer) %}
+{# not implemented in moment
+  <!-- COMMENT -->
+  <div class="comment-wrap">
+    <!-- USER AVATAR -->
+    <a href="user-profile.html">
+      <figure class="user-avatar medium">
+        <img src="../images/avatars/avatar_02.jpg" alt="">
+      </figure>
+    </a>
+    <!-- /USER AVATAR -->
+    <div class="comment">
+      <p class="text-header">{{name}}</p>
+      <!-- PIN -->
+      {% if is_buyer == true %}
+      <span class="pin greyed">{{dictionary.word_buyer}}</span>
+      {% endif %}
+      <!-- /PIN -->
+      <p class="timestamp">{{date}}</p>
+      <a href="#" class="report">Report</a>
+      <p>{{comment}}</p>
+    </div>
+  </div>
+  <!-- /COMMENT -->
+
+  <!-- LINE SEPARATOR -->
+  <hr class="line-separator">
+  <!-- /LINE SEPARATOR -->
+	#}
+{% endmacro %}

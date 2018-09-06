@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="../css/vendor/simple-line-icons.css">
+	<link rel="stylesheet" href="../css/vendor/tooltipster.css">
+	<link rel="stylesheet" href="../css/vendor/owl.carousel.css">
+	<link rel="stylesheet" href="../css/style.css">
+
+	<link rel="stylesheet" href="../css/vendor/magnific-popup.css">
+	<!-- favicon -->
+	<link rel="icon" href="https://e-com.club/mass/ftp/tutoriais/favicon.png">
+	<title>{{ dictionary.title }} | Home</title>
+
+</head>
+<body>
+{% import 'macros.twig' as macro_main %}
+<!-- header -->
+	{{macro_main.all_header(login,dictionary,user,app_category,theme_category)}}
+<!-- /header -->
+
+<div class="section-headline-wrap">
+  <div class="section-headline">
+    <h2>Register Account</h2>
+    <!--p>Home<span class="separator">/</span>Shop V1<span class="separator">/</span><span class="current-section">Illustration</span></p-->
+  </div>
+</div>
+
+<!-- SECTION -->
+<div class="section-wrap">
+  <div class="section">
+    <!-- SIDEBAR -->
+    <div class="sidebar right">
+
+    </div>
+    <!-- /SIDEBAR -->
+    <div class="form-box-items">
+			<div class="form-box-item spaced">
+		    <h4>Create Your Account </h4>
+		    <hr class="line-separator">
+				<div class="sidebar-item">
+	        <a class="button mid dark spaced" id="button-create-account"> Create Account Partner</a>
+					<a href="#create-password" class="button mid dark spaced" id="bt-create-pass">Create password</a>
+				</div>
+		    </div>
+		    <!-- /INPUT CONTAINER -->
+		  </div>
+		</div>
+
+  </div>
+</div>
+<!-- /SECTION -->
+
+<!-- FORM POPUP -->
+<div id="create-password" class="form-popup mfp-hide">
+	<div class="form-popup-content">
+		<!-- FORM POPUP HEADLINE -->
+		<div class="form-popup-headline secondary">
+			<h2>Create password</h2>
+			<p>description</p>
+		</div>
+		<!-- /FORM POPUP HEADLINE -->
+		<!-- FORM POPUP CONTENT -->
+		<div class="form-popup-content">
+			<form id="addons-login" action="scripts/create-pass" method="post">
+				<input type="hidden" id="addons-partner-email" name="user" />
+			</form>
+			<form id="login-form"  class="addons-partner-create-pass">
+				<label id="email-send" for="email_address2" class="rl-label required">Email Address</label>
+				<input type="email" id="email_register" name="email" placeholder="Enter your email address here...">
+				<button class="button mid dark"> Verify <span class="primary">Now!</span></button>
+				<!--a class="button mid dark" href="test-server"> ok </a-->
+			</form>
+			<!-- LINE SEPARATOR -->
+			<hr class="line-separator double">
+			<!-- /LINE SEPARATOR -->
+			<!-- a href="#" class="button mid fb half">Login with Facebook</a-->
+			<!-- a href="#" class="button mid twt half">Login with Twitter</a-->
+		</div>
+		<!-- /FORM POPUP CONTENT -->
+	</div>
+	<form id="addons-create-pass" action="password-create" method="post">
+		<input type="hidden" id="addons-email-user" name="email" />
+	</form>
+</div>
+
+<!-- footer -->
+{{macro_main.footer(dictionary,info_footer)}}
+<!-- /footer -->
+
+
+	<div class="shadow-film closed"></div>
+
+<!-- SVG ARROW -->
+<svg style="display: none;">
+	<symbol id="svg-arrow" viewBox="0 0 3.923 6.64014" preserveAspectRatio="xMinYMin meet">
+		<path d="M3.711,2.92L0.994,0.202c-0.215-0.213-0.562-0.213-0.776,0c-0.215,0.215-0.215,0.562,0,0.777l2.329,2.329
+			L0.217,5.638c-0.215,0.215-0.214,0.562,0,0.776c0.214,0.214,0.562,0.215,0.776,0l2.717-2.718C3.925,3.482,3.925,3.135,3.711,2.92z"/>
+	</symbol>
+</svg>
+<!-- /SVG ARROW -->
+
+<!-- SVG STAR -->
+<svg style="display: none;">
+	<symbol id="svg-star" viewBox="0 0 10 10" preserveAspectRatio="xMinYMin meet">
+		<polygon points="4.994,0.249 6.538,3.376 9.99,3.878 7.492,6.313 8.082,9.751 4.994,8.129 1.907,9.751
+	2.495,6.313 -0.002,3.878 3.45,3.376 "/>
+	</symbol>
+</svg>
+<!-- /SVG STAR -->
+
+<!-- SVG PLUS -->
+<svg style="display: none;">
+	<symbol id="svg-plus" viewBox="0 0 13 13" preserveAspectRatio="xMinYMin meet">
+		<rect x="5" width="3" height="13"/>
+		<rect y="5" width="13" height="3"/>
+	</symbol>
+</svg>
+<!-- /SVG PLUS -->
+
+<!-- jQuery -->
+<script src="../../js/vendor/jquery-3.1.0.min.js"></script>
+<!-- Tooltipster -->
+<script src="../../js/vendor/jquery.tooltipster.min.js"></script>
+<!-- Owl Carousel -->
+<script src="../js/vendor/owl.carousel.min.js"></script>
+<!-- Tweet -->
+<script src="../js/vendor/twitter/jquery.tweet.min.js"></script>
+<!-- xmAlerts -->
+<script src="../js/vendor/jquery.xmalert.min.js"></script>
+<!-- Side Menu -->
+<script src="../js/side-menu.js"></script>
+<!-- Home -->
+<script src="../js/home.js"></script>
+<!-- Tooltip -->
+<script src="../js/tooltip.js"></script>
+<!-- User Quickview Dropdown -->
+<script src="../js/user-board.js"></script>
+<!-- Home Alerts -->
+<!-- <script src="../js/home-alerts.js"></script> -->
+<!-- Footer -->
+<script src="../js/footer.js"></script>
+
+{{macro_main.scripts()}}
+
+</body>
+</html>

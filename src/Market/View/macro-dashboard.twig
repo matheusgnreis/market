@@ -1,0 +1,1009 @@
+{% macro all_menu(dictionary,user)%}
+  <div id="dashboard-options-menu" class="side-menu dashboard left closed">
+        <!-- SVG PLUS -->
+    <svg class="svg-plus">
+      <use xlink:href="#svg-plus"></use>
+    </svg>
+    <!-- /SVG PLUS -->
+
+    <!-- SIDE MENU HEADER -->
+    <div class="side-menu-header">
+      <!-- USER QUICKVIEW -->
+      <div class="user-quickview">
+        <!-- USER AVATAR -->
+        <a href="author-profile.html">
+        <div class="outer-ring">
+          <div class="inner-ring"></div>
+          <figure class="user-avatar">
+            <img src="{{user.path_image}}" alt="avatar">
+          </figure>
+        </div>
+        </a>
+        <!-- /USER AVATAR -->
+
+        <!-- USER INFORMATION -->
+        <p class="user-name">{{user.name}}</p>
+        <p class="user-money">{{dictionary.coin}}${{user.credits  | number_format(2, '.', ',')}}</p>
+        <!-- /USER INFORMATION -->
+      </div>
+      <!-- /USER QUICKVIEW -->
+    </div>
+    <!-- /SIDE MENU HEADER -->
+
+    <!-- SIDE MENU TITLE -->
+    <p class="side-menu-title">{{dictionary.word_your_account}}</p>
+    <!-- /SIDE MENU TITLE -->
+
+    <!-- DROPDOWN -->
+    <ul class="dropdown dark hover-effect interactive">
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item" id="addons-li-dashboard-settings">
+        <a href="dashboard-settings">
+                    <span class="sl-icon icon-settings"></span>
+                    {{dictionary.word_account_settings}}
+                </a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+      {#comments
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item">
+        <a href="dashboard-notifications.html">
+                    <span class="sl-icon icon-star"></span>
+                    Notifications
+                </a>
+                <!-- PIN -->
+                <span class="pin soft-edged big primary">49</span>
+                <!-- /PIN -->
+      </li>
+      <!-- /DROPDOWN ITEM -->
+
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item interactive">
+        <a href="#">
+                    <span class="sl-icon icon-envelope"></span>
+                    Messages
+                    <!-- SVG ARROW -->
+          <svg class="svg-arrow">
+            <use xlink:href="#svg-arrow"></use>
+          </svg>
+          <!-- /SVG ARROW -->
+        </a>
+
+        <!-- INNER DROPDOWN -->
+        <ul class="inner-dropdown">
+          <!-- INNER DROPDOWN ITEM -->
+          <li class="inner-dropdown-item">
+            <a href="dashboard-inbox.html">Your Inbox (36)</a>
+            <!-- PIN -->
+            <span class="pin soft-edged secondary">2</span>
+            <!-- /PIN -->
+          </li>
+          <!-- /INNER DROPDOWN ITEM -->
+
+          <!-- INNER DROPDOWN ITEM -->
+          <li class="inner-dropdown-item">
+            <a href="dashboard-inbox-v2.html">Your Inbox (36) V2</a>
+          </li>
+          <!-- /INNER DROPDOWN ITEM -->
+
+          <!-- INNER DROPDOWN ITEM -->
+          <li class="inner-dropdown-item">
+            <a href="dashboard-openmessage.html">Open Message</a>
+          </li>
+          <!-- /INNER DROPDOWN ITEM -->
+
+          <!-- INNER DROPDOWN ITEM -->
+          <li class="inner-dropdown-item">
+            <a href="dashboard-inbox.html">Starred Message</a>
+          </li>
+          <!-- /INNER DROPDOWN ITEM -->
+
+          <!-- INNER DROPDOWN ITEM -->
+          <li class="inner-dropdown-item">
+            <a href="dashboard-inbox.html">Deleted Messages</a>
+          </li>
+          <!-- /INNER DROPDOWN ITEM -->
+        </ul>
+        <!-- INNER DROPDOWN -->
+
+                <!-- PIN -->
+                <span class="pin soft-edged big secondary">!</span>
+                <!-- /PIN -->
+      </li>
+      <!-- /DROPDOWN ITEM -->
+
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item">
+        <a href="dashboard-purchases.html">
+                    <span class="sl-icon icon-tag"></span>
+                    Your Purchases
+                </a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item">
+        <a href="dashboard-buycredits.html">
+                    <span class="sl-icon icon-credit-card"></span>
+                    Buy Credits
+                </a>
+      </li>
+      #}
+      <!-- /DROPDOWN ITEM -->
+    </ul>
+    <!-- /DROPDOWN -->
+
+        <!-- SIDE MENU TITLE -->
+    <p class="side-menu-title">{{dictionary.word_info_account}}</p>
+    <!-- /SIDE MENU TITLE -->
+
+    <!-- DROPDOWN -->
+    <ul class="dropdown dark hover-effect">
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item" id="addons-li-dashboard-statement">
+        <a href="dashboard-statement">
+                    <span class="sl-icon icon-layers"></span>
+                  {{dictionary.word_sales_statment}}
+                </a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+      {#comments
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item">
+        <a href="dashboard-statistics.html">
+                    <span class="sl-icon icon-chart"></span>
+                    Statistics
+                </a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+      #}
+    </ul>
+    <!-- /DROPDOWN -->
+
+         <!-- SIDE MENU TITLE -->
+    <p class="side-menu-title">{{dictionary.word_tool_acoount}}</p>
+    <!-- /SIDE MENU TITLE -->
+
+    <!-- DROPDOWN -->
+    <ul class="dropdown dark hover-effect">
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item"  id="addons-li-dashboard-upitem">
+        <a href="dashboard-uploaditem">
+                    <span class="sl-icon icon-arrow-up-circle"></span>
+                    {{dictionary.word_upload_item}}
+                </a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+      {#
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item" id="addons-li-dashboard-manageitem">
+        <a href="dashboard-manageitems">
+                    <span class="sl-icon icon-folder-alt"></span>
+                    {{dictionary.word_manage_items}}
+                </a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+      #}
+            <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item" id="addons-li-dashboard-withdrawals">
+        <a href="dashboard-withdrawals">
+                    <span class="sl-icon icon-wallet"></span>
+                    {{dictionary.word_withdrawals}}
+                </a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+
+    </ul>
+    <!-- /DROPDOWN -->
+
+        <a href="?logout" class="button medium secondary">Logout</a>
+  </div>
+{% endmacro %}
+
+{% macro all_menu_store(dictionary,user)%}
+  <div id="dashboard-options-menu" class="side-menu dashboard left closed">
+        <!-- SVG PLUS -->
+    <svg class="svg-plus">
+      <use xlink:href="#svg-plus"></use>
+    </svg>
+    <!-- /SVG PLUS -->
+
+    <!-- SIDE MENU HEADER -->
+    <div class="side-menu-header">
+      <!-- USER QUICKVIEW -->
+      <div class="user-quickview">
+        <!-- USER AVATAR -->
+        <a href="author-profile.html">
+        <div class="outer-ring">
+          <div class="inner-ring"></div>
+          <figure class="user-avatar">
+            <img src="{{user.path_image}}" alt="avatar">
+          </figure>
+        </div>
+        </a>
+        <!-- /USER AVATAR -->
+
+        <!-- USER INFORMATION -->
+        <p class="user-name">{{user.name}}</p>
+        <p class="user-money">{{dictionary.coin}}${{user.credits  | number_format(2, '.', ',')}}</p>
+        <!-- /USER INFORMATION -->
+      </div>
+      <!-- /USER QUICKVIEW -->
+    </div>
+    <!-- /SIDE MENU HEADER -->
+
+    <!-- SIDE MENU TITLE -->
+    <p class="side-menu-title">{{dictionary.word_info_account}}</p>
+    <!-- /SIDE MENU TITLE -->
+
+    <!-- DROPDOWN -->
+    <ul class="dropdown dark hover-effect">
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item" id="">
+        <a href="history-transaction">
+                    <span class="sl-icon icon-layers"></span>
+                  {#{dictionary.word_sales_statment}#}
+                  historic transaction
+                </a>
+      </li>
+
+      <li class="dropdown-item" id="">
+        <a href="car">
+                    <span class="sl-icon icon-layers"></span>
+                  {#{dictionary.word_sales_statment}#}
+                  Car
+                </a>
+      </li>
+
+      <!-- /DROPDOWN ITEM -->
+      {#comments
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item">
+        <a href="dashboard-statistics.html">
+                    <span class="sl-icon icon-chart"></span>
+                    Statistics
+                </a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+      #}
+    </ul>
+    <!-- /DROPDOWN -->
+
+        <a href="?logout" class="button medium secondary">Logout</a>
+  </div>
+{% endmacro %}
+
+
+
+
+
+{% macro dashboard_header(dictionary) %}
+  <!-- DASHBOARD HEADER -->
+  <div class="dashboard-header retracted">
+      <!-- DB CLOSE BUTTON -->
+      <a href="index" class="db-close-button">
+         <img src="../images/dashboard/back-icon.png" alt="back-icon">
+      </a>
+      <!-- DB CLOSE BUTTON -->
+
+  <!-- DB OPTIONS BUTTON -->
+      <div class="db-options-button">
+         <img src="../images/dashboard/db-list-right.png" alt="db-list-right">
+   <img src="../images/dashboard/close-icon.png" alt="close-icon">
+      </div>
+      <!-- DB OPTIONS BUTTON -->
+
+      <!-- DASHBOARD HEADER ITEM -->
+      <div class="dashboard-header-item title">
+          <!-- DB SIDE MENU HANDLER -->
+           <div class="db-side-menu-handler">
+              <img src="../images/dashboard/db-list-left.png" alt="db-list-left">
+          </div>
+          <!-- /DB SIDE MENU HANDLER -->
+          <h6>{{dictionary.word_your_dashboard}}</h6>
+      </div>
+      <!-- /DASHBOARD HEADER ITEM -->
+
+
+  <!-- DASHBOARD HEADER ITEM -->
+      <div class="dashboard-header-item form">
+          <!--(not implemented) form class="dashboard-search">
+              <input type="text" name="search" id="search_dashboard" placeholder="Search on dashboard...">
+              <input type="image" src="../images/dashboard/search-icon.png" alt="search-icon">
+          </form-->
+      </div>
+      <!-- /DASHBOARD HEADER ITEM -->
+
+      <!-- DASHBOARD HEADER ITEM -->
+      <div class="dashboard-header-item stats">
+          <!-- STATS META -->
+          {#not implemented
+          <div class="stats-meta">
+              <div class="pie-chart pie-chart1">
+                  <!-- SVG PLUS -->
+                  <svg class="svg-plus primary">
+                      <use xlink:href="#svg-plus"></use>
+                  </svg>
+                  <!-- /SVG PLUS -->
+              </div>
+              <h6>64.579</h6>
+              <p>New Original Visits</p>
+          </div>
+          <!-- /STATS META -->
+          #}
+      </div>
+      <!-- /DASHBOARD HEADER ITEM -->
+
+      <!-- DASHBOARD HEADER ITEM -->
+      <div class="dashboard-header-item stats">
+          <!-- STATS META -->
+          {# not implemented
+          <div class="stats-meta">
+              <div class="pie-chart pie-chart2">
+                  <!-- SVG PLUS -->
+                  <svg class="svg-minus tertiary">
+                      <use xlink:href="#svg-minus"></use>
+                  </svg>
+                  <!-- /SVG PLUS -->
+              </div>
+              <h6>20.8</h6>
+              <p>Less Sales Than Last Month</p>
+          </div>
+          <!-- /STATS META -->
+          #}
+      </div>
+      <!-- /DASHBOARD HEADER ITEM -->
+
+      <!-- DASHBOARD HEADER ITEM -->
+      <div class="dashboard-header-item stats">
+          <!-- STATS META -->
+          {#not implemented
+          <div class="stats-meta">
+              <div class="pie-chart pie-chart3">
+                  <!-- SVG PLUS -->
+                  <svg class="svg-plus primary">
+                      <use xlink:href="#svg-plus"></use>
+                  </svg>
+                  <!-- /SVG PLUS -->
+              </div>
+              <h6>322k</h6>
+              <p>Total Visits This Month</p>
+          </div>
+          <!-- /STATS META -->
+          #}
+      </div>
+      <!-- /DASHBOARD HEADER ITEM -->
+
+  <!-- DASHBOARD HEADER ITEM -->
+      <div class="dashboard-header-item back-button">
+          <a href="index" class="button mid dark-light"> HOME </a>
+      </div>
+      <!-- /DASHBOARD HEADER ITEM -->
+  </div>
+  <!-- DASHBOARD HEADER -->
+{% endmacro %}
+
+{% macro form_profile_info(dictionary,user) %}
+  <!--div class="form-box-item"-->
+  <div class="form-box-item full">
+
+
+    <h4>{{dictionary.word_profile_info}}</h4>
+    <hr class="line-separator">
+    <!-- PROFILE IMAGE UPLOAD -->
+    <div class="profile-image">
+      <div class="profile-image-data">
+        <figure class="user-avatar medium">
+          <img src="{{user.path_image}}" alt="profile-default-image">
+        </figure>
+        <p class="text-header">{{dictionary.word_profile_image}}</p>
+        <p class="upload-details">{{dictionary.word_minimun_size}} 70x70px</p>
+      </div>
+      <!--a href="#" class="button mid-short dark-light">{{dictionary.word_upload_image}}</a-->
+      <form id="addons-up-partner" action="scripts/up-partner" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="addons-up-id" name="id" />
+        <input type="hidden" id="addons-up-pass" name="pass" />
+        <input type="hidden" id="addons-up-rp-pass" name="rp-pass" />
+        <!-- image -- >
+        <!-- O Nome do elemento input determina o nome da array $_FILES -->
+        Selecione uma imagem: <input name="arquivo" type="file" />
+        <br />
+        {# enter <input> to send image #}
+      </form>
+
+    </div>
+    <!-- PROFILE IMAGE UPLOAD -->
+
+    <form id="profile-info-form">
+      <!-- INPUT CONTAINER -->
+      <div class="input-container half">
+        <label for="acc_id" class="rl-label">ID:</label>
+        <input disabled class="addons-up-id" type="text" value="{{user.id_user}}" >
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container half">
+        <label for="acc_id" class="rl-label">Login:</label>
+        <input disabled class="addons-up-user" type="text" value="{{user.name_login}}" >
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container">
+        <label for="acc_name" class="rl-label"><span class="name">{{dictionary.word_account_name}}</span></label>
+        <input disabled class="addons-up-name" type="text" id="acc_name" name="acc_name" value="{{user.name}}" placeholder="{{dictionary.word_enter_name}}">
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container half">
+        <label for="new_pwd" class="rl-label required"><span class="pass">{{dictionary.word_new_password}}</span></label>
+        <input class="addons-up-pass" type="password" id="new_pwd" name="new_pwd" placeholder="{{dictionary.word_enter_pass}}">
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container half">
+        <label for="new_pwd2" class="rl-label required"><span class="rp-pass">{{dictionary.word_repeat_password}}</span></label>
+        <input class="addons-up-rp-pass" type="password" id="new_pwd2" name="new_pwd2" placeholder="{{dictionary.word_enter_repeat_pss}}">
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+    </form>
+  </div>
+{% endmacro %}
+
+{% macro form_social_info(dictionary)%}
+  <div class="form-box-item spaced">
+    <h4>Social Media</h4>
+    <hr class="line-separator">
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <ul class="share-links">
+        <li><a href="#" class="fb"></a></li>
+      </ul>
+      <input form="profile-info-form" type="text" id="social_fb_link" name="social_fb_link"
+           value="www.facebook.com/jhonnyfischershop" placeholder="Enter your social link here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <ul class="share-links">
+        <li><a href="#" class="twt"></a></li>
+      </ul>
+      <input form="profile-info-form" type="text" id="social_twt_link" name="social_twt_link"
+           placeholder="Enter your social link here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <ul class="share-links">
+        <li><a href="#" class="gplus"></a></li>
+      </ul>
+      <input form="profile-info-form" type="text" id="social_gplus_link" name="social_gplus_link"
+           placeholder="Enter your social link here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <ul class="share-links">
+        <li><a href="#" class="rss"></a></li>
+      </ul>
+      <input form="profile-info-form" type="text" id="social_rss_link" name="social_rss_link"
+           placeholder="Enter your social link here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <ul class="share-links">
+        <li><a href="#" class="db"></a></li>
+      </ul>
+      <input form="profile-info-form" type="text" id="social_db_link" name="social_db_link"
+           placeholder="Enter your social link here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <ul class="share-links">
+        <li><a href="#" class="be"></a></li>
+      </ul>
+      <input form="profile-info-form" type="text" id="social_be_link" name="social_be_link"
+           placeholder="Enter your social link here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <ul class="share-links">
+        <li><a href="#" class="de"></a></li>
+      </ul>
+      <input form="profile-info-form" type="text" id="social_de_link" name="social_de_link"
+           placeholder="Enter your social link here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+  </div>
+{% endmacro %}
+
+{% macro form_billing_info() %}
+ {# not used #}
+  <div class="form-box-item">
+    <h4>Biling Information</h4>
+    <hr class="line-separator">
+    <!-- INPUT CONTAINER -->
+    <div class="input-container half">
+      <label for="first_name2" class="rl-label required">First Name</label>
+      <input type="text" form="profile-info-form" id="first_name2" name="first_name2" placeholder="Enter your first name here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container half">
+      <label for="last_name2" class="rl-label required">Last Name</label>
+      <input type="text" form="profile-info-form" id="last_name2" name="last_name2" placeholder="Enter your last name here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <label for="company_name2" class="rl-label">Company Name</label>
+      <input type="text" form="profile-info-form" id="company_name2" name="company_name2" placeholder="Enter your company name here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <label for="email_address2" class="rl-label required">Email Address</label>
+      <input type="email" form="profile-info-form" id="email_address2" name="email_address2" placeholder="Enter your email address here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <label for="country2" class="rl-label required">Country</label>
+      <label for="country2" class="select-block">
+        <select form="profile-info-form" name="country2" id="country2">
+          <option value="0">Select your Country...</option>
+          <option value="1">United States</option>
+          <option value="2">Argentina</option>
+          <option value="3">Brasil</option>
+          <option value="4">Japan</option>
+        </select>
+        <!-- SVG ARROW -->
+        <svg class="svg-arrow">
+          <use xlink:href="#svg-arrow"></use>
+        </svg>
+        <!-- /SVG ARROW -->
+      </label>
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container half">
+      <label for="state_city2" class="rl-label required">State/City</label>
+      <label for="state_city2" class="select-block">
+        <select form="profile-info-form" name="state_city2" id="state_city2">
+          <option value="0">Select your State/City...</option>
+          <option value="1">New York</option>
+          <option value="2">Buenos Aires</option>
+          <option value="3">Brasilia</option>
+          <option value="4">Tokyo</option>
+        </select>
+        <!-- SVG ARROW -->
+        <svg class="svg-arrow">
+          <use xlink:href="#svg-arrow"></use>
+        </svg>
+        <!-- /SVG ARROW -->
+      </label>
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container half">
+      <label for="zipcode2" class="rl-label required">Zip Code</label>
+      <input form="profile-info-form" type="text" id="zipcode2" name="zipcode2" placeholder="Enter your Zip Code here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <label for="address2" class="rl-label required">Full Address</label>
+      <input form="profile-info-form" type="text" id="address2" name="address2" placeholder="Enter your address here...">
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <label for="notes2" class="rl-label">Aditional Notes</label>
+      <textarea form="profile-info-form" id="notes2" name="notes2" placeholder="Enter aditional notes here..."></textarea>
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container">
+      <!-- CHECKBOX -->
+      <input type="checkbox" form="profile-info-form" id="copy_shipping" name="copy_shipping" checked>
+      <label for="copy_shipping" class="label-check">
+        <span class="checkbox primary"><span></span></span>
+        Copy information to shipping
+      </label>
+      <!-- /CHECKBOX -->
+    </div>
+    <!-- /INPUT CONTAINER -->
+  </div>
+{% endmacro %}
+
+{% macro form_shipping_info() %}
+  {# not used#}
+    <div class="form-box-item padded">
+      <h4>Shipping Information</h4>
+      <hr class="line-separator">
+      <!-- INPUT CONTAINER -->
+      <div class="input-container half">
+        <label for="first_name3" class="rl-label required">First Name</label>
+        <input type="text" form="profile-info-form" id="first_name3" name="first_name3" placeholder="Enter your first name here...">
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container half">
+        <label for="last_name3" class="rl-label required">Last Name</label>
+        <input type="text" form="profile-info-form" id="last_name3" name="last_name3" placeholder="Enter your last name here...">
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container">
+        <label for="company_name3" class="rl-label">Company Name</label>
+        <input type="text" form="profile-info-form" id="company_name3" name="company_name3" placeholder="Enter your company name here...">
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container">
+        <label for="email_address3" class="rl-label required">Email Address</label>
+        <input type="email" form="profile-info-form" id="email_address3" name="email_address3" placeholder="Enter your email address here...">
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container">
+        <label for="country3" class="rl-label required">Country</label>
+        <label for="country3" class="select-block">
+          <select form="profile-info-form" name="country3" id="country3">
+            <option value="0">Select your Country...</option>
+            <option value="1">United States</option>
+            <option value="2">Argentina</option>
+            <option value="3">Brasil</option>
+            <option value="4">Japan</option>
+          </select>
+          <!-- SVG ARROW -->
+          <svg class="svg-arrow">
+            <use xlink:href="#svg-arrow"></use>
+          </svg>
+          <!-- /SVG ARROW -->
+        </label>
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container half">
+        <label for="state_city3" class="rl-label required">State/City</label>
+        <label for="state_city3" class="select-block">
+          <select form="profile-info-form" name="state_city3" id="state_city3">
+            <option value="0">Select your State/City...</option>
+            <option value="1">New York</option>
+            <option value="2">Buenos Aires</option>
+            <option value="3">Brasilia</option>
+            <option value="4">Tokyo</option>
+          </select>
+          <!-- SVG ARROW -->
+          <svg class="svg-arrow">
+            <use xlink:href="#svg-arrow"></use>
+          </svg>
+          <!-- /SVG ARROW -->
+        </label>
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container half">
+        <label for="zipcode3" class="rl-label required">Zip Code</label>
+        <input form="profile-info-form" type="text" id="zipcode3" name="zipcode3" placeholder="Enter your Zip Code here...">
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container">
+        <label for="address3" class="rl-label required">Full Address</label>
+        <input form="profile-info-form" type="text" id="address3" name="address3" placeholder="Enter your address here...">
+      </div>
+      <!-- /INPUT CONTAINER -->
+
+      <!-- INPUT CONTAINER -->
+      <div class="input-container">
+        <label for="notes3" class="rl-label">Aditional Notes</label>
+        <textarea form="profile-info-form" id="notes3" name="notes3" placeholder="Enter aditional notes here..."></textarea>
+      </div>
+      <!-- /INPUT CONTAINER -->
+    </div>
+{% endmacro %}
+
+{# macros for dashboard Statement #}
+{% macro header_table(dictionary) %}
+{#
+id
+id_shopkeeper -
+id_item -
+code -
+note -
+description
+price -
+date -
+name
+is_app -
+#}
+
+  <div class="transaction-list-header">
+    <div class="transaction-list-header-date">
+      <p class="text-header small">Date</p>
+    </div>
+    <div class="transaction-list-header-code">
+      <p class="text-header small">Store ID</p>
+    </div>
+    <div class="transaction-list-header-code">
+      <p class="text-header small">Item ID</p>
+    </div>
+    <div class="transaction-list-header-code">
+      <p class="text-header small">Name Item</p>
+    </div>
+    <div class="transaction-list-header-item">
+      <p class="text-header small">Transaction</p>
+    </div>
+    <div class="transaction-list-header-price">
+      <p class="text-header small">Price</p>
+    </div>
+    {#}
+    <div class="transaction-list-header-item">
+      <p class="text-header small">Notes</p>
+    </div>
+    <div class="transaction-list-header-detail">
+      <p class="text-header small">Desc</p>
+    </div>
+    <div class="transaction-list-header-earnings">
+      <p class="text-header small">Earnings</p>
+    </div>
+    <div class="transaction-list-header-icon"></div>
+    #}
+  </div>
+{% endmacro %}
+
+{% macro header_table_store(dictionary) %}
+
+  <div class="transaction-list-header">
+    <div class="transaction-list-header-date">
+      <p class="text-header small">Title</p>
+    </div>
+    <div class="transaction-list-header-code">
+      <p class="text-header small">Partner ID</p>
+    </div>
+    <div class="transaction-list-header-date">
+      <p class="text-header small">Date init</p>
+    </div>
+    <div class="transaction-list-header-date">
+      <p class="text-header small">Date End</p>
+    </div>
+    <div class="transaction-list-header-price">
+      <p class="text-header small">Price</p>
+    </div>
+    <div class="transaction-list-header-date">
+      <p class="text-header small">Transaction</p>
+    </div>
+    <div class="transaction-list-header-item">
+      <p class="text-header small">Link</p>
+    </div>
+    {#}
+    <div class="transaction-list-header-earnings">
+      <p class="text-header small">Earnings</p>
+    </div>
+    <div class="transaction-list-header-icon"></div>
+    #}
+  </div>
+{% endmacro %}
+
+{% macro header_table_car(dictionary) %}
+
+  <div class="transaction-list-header">
+    <div class="transaction-list-header-date">
+      <p class="text-header small">Title</p>
+    </div>
+    <div class="transaction-list-header-code">
+      <p class="text-header small">Partner ID</p>
+    </div>
+    <div class="transaction-list-header-date">
+      <p class="text-header small">Date Valid</p>
+    </div>
+    <div class="transaction-list-header-date">
+      <p class="text-header small">Plan / License</p>
+    </div>
+    <div class="transaction-list-header-price">
+      <p class="text-header small">Price</p>
+    </div>
+    <div class="transaction-list-header-code">
+      <p class="text-header small">Template</p>
+    </div>
+    {#}
+    <div class="transaction-list-header-item">
+      <p class="text-header small">Link</p>
+    </div>
+    <div class="transaction-list-header-earnings">
+      <p class="text-header small">Earnings</p>
+    </div>
+    <div class="transaction-list-header-icon"></div>
+    #}
+  </div>
+{% endmacro %}
+
+{% macro item_list(dictionary,item) %}
+
+  <div class="transaction-list-item">
+    <div class="transaction-list-item-date">
+      <p>{{item.date_transaction}}</p>
+    </div>
+    <div class="transaction-list-item-code">
+      <p class="text-header">{{item.store_id}}</p>
+    </div>
+    <div class="transaction-list-item-code">
+      <p class="category primary">{{item.id_item}}</p>
+    </div>
+    <div class="transaction-list-item-code">
+      <p class="category primary">{{item.name}}</p>
+    </div>
+    <div class="transaction-list-item-item">
+      <p><span class="light">{{item.code}}</span></p>
+    </div>
+    <div class="transaction-list-item-price">
+      <p>{{dictionary.coin}}$ {{item.price}}</p>
+    </div>
+    {#
+    <div class="transaction-list-item-item">
+      <p><span class="light">{{item.notes}}</span></p>
+    </div>
+    <div class="transaction-list-item-detail">
+      <p><span class="light">{{item.description}}</span></p>
+    </div>
+
+    <div class="transaction-list-item-earnings">
+      <p class="text-header">-</p>
+    </div>
+    <div class="transaction-list-item-icon">
+      <div class="transaction-icon primary">
+        <!-- SVG PLUS -->
+        <svg class="svg-plus">
+          <use xlink:href="#svg-plus"></use>
+        </svg>
+        <!-- /SVG PLUS -->
+      </div>
+    </div>
+    #}
+  </div>
+
+{% endmacro %}
+
+{% macro item_list_store(dictionary,item) %}
+
+  <div class="transaction-list-item">
+    <div class="transaction-list-item-date">
+      <p class="category primary">{{item.title}}</p>
+    </div>
+    <div class="transaction-list-item-code">
+      <p class="text-header">{{item.id_partner}}</p>
+    </div>
+    <div class="transaction-list-item-date">
+      <p class="category primary">{{item.date_init}}</p>
+    </div>
+    <div class="transaction-list-item-date">
+      <p class="category primary">{{item.date_end}}</p>
+    </div>
+    <div class="transaction-list-item-price">
+      <p>{{dictionary.coin}}$ {{item.price}}</p>
+    </div>
+    <div class="transaction-list-item-date">
+      <p><span class="light">{{item.transaction}}</span></p>
+    </div>
+    {% if item.is_app == 0 %}
+   <div class="transaction-list-item-icon" >
+      <a href="scripts/downloads?id={{item.id}}&amp;is_app={{item.is_app}}">
+        <div class="transaction-icon primary"id="{{item.id}}">
+          <input type="hidden" id="addons-buy-theme-{{item.id}}"
+            value="{{item.is_app}}"/>
+        </div>
+      </a>
+    </div>
+    {% endif %}
+{#
+    <div class="transaction-list-item-item">
+      <p><span class="light">{{item.note}}</span></p>
+    </div>
+
+    <div class="transaction-list-item-detail">
+      <p><span class="light">{{item.description}}</span></p>
+    </div>
+
+    <div class="transaction-list-item-earnings">
+      <p class="text-header">-</p>
+    </div>
+    <div class="transaction-list-item-icon">
+      <div class="transaction-icon primary">
+        <!-- SVG PLUS -->
+        <svg class="svg-plus">
+          <use xlink:href="#svg-plus"></use>
+        </svg>
+        <!-- /SVG PLUS -->
+      </div>
+    </div>
+    #}
+  </div>
+
+{% endmacro %}
+
+{% macro item_list_car(dictionary,item) %}
+
+  <div class="transaction-list-item">
+    <div class="transaction-list-item-date">
+      <p class="category primary">{{item.title}}</p>
+    </div>
+    <div class="transaction-list-item-code">
+      <p class="text-header">{{item.id_partner}}</p>
+    </div>
+    <div class="transaction-list-item-date">
+      <p class="category primary">{{item.date_valid}}</p>
+    </div>
+    <div class="transaction-list-item-date">
+      <p class="category primary">{{item.plan}}</p>
+    </div>
+    <div class="transaction-list-item-price">
+      <p>{{dictionary.coin}}$ {{item.price}}</p>
+    </div>
+    <div class="transaction-list-item-code">
+      <p><span class="light">{{item.template}}</span></p>
+    </div>
+
+
+    <div class="transaction-list-item-icon" >
+      <a href="/scripts/buy?id_buy={{item.id}}&amp;is_app={{item.is_app}}	&amp;id_store={{item.id_store}}">
+        <div class="transaction-icon primary">
+        </div>
+      </a>
+    </div>
+{#
+    <div class="transaction-list-item-item">
+      <p><span class="light">{{item.note}}</span></p>
+    </div>
+
+    <div class="transaction-list-item-detail">
+      <p><span class="light">{{item.description}}</span></p>
+    </div>
+
+    <div class="transaction-list-item-earnings">
+      <p class="text-header">-</p>
+    </div>
+    <div class="transaction-list-item-icon">
+      <div class="transaction-icon primary">
+        <!-- SVG PLUS -->
+        <svg class="svg-plus">
+          <use xlink:href="#svg-plus"></use>
+        </svg>
+        <!-- /SVG PLUS -->
+      </div>
+    </div>
+    #}
+  </div>
+
+{% endmacro %}

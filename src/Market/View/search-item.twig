@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="../css/vendor/simple-line-icons.css">
+	<link rel="stylesheet" href="../css/vendor/tooltipster.css">
+	<link rel="stylesheet" href="../css/vendor/jquery.range.css">
+	<link rel="stylesheet" href="../css/style.css">
+
+	<link rel="stylesheet" href="../css/vendor/magnific-popup.css">
+	<!-- favicon -->
+	<link rel="icon" href="https://e-com.club/mass/ftp/tutoriais/favicon.png">
+	<title>{{dictionary.title}} | {{ dictionary.word_apps_store }}</title>
+</head>
+<body>
+  {% import 'macros.twig' as macro_main %}
+	{% import 'macro-app-theme-page.twig' as macro_app_theme %}
+	<!-- HEADER -->
+  {{macro_main.all_header(login,dictionary,user,app_category,theme_category)}}
+	<!-- /HEADER -->
+
+	<!-- SECTION HEADLINE -->
+	<div class="section-headline-wrap">
+		<div class="section-headline">
+			<h2>{{dictionary.word_search}} : {{info_page.name}}</h2>
+			<!--p>Home<span class="separator">/</span>Shop V1<span class="separator">/</span><span class="current-section">Illustration</span></p-->
+		</div>
+	</div>
+	<!-- /SECTION HEADLINE -->
+
+	<!-- SECTION -->
+	<div class="section-wrap">
+		<div class="section">
+			<div class="headline primary">
+				<h4>{{dictionary.word_items_found}} ({{info_page.number_found}})</h4>
+
+				<form id="shop_filter_form" name="shop_filter_form">
+					<label for="price_filter" class="select-block">
+						<select name="price_filter" id="price_filter" onchange="location = this.value;">
+              <option value="?filter=all&name={{info_page.name}}"{{filter.all}}>All</option>
+							<option value="?filter=free&name={{info_page.name}}"{{filter.free}}>Free</option>
+						</select>
+						<!-- SVG ARROW -->
+						<svg class="svg-arrow">
+							<use xlink:href="#svg-arrow"></use>
+						</svg>
+						<!-- /SVG ARROW -->
+					</label>
+				</form>
+			</div>
+
+			<!-- CONTENT -->
+			<!--div class="content"-->
+				<!-- HEADLINE -->
+				{#not implemented in moment
+				<div class="headline primary">
+					<h4>{{ info_page.number_found }} {{ dictionary.word_items_found }}</h4>
+					<!-- VIEW SELECTORS -->
+					<div class="view-selectors">
+						<!-- a href="shop-gridview-v1.html" class="view-selector grid active"></a>
+						<a href="shop-listview-v1.html" class="view-selector list"></a-->
+					</div>
+					<!-- /VIEW SELECTORS -->
+					<form id="shop_filter_form" name="shop_filter_form">
+						<label for="price_filter" class="select-block">
+							<select name="price_filter" id="price_filter">
+								<option value="0">{{ dictionary.word_price_high_low }}</option>
+								<option value="1">{{ dictionary.word_price_low_high }}</option>
+							</select>
+							<!-- SVG ARROW -->
+							<svg class="svg-arrow">
+								<use xlink:href="#svg-arrow"></use>
+							</svg>
+							<!-- /SVG ARROW -->
+						</label>
+						<label for="itemspp_filter" class="select-block">
+							<select name="itemspp_filter" id="itemspp_filter">
+								<option value="0">{{ dictionary.word_12_per_page }}</option>
+								<option value="1">{{ dictionary.word_6_per_page }}</option>
+							</select>
+							<!-- SVG ARROW -->
+							<svg class="svg-arrow">
+								<use xlink:href="#svg-arrow"></use>
+							</svg>
+							<!-- /SVG ARROW -->
+						</label>
+					</form>
+					<div class="clearfix"></div>
+				</div>
+				#}
+				<!-- /HEADLINE -->
+
+				<!-- PRODUCT SHOWCASE -->
+				<div class="product-showcase">
+					<!-- PRODUCT LIST -->
+					<div class="product-list grid column4-wrap owl-carousel">
+					<!--div class="product-list grid column3-4-wrap"-->
+						<!-- PRODUCT ITEM -->
+						{{macro_main.apps_themes(apps_themes,0,12,dictionary)}}
+						<!-- /PRODUCT ITEM -->
+
+					</div>
+					<!-- /PRODUCT LIST -->
+				</div>
+				<!-- /PRODUCT SHOWCASE -->
+
+				<!-- PAGER -->
+				{#not implemented
+				<div class="pager primary">
+					<div class="pager-item active"><p>1</p></div>
+					<div class="pager-item"><p>2</p></div>
+					<div class="pager-item"><p>3</p></div>
+					<div class="pager-item"><p>...</p></div>
+					<div class="pager-item"><p>17</p></div>
+				</div>
+				#}
+				<!-- /PAGER -->
+			<!--/div-->
+			<!-- CONTENT -->
+
+			<!-- SIDEBAR -->
+			{#not implemented in moment
+			<div class="sidebar">
+				<!-- DROPDOWN -->
+				{{macro_app_theme.filter_segment(dictionary,segment)}}
+				<!-- /DROPDOWN -->
+
+				<!-- SIDEBAR ITEM -->
+
+				{{macro_app_theme.filter_item(dictionary)}}
+
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				{{macro_app_theme.filter_category(dictionary,all_category)}}
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				{{macro_app_theme.filter_price_range(dictionary)}}
+				<!-- /SIDEBAR ITEM -->
+			</div>
+			#}
+			<!-- /SIDEBAR -->
+		</div>
+	</div>
+	<!-- /SECTION -->
+
+	<!-- FOOTER -->
+	{{macro_main.footer(dictionary,info_footer)}}
+	<!-- /FOOTER -->
+
+	<div class="shadow-film closed"></div>
+
+<!-- SVG ARROW -->
+<svg style="display: none;">
+	<symbol id="svg-arrow" viewBox="0 0 3.923 6.64014" preserveAspectRatio="xMinYMin meet">
+		<path d="M3.711,2.92L0.994,0.202c-0.215-0.213-0.562-0.213-0.776,0c-0.215,0.215-0.215,0.562,0,0.777l2.329,2.329
+			L0.217,5.638c-0.215,0.215-0.214,0.562,0,0.776c0.214,0.214,0.562,0.215,0.776,0l2.717-2.718C3.925,3.482,3.925,3.135,3.711,2.92z"/>
+	</symbol>
+</svg>
+<!-- /SVG ARROW -->
+
+<!-- SVG STAR -->
+<svg style="display: none;">
+	<symbol id="svg-star" viewBox="0 0 10 10" preserveAspectRatio="xMinYMin meet">
+		<polygon points="4.994,0.249 6.538,3.376 9.99,3.878 7.492,6.313 8.082,9.751 4.994,8.129 1.907,9.751
+	2.495,6.313 -0.002,3.878 3.45,3.376 "/>
+	</symbol>
+</svg>
+<!-- /SVG STAR -->
+
+<!-- SVG PLUS -->
+<svg style="display: none;">
+	<symbol id="svg-plus" viewBox="0 0 13 13" preserveAspectRatio="xMinYMin meet">
+		<rect x="5" width="3" height="13"/>
+		<rect y="5" width="13" height="3"/>
+	</symbol>
+</svg>
+<!-- /SVG PLUS -->
+
+<!-- jQuery -->
+<script src="../js/vendor/jquery-3.1.0.min.js"></script>
+<!-- JRange -->
+<script src="../js/vendor/jquery.range.min.js"></script>
+<!-- Tooltipster -->
+<script src="../js/vendor/jquery.tooltipster.min.js"></script>
+<!-- Tweet -->
+<script src="../js/vendor/twitter/jquery.tweet.min.js"></script>
+<!-- Side Menu -->
+<script src="../js/side-menu.js"></script>
+<!-- Tooltip -->
+<script src="../js/tooltip.js"></script>
+<!-- User Quickview Dropdown -->
+<script src="../js/user-board.js"></script>
+<!-- Shop -->
+<script src="../js/shop.js"></script>
+<!-- Footer -->
+<script src="../js/footer.js"></script>
+
+{{macro_main.scripts()}}
+
+</body>
+</html>

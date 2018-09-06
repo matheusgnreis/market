@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="/assets/css/vendor/simple-line-icons.css">
+	<link rel="stylesheet" href="/assets/css/vendor/tooltipster.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<link rel="stylesheet" href="/assets/css/vendor/magnific-popup.css">
+	<!-- favicon -->
+	<link rel="icon" href="https://e-com.club/mass/ftp/tutoriais/favicon.png">
+	<title>{{dictionary.title}} | {{dictionary.word_profile_author}}</title>
+</head>
+<body>
+	<!-- HEADER -->
+  {% import 'macros.twig' as macro_main %}
+  {% import 'macro-profile.twig' as macro_profile %}
+  {{macro_main.all_header(login,dictionary,user,app_category,theme_category)}}
+	<!-- /HEADER -->
+  {{macro_profile.autor_header(dictionary,info_author)}}
+
+	<!-- SECTION -->
+	<div class="section-wrap">
+		<div class="section overflowable">
+			<!-- SIDEBAR -->
+			<div class="sidebar left author-profile">
+				<!-- SIDEBAR ITEM -->
+				{{macro_profile.bio_author(dictionary,info_author)}}
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- DROPDOWN -->
+				{{macro_profile.profile_board(dictionary,info_author)}}
+				<!-- /DROPDOWN -->
+
+				<!-- SIDEBAR ITEM -->
+				{{macro_profile.board_reputation(dictionary,info_author)}}
+				<!-- /SIDEBAR ITEM -->
+			</div>
+			<!-- /SIDEBAR -->
+
+			<!-- CONTENT -->
+			<!-- Wisley edit -->
+			<div class="content">
+				<!-- HEADLINE -->
+				<div class="headline primary">
+					<h4>{{ info_page.number_found }} {{ dictionary.word_items_found }}</h4>
+					<!-- VIEW SELECTORS -->
+					<div class="view-selectors">
+						<!-- a href="shop-gridview-v1.html" class="view-selector grid active"></a>
+						<a href="shop-listview-v1.html" class="view-selector list"></a-->
+					</div>
+					<!-- /VIEW SELECTORS -->
+					{# not implemented
+					<form id="shop_filter_form" name="shop_filter_form">
+						<label for="price_filter" class="select-block">
+							<select name="price_filter" id="price_filter">
+								<option value="0">{{ dictionary.word_price_high_low }}</option>
+								<option value="1">{{ dictionary.word_price_low_high }}</option>
+							</select>
+							<!-- SVG ARROW -->
+							<svg class="svg-arrow">
+								<use xlink:href="#svg-arrow"></use>
+							</svg>
+							<!-- /SVG ARROW -->
+						</label>
+
+						<label for="itemspp_filter" class="select-block">
+							<select name="itemspp_filter" id="itemspp_filter">
+								<option value="0">{{ dictionary.word_12_per_page }}</option>
+								<option value="1">{{ dictionary.word_6_per_page }}</option>
+							</select>
+							<!-- SVG ARROW -->
+							<svg class="svg-arrow">
+								<use xlink:href="#svg-arrow"></use>
+							</svg>
+							<!-- /SVG ARROW -->
+						</label>
+
+					</form>
+					#}
+					<div class="clearfix"></div>
+				</div>
+				<!-- /HEADLINE -->
+
+				<!-- PRODUCT SHOWCASE -->
+				<div class="product-showcase">
+					<!-- PRODUCT LIST -->
+					<div class="product-list grid column3-4-wrap">
+						<!-- PRODUCT ITEM -->
+						{{macro_main.apps_themes(apps,0,6,dictionary)}}
+						<!-- /PRODUCT ITEM -->
+
+					</div>
+					<!-- /PRODUCT LIST -->
+				</div>
+				<!-- /PRODUCT SHOWCASE -->
+				<hr class="line-separator">
+				<!-- themes -->
+
+				<!-- PRODUCT SHOWCASE -->
+				<div class="product-showcase">
+					<!-- PRODUCT LIST -->
+					<div class="product-list grid column3-4-wrap">
+						<!-- PRODUCT ITEM -->
+						{{macro_main.apps_themes(themes,0,6,dictionary)}}
+						<!-- /PRODUCT ITEM -->
+
+					</div>
+					<!-- /PRODUCT LIST -->
+				</div>
+				<!-- /PRODUCT SHOWCASE -->
+				{# not implemented
+				<!-- PAGER -->
+				<div class="pager primary">
+					<div class="pager-item active"><p>1</p></div>
+					<div class="pager-item"><p>2</p></div>
+					<div class="pager-item"><p>3</p></div>
+					<div class="pager-item"><p>...</p></div>
+					<div class="pager-item"><p>17</p></div>
+				</div>
+				<!-- /PAGER -->
+				#}
+			</div>
+			<!-- wisley edit -->
+			<!-- CONTENT -->
+
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!-- /SECTION -->
+
+	<!-- FOOTER -->
+	{{macro_main.footer(dictionary,info_footer)}}
+	<!-- /FOOTER -->
+
+	<div class="shadow-film closed"></div>
+
+<!-- SVG ARROW -->
+<svg style="display: none;">
+	<symbol id="svg-arrow" viewBox="0 0 3.923 6.64014" preserveAspectRatio="xMinYMin meet">
+		<path d="M3.711,2.92L0.994,0.202c-0.215-0.213-0.562-0.213-0.776,0c-0.215,0.215-0.215,0.562,0,0.777l2.329,2.329
+			L0.217,5.638c-0.215,0.215-0.214,0.562,0,0.776c0.214,0.214,0.562,0.215,0.776,0l2.717-2.718C3.925,3.482,3.925,3.135,3.711,2.92z"/>
+	</symbol>
+</svg>
+<!-- /SVG ARROW -->
+
+<!-- SVG STAR -->
+<svg style="display: none;">
+	<symbol id="svg-star" viewBox="0 0 10 10" preserveAspectRatio="xMinYMin meet">
+		<polygon points="4.994,0.249 6.538,3.376 9.99,3.878 7.492,6.313 8.082,9.751 4.994,8.129 1.907,9.751
+	2.495,6.313 -0.002,3.878 3.45,3.376 "/>
+	</symbol>
+</svg>
+<!-- /SVG STAR -->
+
+<!-- SVG PLUS -->
+<svg style="display: none;">
+	<symbol id="svg-plus" viewBox="0 0 13 13" preserveAspectRatio="xMinYMin meet">
+		<rect x="5" width="3" height="13"/>
+		<rect y="5" width="13" height="3"/>
+	</symbol>
+</svg>
+<!-- /SVG PLUS -->
+
+<!-- jQuery -->
+<script src="/assets/js/vendor/jquery-3.1.0.min.js"></script>
+<!-- Tooltipster -->
+<script src="/assets/js/vendor/jquery.tooltipster.min.js"></script>
+<!-- Tweet -->
+<script src="/assets/js/vendor/twitter/jquery.tweet.min.js"></script>
+<!-- Side Menu -->
+<script src="/assets/js/side-menu.js"></script>
+<!-- Tooltip -->
+<script src="/assets/js/tooltip.js"></script>
+<!-- User Quickview Dropdown -->
+<script src="/assets/js/user-board.js"></script>
+<!-- XM PieChart -->
+<!--script src="/assets/js/vendor/jquery.xmpiechart.min.js"></script-->
+<!-- Author Profile -->
+<script src="/assets/js/author-profile.js"></script>
+<!-- Footer -->
+<script src="/assets/js/footer.js"></script>
+
+{{macro_main.scripts()}}
+</body>
+</html>
