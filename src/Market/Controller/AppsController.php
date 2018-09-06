@@ -24,13 +24,16 @@ class AppsController
     {
         $ret = Apps::find($args['id'])
                                     ->evaluations()
-                                    ->partner();
+                                    ->partner()
+                                    ->comments()
+                                    ->imagens();
+
         return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
     }
     
     public function getBySlug($request, $response, $args)
     {
-        $ret = Apps::where('slug', $slug)->get();
+        $ret = Apps::where('slug', $args['slug'])->get();
         return $response->withJson($ret, 200);
     }
 
@@ -70,6 +73,7 @@ class AppsController
             'partner_id' => $body['partner_id'],
             'title' => $body['title'],
             'slug' => $body['slug'],
+            'category' => $body['category'],
             'thumbnail' => $body['thumbnail'],
             'description' => $body['description'],
             'json_body' => $body['json_body'],
@@ -99,13 +103,13 @@ class AppsController
     public function update($request, $response, $args)
     {
         if (!$args['id']) {
-            return $response->withJson(['status' => 400, 'msn' => 'app_id not found'], 400);
+            return $response->withJson(['status' => 400, 'message' => 'app_id not found'], 400);
         }
 
-        $app = Anuncios::find($args['id']);
+        $app = Apps::find($args['id']);
 
-        if (!$anuncio) {
-            return $response->withJson(['status' => 400, 'msg' => 'app not found'], 400);
+        if (!$app) {
+            return $response->withJson(['status' => 400, 'message' => 'app not found'], 400);
         }
 
         $body = $request->getParsedBody();
@@ -113,6 +117,7 @@ class AppsController
             'partner_id' => isset($body['partner_id']) ? $body['partner_id'] : $app->partner_id,
             'title' => isset($body['title']) ? $body['title'] : $app->title,
             'slug' => isset($body['slug']) ? $body['slug'] : $app->slug,
+            'category' => isset($body['category']) ? $body['category'] : $app->category,
             'thumbnail' => isset($body['thumbnail']) ? $body['thumbnail'] : $app->thumbnail,
             'description' => isset($body['description']) ? $body['description'] : $app->description,
             'json_body' => isset($body['json_body']) ? $body['json_body'] : $app->json_body,
@@ -136,7 +141,7 @@ class AppsController
             'active' => isset($body['active']) ? $body['active'] : $app->active
         ]);
 
-        return $update ? $response->withJson(['status' => 201, 'msg' => 'updated'], 201) : false;
+        return $update ? $response->withJson(['status' => 201, 'message' => 'updated'], 201) : false;
     }
 
     public function destroy($request, $response, $args)
