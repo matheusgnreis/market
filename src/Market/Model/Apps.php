@@ -31,7 +31,7 @@ class Apps extends Model
      */
     public function partner()
     {
-        return $this->hasOne(Partners::class);
+        return $this->belongsTo(Partner::class);
     }
     
     /**

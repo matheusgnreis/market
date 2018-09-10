@@ -17,8 +17,9 @@ class ThemesController
         $params = $this->getSearchParams($request);
         $skip = $this->getSearchSkip($request);
         $take = $this->getSearchTake($request);
-        $ret = Themes::where($params)->skip($skip)->take($take)->get();
-        return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
+        return Themes::where($params)->skip($skip)->take($take)->with('partner')->get()->toArray();
+        
+        //return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
     }
 
     public function getById($request, $response, $args)

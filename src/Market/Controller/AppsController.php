@@ -16,8 +16,8 @@ class AppsController
         $params = $this->getSearchParams($request);
         $skip = $this->getSearchSkip($request);
         $take = $this->getSearchTake($request);
-        $ret = Apps::where($params)->skip($skip)->take($take)->get();
-        return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
+        $apps = Apps::where($params)->skip($skip)->take($take)->with('partner')->get()->toArray();
+        return $apps;
     }
 
     public function getById($request, $response, $args)
