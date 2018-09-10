@@ -395,6 +395,7 @@ trait Dictionary
               'word_other' => $word_other,
               'word_categories' => $word_categories,
               'word_search_empty' => $word_search_empty,
+              'lang' => $lang
             );
         return $dictionary;
     }
