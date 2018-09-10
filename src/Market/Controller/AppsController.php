@@ -17,7 +17,10 @@ class AppsController
         $skip = $this->getSearchSkip($request);
         $take = $this->getSearchTake($request);
         $apps = Apps::where($params)->skip($skip)->take($take)->with('partner')->get()->toArray();
-        return $apps;
+        return (object)[
+            'apps' => $apps,
+            'total' => Apps::where($params)->count()
+        ];
     }
 
     public function getById($request, $response, $args)
@@ -48,6 +51,10 @@ class AppsController
             }
         }
 
+        if (isset($request->getParams()['category'])) {
+            $search[] = ['category', $request->getParams()['category']];
+        }
+
         if (isset($request->getParams()['title'])) {
             $search[] = ['title', $request->getParams()['title']];
         }
@@ -62,7 +69,7 @@ class AppsController
 
     public function getSearchTake($request)
     {
-        return isset($request->getParams()['take']) ? (int) $request->getParams()['take'] : 10;
+        return isset($request->getParams()['take']) ? (int) $request->getParams()['take'] : 12;
     }
 
     public function create($request, $response, $args)

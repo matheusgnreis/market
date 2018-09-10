@@ -30,7 +30,7 @@ class HomeController extends BaseController
                 'app_category' => $this->appsCategories($translate),
                 'theme_category' => $this->themesCategories($translate),
                 'search' => $this->searchCategories($translate),
-                'apps' => $apps->getAll($request, $response, $args),
+                'apps' => $apps->getAll($request, $response, $args)->apps,
                 'themes' => $themes->getAll($request, $response, $args),
                 'login' => false,
                 'user' => null
@@ -45,18 +45,28 @@ class HomeController extends BaseController
         $apps = new AppsController();
         $themes = new ThemesController();
 
+        $resp = $apps->getAll($request, $response, $args);
+                
         return $this->view->render($response, 'apps.html', 
             [
                 'data' => [
                     'page' => [
                         'name' => 'Apps',
                         'category' => 'All',
-                        'lang' => $args['lang']
-                        ]
-                    ],
+                        'lang' => $args['lang'],
+                        'total' => $resp->total,
+                        'pages' => ceil($resp->total / 12),
+                        'atual' => ceil($request->getParams()['skip'] / 10),
+                        'filter' => $request->getParams()['filter']
+                    ]
+                ],
+                'app_category' => $this->appsCategories($translate),
+                'theme_category' => $this->themesCategories($translate),
+                'categories' => $this->appsCategories($translate),
                 'dictionary' => $translate,
                 'login' => false,
-                'user' => null
+                'user' => null,
+                'apps' => $resp->apps
             ]
         );
     }
