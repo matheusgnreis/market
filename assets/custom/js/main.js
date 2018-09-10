@@ -130,8 +130,8 @@ $('select#price_filter').on("change",function(ev){
     type_page = 'themes';
   }
 
-  console.log($('#categories').val())
-  window.location.href = "/apps?title=" ;
+
+  window.location.href = '/' + $('html')[0].lang + '/apps?filter=' + price_filter ;
 
 });
 
@@ -159,9 +159,7 @@ $('select#category_filter').on("change",function(ev){
     category_filter = 0;
     type_page = 'themes';
   }
-
-  window.location.href = "/apps?title=" ;
-
+  window.location.href = '/' + $('html')[0].lang + '/apps?category=' + category_filter ;
 });
 
 $( ".search-form" ).submit(function( event ) {
