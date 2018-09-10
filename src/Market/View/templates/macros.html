@@ -641,10 +641,10 @@
                         <ul class="rating tooltip" title="{{ dictionary.word_reputation }}">
                             {% import 'templates/macros.html' as macro_main %}
                             <!-- use macros to render stars -->
-                            
-  								{{macro_main.star_on(4)}}
-  								{{macro_main.star_off(1)}}
-                  
+
+                            {{macro_main.star_on(4)}}
+                            {{macro_main.star_off(1)}}
+
                         </ul>
                     </div>
                     <!-- /USER RATING -->
@@ -1632,4 +1632,94 @@
         <!-- a href="#" class="button mid twt half">Login with Twitter</a-->
     </div>
     <!-- /FORM POPUP CONTENT -->
+{% endmacro %}
+
+{# 
+    Macros novas 
+#}
+{% macro apps_card(apps, init, end, dictionary) %}
+    {% for app in apps %}
+        {% if loop.index0 >= init and loop.index0 < end %}
+            <div class="product-item column">
+                {% if app.is_app == 1 %}
+                    <span class="pin featured">APP</span>
+                {% endif %}
+                <!-- PRODUCT PREVIEW ACTIONS -->
+                <div class="product-preview-actions">
+                    <!-- PRODUCT PREVIEW IMAGE -->
+                    <figure class="product-preview-image">
+                        <a href="/{{dictionary.lang}}/apps/{{app.slug}}">
+                            <img src="{{app.thumbnail}}" alt="product-image" width="258" height="168">
+                        </a>
+                    </figure>
+                </div>
+                <!-- /PRODUCT PREVIEW ACTIONS -->
+
+                <!-- PRODUCT INFO -->
+                <div class="product-info">
+                    <a href="/{{dictionary.lang}}/apps/{{app.slug}}">
+                        <p class="text-header">
+                            {{ app.title }}
+                        </p>
+                    </a>
+                    <p class="product-description">{{ app.description |truncate(140) }}</p>
+                    <a href="/{{dictionary.lang}}/apps/categories/{{app.category}}">
+                        <p class="category primary">{{ app.category }}</p>
+                    </a>
+                    <p class="price">
+                        <span>{{dictionary.coin}}$
+                        </span>{{ app.value | number_format(2, '.', ',') }}</p>
+                </div>
+                <!-- /PRODUCT INFO -->
+                <hr class="line-separator">
+
+                <!-- USER RATING -->
+                <div class="user-rating">
+                    <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
+                        <figure class="user-avatar small">
+                            <img src="{{app.partner.path_image}}" alt="user-avatar">
+                        </figure>
+                    </a>
+                    <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
+                        <p class="text-header tiny">{{ app.partner.name }}</p>
+                    </a>
+                    <ul class="rating tooltip" title="{{ dictionary.word_reputation }}">
+                        {% import 'templates/macros.html' as macro_main %}
+                        <!-- use macros to render stars -->
+
+                        {{macro_main.star_on(4)}}
+                        {{macro_main.star_off(1)}}
+
+                    </ul>
+                </div>
+                <!-- /USER RATING -->
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro apps_pagination(total, atual, lang) %}
+    <div class="pager primary">
+        {% for i in 1..total %}
+            <div class="pager-item {% if i == atual %} active {% endif %}">
+                <a href="/{{lang}}/apps?skip={{i*10}}">
+                    <p>{{i}}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    <style>
+        .section .pager {
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+    </style>
 {% endmacro %}
