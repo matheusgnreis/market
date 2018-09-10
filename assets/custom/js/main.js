@@ -130,8 +130,8 @@ $('select#price_filter').on("change",function(ev){
     type_page = 'themes';
   }
 
-  window.location.href = "/apps-page?type=" + type_page + "&filter=" + price_filter +
-   "&category=" + category_filter + "&name=" + name_search;
+  console.log($('#categories').val())
+  window.location.href = "/apps?title=" ;
 
 });
 
@@ -160,8 +160,7 @@ $('select#category_filter').on("change",function(ev){
     type_page = 'themes';
   }
 
-  window.location.href = "/apps-page?type=" + type_page + "&filter=" + price_filter +
-   "&category=" + category_filter + "&name=" + name_search;
+  window.location.href = "/apps?title=" ;
 
 });
 
@@ -190,8 +189,7 @@ $( ".search-form" ).submit(function( event ) {
     type_page = 'themes';
   }
 
-  window.location.href = "/apps-page?type=" + type_page + "&filter=" + price_filter +
-   "&category=" + category_filter + "&name=" + name_search;
+  window.location.href = "/apps?title=" ;
   // alert( "Handler for .submit() called." );
   event.preventDefault();
 });

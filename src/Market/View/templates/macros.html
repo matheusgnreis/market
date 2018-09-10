@@ -1,0 +1,1635 @@
+<!-- These macros can be used on other page -->
+{% macro scripts() %}
+    <!-- xmAlert -->
+    <script src="/assets/js/vendor/jquery.xmalert.min.js"></script>
+    <!-- Magnific Popup -->
+    <script src="/assets/js/vendor/jquery.magnific-popup.min.js"></script>
+    <!-- Alerts Demo -->
+    <script src="/assets/js/alerts-demo.js"></script>
+    <!-- -->
+    <!-- -->
+    <script type="text/javascript" src="/assets/custom/js/main.js"></script>
+    <!-- script convert to md5 -->
+    <script type="text/javascript" src="/assets/custom/js/md5.min.js"></script>
+    <!-- script for checkbox -->
+    <script type="text/javascript" src="/assets/custom/js/checkbox-item.js"></script>
+    <!-- script in itempage -->
+    <script type="text/javascript" src="/assets/custom/js/item-page.js"></script>
+    <!-- script uploaditem -->
+    <script type="text/javascript" src="/assets/custom/js/uploaditem.js"></script>
+    <!-- script upload partner -->
+    <script type="text/javascript" src="/assets/custom/js/up-partner.js"></script>
+    <!-- script register -->
+    <script type="text/javascript" src="/assets/custom/js/register.js"></script>
+{% endmacro %}
+<!-- macro to draw active star -->
+{% macro star_on(n)%}
+    {% for i in 0..n - 1 if n > 0 %}
+        <li class="rating-item">
+            <!-- SVG STAR -->
+            <svg class="svg-star">
+                <use xlink:href="#svg-star"></use>
+            </svg>
+            <!-- /SVG STAR -->
+        </li>
+    {% endfor %}
+{% endmacro %}
+<!-- macro to draw star not active -->
+{% macro star_off(n)%}
+    {% for i in 0..n - 1 if n > 0 %}
+        <li class="rating-item empty">
+            <!-- SVG STAR -->
+            <svg class="svg-star">
+                <use xlink:href="#svg-star"></use>
+            </svg>
+            <!-- /SVG STAR -->
+        </li>
+    {% endfor %}
+{% endmacro %}
+<!-- macro to use features main -->
+{% macro feature_menu(dictionary) %}
+    <!-- MENU ITEM -->
+    <li class="menu-item sub">
+        <a href="">
+            {{dictionary.word_categories}}
+            <!-- SVG ARROW -->
+            <svg class="svg-arrow">
+                <use xlink:href="#svg-arrow"></use>
+            </svg>
+            <!-- /SVG ARROW -->
+        </a>
+        <div class="content-dropdown">
+            <!-- FEATURE LIST BLOCK -->
+            <div class="feature-list-block">
+                <h6 class="feature-list-title">{{dictionary.word_app}}</h6>
+                <hr class="line-separator">
+                <!-- FEATURE LIST -->
+                <ul class="feature-list">
+                    <!-- FEATURE LIST ITEM -->
+                    {% for category in all_category if category.id > 0 and category.id < 10 %}
+                        <li class="feature-list-item">
+                            <a href="{{category.page}}">{{category.name}}</a>
+                        </li>
+                    {% endfor %}
+                    <!-- /FEATURE LIST ITEM -->
+                </ul>
+                <!-- /FEATURE LIST -->
+                <!-- FEATURE LIST -->
+                <ul class="feature-list">
+                    <!-- FEATURE LIST ITEM -->
+                    {% for category in all_category if category.id >= 10 and category.id < 12 %}
+                        <li class="feature-list-item">
+                            <a href="{{category.page}}">{{category.name}}</a>
+                        </li>
+                    {% endfor %}
+                    <!-- /FEATURE LIST ITEM -->
+                </ul>
+                <!-- /FEATURE LIST -->
+
+            </div>
+            <!-- /FEATURE LIST BLOCK -->
+
+            <!-- FEATURE LIST BLOCK -->
+            <div class="feature-list-block">
+                <h6 class="feature-list-title">{{dictionary.word_theme}}</h6>
+                <hr class="line-separator">
+                <!-- FEATURE LIST -->
+                <ul class="feature-list">
+                    <!-- FEATURE LIST ITEM -->
+                    {% for category in all_category if category.id >= 12 and category.id < 22 %}
+                        <li class="feature-list-item">
+                            <a href="{{category.page}}">{{category.name}}</a>
+                        </li>
+                    {% endfor %}
+                    <!-- /FEATURE LIST ITEM -->
+                </ul>
+                <!-- /FEATURE LIST -->
+                <!-- FEATURE LIST -->
+                <ul class="feature-list">
+                    <!-- FEATURE LIST ITEM -->
+                    {% for category in all_category if category.id >= 15 %}
+                        <li class="feature-list-item">
+                            <a href="{{category.page}}">{{category.name}}</a>
+                        </li>
+                    {% endfor %}
+                    <!-- /FEATURE LIST ITEM -->
+                </ul>
+                <!-- /FEATURE LIST -->
+            </div>
+            <!-- /FEATURE LIST BLOCK -->
+            {# not implemented
+      <!-- FEATURE LIST BLOCK -->
+      <div class="feature-list-block">
+        <h6 class="feature-list-title">Dashboard</h6>
+        <hr class="line-separator">
+        <!-- FEATURE LIST -->
+        <ul class="feature-list">
+          <!-- FEATURE LIST ITEM -->
+          <li class="feature-list-item">
+            <a href="dashboard-settings">Account Settings</a>
+          </li>
+          <!-- /FEATURE LIST ITEM -->
+
+          <!-- FEATURE LIST ITEM -->
+          <li class="feature-list-item">
+            <a href="dashboard-statistics.html">Statistics Page</a>
+          </li>
+          <!-- /FEATURE LIST ITEM -->
+
+          <!-- FEATURE LIST ITEM -->
+          <li class="feature-list-item">
+            <a href="dashboard-statement.html">Sales Statement</a>
+          </li>
+          <!-- /FEATURE LIST ITEM -->
+
+          <!-- FEATURE LIST ITEM -->
+          <li class="feature-list-item">
+            <a href="dashboard-inbox.html">Inbox Page</a>
+          </li>
+          <!-- /FEATURE LIST ITEM -->
+
+          <!-- FEATURE LIST ITEM -->
+          <li class="feature-list-item">
+            <a href="dashboard-openmessage.html">Open Message</a>
+          </li>
+          <!-- /FEATURE LIST ITEM -->
+
+          <!-- FEATURE LIST ITEM -->
+          <li class="feature-list-item">
+            <a href="dashboard-uploaditem.html">Upload Page</a>
+          </li>
+          <!-- /FEATURE LIST ITEM -->
+        </ul>
+        <!-- /FEATURE LIST -->
+      </div>
+      <!-- /FEATURE LIST BLOCK -->
+
+      <!-- FEATURE LIST BLOCK -->
+      <div class="feature-list-block">
+        <h6 class="feature-list-title">Gamification</h6>
+        <hr class="line-separator">
+        <!-- FEATURE LIST -->
+        <ul class="feature-list">
+          <!-- FEATURE LIST ITEM -->
+          <li class="feature-list-item">
+            <a href="community-badges.html">Author Badges Page</a>
+          </li>
+          <!-- /FEATURE LIST ITEM -->
+
+          <!-- FEATURE LIST ITEM -->
+          <li class="feature-list-item">
+            <a href="badges.html">All Badges (Big and Small)</a>
+          </li>
+          <!-- /FEATURE LIST ITEM -->
+
+          <!-- FEATURE LIST ITEM -->
+          <li class="feature-list-item">
+            <a href="flag-badges.html">Flag Badges (Big and Small)</a>
+          </li>
+          <!-- /FEATURE LIST ITEM -->
+
+          <!-- FEATURE LIST ITEM -->
+          <li class="feature-list-item">
+            <a href="badges-boxes.html">Badge Boxes Versions</a>
+          </li>
+          <!-- /FEATURE LIST ITEM -->
+
+          <!-- FEATURE LIST ITEM -->
+          <li class="feature-list-item">
+            <a href="author-badges.html">Public Author Badges</a>
+          </li>
+          <!-- /FEATURE LIST ITEM -->
+        </ul>
+        <!-- /FEATURE LIST -->
+      </div>
+      <!-- /FEATURE LIST BLOCK -->
+      #}
+        </div>
+    </li>
+    <!-- /MENU ITEM -->
+{% endmacro %}
+<!-- macro to use submenu app -->
+{% macro subcategory_app(dictionary, all_category) %}
+    <!-- MENU ITEM -->
+    <li class="menu-item sub">
+        <a href="/apps">
+            {{ dictionary.word_app }}
+            <!-- SVG ARROW -->
+            <svg class="svg-arrow">
+                <use xlink:href="#svg-arrow"></use>
+            </svg>
+            <!-- /SVG ARROW -->
+        </a>
+        <div class="content-dropdown">
+            <!-- FEATURE LIST BLOCK -->
+            <div class="feature-list-block">
+                <h6 class="feature-list-title">{{dictionary.word_app}}</h6>
+                <hr class="line-separator">
+                <!-- FEATURE LIST -->
+                <ul class="feature-list">
+                    <!-- FEATURE LIST ITEM -->
+                    {% for category in all_category if category.id < 10 %}
+                        <li class="feature-list-item">
+                            <a href="/{{dictionary.lang}}/apps/{{category.page}}">{{category.name}}</a>
+                        </li>
+                    {% endfor %}
+                    <!-- /FEATURE LIST ITEM -->
+                </ul>
+                <!-- /FEATURE LIST -->
+                <!-- FEATURE LIST -->
+                <ul class="feature-list">
+                    <!-- FEATURE LIST ITEM -->
+                    {% for category in all_category if category.id >= 10 and category.id < 12 %}
+                        <li class="feature-list-item">
+                            <a href="/{{dictionary.lang}}/apps/{{category.page}}">{{category.name}}</a>
+                        </li>
+                    {% endfor %}
+                    <!-- /FEATURE LIST ITEM -->
+                </ul>
+                <!-- /FEATURE LIST -->
+
+            </div>
+            <!-- /FEATURE LIST BLOCK -->
+        </div>
+    </li>
+    <!-- /MENU ITEM -->
+{% endmacro %}
+<!-- macro to use submenu app -->
+{% macro subcategory_theme(dictionary, all_category) %}
+    <!-- MENU ITEM -->
+    <li class="menu-item sub">
+        <a href="/themes">
+            {{ dictionary.word_theme }}
+            <!-- SVG ARROW -->
+            <svg class="svg-arrow">
+                <use xlink:href="#svg-arrow"></use>
+            </svg>
+            <!-- /SVG ARROW -->
+        </a>
+        <div class="content-dropdown">
+            <!-- FEATURE LIST BLOCK -->
+            <div class="feature-list-block">
+                <h6 class="feature-list-title">{{ dictionary.word_theme }}</h6>
+                <hr class="line-separator">
+                <!-- FEATURE LIST -->
+                <ul class="feature-list">
+                    <!-- FEATURE LIST ITEM -->
+                    {% for category in all_category if category.id < 10 %}
+                        <li class="feature-list-item">
+                            <a href="/{{dictionary.lang}}/themes/{{category.page}}">{{category.name}}</a>
+                        </li>
+                    {% endfor %}
+                    <!-- /FEATURE LIST ITEM -->
+                </ul>
+                <!-- /FEATURE LIST -->
+                <!-- FEATURE LIST -->
+                <ul class="feature-list">
+                    <!-- FEATURE LIST ITEM -->
+                    {% for category in all_category if category.id >= 10 and category.id < 20 %}
+                        <li class="feature-list-item">
+                            <a href="/{{dictionary.lang}}/themes/{{category.page}}">{{category.name}}</a>
+                        </li>
+                    {% endfor %}
+                    <!-- /FEATURE LIST ITEM -->
+                </ul>
+                <!-- /FEATURE LIST -->
+
+            </div>
+            <!-- /FEATURE LIST BLOCK -->
+        </div>
+    </li>
+    <!-- /MENU ITEM -->
+{% endmacro %}
+<!-- macro to use features moblie -->
+{% macro feature_moblie(dictionary) %}
+    <!-- DROPDOWN ITEM -->
+    <li class="dropdown-item interactive">
+        <a href="#">
+            {{dictionary.word_categories}}
+            <!-- SVG ARROW -->
+            <svg class="svg-arrow">
+                <use xlink:href="#svg-arrow"></use>
+            </svg>
+            <!-- /SVG ARROW -->
+        </a>
+
+        <!-- INNER DROPDOWN -->
+        <ul class="inner-dropdown">
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <p>Emerald Dragon</p>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="/{{dictionary.lang}}">Homepage V1</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="home-v2.html">Homepage V2</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="itemview-versions.html">Item View Versions</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="shop-gridview-v1.html">Shop Grid View V1</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="shop-gridview-v2.html">Shop Grid View V2</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="shop-listview-v1.html">Shop List View V1</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="shop-listview-v2.html">Shop List View V2</a>
+                <!-- PIN -->
+                <span class="pin soft-edged primary">hot</span>
+                <!-- /PIN -->
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="profile-page">Profile Page</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="blog-v1.html">Blog Page V1</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="blog-v2.html">Blog Page V2</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="open-post.html">Open Post</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="forum.html">Forum Board</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="subforum.html">Subforum</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="open-topic.html">Open Topic</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="login-register.html">Login and Register</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="menu-dropdowns.html">Menu and Dropdowns</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <p>Product Pages</p>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="item-v1.html">Item Page V1</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="item-v2.html">Item Page V2</a>
+                <!-- PIN -->
+                <span class="pin soft-edged secondary">new</span>
+                <!-- /PIN -->
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="product-page.html">Product Page</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="auction-page.html">Auction Page</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="service-page.html">Service Page</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="favourites.html">Favourite Products Grid View</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="favourites-listview.html">Favourite Products List View</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="alerts-notifications.html">Alerts &amp; Notifications</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <p>Dashboard</p>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="dashboard-settings">Account Settings</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="dashboard-statistics.html">Statistics Page</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="dashboard-statement.html">Sales Statement</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="dashboard-inbox.html">Inbox Page</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="dashboard-openmessage.html">Open Message</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="dashboard-uploaditem.html">Upload Page</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <p>Gamification</p>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="community-badges.html">Author Badges Page</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="badges.html">All Badges (Big and Small)</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="flag-badges.html">Flag Badges (Big and Small)</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="badges-boxes.html">Badge Boxes Versions</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+
+            <!-- INNER DROPDOWN ITEM -->
+            <li class="inner-dropdown-item">
+                <a href="author-badges.html">Public Author Badges</a>
+            </li>
+            <!-- /INNER DROPDOWN ITEM -->
+        </ul>
+        <!-- /INNER DROPDOWN -->
+    </li>
+    <!-- /DROPDOWN ITEM -->
+{% endmacro %}
+<!-- use macro to print application or theme information -->
+{% macro apps_themes(apps, init, end, dictionary)%}
+    {% for app in apps %}
+        {% if loop.index0 >= init and loop.index0 < end %}
+            <div class="product-item column">
+                {% if app.is_app == 1 %}
+                    <span class="pin featured">APP</span>
+                {% endif %}
+                <!-- PRODUCT PREVIEW ACTIONS -->
+                <div class="product-preview-actions">
+                    <!-- PRODUCT PREVIEW IMAGE -->
+                    <figure class="product-preview-image">
+                        <a href="/{{dictionary.lang}}/apps/{{app.slug}}">
+                            <img src="{{app.thumbnail}}" alt="product-image" width="258" height="168">
+                        </figure>
+                        <!-- /PRODUCT PREVIEW IMAGE -->
+
+                        <!-- PREVIEW ACTIONS -->
+                        {# not implemented
+  							<div class="preview-actions">
+  								<!-- PREVIEW ACTION -->
+  								<div class="preview-action">
+  									<a href="/{{dictionary.lang}}/apps/{{app.slug}}">
+  										<div class="circle tiny primary">
+  											<span class="icon-tag"></span>
+  										</div>
+  									</a>
+  									<a href="/{{dictionary.lang}}/apps/{{app.slug}}">
+  										<p>{{ dictionary.word_go_item }}</p>
+  									</a>
+  								</div>
+  								<!-- /PREVIEW ACTION -->
+
+  								<!-- PREVIEW ACTION -->
+  								<!--(not implemented)div class="preview-action">
+  									<a href="#">
+  										<div class="circle tiny secondary">
+  											<span class="icon-heart"></span>
+  										</div>
+  									</a>
+  									<a href="#">
+  										<p>{{ dictionary.word_favorate_add}}</p>
+  									</a>
+  								</div-->
+  								<!-- /PREVIEW ACTION -->
+  							</div>
+                #}
+                        <!-- /PREVIEW ACTIONS -->
+                    </div>
+                    <!-- /PRODUCT PREVIEW ACTIONS -->
+
+                    <!-- PRODUCT INFO -->
+                    <div class="product-info">
+                        <a href="/{{dictionary.lang}}/apps/{{app.slug}}">
+                            <p class="text-header">
+                                {{ app.title }}
+                            </p>
+                        </a>
+                        <p class="product-description">{{ app.description |truncate(140) }}</p>
+                        <a href="/{{dictionary.lang}}/apps/categories/{{app.category}}">
+                            <p class="category primary">{{ app.category }}</p>
+                        </a>
+                        <p class="price">
+                            <span>{{dictionary.coin}}$
+                            </span>{{ app.value | number_format(2, '.', ',') }}</p>
+                    </div>
+                    <!-- /PRODUCT INFO -->
+                    <hr class="line-separator">
+
+                    <!-- USER RATING -->
+                    <div class="user-rating">
+                        <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
+                            <figure class="user-avatar small">
+                                <img src="{{app.partner.path_image}}" alt="user-avatar">
+                            </figure>
+                        </a>
+                        <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
+                            <p class="text-header tiny">{{ app.partner.name }}</p>
+                        </a>
+                        <ul class="rating tooltip" title="{{ dictionary.word_reputation }}">
+                            {% import 'templates/macros.html' as macro_main %}
+                            <!-- use macros to render stars -->
+                            
+  								{{macro_main.star_on(4)}}
+  								{{macro_main.star_off(1)}}
+                  
+                        </ul>
+                    </div>
+                    <!-- /USER RATING -->
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endmacro %}
+    <!-- macro for mounting footer -->
+    {% macro footer(dictionary, info_footer) %}
+        <!-- FOOTER -->
+        <footer>
+            <!-- FOOTER TOP -->
+            <div id="footer-top-wrap">
+                <div id="footer-top">
+                    <!-- COMPANY INFO -->
+                    <div class="company-info">
+                        <figure class="logo small">
+                            <img src="/assets/images/logo_small.png" alt="logo-small">
+                        </figure>
+                        <p>
+                            {{ dictionary.e_com }}
+                            {{ dictionary.addons }}
+                            {{ dictionary.description_mkp }}</p>
+                        {#comments
+          <ul class="company-info-list">
+            <li class="company-info-item">
+              <span class="icon-present"></span>
+              <p><span>{{ info_footer.total_apps_and_themes }} &nbsp; </span> {{  dictionary.word_app }} {{ dictionary.word_and }} {{dictionary.word_theme}}</p>
+            </li>
+            <li class="company-info-item">
+              <span class="icon-energy"></span>
+            </li>
+            <li class="company-info-item">
+              <span class="icon-user"></span>
+              <p><span>{{ info_footer.count_partners }} &nbsp; </span> {{ dictionary.word_partner }}</p>
+            </li>
+          </ul>
+          #}
+                        <!-- SOCIAL LINKS -->
+                        <ul class="social-links">
+                            <li class="social-link fb">
+                                <a href="https://www.facebook.com/ecom.clubpage/"></a>
+                            </li>
+                            <!-- (not implemented )li class="social-link twt"> <a href="#"></a> </li> <li class="social-link db"> <a href="#"></a> </li> <li class="social-link rss"> <a href="#"></a> </li-->
+                        </ul>
+                        <!-- /SOCIAL LINKS -->
+                    </div>
+                    <!-- /COMPANY INFO -->
+
+                    <!-- LINK INFO -->
+                    {#comments
+        <div class="link-info">
+          <p class="footer-title">Our Community</p>
+          <!-- LINK LIST -->
+          <ul class="link-list">
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">How to Join us</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">Buying and Selling</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="forum.html">Emerald Forum</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="blog-v1.html">Emerald Blog</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">Free Goods</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">Job Oportunities</a>
+            </li>
+          </ul>
+          <!-- /LINK LIST -->
+        </div>
+        #}
+                    <!-- /LINK INFO -->
+
+                    <!-- LINK INFO -->
+                    {#commnets
+        <div class="link-info">
+          <p class="footer-title">Member Links</p>
+          <!-- LINK LIST -->
+          <ul class="link-list">
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">Partner Program</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">Starting a Shop</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">Purchase Credits</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">Withdrawals</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">World Meetings</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">How to Auction</a>
+            </li>
+          </ul>
+          <!-- /LINK LIST -->
+        </div>
+        #}
+                    <!-- /LINK INFO -->
+
+                    <!-- LINK INFO -->
+                    {#commnets
+        <div class="link-info">
+          <p class="footer-title">Help and FAQs</p>
+          <!-- LINK LIST -->
+          <ul class="link-list">
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">Help Center</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">FAQs</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">Terms and Conditions</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">Products Licenses</a>
+            </li>
+            <li class="link-item">
+              <div class="bullet"></div>
+              <a href="#">Security Information</a>
+            </li>
+          </ul>
+          <!-- /LINK LIST -->
+        </div>
+        #}
+                    <!-- /LINK INFO -->
+
+                    <!-- language -->
+                    <div class="link-info">
+                        <p class="footer-title">{{ dictionary.word_language }}</p>
+                        <!-- language LIST -->
+                        <ul class="link-list">
+                            <li class="link-item">
+                                <div class="bullet"></div>
+                                <a href="/en_us/{{info_footer.path_file}}">English (USA)</a>
+                            </li>
+                            <li class="link-item">
+                                <div class="bullet"></div>
+                                <a href="/{{info_footer.path_file}}">Português (Brasil)</a>
+                            </li>
+                        </ul>
+                        <!-- /language LIST -->
+                    </div>
+                    <!-- /language INFO -->
+
+                    <!-- TWITTER FEED -->
+                    {#commnets
+        <div class="twitter-feed">
+          <p class="footer-title">Twitter Feed</p>
+          <!-- TWEETS -->
+          <ul class="tweets"></ul>
+          <!-- /TWEETS -->
+        </div>
+        #}
+                    <!-- /TWITTER FEED -->
+                </div>
+
+            </div>
+        </div>
+        <!-- /FOOTER TOP -->
+
+        <!-- FOOTER BOTTOM -->
+        <div id="footer-bottom-wrap">
+            <div id="footer-bottom">
+                <p>2018
+                    <span>&copy;</span>
+                    <a href="/{{dictionary.lang}}">{{ dictionary.e_com }}</a>
+                </p>
+            </div>
+        </div>
+        <!-- /FOOTER BOTTOM -->
+    </footer>
+    <!-- /FOOTER -->
+{% endmacro %}
+<!-- macro to mount the main header -->
+{% macro header(login, dictionary, user) %}
+    {% import 'templates/macros.html' as macro_main %}
+    {% if login == true %}
+        <!-- USER BOARD -->
+        <div class="user-board">
+            <!-- USER QUICKVIEW -->
+            {{macro_main.user_quickview(dictionary,user)}}
+            <!-- /USER QUICKVIEW -->
+
+            <!-- ACCOUNT INFORMATION -->
+            {# comments
+          {{macro_main.account_info(dictionary,user)}}
+          end comments #}
+            <!-- /ACCOUNT INFORMATION -->
+
+            <!-- ACCOUNT ACTIONS -->
+            <div class="account-actions">
+                <!--(not implemented) a href="#" class="button primary">Become a Seller</a -->
+                <a href="?logout" class="button secondary">Logout</a>
+
+            </div>
+            <!-- /ACCOUNT ACTIONS -->
+        </div>
+        <!-- /USER BOARD -->
+    {% else %}
+        <div class="user-board">
+
+            <div class="account-actions no-space">
+                <!-- not implemented <a href="forum.html" class="interesting-link">Our Forums</a> <a href="#" class="interesting-link">Why Choose Emerald Dragon?</a> -->
+                <a href="register-page" class="button secondary">{{ dictionary.word_register }}</a>
+                <a href="#login-popup" class="button secondary promo-popup">
+                    {{dictionary.word_login}}
+                    <span class="primary">{{dictionary.word_partner}}</span>
+                </a>
+                <a href="/session/create_login" class="button primary">{{ dictionary.word_login }}
+                    <span class="primary">{{dictionary.word_shopkeeper}}</span></a>
+            </div>
+
+        </div>
+        <!-- FORM POPUP -->
+        <div id="login-popup" class="form-popup mfp-hide">
+            {{macro_main.login(dictionary)}}
+        </div>
+        <!-- /FORM POPUP -->
+
+    {% endif %}
+{% endmacro %}
+<!-- macro to mount the mobile header -->
+{% macro header_moblie(login,dictionary,user)%}
+    {% import 'templates/macros.html' as macro_main %}
+    <div id="account-options-menu" class="side-menu right closed">
+        <!-- SVG PLUS -->
+        <svg class="svg-plus">
+            <use xlink:href="#svg-plus"></use>
+        </svg>
+        <!-- /SVG PLUS -->
+        {% if login == true %}
+            <!-- SIDE MENU HEADER -->
+            <div class="side-menu-header">
+                <!-- USER QUICKVIEW -->
+                {{macro_main.user_quickview_moblie(dictionary,user)}}
+                <!-- /USER QUICKVIEW -->
+            </div>
+            <!-- /SIDE MENU HEADER -->
+            {{macro_main.account_info_moblie(dictionary,user)}}
+
+            <a href="?logout" class="button medium secondary">Logout</a>
+            <!--(not implemented) a href="#" class="button medium primary">Become a Seller</a -->
+
+        {% else %}
+            <div class="side-menu-header"></div>
+
+            <a href="register-page" class="button secondary spaced">{{ dictionary.word_register }}</a>
+            <a>.</a>
+            <a href="#login-popup" class="button secondary promo-popup spaced">
+                {{dictionary.word_login}}
+                <span class="primary">{{dictionary.word_partner}}</span>
+            </a>
+            <a href="/scripts//session/create_login" class="button primary">{{ dictionary.word_login }}
+                <span class="primary">{{dictionary.word_shopkeeper}}</span></a>
+            <!-- FORM POPUP -->
+            <div id="login-popup" class="form-popup mfp-hide">
+                {{macro_main.login(dictionary)}}
+            </div>
+            <!-- /FORM POPUP -->
+        {% endif %}
+    </div>
+{% endmacro %}
+<!-- macro to mount the main menu -->
+{% macro menu_main(dictionary, app_category, theme_category, info_page) %}
+    {% import 'templates/macros.html' as macro_main %}
+    <div class="main-menu-wrap">
+        <div class="menu-bar">
+            <nav>
+                <ul class="main-menu">
+                    <!-- MENU ITEM -->
+                    <li class="menu-item">
+                        <a href="/{{dictionary.lang}}">Home</a>
+                    </li>
+                    <!-- /MENU ITEM -->
+
+                    <!-- MENU ITEM -->
+                    {#comments
+        <i class="menu-item">
+          <a href="how-it-works">{{ dictionary.word_how_works }}</a>
+        </li>
+        #}
+                    <!-- /MENU ITEM -->
+
+                    <!-- MENU ITEM -->
+                    {{macro_main.subcategory_app(dictionary,app_category)}}
+                    <!-- /MENU ITEM -->
+
+                    <!-- MENU ITEM -->
+                    {{macro_main.subcategory_theme(dictionary,theme_category)}}
+                    <!-- /MENU ITEM -->
+
+                    <!-- MENU ITEM -->
+                    <!-- not implemented <li class="menu-item"> <a href="shop-gridview-v1.html">Online goods</a> </li> -->
+                    <!-- /MENU ITEM -->
+                    <!-- MENU ITEM -->
+
+                    {# not implemented
+        {{macro_main.feature_menu(dictionary)}}
+        #}
+                    <!-- /MENU ITEM -->
+                </ul>
+            </nav>
+            <form class="search-form">
+                <input type="text" class="rounded" name="name" id="search_products" placeholder="{{dictionary.word_search}}" value="{{info_page.search}}">
+                <input type="image" src="/assets/images/search-icon.png" alt="search-icon">
+            </form>
+        </div>
+    </div>
+{% endmacro %}
+<!-- macro to mount the mobile menu -->
+{% macro menu_moblie(dictionary) %}
+    <div id="mobile-menu" class="side-menu left closed">
+        <!-- SVG PLUS -->
+        <svg class="svg-plus">
+            <use xlink:href="#svg-plus"></use>
+        </svg>
+        <!-- /SVG PLUS -->
+
+        <!-- SIDE MENU HEADER -->
+        <div class="side-menu-header">
+            <figure class="logo small">
+                <img src="/assets/images/logo.png" alt="logo">
+            </figure>
+        </div>
+        <!-- /SIDE MENU HEADER -->
+
+        <!-- SIDE MENU TITLE -->
+        <p class="side-menu-title">Main Links</p>
+        <!-- /SIDE MENU TITLE -->
+
+        <!-- DROPDOWN -->
+        <ul class="dropdown dark hover-effect interactive">
+            <!-- DROPDOWN ITEM -->
+            <li class="dropdown-item">
+                <a href="/">Home</a>
+            </li>
+            <!-- /DROPDOWN ITEM -->
+
+            <!-- DROPDOWN ITEM -->
+            {#comments
+    <li class="dropdown-item">
+      <a href="how-it-works">{{ dictionary.word_how_works }}</a>
+    </li>
+    #}
+            <!-- /DROPDOWN ITEM -->
+
+            <!-- DROPDOWN ITEM -->
+            <li class="dropdown-item">
+                <a href="/{{dictionary.lang}}/apps">{{ dictionary.word_app }}</a>
+            </li>
+            <!-- /DROPDOWN ITEM -->
+
+            <!-- DROPDOWN ITEM -->
+            <li class="dropdown-item">
+                <a href="/{{dictionary.lang}}/themes">{{  dictionary.word_theme }}</a>
+            </li>
+            <!-- /DROPDOWN ITEM -->
+
+            <!-- DROPDOWN ITEM -->
+            <!-- not implemented <li class="dropdown-item"> <a href="shop-gridview-v1.html">Online Goods</a> </li> -->
+            <!-- /DROPDOWN ITEM -->
+
+            <!-- DROPDOWN ITEM -->
+            {# not implemented
+    {% import 'templates/macros.html' as macro_main %}
+    {{macro_main.feature_moblie(dictionary)}}
+    #}
+            <!-- /DROPDOWN ITEM -->
+
+        </ul>
+        <!-- /DROPDOWN -->
+    </div>
+{% endmacro %}
+<!-- macro image logo moblie -->
+{% macro logo_moblie() %}
+    <img src="/assets/images/logo_mobile.png" alt="logo-mobile">
+{% endmacro %}
+<!-- macro image logo -->
+{% macro logo_main() %}
+    <img src="/assets/images/logo.png" alt="logo">
+{% endmacro %}
+<!-- macro image logo -->
+{% macro all_header(login, dictionary, user, app_category, theme_category, info_page) %}
+    {% import 'templates/macros.html' as macro_main %}
+    <!-- HEADER -->
+    <div class="header-wrap">
+        <header>
+            <!-- LOGO -->
+            <a href="/{{dictionary.lang}}">
+                <figure class="logo">
+                    {{macro_main.logo_main(dictionary)}}
+                </figure>
+            </a>
+            <!-- /LOGO -->
+
+            <!-- MOBILE MENU HANDLER -->
+            <div class="mobile-menu-handler left primary">
+                <img src="/assets/images/pull-icon.png" alt="pull-icon">
+            </div>
+            <!-- /MOBILE MENU HANDLER -->
+
+            <!-- LOGO MOBILE -->
+            <a href="/{{dictionary.lang}}">
+                <figure class="logo-mobile">
+                    {{ macro_main.logo_moblie() }}
+                </figure>
+            </a>
+            <!-- /LOGO MOBILE -->
+
+            <!-- MOBILE ACCOUNT OPTIONS HANDLER -->
+            <div class="mobile-account-options-handler right secondary">
+                <span class="icon-user"></span>
+            </div>
+            <!-- /MOBILE ACCOUNT OPTIONS HANDLER -->
+
+            <!--(wisley) check login -->
+            {{macro_main.header(login,dictionary,user)}}
+            <!--(wisley) check login -->
+        </header>
+    </div>
+    <!-- /HEADER -->
+
+    <!-- SIDE MENU -->
+    {{macro_main.menu_moblie(dictionary)}}
+    <!-- /SIDE MENU -->
+
+    <!-- SIDE MENU -->
+    {{macro_main.header_moblie(login,dictionary,user)}}
+    <!-- /SIDE MENU -->
+
+    <!-- MAIN MENU -->
+    {{macro_main.menu_main(dictionary,app_category,theme_category,info_page)}}
+    <!-- /MAIN MENU -->
+{% endmacro %}
+<!-- macro user quickview main -->
+{% macro user_quickview(dictionary, user) %}
+    {% if user.is_store == false %}
+        <div class="user-quickview">
+            <!-- USER AVATAR -->
+            <a href="/{{dictionary.lang}}/author/{{user.id_user}}">
+                <div class="outer-ring">
+                    <div class="inner-ring"></div>
+                    <figure class="user-avatar">
+                        <img src="{{user.path_image}}" alt="avatar">
+                    </figure>
+                </div>
+            </a>
+            <!-- /USER AVATAR -->
+
+            <!-- USER INFORMATION -->
+            <p class="user-name">{{ user.id_user }}
+                -
+                {{ user.name }}
+            </p>
+            <!-- SVG ARROW -->
+            <svg class="svg-arrow">
+                <use xlink:href="#svg-arrow"></use>
+            </svg>
+            <!-- /SVG ARROW -->
+            <p class="user-money">{{dictionary.coin}}$
+                {{ user.credits | number_format(2, '.', ',') }}</p>
+            <!-- /USER INFORMATION -->
+
+            <!-- DROPDOWN -->
+            <ul class="dropdown small hover-effect closed">
+                <li class="dropdown-item">
+                    <div class="dropdown-triangle"></div>
+                    <a href="/{{dictionary.lang}}/author/{{user.id_user}}">{{dictionary.word_profile_page}}</a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="dashboard-settings">{{dictionary.word_account_settings}}</a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="dashboard-statement">{{dictionary.word_sales_statment}}</a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="dashboard-withdrawals">{{dictionary.word_withdrawals}}</a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="dashboard-uploaditem">{{dictionary.word_upload_item}}</a>
+                </li>
+                {# not implemented
+        <li class="dropdown-item">
+          <a href="dashboard-manageitems">{{dictionary.word_manage_items}}</a>
+        </li>
+        #}
+            </ul>
+            <!-- /DROPDOWN -->
+        </div>
+    {% else %}
+        <div class="user-quickview">
+            <!-- USER AVATAR -->
+            <a href="/{{dictionary.lang}}/author/{{user.id_user}}">
+                <div class="outer-ring">
+                    <div class="inner-ring"></div>
+                    <figure class="user-avatar">
+                        <img src="{{user.path_image}}" alt="avatar">
+                    </figure>
+                </div>
+            </a>
+            <!-- /USER AVATAR -->
+
+            <!-- USER INFORMATION -->
+            <p class="user-name">{{ user.id_user }}
+                -
+                {{ user.name }}
+            </p>
+            <!-- SVG ARROW -->
+            <svg class="svg-arrow">
+                <use xlink:href="#svg-arrow"></use>
+            </svg>
+            <!-- /SVG ARROW -->
+            <p class="user-money">{{dictionary.coin}}$
+                {{ user.credits | number_format(2, '.', ',') }}</p>
+            <!-- /USER INFORMATION -->
+            <!-- DROPDOWN -->
+            <ul class="dropdown small hover-effect closed">
+                <!--(not implemented)li class="dropdown-item"> <a href="#favorite">{{dictionary.word_favorate}}</a> </li-->
+                <li class="dropdown-item">
+                    <a href="history-transaction">{{dictionary.word_transaction_history}}</a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="car">CAR</a>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+{% endmacro %}
+<!-- macro user quivkview for moblie -->
+{% macro user_quickview_moblie(dictionary, user) %}
+    <div class="user-quickview">
+        <!-- USER AVATAR -->
+        <a href="/{{dictionary.lang}}/author/{{user.id_user}}">
+            <div class="outer-ring">
+                <div class="inner-ring"></div>
+                <figure class="user-avatar">
+                    <img src="{{user.path_image}}" alt="avatar">
+                </figure>
+            </div>
+        </a>
+        <!-- /USER AVATAR -->
+
+        <!-- USER INFORMATION -->
+        <p class="user-name">{{ user.id_user }}
+            -
+            {{ user.name }}
+        </p>
+        <p class="user-money">{{dictionary.coin}}$
+            {{ user.credits | number_format(2, '.', ',') }}</p>
+        <!-- /USER INFORMATION -->
+    </div>
+{% endmacro %}
+<!-- macro account info main -->
+{% macro account_info(dictionary, user) %}
+    <div class="account-information">
+        <a href="favourites.html">
+            <div class="account-wishlist-quickview">
+                <span class="icon-heart"></span>
+            </div>
+        </a>
+        <div class="account-cart-quickview">
+            <span class="icon-present">
+                <!-- SVG ARROW -->
+                <svg class="svg-arrow">
+                    <use xlink:href="#svg-arrow"></use>
+                </svg>
+                <!-- /SVG ARROW -->
+            </span>
+
+            <!-- PIN -->
+            <span class="pin soft-edged secondary">7</span>
+            <!-- /PIN -->
+
+            <!-- DROPDOWN CART -->
+            <ul class="dropdown cart closed">
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <a href="item-v1.html" class="link-to"></a>
+                    <!-- SVG PLUS -->
+                    <svg class="svg-plus">
+                        <use xlink:href="#svg-plus"></use>
+                    </svg>
+                    <!-- /SVG PLUS -->
+                    <div class="dropdown-triangle"></div>
+                    <figure class="product-preview-image tiny">
+                        <img src="/assets/images/items/pixel_s.jpg" alt="">
+                    </figure>
+                    <p class="text-header tiny">Pixel Diamond Gaming Shop</p>
+                    <p class="category tiny primary">Shopify</p>
+                    <p class="price tiny">
+                        <span>$</span>86</p>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <a href="item-v1.html" class="link-to"></a>
+                    <!-- SVG PLUS -->
+                    <svg class="svg-plus">
+                        <use xlink:href="#svg-plus"></use>
+                    </svg>
+                    <!-- /SVG PLUS -->
+                    <figure class="product-preview-image tiny">
+                        <img src="/assets/images/items/monsters_s.jpg" alt="">
+                    </figure>
+                    <p class="text-header tiny">Little Monsters - 40 Pack Button Badge Maker</p>
+                    <p class="category tiny primary">Graphics</p>
+                    <p class="price tiny">
+                        <span>$</span>10</p>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <a href="item-v1.html" class="link-to"></a>
+                    <!-- SVG PLUS -->
+                    <svg class="svg-plus">
+                        <use xlink:href="#svg-plus"></use>
+                    </svg>
+                    <!-- /SVG PLUS -->
+                    <figure class="product-preview-image tiny">
+                        <img src="/assets/images/items/flat_s.jpg" alt="">
+                    </figure>
+                    <p class="text-header tiny">Flatland - Hero Image Composer</p>
+                    <p class="category tiny primary">Shopify</p>
+                    <p class="price tiny">
+                        <span>$</span>12</p>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <p class="text-header tiny">Total</p>
+                    <p class="price">
+                        <span>$</span>108.00</p>
+                    <a href="cart.html" class="button primary half">Go to Cart</a>
+                    <a href="checkout.html" class="button secondary half">Go to Checkout</a>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+            </ul>
+            <!-- /DROPDOWN CART -->
+        </div>
+        <div class="account-email-quickview">
+            <span class="icon-envelope">
+                <!-- SVG ARROW -->
+                <svg class="svg-arrow">
+                    <use xlink:href="#svg-arrow"></use>
+                </svg>
+                <!-- /SVG ARROW -->
+            </span>
+
+            <!-- PIN -->
+            <span class="pin soft-edged secondary">!</span>
+            <!-- /PIN -->
+
+            <!-- DROPDOWN NOTIFICATIONS -->
+            <ul class="dropdown notifications closed">
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <div class="dropdown-triangle"></div>
+                    <a href="dashboard-openmessage.html" class="link-to"></a>
+                    <figure class="user-avatar">
+                        <img src="/assets/images/avatars/avatar_06.jpg" alt="">
+                    </figure>
+                    <p class="text-header tiny">
+                        <span>Sarah-Imaginarium</span></p>
+                    <p class="subject">Product Question</p>
+                    <p class="timestamp">May 18th, 2014</p>
+                    <span class="notification-type secondary-new icon-envelope"></span>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <a href="dashboard-openmessage.html" class="link-to"></a>
+                    <figure class="user-avatar">
+                        <img src="/assets/images/avatars/avatar_04.jpg" alt="">
+                    </figure>
+                    <p class="text-header tiny">
+                        <span>Red Thunder Graphics</span></p>
+                    <p class="subject">Support Inquiry</p>
+                    <p class="timestamp">May 5th, 2014</p>
+                    <span class="notification-type icon-envelope-open"></span>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <a href="dashboard-openmessage.html" class="link-to"></a>
+                    <figure class="user-avatar">
+                        <img src="/assets/images/avatars/avatar_07.jpg" alt="">
+                    </figure>
+                    <p class="text-header tiny">
+                        <span>Twisted Themes</span></p>
+                    <p class="subject">Collaboration</p>
+                    <p class="timestamp">Feb 24th, 2014</p>
+                    <span class="notification-type secondary-new icon-envelope"></span>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <a href="dashboard-openmessage.html" class="link-to"></a>
+                    <figure class="user-avatar">
+                        <img src="/assets/images/avatars/avatar_08.jpg" alt="">
+                    </figure>
+                    <p class="text-header tiny">
+                        <span>GregSpiegel1820</span></p>
+                    <p class="subject">How to Install the Theme...</p>
+                    <p class="timestamp">Jan 3rd, 2014</p>
+                    <span class="notification-type icon-action-undo"></span>
+                    <a href="dashboard-inbox.html" class="button secondary">View all Messages</a>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+            </ul>
+            <!-- /DROPDOWN NOTIFICATIONS -->
+        </div>
+        <div class="account-settings-quickview">
+            <span class="icon-settings">
+                <!-- SVG ARROW -->
+                <svg class="svg-arrow">
+                    <use xlink:href="#svg-arrow"></use>
+                </svg>
+                <!-- /SVG ARROW -->
+            </span>
+
+            <!-- PIN -->
+            <span class="pin soft-edged primary">49</span>
+            <!-- /PIN -->
+
+            <!-- DROPDOWN NOTIFICATIONS -->
+            <ul class="dropdown notifications no-hover closed">
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <div class="dropdown-triangle"></div>
+                    <a href="profile-page">
+                        <figure class="user-avatar">
+                            <img src="/assets/images/avatars/avatar_02.jpg" alt="">
+                        </figure>
+                    </a>
+                    <p class="title">
+                        <a href="profile-page">
+                            <span>MeganV.</span></a>
+                        added
+                        <a href="item-v1.html">
+                            <span>Pixel Diamond Gaming Shop</span></a>
+                        to favourites
+                    </p>
+                    <p class="timestamp">2 Hours ago</p>
+                    <span class="notification-type primary-new icon-heart"></span>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <a href="profile-page">
+                        <figure class="user-avatar">
+                            <img src="/assets/images/avatars/avatar_03.jpg" alt="">
+                        </figure>
+                    </a>
+                    <p class="title">
+                        <a href="profile-page">
+                            <span>Thomas_Ket</span></a>
+                        wrote you an
+                        <a href="author-reputation.html">
+                            <span>Author’s Reputation</span></a>
+                    </p>
+                    <p class="timestamp">17 Hours ago</p>
+                    <span class="notification-type icon-star"></span>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <a href="profile-page">
+                        <figure class="user-avatar">
+                            <img src="/assets/images/avatars/avatar_04.jpg" alt="">
+                        </figure>
+                    </a>
+                    <p class="title">
+                        <a href="profile-page">
+                            <span>Red Thunder Graphics</span></a>
+                        commented on
+                        <a href="item-v1.html">
+                            <span>3D Layers - Web Mockup</span></a>
+                    </p>
+                    <p class="timestamp">8 Days Ago</p>
+                    <span class="notification-type primary-new icon-bubble"></span>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+
+                <!-- DROPDOWN ITEM -->
+                <li class="dropdown-item">
+                    <a href="profile-page">
+                        <figure class="user-avatar">
+                            <img src="/assets/images/avatars/avatar_05.jpg" alt="">
+                        </figure>
+                    </a>
+                    <p class="title">
+                        <a href="profile-page">
+                            <span>DaBebop</span></a>
+                        purchased
+                        <a href="item-v1.html">
+                            <span>Miniverse - Hero Image Composer</span></a>
+                    </p>
+                    <p class="timestamp">1 Week ago</p>
+                    <span class="notification-type icon-tag"></span>
+                    <a href="dashboard-notifications.html" class="button primary">View all Notifications</a>
+                </li>
+                <!-- /DROPDOWN ITEM -->
+            </ul>
+            <!-- /DROPDOWN NOTIFICATIONS -->
+        </div>
+    </div>
+{% endmacro %}
+<!-- macro account info for moblie -->
+{% macro account_info_moblie(dictionary, user) %}
+    {% if user.is_store == false %}
+        {#comments
+    <!-- SIDE MENU TITLE -->
+    <p class="side-menu-title">Your Account</p>
+    <!-- /SIDE MENU TITLE -->
+
+    <!-- DROPDOWN -->
+    <ul class="dropdown dark hover-effect">
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item">
+        <a href="dashboard-notifications.html">Notifications</a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item">
+        <a href="dashboard-inbox.html">Messages</a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item">
+        <a href="cart.html">Your Cart</a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item">
+        <a href="favourites.html">Favourites</a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+    </ul>
+    <!-- /DROPDOWN -->
+    end comments #}
+        <!-- SIDE MENU TITLE -->
+        <p class="side-menu-title">Dashboard</p>
+        <!-- /SIDE MENU TITLE -->
+
+        <!-- DROPDOWN -->
+        <ul class="dropdown dark hover-effect">
+            <!-- DROPDOWN ITEM -->
+            <li class="dropdown-item">
+                <a href="/{{dictionary.lang}}/author/{{user.id_user}}">{{dictionary.word_profile_page}}</a>
+            </li>
+            <!-- /DROPDOWN ITEM -->
+
+            <!-- DROPDOWN ITEM -->
+            <li class="dropdown-item">
+                <a href="dashboard-settings">{{dictionary.word_account_settings}}</a>
+            </li>
+            <!-- /DROPDOWN ITEM -->
+
+            <!-- DROPDOWN ITEM -->
+            <li class="dropdown-item">
+                <a href="dashboard-statement">{{dictionary.word_sales_statment}}</a>
+            </li>
+            <!-- /DROPDOWN ITEM -->
+            <!-- DROPDOWN ITEM -->
+            <li class="dropdown-item">
+                <a href="dashboard-withdrawalsl">{{dictionary.word_withdrawals}}</a>
+            </li>
+            <!-- /DROPDOWN ITEM -->
+            <!-- DROPDOWN ITEM -->
+            <li class="dropdown-item">
+                <a href="dashboard-uploaditem">{{dictionary.word_upload_item}}</a>
+            </li>
+            <!-- /DROPDOWN ITEM -->
+
+            <!-- DROPDOWN ITEM -->
+            {# not implemented
+      <li class="dropdown-item">
+        <a href="dashboard-manageitems">{{dictionary.word_manage_items}}</a>
+      </li>
+      #}
+            <!-- /DROPDOWN ITEM -->
+        </ul>
+        {#not implemented
+    <!-- /DROPDOWN -->
+  {% else %}
+    <!-- SIDE MENU TITLE -->
+    <p class="side-menu-title">Dashboard</p>
+    <!-- /SIDE MENU TITLE -->
+
+    <!-- DROPDOWN -->
+    <ul class="dropdown dark hover-effect">
+      <!-- DROPDOWN ITEM -->
+      <li class="dropdown-item">
+        <a href="profile-page">{{dictionary.word_favorate}}</a>
+      </li>
+      <!-- /DROPDOWN ITEM -->
+
+    <!-- DROPDOWN ITEM -->
+    <li class="dropdown-item">
+      <a href="dashboard-manageitems.html">{{dictionary.word_transaction_history}}</a>
+    </li>
+    <!-- /DROPDOWN ITEM -->
+    </ul>
+    <!-- /DROPDOWN -->
+    #}
+    {% endif %}
+{% endmacro %}
+<!-- macro login -->
+{% macro login(dictionary) %}
+    <!-- FORM POPUP HEADLINE -->
+    <div class="form-popup-headline secondary">
+        <h2>{{dictionary.word_login_account}}</h2>
+        <p>{{dictionary.description_login}}</p>
+    </div>
+    <!-- /FORM POPUP HEADLINE -->
+    <!-- FORM POPUP CONTENT -->
+    <div class="form-popup-content">
+        <form id="addons-login" action="scripts/login" method="post">
+            <input type="hidden" id="addons-login-user" name="user"/>
+            <input type="hidden" id="addons-login-pass" name="pass"/>
+        </form>
+        <form id="login-form2" class="addons-partner-login">
+            <label for="username5" class="rl-label">Login</label>
+            <input id="username5" name="username5" class="addons-login-user" placeholder="{{dictionary.word_enter_username}}">
+            <!--input type="email" id="username5" name="username5" class="addons-login-user" placeholder="{{dictionary.word_enter_username}}"-->
+            <label id="addons-login-pass" for="password5" class="rl-label">{{dictionary.word_password}}</label>
+            <input type="password" id="password5" name="password5" class="addons-login-password" placeholder="{{dictionary.word_enter_pass}}">
+            <!-- CHECKBOX -->
+            <input type="checkbox" id="remember2" name="remember2" checked="checked">
+            <label for="remember2" class="label-check">
+                <span class="checkbox primary primary">
+                    <span></span></span>
+                {{dictionary.word_remember_user}}
+            </label>
+            {#
+        <!-- /CHECKBOX -->
+        <p>{{dictionary.word_forgot_pssw}} <a href="#" class="primary">{{dictionary.word_click_here}}</a></p>
+        #}
+            <button class="button mid dark">{{dictionary.word_login}}
+                <span class="primary">{{dictionary.word_now}}!</span></button>
+            <!--a class="button mid dark" href="test-server"> ok </a-->
+        </form>
+        <!-- LINE SEPARATOR -->
+        <hr class="line-separator double">
+        <!-- /LINE SEPARATOR -->
+        <!-- a href="#" class="button mid fb half">Login with Facebook</a-->
+        <!-- a href="#" class="button mid twt half">Login with Twitter</a-->
+    </div>
+    <!-- /FORM POPUP CONTENT -->
+{% endmacro %}

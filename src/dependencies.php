@@ -40,9 +40,12 @@ $container['cache'] = function () {
 $container['view'] = function ($c) {
 
     $view = new \Slim\Views\Twig(__DIR__.'/Market/View', [
-        'cache' => 'cache/twig/cache'
+        'cache' => false,
+        //'cache' => 'cache/twig/cache'
     ]);
     
+    $view->addExtension(new Twig_Extensions_Extension_Text());
+
     // Instantiate and add Slim specific extension
     $router = $c->get('router');
     $uri = \Slim\Http\Uri::createFromEnvironment(new \Slim\Http\Environment($_SERVER));

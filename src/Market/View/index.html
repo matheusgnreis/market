@@ -1,0 +1,206 @@
+{% extends "templates/layout.html" %}
+{% import 'templates/macros.html' as macro_main %}
+
+{% block content %}
+    <!-- /header -->
+    <!-- BANNER -->
+    <div class="banner-wrap">
+        <section class="banner">
+            <h5>{{ dictionary.welcome }}</h5>
+            <h1>
+                {{ dictionary.e_com }}
+                <span>{{ dictionary.addons }}</span></h1>
+            <p>{{ dictionary.subtitle }}</p>
+            <img src="/assets/images/top_items.png" alt="banner-img">
+
+            <!-- SEARCH WIDGET -->
+            <div class="search-widget">
+                <form class="search-widget-form">
+                    <input type="text" name="category_name" placeholder="{{ dictionary.word_search_apps_themes }}">
+                    <label for="categories" class="select-block">
+                        <select name="categories" id="categories">
+                            <!-- <option value="0">All Categories</option> <option value="1">PSD Templates</option> <option value="2">Hero Images</option> <option value="3">Shopify</option> <option value="4">Icon Packs</option> <option value="5">Graphics</option> <option value="6">Flyers</option> <option value="7">Backgrounds</option> <option value="8">Social Covers</option> -->
+                            {% for feature in search %}
+                                <option value="{{feature.id}}">{{ feature.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <!-- SVG ARROW -->
+                        <svg class="svg-arrow">
+                            <use xlink:href="#svg-arrow"></use>
+                        </svg>
+                        <!-- /SVG ARROW -->
+                    </label>
+                    <button class="button medium dark">
+                        {{ dictionary.word_search }}
+                        !</button>
+                </form>
+            </div>
+            <!-- /SEARCH WIDGET -->
+        </section>
+    </div>
+    <!-- /BANNER -->
+
+    <!-- SERVICES -->
+    <div id="services-wrap">
+        <section id="services">
+            <!-- SERVICE LIST -->
+            <div class="service-list column4-wrap">
+                <!-- SERVICE ITEM -->
+                <div class="service-item column">
+                    <div class="circle medium gradient"></div>
+                    <div class="circle white-cover"></div>
+                    <div class="circle dark">
+                        <span class="icon-present"></span>
+                    </div>
+                    <h3>{{ dictionary.word_buy_apps }}</h3>
+                    <p>{{ dictionary.description_buy_apps}}.</p>
+                </div>
+                <!-- /SERVICE ITEM -->
+
+                <!-- SERVICE ITEM -->
+                <div class="service-item column">
+                    <div class="circle medium gradient"></div>
+                    <div class="circle white-cover"></div>
+                    <div class="circle dark">
+                        <span class="icon-lock"></span>
+                    </div>
+                    <h3>{{ dictionary.word_secure_transation }}</h3>
+                    <p>{{ dictionary.description_secure_transation }}.</p>
+                </div>
+                <!-- /SERVICE ITEM -->
+
+                <!-- SERVICE ITEM -->
+                <div class="service-item column">
+                    <div class="circle medium gradient"></div>
+                    <div class="circle white-cover"></div>
+                    <div class="circle dark">
+                        <span class="icon-like"></span>
+                    </div>
+                    <h3>{{ dictionary.word_community}}</h3>
+                    <p>{{ dictionary.description_community }}.</p>
+                </div>
+                <!-- /SERVICE ITEM -->
+
+                <!-- SERVICE ITEM -->
+                <div class="service-item column">
+                    <div class="circle medium gradient"></div>
+                    <div class="circle white-cover"></div>
+                    <div class="circle dark">
+                        <span class="icon-diamond"></span>
+                    </div>
+                    <h3>{{ dictionary.word_mkp_quality }}</h3>
+                    <p>{{ dictionary.description_mkp_quality }}</p>
+                </div>
+                <!-- /SERVICE ITEM -->
+            </div>
+            <!-- /SERVICE LIST -->
+            <div class="clearfix"></div>
+        </section>
+    </div>
+    <!-- /SERVICES -->
+
+    {% if login == false %}
+        <!-- PROMO -->
+        <div class="promo-banner dark left">
+            <span class="icon-wallet"></span>
+            <h5>{{ dictionary.desc_promo_partners }}
+                {{ dictionary.title }}!</h5>
+            <h1>{{ dictionary.word_start }}
+                <span>{{ dictionary.word_now }}</span></h1>
+            <a href="register-page" class="button medium primary">{{ dictionary.word_register }}!</a>
+        </div>
+        <!-- /PROMO -->
+
+        <!-- PROMO -->
+        <div class="promo-banner secondary right">
+            <span class="icon-tag"></span>
+            <h5>{{ dictionary.desc_promo_store }}</h5>
+            <h1>{{dictionary.word_start}}
+                {{ dictionary.word_buying }}</h1>
+            <a href="#" class="button medium dark">{{ dictionary.buy_now }}</a>
+        </div>
+        <!-- /PROMO -->
+    {% endif %}
+    <div class="clearfix"></div>
+
+    <!-- PRODUCT SIDESHOW -->
+    <div id="product-sideshow-wrap">
+        <div id="product-sideshow">
+            <!-- PRODUCT SHOWCASE -->
+            <div class="product-showcase">
+                <!-- HEADLINE -->
+                <div class="headline primary">
+                    <h4>{{ dictionary.apps_trends }}</h4>
+                    <!-- SLIDE CONTROLS -->
+                    <div class="slide-control-wrap">
+                        <div class="slide-control left">
+                            <!-- SVG ARROW -->
+                            <svg class="svg-arrow">
+                                <use xlink:href="#svg-arrow"></use>
+                            </svg>
+                            <!-- /SVG ARROW -->
+                        </div>
+
+                        <div class="slide-control right">
+                            <!-- SVG ARROW -->
+                            <svg class="svg-arrow">
+                                <use xlink:href="#svg-arrow"></use>
+                            </svg>
+                            <!-- /SVG ARROW -->
+                        </div>
+                    </div>
+                    <!-- /SLIDE CONTROLS -->
+                </div>
+                <!-- /HEADLINE -->
+
+                <!-- PRODUCT LIST -->
+                <div id="pl-1" class="product-list grid column4-wrap owl-carousel">
+                    <!-- PRODUCT ITEM -->
+                    <!-- /PRODUCT ITEM -->
+                    {{macro_main.apps_themes(apps,0,8,dictionary)}}
+                </div>
+
+                <!-- /PRODUCT LIST -->
+            </div>
+            <!-- /PRODUCT SHOWCASE -->
+
+            <!-- PRODUCT SHOWCASE -->
+            <div class="product-showcase">
+                <!-- HEADLINE -->
+                <div class="headline secondary">
+                    <h4>{{ dictionary.themes_trends }}</h4>
+                    <!-- SLIDE CONTROLS -->
+                    <div class="slide-control-wrap">
+                        <div class="slide-control left">
+                            <!-- SVG ARROW -->
+                            <svg class="svg-arrow">
+                                <use xlink:href="#svg-arrow"></use>
+                            </svg>
+                            <!-- /SVG ARROW -->
+                        </div>
+
+                        <div class="slide-control right">
+                            <!-- SVG ARROW -->
+                            <svg class="svg-arrow">
+                                <use xlink:href="#svg-arrow"></use>
+                            </svg>
+                            <!-- /SVG ARROW -->
+                        </div>
+                    </div>
+                    <!-- /SLIDE CONTROLS -->
+                </div>
+                <!-- /HEADLINE -->
+
+                <!-- PRODUCT LIST -->
+                <div id="pl-4" class="product-list grid column4-wrap owl-carousel">
+                    {{macro_main.apps_themes(themes,0,12,dictionary)}}
+                </div>
+                <!-- /PRODUCT LIST -->
+            </div>
+            <!-- /PRODUCT SHOWCASE -->
+
+        </div>
+    </div>
+    <!-- /PRODUCTS SIDESHOW -->
+
+{% endblock %}
