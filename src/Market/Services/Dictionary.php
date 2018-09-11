@@ -143,6 +143,7 @@ trait Dictionary
                 $word_other = 'Other';
                 $word_categories = 'Categories';
                 $word_search_empty = 'The search is empty.';
+                $word_title_description = 'Title Description';
                 break;
           
               default:
@@ -263,7 +264,7 @@ trait Dictionary
                 $word_other = 'Outros';
                 $word_categories = 'Categorias';
                 $word_search_empty = 'A busca está vazia.';
-          
+                $word_title_description = 'Descrição';
                 break;
             }
         // array dictionary
@@ -395,6 +396,7 @@ trait Dictionary
               'word_other' => $word_other,
               'word_categories' => $word_categories,
               'word_search_empty' => $word_search_empty,
+              'word_description_single' => $word_title_description,
               'lang' => $lang
             );
         return $dictionary;

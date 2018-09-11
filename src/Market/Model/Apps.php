@@ -21,7 +21,7 @@ class Apps extends Model
      */
     public function evaluations()
     {
-        return $this->hasMany(AppsEvaluation::class);
+        return $this->hasMany(AppsEvaluation::class, 'app_id');
     }
     
     /**
@@ -31,7 +31,7 @@ class Apps extends Model
      */
     public function partner()
     {
-        return $this->belongsTo(Partner::class);
+        return $this->hasOne(Partner::class, 'id', 'partner_id');
     }
     
     /**
@@ -41,7 +41,7 @@ class Apps extends Model
      */
     public function comments()
     {
-        return $this->hasMany(AppsComments::class);
+        return $this->hasMany(AppsComments::class, 'app_id', 'id');
     }
 
     /**
@@ -51,6 +51,6 @@ class Apps extends Model
      */
     public function imagens()
     {
-        return $this->hasMany(AppsImagens::class);
+        return $this->hasMany(AppsImagens::class, 'app_id');
     }
 }

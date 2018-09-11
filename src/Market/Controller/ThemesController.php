@@ -17,8 +17,11 @@ class ThemesController
         $params = $this->getSearchParams($request);
         $skip = $this->getSearchSkip($request);
         $take = $this->getSearchTake($request);
-        return Themes::where($params)->skip($skip)->take($take)->with('partner')->get()->toArray();
-        
+        $themes = Themes::where($params)->skip($skip)->take($take)->with('partner')->get()->toArray();
+        return (object)[
+            'themes' => $themes,
+            'total' => Themes::where($params)->count()
+        ];
         //return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
     }
 
@@ -43,18 +46,20 @@ class ThemesController
     {
         $search = [];
         
-        if (isset($request->getParams()['free'])) {
-            if ($request->getParams()['free'] == 1) {
+        if (isset($request->getParams()['filter'])) {
+            if ($request->getParams()['filter'] == 'free') {
                 $search[] = ['value_plan_basic', 0];
+            }
+        }
+
+        if (isset($request->getParams()['category'])) {
+            if ($request->getParams()['category'] !== 'all') {
+                $search[] = ['category', $request->getParams()['category']];
             }
         }
 
         if (isset($request->getParams()['title'])) {
             $search[] = ['title', $request->getParams()['title']];
-        }
-
-        if (isset($request->getParams()['category'])) {
-            $search[] = ['category', $request->getParams()['category']];
         }
 
         if (isset($request->getParams()['partner'])) {
@@ -71,7 +76,7 @@ class ThemesController
 
     public function getSearchTake($request)
     {
-        return isset($request->getParams()['take']) ? (int) $request->getParams()['take'] : 10;
+        return isset($request->getParams()['take']) ? (int) $request->getParams()['take'] : 12;
     }
     
     public function create($request, $response, $args)

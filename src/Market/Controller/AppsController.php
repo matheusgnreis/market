@@ -36,8 +36,14 @@ class AppsController
     
     public function getBySlug($request, $response, $args)
     {
-        $ret = Apps::where('slug', $args['slug'])->get();
-        return $response->withJson($ret, 200);
+        $app = Apps::where('slug', $args['slug'])->first();
+        return (object) [
+            'app' => $app->toArray(),
+            'imagens' => $app->imagens->toArray(),
+            'partner' => $app->partner->toArray(),
+            'comments' => $app->comments->toArray(),
+            'evaluations' => $app->evaluations
+        ];
     }
 
     public function getSearchParams($request)
@@ -45,14 +51,16 @@ class AppsController
         $search = [];
         $search[] = ['active', 1];
         
-        if (isset($request->getParams()['free'])) {
-            if ($request->getParams()['free'] == 1) {
+        if (isset($request->getParams()['filter'])) {
+            if ($request->getParams()['filter'] == 'free') {
                 $search[] = ['value_plan_basic', 0];
             }
         }
 
         if (isset($request->getParams()['category'])) {
-            $search[] = ['category', $request->getParams()['category']];
+            if ($request->getParams()['category'] !== 'all') {
+                $search[] = ['category', $request->getParams()['category']];
+            }
         }
 
         if (isset($request->getParams()['title'])) {

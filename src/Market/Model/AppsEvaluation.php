@@ -8,7 +8,7 @@ class AppsEvaluation extends Model
     /** db table */
     protected $table = 'apps_evaluations';
     /** The attributes that are mass assignable. */
-    protected $fillable = ['partner_id', 'store_id', 'date_time', 'stars'];
+    protected $fillable = ['app_id', 'store_id', 'date_time', 'stars'];
     /** The attributes that will be hidden */
     protected $hidden = [];
     /** Indicates if the model should be timestamped. */
