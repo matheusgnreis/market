@@ -1,46 +1,46 @@
 // login
-$("form.addons-partner-login").submit(function(event) {
+$("form.addons-partner-login").submit(function (event) {
   let username = $(this).find("input.addons-login-user").val(),
-   password = md5($(this).find("input.addons-login-password").val()),
-   legth_pass = $(this).find("input.addons-login-password").val().length;
+    password = md5($(this).find("input.addons-login-password").val()),
+    legth_pass = $(this).find("input.addons-login-password").val().length;
   if (legth_pass >= 6) {
     $("#addons-login-user").val(username);
     $("#addons-login-pass").val(password);
     $("#addons-login").submit();
   }
   else {
-    $("label#addons-login-pass").css( "color", "red");
+    $("label#addons-login-pass").css("color", "red");
   }
   event.preventDefault();
 });
 // alert login sucess or error
-$( document ).ready(function() {
+$(document).ready(function () {
   if ($(this).find("div.addons-error-login").length > 0) {
     $('body').xmalert({
-    	x: 'right',
-    	y: 'top',
-    	xOffset: 30,
-    	yOffset: 30,
-    	alertSpacing: 40,
-    	lifetime: 6000,
-    	fadeDelay: 0.3,
-    	template: 'messageError',
-    	title: 'ERROR LOGIN',
-    	paragraph: $(this).find("div.addons-error-login").text(),
+      x: 'right',
+      y: 'top',
+      xOffset: 30,
+      yOffset: 30,
+      alertSpacing: 40,
+      lifetime: 6000,
+      fadeDelay: 0.3,
+      template: 'messageError',
+      title: 'ERROR LOGIN',
+      paragraph: $(this).find("div.addons-error-login").text(),
     });
   }
   if ($(this).find("div.addons-sucess-login").length > 0) {
     $('body').xmalert({
-    	x: 'right',
-    	y: 'top',
-    	xOffset: 30,
-    	yOffset: 30,
-    	alertSpacing: 40,
-    	lifetime: 6000,
-    	fadeDelay: 0.3,
-    	template: 'messageSuccess',
-    	title: 'LOGIN SUCESS',
-    	paragraph: $(this).find("div.addons-sucess-login").text(),
+      x: 'right',
+      y: 'top',
+      xOffset: 30,
+      yOffset: 30,
+      alertSpacing: 40,
+      lifetime: 6000,
+      fadeDelay: 0.3,
+      template: 'messageSuccess',
+      title: 'LOGIN SUCESS',
+      paragraph: $(this).find("div.addons-sucess-login").text(),
     });
   }
   // treat buttons on profile page
@@ -50,12 +50,12 @@ $( document ).ready(function() {
   let dashboard_statement = page.indexOf("dashboard-statement");
   let dashboard_settings = page.indexOf("dashboard-settings");
   let dashboard_uploaditem = page.indexOf("dashboard-uploaditem");
-  if(profile_page != -1){
+  if (profile_page != -1) {
     let ul = "ul#addons-board-profile"
     $(ul).find("#board-profile-page").attr('class', 'dropdown-item active');
     $(ul).find("#board-author-itens-page").attr('class', 'dropdown-item');
   }
-  if(items_page != -1){
+  if (items_page != -1) {
     let ul = "ul#addons-board-profile"
     $(ul).find("#board-profile-page").attr('class', 'dropdown-item');
     $(ul).find("#board-author-itens-page").attr('class', 'dropdown-item active');
@@ -92,10 +92,10 @@ $( document ).ready(function() {
 });
 // test
 
-$("#addons-download").click(function(event) {
+$("#addons-download").click(function (event) {
   // console.log(event.target.id);
   let id = event.target.id,
-      is_app = $("input#addons-buy-theme-"+id).val();
+    is_app = $("input#addons-buy-theme-" + id).val();
 
   // console.log(is_app);
   //addons-downlod-file
@@ -105,11 +105,11 @@ $("#addons-download").click(function(event) {
   $("#addons-downlod-file").submit();
 });
 
-$('select#price_filter').on("change",function(ev){
+$('select#price_filter').on("change", function (ev) {
   let price_filter = $(this).val(),
-      category_filter = $('select#category_filter').val(),
-      name_search = $('input#search_products').val(),
-      type_page = $('input#type_page').val();
+    category_filter = $('select#category_filter').val(),
+    name_search = $('input#search_products').val(),
+    type_page = $('input#type_page').val();
 
   console.log(price_filter);
   console.log(category_filter);
@@ -120,26 +120,42 @@ $('select#price_filter').on("change",function(ev){
     price_filter = 'all';
   }
 
-  if (category_filter == undefined ||  category_filter == 'ALL' ) {
+  if (category_filter == undefined || category_filter == 'ALL') {
     category_filter = undefined;
-  }else if (category_filter == 'apps') {
+  } else if (category_filter == 'apps') {
     category_filter = 0;
     type_page = 'apps';
-  }else if (category_filter == 'themes') {
+  } else if (category_filter == 'themes') {
     category_filter = 0;
     type_page = 'themes';
   }
+  let path = window.location.pathname.split('/')[2];
+  console.log(path)
+  window.location.href =  '/' + $('html')[0].lang + '/' + path  + '?filter=' + price_filter;
 
+  let qs = getUrlVars();
 
-  window.location.href = '/' + $('html')[0].lang + '/apps?filter=' + price_filter ;
+  if (qs['filter']) {
+    switch (qs['filter']) {
+      case 'all':
+        //window.location.href = window.location.href + '&filter='
+        window.location.href = '/' + $('html')[0].lang + '/' + path  + '?filter=all&category=' + category_filter ;
+        break;
+      case 'free':
+        window.location.href = '/' + $('html')[0].lang + '/' + path  + '?filter=free&category=' + category_filter ;
+        break;
+      default:
+        break;
+    }
+  }
 
 });
 
-$('select#category_filter').on("change",function(ev){
+$('select#category_filter').on("change", function (ev) {
   let category_filter = $(this).val(),
-      price_filter = $('select#price_filter').val(),
-      name_search = $('input#search_products').val(),
-      type_page = $('input#type_page').val();
+    price_filter = $('select#price_filter').val(),
+    name_search = $('input#search_products').val(),
+    type_page = $('input#type_page').val();
 
   console.log(price_filter);
   console.log(category_filter);
@@ -150,23 +166,23 @@ $('select#category_filter').on("change",function(ev){
     price_filter = 'all';
   }
 
-  if (category_filter == undefined ||  category_filter == 'ALL' ) {
+  if (category_filter == undefined || category_filter == 'ALL') {
     category_filter = undefined;
-  }else if (category_filter == 'apps') {
+  } else if (category_filter == 'apps') {
     category_filter = 0;
     type_page = 'apps';
-  }else if (category_filter == 'themes') {
+  } else if (category_filter == 'themes') {
     category_filter = 0;
     type_page = 'themes';
   }
-  window.location.href = '/' + $('html')[0].lang + '/apps?category=' + category_filter ;
+  window.location.href = '/' + $('html')[0].lang + '/' + window.location.pathname.split('/')[2] + '?filter=' + price_filter + '&category=' + category_filter;
 });
 
-$( ".search-form" ).submit(function( event ) {
+$(".search-form").submit(function (event) {
   let category_filter = $('select#category_filter').val(),
-      price_filter = $('select#price_filter').val(),
-      name_search = $('input#search_products').val(),
-      type_page = $('input#type_page').val();
+    price_filter = $('select#price_filter').val(),
+    name_search = $('input#search_products').val(),
+    type_page = $('input#type_page').val();
 
   console.log(price_filter);
   console.log(category_filter);
@@ -177,17 +193,30 @@ $( ".search-form" ).submit(function( event ) {
     price_filter = 'all';
   }
 
-  if (category_filter == undefined ||  category_filter == 'ALL' ) {
+  if (category_filter == undefined || category_filter == 'ALL') {
     category_filter = undefined;
-  }else if (category_filter == 'apps') {
+  } else if (category_filter == 'apps') {
     category_filter = 0;
     type_page = 'apps';
-  }else if (category_filter == 'themes') {
+  } else if (category_filter == 'themes') {
     category_filter = 0;
     type_page = 'themes';
   }
 
-  window.location.href = "/apps?title=" ;
+  window.location.href = "/apps?title=";
   // alert( "Handler for .submit() called." );
   event.preventDefault();
 });
+
+
+// Read a page's GET URL variables and return them as an associative array. https://stackoverflow.com/questions/4656843/jquery-get-querystring-from-url
+function getUrlVars() {
+  var vars = [], hash;
+  var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+  for (var i = 0; i < hashes.length; i++) {
+    hash = hashes[i].split('=');
+    vars.push(hash[0]);
+    vars[hash[0]] = hash[1];
+  }
+  return vars;
+}
