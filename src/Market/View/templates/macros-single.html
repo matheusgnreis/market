@@ -27,18 +27,18 @@
     </div>
 {% endmacro %}
 
-{% macro author_bio() %}
+{% macro author_bio(partner, dictionary) %}
     <div class="sidebar-item author-bio">
-        <h4>Product Author</h4>
+        <h4>{{dictionary.word_profile_author}}</h4>
         <hr class="line-separator">
         <!-- USER AVATAR -->
         <a href="user-profile.html" class="user-avatar-wrap medium">
             <figure class="user-avatar medium">
-                <img src="../images/avatars/avatar_09.jpg" alt="">
+                <img src="{{partner.path_image}}" alt="">
             </figure>
         </a>
         <!-- /USER AVATAR -->
-        <p class="text-header">Odin_Design</p>
+        <p class="text-header">{{partner.name}}</p>
         <p class="text-oneline">Super Samurai Developers<br>Los Angeles, Usa</p>
         <!-- SHARE LINKS -->
         <ul class="share-links">
@@ -53,54 +53,59 @@
             </li>
         </ul>
         <!-- /SHARE LINKS -->
-        <a href="#" class="button mid dark spaced">Go to
-            <span class="primary">Profile Page</span></a>
-        <a href="#" class="button mid dark-light">Send a Private Message</a>
+        <a href="/{{dictionary.lang}}/author/{{partner.id}}" class="button mid dark spaced">
+            <span class="primary">{{dictionary.word_profile_page}}</span></a>
+        {# <a href="#" class="button mid dark-light">Send a Private Message</a> #}
     </div>
 {% endmacro %}
 
-{% macro product_info() %}
+{% macro product_info(app, dictionary) %}
     <div class="sidebar-item product-info">
-        <h4>Product Information</h4>
+        <h4>{{dictionary.word_description_single}}</h4>
         <hr class="line-separator">
         <!-- INFORMATION LAYOUT -->
         <div class="information-layout">
             <!-- INFORMATION LAYOUT ITEM -->
             <div class="information-layout-item">
-                <p class="text-header">Sales:</p>
-                <p>22</p>
+                <p class="text-header">{{dictionary.word_categories}}:</p>
+                <p>{{app.category}}</p>
             </div>
             <!-- /INFORMATION LAYOUT ITEM -->
 
             <!-- INFORMATION LAYOUT ITEM -->
             <div class="information-layout-item">
-                <p class="text-header">Upload Date:</p>
-                <p>August 18th, 2015</p>
+                <p class="text-header">{{dictionary.word_version}}:</p>
+                <p>{{app.version}}</p>
             </div>
             <!-- /INFORMATION LAYOUT ITEM -->
 
             <!-- INFORMATION LAYOUT ITEM -->
             <div class="information-layout-item">
-                <p class="text-header">Files Included:</p>
-                <p>PSD, AI<br>JPEG, PNG</p>
+                <p class="text-header">{{dictionary.word_version_date}}</p>
+                <p>{{app.version_date}}</p>
             </div>
             <!-- /INFORMATION LAYOUT ITEM -->
+
+            {% if app.type %}
+                <!-- INFORMATION LAYOUT ITEM -->
+                <div class="information-layout-item">
+                    <p class="text-header">{{dictionary.word_type_of_app}}</p>
+                    <p>{{app.type}}</p>
+                </div>
+                <!-- /INFORMATION LAYOUT ITEM -->
+            {% endif %}
 
             <!-- INFORMATION LAYOUT ITEM -->
             <div class="information-layout-item">
-                <p class="text-header">Requirements:</p>
-                <p>CS6 or Lower</p>
+                <p class="text-header">Github:</p>
+                <p>
+                    <a href="{{app.github_repository}}">Link</a>
+                </p>
             </div>
             <!-- /INFORMATION LAYOUT ITEM -->
 
             <!-- INFORMATION LAYOUT ITEM -->
-            <div class="information-layout-item">
-                <p class="text-header">Dimensions:</p>
-                <p>4500x2800 Px</p>
-            </div>
-            <!-- /INFORMATION LAYOUT ITEM -->
-
-            <!-- INFORMATION LAYOUT ITEM -->
+            {#
             <div class="information-layout-item">
                 <p class="tags primary">
                     <a href="#">photoshop</a>,
@@ -120,20 +125,21 @@
                     <a href="#">mockup</a>
                 </p>
             </div>
+            #}
             <!-- /INFORMATION LAYOUT ITEM -->
         </div>
         <!-- INFORMATION LAYOUT -->
     </div>
 {% endmacro %}
 
-{% macro author_reputation() %}
+{% macro author_reputation(app, dictionary) %}
     <div class="sidebar-item author-reputation full">
-        <h4>Author's Reputation</h4>
+        <h4>{{dictionary.word_reputation}}</h4>
         <hr class="line-separator">
         <!-- PIE CHART -->
         <div class="pie-chart pie-chart1">
             <p class="text-header percent">86<span>%</span></p>
-            <p class="text-header percent-info">Recommended</p>
+            <p class="text-header percent-info">{{dictionary.word_recommended}}</p>
             <!-- RATING -->
             <ul class="rating">
                 <li class="rating-item">
@@ -175,11 +181,11 @@
             <!-- /RATING -->
         </div>
         <!-- /PIE CHART -->
-        <a href="#" class="button mid dark-light">Read all the Customer Reviews</a>
+        <a href="#" class="button mid dark-light">{{dictionary.word_read_all_reviews}}</a>
     </div>
 {% endmacro %}
 
-{%macro author_outher_items() %}
+{% macro author_outher_items() %}
     <div class="sidebar-item author-items">
         <h4>More Author's Items</h4>
         <!-- PRODUCT LIST -->
@@ -415,7 +421,7 @@
     <div class="post-image">
         <figure class="product-preview-image large liquid">
             <!--img src="https://lh3.googleusercontent.com/wIcl3tehFmOUpq-Jl3hlVbZVFrLHePRtIDWV5lZwBVDr7kEAgLTChyvXUclMVQDRHDEcDhY=w640-h400-e365" alt=""-->
-            <img src="{{image_main.path_img}}" alt="product-image">
+            <img src="https://lh3.googleusercontent.com/wIcl3tehFmOUpq-Jl3hlVbZVFrLHePRtIDWV5lZwBVDr7kEAgLTChyvXUclMVQDRHDEcDhY=w640-h400-e365" alt="product-image">
         </figure>
         {% if info_page.app == 1 %}
             <!-- SLIDE CONTROLS -->
@@ -457,7 +463,7 @@
             </div>
             <!-- /IMAGE SLIDE -->
 
-            {% for image in array_images %}
+            {% for image in array_images.imagens %}
                 {% if loop.index0 > 0 %}
                     <!-- IMAGE SLIDE -->
                     <div class="image-slide">
@@ -470,6 +476,47 @@
                 {% endif %}
             {% endfor %}
         </div>
+        <!-- IMAGE SLIDES -->
+    </div>
+{% endmacro %}
+
+{% macro single_imagens(imagens) %}
+
+    <div class="image-slides-wrap full">
+        <!-- IMAGE SLIDES -->
+        <div class="image-slides" data-slide-visible-full="8" data-slide-visible-small="2" data-slide-count="9">
+            {% for image in imagens %}
+                {% if loop.index0 > 0 %}
+                    <!-- IMAGE SLIDE -->
+                    <div class="image-slide" {% if loop.index0 == 0 %} selected="selected" {% endif %}>
+                        <div class="overlay"></div>
+                        <figure class="product-preview-image thumbnail liquid">
+                            <img src="{{image.path}}" alt="">
+                        </figure>
+                    </div>
+                    <!-- /IMAGE SLIDE -->
+                {% endif %}
+            {% endfor %}
+            
+        </div>
+        <!-- SLIDE CONTROLS -->
+            <div class="slide-control-wrap">
+                <div class="slide-control rounded left">
+                    <!-- SVG ARROW -->
+                    <svg class="svg-arrow">
+                        <use xlink:href="#svg-arrow"></use>
+                    </svg>
+                    <!-- /SVG ARROW -->
+                </div>
+
+                <div class="slide-control rounded right">
+                    <!-- SVG ARROW -->
+                    <svg class="svg-arrow">
+                        <use xlink:href="#svg-arrow"></use>
+                    </svg>
+                    <!-- /SVG ARROW -->
+                </div>
+            </div>
         <!-- IMAGE SLIDES -->
     </div>
 {% endmacro %}
@@ -569,4 +616,38 @@
         </ul>
         <!-- POST ITEM LIST -->
     </div>
+{% endmacro %}
+
+{% macro single_scripts() %}
+    <script src="/assets/js/vendor/jquery-3.1.0.min.js"></script>
+    <!-- Tooltipster -->
+    <script src="/assets/js/vendor/jquery.tooltipster.min.js"></script>
+    <!-- ImgLiquid -->
+    <script src="/assets/js/vendor/imgLiquid-min.js"></script>
+    <!-- XM Tab -->
+    <script src="/assets/js/vendor/jquery.xmtab.min.js"></script>
+    <!-- Tweet -->
+    <script src="/assets/js/vendor/twitter/jquery.tweet.min.js"></script>
+    <!-- Side Menu -->
+    <script src="/assets/js/side-menu.js"></script>
+    <!-- Liquid -->
+    <script src="/assets/js/liquid.js"></script>
+    <!-- Checkbox Link -->
+    <!--(not used)script src="/assets/js/checkbox-link.js"></script-->
+    <!-- Image Slides -->
+    <script src="/assets/js/image-slides.js"></script>
+    <!-- Post Tab -->
+    <script src="/assets/js/post-tab.js"></script>
+    <!-- XM Accordion -->
+    <script src="/assets/js/vendor/jquery.xmaccordion.min.js"></script>
+    <!-- XM Pie Chart -->
+    <script src="/assets/js/vendor/jquery.xmpiechart.min.js"></script>
+    <!-- Item V1 -->
+    <script src="/assets/js/item-v1.js"></script>
+    <!-- Tooltip -->
+    <script src="/assets/js/tooltip.js"></script>
+    <!-- User Quickview Dropdown -->
+    <script src="/assets/js/user-board.js"></script>
+    <!-- Footer -->
+    <script src="/assets/js/footer.js"></script>
 {% endmacro %}

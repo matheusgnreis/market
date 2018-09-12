@@ -118,7 +118,7 @@ class HomeController extends BaseController
         $translate = $this->getDictionary($args['lang']);
         $apps = new AppsController();
         $resp = $apps->getBySlug($request, $response, $args);
-        print_r($resp);
+        
         return $this->view->render(
               $response,
               'single.html',
@@ -137,7 +137,8 @@ class HomeController extends BaseController
                   'dictionary' => $translate,
                   'login' => false,
                   'user' => null,
-                  'app' => $resp
+                  'app' => $resp,
+                  'plans' => json_decode($resp->app['plans_json'])
               ]
           );
     }

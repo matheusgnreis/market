@@ -10,7 +10,7 @@ class Partner extends Model
     /** The attributes that are mass assignable. */
     protected $fillable = ['id', 'name', 'password_hash', 'member_since', 'avg_stars', 'evaluations', 'path_image', 'profile_json', 'credit'];
     /** The attributes that will be hidden */
-    protected $hidden = [];
+    protected $hidden = ['password_hash'];
     /** Indicates if the model should be timestamped. */
     public $timestamps = false;
 }

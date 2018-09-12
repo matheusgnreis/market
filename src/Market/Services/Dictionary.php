@@ -144,10 +144,13 @@ trait Dictionary
                 $word_categories = 'Categories';
                 $word_search_empty = 'The search is empty.';
                 $word_title_description = 'Title Description';
+                $word_version = 'Version';
+                $word_version_date = 'Version date';
+                $word_type_of_app = 'Type';
                 break;
           
               default:
-              $title = 'E-Com Plus Addons';
+                $title = 'E-Com Plus Addons';
                 $subtitle = 'Marketplace de apps e temas para e-commerce';
                 $description_mkp = 'é o melhor marketplace de apps e temas para e-commerce, criado para possibilitar que lojistas que não tem grande capacidade de investimento tenham acesso a um layout personalizado de qualidade pelo melhor preço.';
                 $welcome = 'Bem vindo a ';
@@ -265,6 +268,9 @@ trait Dictionary
                 $word_categories = 'Categorias';
                 $word_search_empty = 'A busca está vazia.';
                 $word_title_description = 'Descrição';
+                $word_version = 'Versão';
+                $word_version_date = 'Data da versão';
+                $word_type_of_app = 'Tipo';
                 break;
             }
         // array dictionary
@@ -397,6 +403,9 @@ trait Dictionary
               'word_categories' => $word_categories,
               'word_search_empty' => $word_search_empty,
               'word_description_single' => $word_title_description,
+              'word_version' => $word_version,
+              'word_version_date' => $word_version_date,
+              'word_type_of_app' => $word_type_of_app,
               'lang' => $lang
             );
         return $dictionary;
