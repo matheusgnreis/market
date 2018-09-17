@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="/assets/css/vendor/bootstrap-datepicker3.standalone.min.css">
+    <link rel="stylesheet" href="/assets/css/vendor/simple-line-icons.css">
+	<link rel="stylesheet" href="/assets/css/style.css" >
+	<!-- favicon -->
+	<link rel="icon" href="https://e-com.club/mass/ftp/tutoriais/favicon.png">
+	<title>{{dictionary.title}} | {{dictionary.word_dashboard_statement}}</title>
+</head>
+<body>
+  {% import 'macros.twig' as macro_main %}
+  {% import 'macro-dashboard.twig' as macro_dashboad %}
+	<!-- SIDE MENU -->
+	{{macro_dashboad.all_menu(dictionary,user)}}
+	<!-- /SIDE MENU -->
+
+    <!-- DASHBOARD BODY -->
+    <div class="dashboard-body">
+        <!-- DASHBOARD HEADER -->
+				{{macro_dashboad.dashboard_header(dictionary)}}
+        <!-- DASHBOARD HEADER -->
+
+        <!-- DASHBOARD CONTENT -->
+        <div class="dashboard-content">
+            <!-- HEADLINE -->
+            {#not implemented im momment
+              <div class="headline statement primary">
+                <h4>Sales Statement</h4>
+        				<a href="#" class="button primary">Download File</a>
+        				<button form="statement_filter_form" class="button dark-light">Refine Search</button>
+        				<form id="statement_filter_form" name="statement_filter_form" class="statement-form">
+        					<!-- DATEPICKER -->
+        					<div class="datepicker-wrap">
+        						<input type="text" id="date_from" name="date_from" class="datepicker" value="02/22/2016">
+        						<span class="icon-calendar"></span>
+        					</div>
+        					<!-- /DATEPICKER -->
+        					<label>to:</label>
+        					<!-- DATEPICKER -->
+        					<div class="datepicker-wrap">
+        						<input type="text" id="date_to" name="date_to" class="datepicker" value="02/22/2017">
+        						<span class="icon-calendar"></span>
+        					</div>
+        					<!-- /DATEPICKER -->
+        					<label for="ss_filter" class="select-block">
+        						<select name="ss_filter" id="ss_filter">
+        							<option value="0">Sales and Purchases</option>
+        							<option value="1">Sales</option>
+        							<option value="2">Purchases</option>
+        						</select>
+        						<!-- SVG ARROW -->
+        						<svg class="svg-arrow">
+        							<use xlink:href="#svg-arrow"></use>
+        						</svg>
+        						<!-- /SVG ARROW -->
+        					</label>
+        				</form>
+              </div>
+            #}
+          <!-- /HEADLINE -->
+
+			<!-- SALE DATA -->
+			<div class="sale-data">
+				<!-- SALE DATA ITEM -->
+				<div class="sale-data-item">
+					<span class="sl-icon icon-present"></span>
+					<p class="text-header big">{{sales_user.total_items}}</p>
+					<div class="sale-data-item-info">
+						<p class="text-header">{{dictionary.word_items_sold}}</p>
+						<p>{{dictionary.word_up_to_now}}</p>
+					</div>
+				</div>
+				<!-- /SALE DATA ITEM-->
+
+				<!-- SALE DATA ITEM -->
+        {#not implemented #}
+				<div class="sale-data-item">
+          {#
+					<span class="sl-icon icon-present"></span>
+					<p class="text-header big">234</p>
+					<div class="sale-data-item-info">
+						<p class="text-header">Products Sold</p>
+						<p>In this Month</p>
+					</div>
+          #}
+				</div>
+				<!-- /SALE DATA ITEM-->
+
+				<!-- SALE DATA ITEM -->
+        {# not implemented in moment #}
+				<div class="sale-data-item">
+          {#
+					<span class="sl-icon icon-tag"></span>
+					<p class="price big"><span>$</span>12.450</p>
+					<div class="sale-data-item-info">
+						<p class="text-header">Total Sales</p>
+						<p>In all Time</p>
+					</div>
+          #}
+				</div>
+				<!-- /SALE DATA ITEM-->
+
+				<!-- SALE DATA ITEM -->
+				<div class="sale-data-item">
+					<span class="sl-icon icon-wallet"></span>
+					<p class="price big"><span>{{dictionary.coin}}$</span>{{sales_user.total_earnings}}</p>
+					<div class="sale-data-item-info">
+						<p class="text-header">{{dictionary.word_total_earnings}}</p>
+						<p>{{dictionary.word_from_sales}}</p>
+					</div>
+				</div>
+				<!-- /SALE DATA ITEM-->
+			</div>
+			<!-- /SALE DATA -->
+
+			<!-- TRANSACTION LIST -->
+			<div class="transaction-list">
+				<!-- TRANSACTION LIST HEADER -->
+          {{macro_dashboad.header_table(dictionary)}}
+				<!-- /TRANSACTION LIST HEADER -->
+
+        {# use foreach to list items #}
+				{% for i in item_theme %}
+					<!-- TRANSACTION LIST ITEM -->
+					{{macro_dashboad.item_list(dictionary,i)}}
+					<!-- /TRANSACTION LIST ITEM -->
+				{% endfor %}
+
+				{% for i in item_app %}
+					<!-- TRANSACTION LIST ITEM -->
+					{{macro_dashboad.item_list(dictionary,i)}}
+					<!-- /TRANSACTION LIST ITEM -->
+				{% endfor %}
+
+
+				<!-- PAGER -->
+        {# not implemented in moment
+				<div class="pager-wrap">
+					<div class="pager primary">
+						<div class="pager-item"><p>1</p></div>
+						<div class="pager-item active"><p>2</p></div>
+						<div class="pager-item"><p>3</p></div>
+						<div class="pager-item"><p>...</p></div>
+						<div class="pager-item"><p>17</p></div>
+					</div>
+				</div>
+        #}
+				<!-- /PAGER -->
+			</div>
+			<!-- /TRANSACTION LIST -->
+        </div>
+        <!-- DASHBOARD CONTENT -->
+    </div>
+    <!-- /DASHBOARD BODY -->
+
+	<div class="shadow-film closed"></div>
+
+<!-- SVG ARROW -->
+<svg style="display: none;">
+	<symbol id="svg-arrow" viewBox="0 0 3.923 6.64014" preserveAspectRatio="xMinYMin meet">
+		<path d="M3.711,2.92L0.994,0.202c-0.215-0.213-0.562-0.213-0.776,0c-0.215,0.215-0.215,0.562,0,0.777l2.329,2.329
+			L0.217,5.638c-0.215,0.215-0.214,0.562,0,0.776c0.214,0.214,0.562,0.215,0.776,0l2.717-2.718C3.925,3.482,3.925,3.135,3.711,2.92z"/>
+	</symbol>
+</svg>
+<!-- /SVG ARROW -->
+
+<!-- SVG PLUS -->
+<svg style="display: none;">
+	<symbol id="svg-plus" viewBox="0 0 13 13" preserveAspectRatio="xMinYMin meet">
+		<rect x="5" width="3" height="13"/>
+		<rect y="5" width="13" height="3"/>
+	</symbol>
+</svg>
+<!-- /SVG PLUS -->
+
+<!-- SVG MINUS -->
+<svg style="display: none;">
+	<symbol id="svg-minus" viewBox="0 0 13 13" preserveAspectRatio="xMinYMin meet">
+		<rect y="5" width="13" height="3"/>
+	</symbol>
+</svg>
+<!-- /SVG MINUS -->
+
+<!-- jQuery -->
+<script src="/assets/js/vendor/jquery-3.1.0.min.js"></script>
+<!-- XM Pie Chart -->
+<script src="/assets/js/vendor/jquery.xmpiechart.min.js"></script>
+<!-- Bootstrap Datepicker -->
+<script src="/assets/js/vendor/bootstrap-datepicker.min.js"></script>
+<!-- Side Menu -->
+<script src="/assets/js/side-menu.js"></script>
+<!-- Dashboard Header -->
+<script src="/assets/js/dashboard-header.js"></script>
+<!-- Dashboard Statement -->
+<script src="/assets/js/dashboard-statement.js"></script>
+{{macro_main.scripts()}}
+</body>
+</html>

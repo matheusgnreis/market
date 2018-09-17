@@ -22,22 +22,21 @@ as macro_item %}
             <div class="sidebar right">
 
                 <!-- SIDEBAR ITEM -->
-                <div class="sidebar-item">
-                    {% if data.page.app == 0 %}
+                {% if data.is == 'app' %}
+                    <div class="sidebar-item">
                         <h6 style="text-align: center;">
-                            Link Doc
+                            <h6 style="text-align: center;">Web site</h6>
                         </h6>
-                    {% else %}
-                        <h6 style="text-align: center;">Web site</h6>
-                    {% endif %}
-                    <hr class="line-separator">
-                    <a href="{{app.app.website}}">
-                        <h6 style="text-align: center;">
-                            <a href="{{app.app.website}}" target="_blank">{{app.app.website}}</a>
-                        </h6>
-                    </a>
-                    <div class="clearfix"></div>
-                </div>
+
+                        <hr class="line-separator">
+                        <a href="{{app.app.website}}">
+                            <h6 style="text-align: center;">
+                                <a href="{{app.app.website}}" target="_blank">{{app.app.website}}</a>
+                            </h6>
+                        </a>
+                        <div class="clearfix"></div>
+                    </div>
+                {% endif %}
                 <!-- /SIDEBAR ITEM -->
 
                 <!-- SIDEBAR ITEM -->
@@ -56,7 +55,12 @@ as macro_item %}
                 <!-- SIDEBAR ITEM -->
                 <div class="sidebar-item" id="item-page">
                     <p class="price large" id="coin">
-                        <span id="coin">{{dictionary.coin}}$</span></p>
+                        <span id="coin">{{dictionary.coin}}$
+                            {% if data.is == 'theme' %}
+                            {{app.value_license_basic}}
+                            {% endif %}
+                        </span>
+                    </p>
                     <hr class="line-separator">
                     <form id="aux_form" name="aux_form"></form>
                     {% for plan in plans %}
@@ -72,27 +76,7 @@ as macro_item %}
                         <!-- /CHECKBOX -->
                         <p class="license-text" data-license="{{plan.id}}" {% if plan.checked %} style="display: block;" {% endif %}>{{plan.description}}</p>
                     {% endfor %}
-                    {# not implemented
-				<!-- CHECKBOX -->
-				<input type="radio" id="regular-license" name="regular-license" form="aux_form" checked>
-				<label class="b-label linked-check" for="regular-license">
-					<span class="checkbox primary"><span></span></span>
-					Regular License
-				</label>
-				<!-- /CHECKBOX -->
-				<p class="license-text" data-license="regular-license" style="display: block;">Lorem ipsum dolor sit amet, sectetur adipisicing
-					elit, sed do eiusmod tempor cididunt ut labore.</p>
-
-				<!-- CHECKBOX -->
-				<input type="radio" id="extended-license" name="extended-license" form="aux_form">
-				<label class="b-label linked-check" for="extended-license">
-					<span class="checkbox primary"><span></span></span>
-					Extended License
-				</label>
-				<!-- /CHECKBOX -->
-				<p class="license-text" data-license="extended-license">Lorem ipsum dolor sit amet, sectetur adipisicing elit, sed do
-					eiusmod tempor cididunt ut labore.</p>
-				#}
+                
                     <a href="#" class="button mid dark spaced" id="buy-item">
                         <span class="primary">{{dictionary.buy_now}}</span></a>
                     <!--a href="#" class="button mid primary half">Add to Cart</a> <a href="#" class="button mid secondary wicon half"><span class="icon-heart"></span>652</a-->
@@ -211,46 +195,45 @@ as macro_item %}
                 </article>
                 <!-- /POST -->
             </div>
-            
-			
+
         </div>
         <!-- CONTENT -->
     </div>
 </div>
 
 <!-- SVG ARROW -->
-<svg style="display: none;">	
-	<symbol id="svg-arrow" viewBox="0 0 3.923 6.64014" preserveAspectRatio="xMinYMin meet">
-		<path d="M3.711,2.92L0.994,0.202c-0.215-0.213-0.562-0.213-0.776,0c-0.215,0.215-0.215,0.562,0,0.777l2.329,2.329
+<svg style="display: none;">
+    <symbol id="svg-arrow" viewbox="0 0 3.923 6.64014" preserveaspectratio="xMinYMin meet">
+        <path d="M3.711,2.92L0.994,0.202c-0.215-0.213-0.562-0.213-0.776,0c-0.215,0.215-0.215,0.562,0,0.777l2.329,2.329
 			L0.217,5.638c-0.215,0.215-0.214,0.562,0,0.776c0.214,0.214,0.562,0.215,0.776,0l2.717-2.718C3.925,3.482,3.925,3.135,3.711,2.92z"/>
-	</symbol>
+    </symbol>
 </svg>
 <!-- /SVG ARROW -->
 
 <!-- SVG STAR -->
 <svg style="display: none;">
-	<symbol id="svg-star" viewBox="0 0 10 10" preserveAspectRatio="xMinYMin meet">	
-		<polygon points="4.994,0.249 6.538,3.376 9.99,3.878 7.492,6.313 8.082,9.751 4.994,8.129 1.907,9.751 
+    <symbol id="svg-star" viewbox="0 0 10 10" preserveaspectratio="xMinYMin meet">
+        <polygon points="4.994,0.249 6.538,3.376 9.99,3.878 7.492,6.313 8.082,9.751 4.994,8.129 1.907,9.751
 	2.495,6.313 -0.002,3.878 3.45,3.376 "/>
-	</symbol>
+    </symbol>
 </svg>
 <!-- /SVG STAR -->
 
 <!-- SVG PLUS -->
 <svg style="display: none;">
-	<symbol id="svg-plus" viewBox="0 0 13 13" preserveAspectRatio="xMinYMin meet">
-		<rect x="5" width="3" height="13"/>
-		<rect y="5" width="13" height="3"/>
-	</symbol>
+    <symbol id="svg-plus" viewbox="0 0 13 13" preserveaspectratio="xMinYMin meet">
+        <rect x="5" width="3" height="13"/>
+        <rect y="5" width="13" height="3"/>
+    </symbol>
 </svg>
 <!-- /SVG PLUS -->
 
 <!-- SVG CHECK -->
 <svg style="display: none;">
-	<symbol id="svg-check" viewBox="0 0 15 12" preserveAspectRatio="xMinYMin meet">
-		<polygon points="12.45,0.344 5.39,7.404 2.562,4.575 0.429,6.708 3.257,9.536 3.257,9.536 
+    <symbol id="svg-check" viewbox="0 0 15 12" preserveaspectratio="xMinYMin meet">
+        <polygon points="12.45,0.344 5.39,7.404 2.562,4.575 0.429,6.708 3.257,9.536 3.257,9.536
 			5.379,11.657 14.571,2.465 "/>
-	</symbol>
+    </symbol>
 </svg>
 <!-- /SVG CHECK -->
 

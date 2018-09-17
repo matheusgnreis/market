@@ -560,7 +560,7 @@
     <!-- /DROPDOWN ITEM -->
 {% endmacro %}
 <!-- use macro to print application or theme information -->
-{% macro apps_themes(apps, init, end, dictionary, type)%}
+{% macro apps_themes(apps, init, end, dictionary)%}
     {% for app in apps %}
         {% if loop.index0 >= init and loop.index0 < end %}
             <div class="product-item column">
@@ -571,7 +571,7 @@
                 <div class="product-preview-actions">
                     <!-- PRODUCT PREVIEW IMAGE -->
                     <figure class="product-preview-image">
-                        <a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
+                        <a href="/{{dictionary.lang}}/apps/{{app.slug}}">
                             <img src="{{app.thumbnail}}" alt="product-image" width="258" height="168">
                         </figure>
                         <!-- /PRODUCT PREVIEW IMAGE -->
@@ -581,12 +581,12 @@
   							<div class="preview-actions">
   								<!-- PREVIEW ACTION -->
   								<div class="preview-action">
-  									<a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
+  									<a href="/{{dictionary.lang}}/apps/{{app.slug}}">
   										<div class="circle tiny primary">
   											<span class="icon-tag"></span>
   										</div>
   									</a>
-  									<a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
+  									<a href="/{{dictionary.lang}}/apps/{{app.slug}}">
   										<p>{{ dictionary.word_go_item }}</p>
   									</a>
   								</div>
@@ -612,13 +612,13 @@
 
                     <!-- PRODUCT INFO -->
                     <div class="product-info">
-                        <a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
+                        <a href="/{{dictionary.lang}}/apps/{{app.slug}}">
                             <p class="text-header">
                                 {{ app.title }}
                             </p>
                         </a>
                         <p class="product-description">{{ app.description |truncate(140) }}</p>
-                        <a href="/{{dictionary.lang}}/{{type}}?category={{app.category}}">
+                        <a href="/{{dictionary.lang}}/apps?category={{app.category}}">
                             <p class="category primary">{{ app.category }}</p>
                         </a>
                         <p class="price">
@@ -975,7 +975,7 @@
                 </ul>
             </nav>
             <form class="search-form">
-                <input type="text" class="rounded" name="title" id="search_products" placeholder="{{dictionary.word_search}}" value="{{info_page.search}}">
+                <input type="text" class="rounded" name="name" id="search_products" placeholder="{{dictionary.word_search}}" value="{{info_page.search}}">
                 <input type="image" src="/assets/images/search-icon.png" alt="search-icon">
             </form>
         </div>
