@@ -1,56 +1,90 @@
-(function(event) {
+(function (event) {
 
-$('#bt-create-pass').click(function() {
-  form_popup();
-});
-//
-$('form.addons-partner-create-pass').submit(function(event){
-  let $form = $(this),
-    email = $form.find('#email_register').val();
+  $('#bt-create-pass').click(function () {
+    form_popup();
+  });
+  //
+  $('form.addons-partner-create-pass').submit(function (event) {
+    let $form = $(this),
+      email = $form.find('#email_register').val();
     if (email != '' && email != 'undefined') {
       $("#addons-email-user").val(email);
-      $("#addons-create-pass").submit();
+      let btnVla = $('#btn-verify').text();
+      $.ajax({
+        type: "POST",
+        url: "/ws/login/verify",
+        data: {
+          user_email: email
+        },
+        dataType: "json",
+        beforeSend: function () {
+          $('#error').hide();
+          $('#btn-verify').text('...');
+        },
+        success: function (response) {
+          if (response.erro) {
+            console.log(response.erro)
+            $('#btn-verify').text(btnVla);
+            $('#error').html('<span>' + response.erro + '</span>').show();
+          } else {
+            let url = '/' + $('html')[0].lang + '/register-password?u=' + response.user
+            $('#btn-verify').text('working..');
+            setTimeout(window.location.href = url, 2000);
+
+          }
+        }
+      });
     }
     else {
       alert("Error E-mail!")
-      $("#email-send").css( "color", "red");
+      $("#email-send").css("color", "red");
     }
 
     event.preventDefault();
 
-});
+  });
 
-//
-$('form#addons-form-password').submit(function(event){
-  let $div = $("div#addons-form-pass"),
-      pass = md5($div.find("input.addons-pass").val()),
-      legth_pass = $div.find("input.addons-pass").val().length;
-      rp_pass = md5($div.find("input.addons-rp-pass").val()),
-      test = $div.find("input.addons-pass").val();
-  if(pass != rp_pass || pass == md5('undefined') || pass == md5('') || (legth_pass < 6)){
-    //If the confirmation password and password are different, activate "span"
-    $div.find("span.pass-p").css( "color", "red");
-    $div.find("span.rp-pass-p").css( "color", "red");
-    alert('Error Password');
-  }
-  else {
-    $div.find("span.pass-p").css( "color", "black");
-    $div.find("span.rp-pass-p").css( "color", "black");
-    // TODO: send password save bd
-    $('#addons-register-pass').val(pass);
-    information = "\n id: " + $('#addons-register-id').val() +
-            "\n e-mail: " + $('#addons-register-user').val() + "\n Confirm ? ";
-    decision = confirm("Your informations " + information );
+  $('form#addons-form-password').submit(function (event) {
 
-    if (decision){ // click ok
-    $('form#addons-register').submit();
-    } else {
-      // click cancel
-    location.reload();
+    let pass, pass_conf, err = false;
+
+    pass = $('#new_pwd');
+    pass_conf = $('#new_pwd2');
+    $('#error').hide();
+    $("div#addons-form-pass").find("span.pass-p").css("color", "#2b373a");
+    $("div#addons-form-pass").find("span.rp-pass-p").css("color", "#2b373a");
+
+    if (!pass.val() || pass.val() == 'undefined') {
+      $("div#addons-form-pass").find("span.pass-p").css("color", "red");
+      $('#error').html('<span>Preencha o campo senha.</span>').show();
+      err = true;
+    } else if (!pass_conf.val() && pass_conf.val() == 'undefined') {
+      $("div#addons-form-pass").find("span.rp-pass-p").css("color", "red");
+      $('#error').html('<span>Preencha o campo confirmação de senha</span>').show();
+      err = true;
+    } else if (pass.val() != pass_conf.val()) {
+      $("div#addons-form-pass").find("span.pass-p").css("color", "red");
+      $("div#addons-form-pass").find("span.rp-pass-p").css("color", "red");
+      $('#error').html('<span>Senhas não conferem.</span>').show();
+      err = true;
     }
-  }
-  event.preventDefault();
-});
+
+    if (err == false) {
+      $.ajax({
+        type: "POST",
+        url: "/ws/login/pass",
+        data: {
+          u: $('#addons-register-id').val(),
+          p: pass.val()
+        },
+        success: function (response) {
+          console.log(response);
+        }
+      });
+    }
+
+    event.preventDefault();
+  });
 
 })(jQuery);
 
@@ -58,9 +92,12 @@ $('form#addons-form-password').submit(function(event){
 function form_popup() {
   //enable form send email for create password
   $('#create-password').attr('class', 'form-popup');
+  $('#account-options').hide();
+  //$('#account-options').removeClass('active');
+  //$('#create-password').addClass('active') 
 }
 
-$('a#button-create-account').click(function(event) {
-  window.open("https://docs.google.com/forms/d/e/1FAIpQLSfd8uUsMG6N_rSFi2blGuk3Rfqi_BPp6fxschkmkdhEBVDsyw/viewform","_blank");
-  window.location.href = "/index";
+$('a#button-create-account').click(function (event) {
+  window.open("https://docs.google.com/forms/d/e/1FAIpQLSfd8uUsMG6N_rSFi2blGuk3Rfqi_BPp6fxschkmkdhEBVDsyw/viewform", "_blank");
+  window.location.href = "/";
 })(jQuery);
