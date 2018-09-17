@@ -72,7 +72,7 @@ class AppsController
         }
 
         if (isset($request->getParams()['title'])) {
-            $search[] = ['title', $request->getParams()['title']];
+            $search[] = ['title','like', '%' . $request->getParams()['title'] . '%'];
         }
 
         return $search;

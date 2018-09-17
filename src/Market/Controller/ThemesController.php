@@ -39,17 +39,20 @@ class ThemesController
     public function getBySlug($request, $response, $args)
     {
         $theme = Themes::where('slug', $args['slug'])->first();
-        return (object) [
-            'app' => $theme->toArray(),
-            //'imagens' => $theme->imagens->toArray(),
-            'imagens' => array_map(function ($a) { 
-                $r['path'] = $a['path_image'];
-                return $r;
-            }, $theme->imagens->toArray()),
-            'partner' => $theme->partner->toArray(),
-            'comments' => $theme->comments->toArray(),
-            'evaluations' => $theme->evaluations
-        ];
+        if ($theme) {
+            return (object) [
+                'app' => $theme->toArray(),
+                //'imagens' => $theme->imagens->toArray(),
+                'imagens' => array_map(function ($a) {
+                    $r['path'] = $a['path_image'];
+                    return $r;
+                }, $theme->imagens->toArray()),
+                'partner' => $theme->partner->toArray(),
+                'comments' => $theme->comments->toArray(),
+                'evaluations' => $theme->evaluations
+            ];
+        }
+        return false;
     }
 
     public function getSearchParams($request)
@@ -69,7 +72,7 @@ class ThemesController
         }
 
         if (isset($request->getParams()['title'])) {
-            $search[] = ['title', $request->getParams()['title']];
+            $search[] = ['title','like', '%' . $request->getParams()['title'] . '%'];
         }
 
         if (isset($request->getParams()['partner'])) {

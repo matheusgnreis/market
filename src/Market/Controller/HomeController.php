@@ -20,6 +20,20 @@ class HomeController extends BaseController
         $translate = $this->getDictionary($args['lang']);
         $apps = new AppsController();
         $themes = new ThemesController();
+        var_dump($request->getParams());
+        if ($request->getParams()['title'] && $request->getParams()['categories']) {
+            switch ($request->getParams()['categories']) {
+                case 'apps':
+                    return $response->withStatus(302)->withHeader('Location', '/'.$args['lang'].'/apps?title='.$request->getParams()['title']);
+                    break;
+                case 'themes':
+                    return $response->withStatus(302)->withHeader('Location', '/'.$args['lang'].'/themes?title='.$request->getParams()['title']);
+                    break;
+                default:
+                    return $response->withStatus(302)->withHeader('Location', '/'.$args['lang']);
+                    break;
+            }
+        }
 
         return $this->view->render(
             $response,
@@ -118,8 +132,8 @@ class HomeController extends BaseController
         $apps = new AppsController();
         $resp = $apps->getBySlug($request, $response, $args);
         
-        if(!$resp){
-            return $this->view->render($response->withStatus(404), '404.html');
+        if (!$resp) {
+            return $this->view->render($response->withStatus(404), '404.html', ['search' => ['type' => 'App'], 'dictionary' => $translate]);
         }
 
         return $this->view->render(
@@ -153,7 +167,11 @@ class HomeController extends BaseController
         $translate = $this->getDictionary($args['lang']);
         $apps = new ThemesController();
         $resp = $apps->getBySlug($request, $response, $args);
-          
+        
+        if (!$resp) {
+            return $this->view->render($response->withStatus(404), '404.html', ['search' => ['type' => 'Themer'], 'dictionary' => $translate]);
+        }
+
         return $this->view->render(
                 $response,
                 'single.html',
@@ -242,7 +260,6 @@ class HomeController extends BaseController
 
     public function dashboard($request, $response, $args)
     {
-
         return $this->view->render(
                 $response,
                 '/d/dashboard-car.twig',
@@ -267,5 +284,4 @@ class HomeController extends BaseController
                 ]
             );
     }
-
 }
