@@ -38,7 +38,6 @@ $container['cache'] = function () {
 };
 
 $container['view'] = function ($c) {
-
     $view = new \Slim\Views\Twig(__DIR__.'/Market/View', [
         'cache' => false,
         //'cache' => 'cache/twig/cache'
@@ -56,10 +55,7 @@ $container['view'] = function ($c) {
 //Erro 404
 $container['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
-        return $c['response']
-            ->withStatus(404)
-            ->withHeader('Content-Type', 'application/json')
-            ->write('not found');
+        return $c['view']->render($response->withStatus(404), '404.html');
     };
 };
 // Erro 405

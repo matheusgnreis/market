@@ -1,14 +1,28 @@
 <?php
 use Market\Controller\HomeController;
+use Market\Controller\LoginController;
 
-$rotas = function (){
-    $this->get('/', function(){ echo "redirect lang default."; });
-    $this->get('/{lang}', HomeController::class . ':index');
-    $this->get('/{lang}/apps', HomeController::class . ':apps');
-    $this->get('/{lang}/themes', HomeController::class . ':themes');
-    $this->get('/{lang}/apps/{slug}', HomeController::class . ':app');
-    $this->get('/{lang}/themes/{slug}', HomeController::class . ':theme');
+$routes = function () use ($langRedirect) {
+
+    // dashboard
+    $this->get('/account', HomeController::class . ':dashboard');
+
+    //app routes
+    $this->get('/', function () {echo "redirect lang default.";})->add($langRedirect);
+    $this->get('/{lang}', HomeController::class . ':index')->add($langRedirect);
+    $this->get('/{lang}/apps', HomeController::class . ':apps')->add($langRedirect);
+    $this->get('/{lang}/themes', HomeController::class . ':themes')->add($langRedirect);
+    $this->get('/{lang}/signup', HomeController::class . ':signUp')->add($langRedirect);
+    $this->get('/{lang}/register-password', HomeController::class . ':signUpPassword')->add($langRedirect);
+    $this->get('/{lang}/apps/{slug}', HomeController::class . ':app')->add($langRedirect);
+    $this->get('/{lang}/themes/{slug}', HomeController::class . ':theme')->add($langRedirect);
+
+
+    //api
+    $this->post('/ws/login', LoginController::class . ':login');
+    $this->post('/ws/login/pass', LoginController::class . ':createPassword');
+    $this->post('/ws/login/verify', LoginController::class . ':verify');
 };
 
 // Api Routes
-$app->group('', $rotas)->add($langRedirect);
+$app->group('', $routes);
