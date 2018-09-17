@@ -25,15 +25,13 @@
         "firebase/php-jwt": "^5.0",
         "vlucas/phpdotenv": "^2.5",
         "slim/twig-view": "^2.4",
-        "twig/extensions": "^1.5"
+        "twig/extensions": "^1.5",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "autoload": {
         "psr-4": {
             "Market\\": "src/Market"
         }
-    },
-    "require-dev": {
-        "guzzlehttp/guzzle": "^6.3"
     },
     "scripts": {
         "post-install-cmd": [
