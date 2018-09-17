@@ -37,17 +37,21 @@ class AppsController
     public function getBySlug($request, $response, $args)
     {
         $app = Apps::where('slug', $args['slug'])->first();
-        return (object) [
-            'app' => $app->toArray(),
-            //'imagens' => $app->imagens->toArray(),
-            'imagens' => array_map(function ($a) { 
-                $r['path'] = $a['path_image'];
-                return $r;
-            }, $app->imagens->toArray()),
-            'partner' => $app->partner->toArray(),
-            'comments' => $app->comments->toArray(),
-            'evaluations' => $app->evaluations
-        ];
+
+        if ($app) {
+            return (object) [
+                'app' => $app->toArray(),
+                //'imagens' => $app->imagens->toArray(),
+                'imagens' => array_map(function ($a) {
+                    $r['path'] = $a['path_image'];
+                    return $r;
+                }, $app->imagens->toArray()),
+                'partner' => $app->partner->toArray(),
+                'comments' => $app->comments->toArray(),
+                'evaluations' => $app->evaluations
+            ];
+        }
+        return false;
     }
 
     public function getSearchParams($request)

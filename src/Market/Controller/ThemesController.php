@@ -38,8 +38,18 @@ class ThemesController
 
     public function getBySlug($request, $response, $args)
     {
-        $ret = Themes::where('slug', $args['slug'])->get();
-        return $response->withJson($ret, 200);
+        $theme = Themes::where('slug', $args['slug'])->first();
+        return (object) [
+            'app' => $theme->toArray(),
+            //'imagens' => $theme->imagens->toArray(),
+            'imagens' => array_map(function ($a) { 
+                $r['path'] = $a['path_image'];
+                return $r;
+            }, $theme->imagens->toArray()),
+            'partner' => $theme->partner->toArray(),
+            'comments' => $theme->comments->toArray(),
+            'evaluations' => $theme->evaluations
+        ];
     }
 
     public function getSearchParams($request)

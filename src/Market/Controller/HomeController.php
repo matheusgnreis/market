@@ -2,7 +2,6 @@
 namespace Market\Controller;
 
 use Market\Controller\BaseController;
-use Market\Model\ThemesComments;
 
 class HomeController extends BaseController
 {
@@ -119,6 +118,10 @@ class HomeController extends BaseController
         $apps = new AppsController();
         $resp = $apps->getBySlug($request, $response, $args);
         
+        if(!$resp){
+            return $this->view->render($response->withStatus(404), '404.html');
+        }
+
         return $this->view->render(
               $response,
               'single.html',
@@ -138,12 +141,131 @@ class HomeController extends BaseController
                   'login' => false,
                   'user' => null,
                   'app' => $resp,
-                  'plans' => json_decode($resp->app['plans_json'])
+                  'plans' => json_decode($resp->app['plans_json']),
+                  'is' => 'app'
               ]
           );
     }
 
     public function theme($request, $response, $args)
     {
+        // Render index view
+        $translate = $this->getDictionary($args['lang']);
+        $apps = new ThemesController();
+        $resp = $apps->getBySlug($request, $response, $args);
+          
+        return $this->view->render(
+                $response,
+                'single.html',
+                [
+                    'data' => [
+                        'page' => [
+                            'name' => 'Apps',
+                            'lang' => $args['lang'],
+                            'current' => 'apps',
+                            'app' => 1
+                        ]
+                    ],
+                    'app_category' => $this->appsCategories($translate),
+                    'theme_category' => $this->themesCategories($translate),
+                    'categories' => $this->appsCategories($translate),
+                    'dictionary' => $translate,
+                    'login' => false,
+                    'user' => null,
+                    'app' => $resp,
+                    'plans' => json_decode($resp->app['plans_json']),
+                    'is' => 'themer'
+                ]
+            );
     }
+
+    public function signUp($request, $response, $args)
+    {
+        // Render index view
+        $translate = $this->getDictionary($args['lang']);
+        
+        return $this->view->render(
+              $response,
+              'register.html',
+                [
+                'data' => [
+                        'page' => [
+                            'name' => 'Signup',
+                            'lang' => $args['lang'],
+                            'current' => 'signup',
+                            'app' => 1
+                        ]
+                ],
+                'app_category' => $this->appsCategories($translate),
+                'theme_category' => $this->themesCategories($translate),
+                'categories' => $this->appsCategories($translate),
+                'dictionary' => $translate,
+                'login' => false,
+                'user' => null
+            ]
+        );
+    }
+
+    public function signUpPassword($request, $response, $args)
+    {
+        // Render index view
+        $translate = $this->getDictionary($args['lang']);
+        $body = $request->getQueryParams();
+        
+        if ($body['u']) {
+            $user = json_decode(base64_decode($body['u']));
+        } else {
+            return $response->withStatus(302)->withHeader('Location', '/'.$args['lang'].'/signup');
+        }
+
+        return $this->view->render(
+               $response,
+               'register-password.html',
+               [
+                   'data' => [
+                       'page' => [
+                           'name' => 'Register Password',
+                           'lang' => $args['lang'],
+                           'current' => 'register-password',
+                       ],
+                       'user_hash' => $body['u']
+                   ],
+                   'app_category' => $this->appsCategories($translate),
+                   'theme_category' => $this->themesCategories($translate),
+                   'categories' => $this->appsCategories($translate),
+                   'dictionary' => $translate,
+                   'login' => false,
+                   'user' => $user[0]
+               ]
+           );
+    }
+
+    public function dashboard($request, $response, $args)
+    {
+
+        return $this->view->render(
+                $response,
+                '/d/dashboard-car.twig',
+                [
+                    'data' => [
+                        'page' => [
+                            'name' => 'Apps',
+                            'lang' => $args['lang'],
+                            'current' => 'apps',
+                            'app' => 1
+                        ]
+                    ],
+                    'app_category' => $this->appsCategories($translate),
+                    'theme_category' => $this->themesCategories($translate),
+                    'categories' => $this->appsCategories($translate),
+                    'dictionary' => $translate,
+                    'login' => true,
+                    'user' => null,
+                    'app' => $resp,
+                    'plans' => json_decode($resp->app['plans_json']),
+                    'is' => 'themer'
+                ]
+            );
+    }
+
 }

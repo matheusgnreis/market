@@ -15,42 +15,42 @@ class Themes extends Model
     public $timestamps = false;
     
     /**
-     *  Create evaluations relationship with app model
+     *  Create evaluations relationship with app
      *
      * @return void
      */
     public function evaluations()
     {
-        return $this->hasMany(ThemesEvaluation::class);
+        return $this->hasMany(AppsEvaluation::class, 'app_id');
     }
     
     /**
-     * Create partner relationship with app model
+     * Create partner relationship with app
      *
      * @return void
      */
     public function partner()
     {
-        return $this->belongsTo(Partner::class);
+        return $this->hasOne(Partner::class, 'id', 'partner_id');
     }
     
     /**
-     * Create comments relationship with app model
+     * Create comments relationship with app
      *
      * @return void
      */
     public function comments()
     {
-        return $this->hasMany(ThemesComments::class);
+        return $this->hasMany(AppsComments::class, 'app_id', 'id');
     }
 
     /**
-     * Create imagens relationship with app model
+     * Create imagens relationship with app
      *
      * @return void
      */
     public function imagens()
     {
-        return $this->hasMany(ThemesImagens::class);
+        return $this->hasMany(AppsImagens::class, 'app_id');
     }
 }
