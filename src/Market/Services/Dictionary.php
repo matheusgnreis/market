@@ -30,6 +30,7 @@ trait Dictionary
                 $subtitle = 'Ecommerce apps and themes marketplace';
                 $description_mkp = 'is the best e-commerce theme and app marketplace designed to enable retailers who do not have large investment capacity to access a customized quality layout at the best price.';
                 $welcome = 'Welcome to ';
+                $welcome_only = 'Welcome';
                 $word_partner = 'Partners ';
                 $word_shopkeeper = 'Shopkeeper ';
                 $word_app = 'Apps ';
@@ -61,6 +62,7 @@ trait Dictionary
                 $word_how_works = 'How it works';
                 $word_apps_store = 'Apps Stores';
                 $word_items_found = 'Items found';
+                $word_not_found = 'not found';
                 $word_price  = 'Price';
                 $word_themes_store = 'Themes Store';
                 $word_profile_page = 'Profile page ';
@@ -147,6 +149,11 @@ trait Dictionary
                 $word_version = 'Version';
                 $word_version_date = 'Version date';
                 $word_type_of_app = 'Type';
+                $word_create_account = 'Create Your Account';
+                $word_account_partner = 'Create Account Partner';
+                $word_create_password = 'Create password';
+                $word_info_create_password = 'is the page for creating your password to register your items in our Marketplace.';
+                $word_verify = 'Verify';
                 break;
           
               default:
@@ -154,6 +161,7 @@ trait Dictionary
                 $subtitle = 'Marketplace de apps e temas para e-commerce';
                 $description_mkp = 'é o melhor marketplace de apps e temas para e-commerce, criado para possibilitar que lojistas que não tem grande capacidade de investimento tenham acesso a um layout personalizado de qualidade pelo melhor preço.';
                 $welcome = 'Bem vindo a ';
+                $welcome_only = 'Bem vindo';
                 $word_partner = 'Parceiros ';
                 $word_shopkeeper = 'Lojistas ';
                 $word_app = 'Apps ';
@@ -185,6 +193,7 @@ trait Dictionary
                 $word_how_works = 'Como funciona ';
                 $word_apps_store = 'Loja de Apps';
                 $word_items_found = 'Items encontrados';
+                $word_not_found = 'não encontrado';
                 $word_price  = 'Preço';
                 $word_themes_store = 'Loja de Temas';
                 $word_profile_page = 'Perfil ';
@@ -271,6 +280,11 @@ trait Dictionary
                 $word_version = 'Versão';
                 $word_version_date = 'Data da versão';
                 $word_type_of_app = 'Tipo';
+                $word_create_account = 'Crie sua conta';
+                $word_account_partner = 'Criar conta como parceiro';
+                $word_create_password = 'Criar senha';
+                $word_info_create_password = 'Nessa página você poderá criar sua senha para registrar seus itens em nosso Marketplace.';
+                $word_verify = 'Verificar';
                 break;
             }
         // array dictionary
@@ -278,6 +292,7 @@ trait Dictionary
               'title' => $title,
               'subtitle' => $subtitle,
               'welcome' => $welcome,
+              'welcome_only' => $welcome_only,
               'e_com' => 'E-Com Plus ',
               'addons' => 'Market',
               'word_partner' => $word_partner,
@@ -315,6 +330,7 @@ trait Dictionary
               'coin' => 'R',
               'word_apps_store' => $word_apps_store,
               'word_items_found' => $word_items_found,
+              'word_not_found' => $word_not_found,
               'word_price' => $word_price,
               'word_themes_store' => $word_themes_store,
               'word_profile_page' => $word_profile_page,
@@ -406,6 +422,11 @@ trait Dictionary
               'word_version' => $word_version,
               'word_version_date' => $word_version_date,
               'word_type_of_app' => $word_type_of_app,
+              'word_create_account'  => $word_create_account,
+              'word_account_partner' => $word_account_partner,
+              'word_create_password' => $word_create_password,
+              'word_info_create_password' => $word_info_create_password,
+              'word_verify' => $word_verify,
               'lang' => $lang
             );
         return $dictionary;
