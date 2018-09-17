@@ -101,3 +101,66 @@ body{
     font-size: .9375rem;
     font-weight: 300;
 }
+
+.header-logo span {
+    font-weight: 200;
+    font-size: 24px;
+    color: #fff;
+    position: relative;
+    top: 5px;
+    text-transform: lowercase;
+}
+
+header .logo {
+    margin-top: 0;
+    width: 132px;
+    height: 28px;
+    margin-right: 4px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-actions.no-space {
+    margin: 0;
+}
+
+#error {
+    position: absolute;
+    max-width: 340px;
+    height: 51px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+    font-weight: 400;
+}
+
+#addons-form-pass {
+    max-width: 370px;
+    width: 100%;
+    width: 430px;
+    margin: 1em;
+    border: 1px solid #ebebeb;
+    background-color: #fff;
+    position: relative;
+}
+
+main#erro404 {
+    max-width: 990px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+main#erro404 .content {
+    overflow: auto;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
