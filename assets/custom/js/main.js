@@ -1,17 +1,24 @@
 // login
 $("form.addons-partner-login").submit(function (event) {
-  let username = $(this).find("input.addons-login-user").val(),
-    password = md5($(this).find("input.addons-login-password").val()),
-    legth_pass = $(this).find("input.addons-login-password").val().length;
-  if (legth_pass >= 6) {
-    $("#addons-login-user").val(username);
-    $("#addons-login-pass").val(password);
-    $("#addons-login").submit();
-  }
-  else {
-    $("label#addons-login-pass").css("color", "red");
-  }
-  event.preventDefault();
+  let username = $(this).find("input#user").val(),
+    password = $(this).find("input#passwd").val(),
+    remember = $('#remember').is(':checked') ? true : false;
+
+    $.ajax({
+      type: "POST",
+      url: "/ws/login",
+      data: {
+        u: username,
+        p: password,
+        r: remember
+      },
+      //dataType: "json",
+      success: function (response) {
+        console.log(response);
+      }
+    });
+
+    event.preventDefault();
 });
 // alert login sucess or error
 $(document).ready(function () {

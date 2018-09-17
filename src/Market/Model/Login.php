@@ -2,8 +2,9 @@
 namespace Market\Model;
 
 use Market\Model\Partner;
+use Illuminate\Database\Eloquent\Model;
 
-class Login
+class Login extends Model
 {
     private $http;
     private $token;
@@ -52,8 +53,6 @@ class Login
                 'password_hash' => password_hash($password, PASSWORD_DEFAULT)
             ]);
         }
-
-        var_dump($ret);
         return $ret;
     }
 }

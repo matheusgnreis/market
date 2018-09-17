@@ -20,7 +20,7 @@ $routes = function () use ($langRedirect) {
 
     //api
     $this->post('/ws/login', LoginController::class . ':login');
-    $this->post('/ws/login/pass', LoginController::class . ':createPassword');
+    $this->post('/ws/login/pass', LoginController::class . ':password');
     $this->post('/ws/login/verify', LoginController::class . ':verify');
 };
 

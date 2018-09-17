@@ -1597,19 +1597,15 @@
     <!-- /FORM POPUP HEADLINE -->
     <!-- FORM POPUP CONTENT -->
     <div class="form-popup-content">
-      <form id="addons-login" action="scripts/login" method="post">
-        <input type="hidden" id="addons-login-user" name="user" />
-        <input type="hidden" id="addons-login-pass" name="pass" />
-      </form>
-      <form id="login-form2"  class="addons-partner-login">
-        <label for="username5" class="rl-label">Login</label>
-        <input id="username5" name="username5" class="addons-login-user" placeholder="{{dictionary.word_enter_username}}">
-        <!--input type="email" id="username5" name="username5" class="addons-login-user" placeholder="{{dictionary.word_enter_username}}"-->
-        <label id="addons-login-pass" for="password5" class="rl-label">{{dictionary.word_password}}</label>
-        <input type="password" id="password5" name="password5" class="addons-login-password" placeholder="{{dictionary.word_enter_pass}}">
+      <form id="login-forms"  class="addons-partner-login">
+        <label for="user" class="rl-label">Login</label>
+        <input id="user" name="user" class="addons-login-user" placeholder="{{dictionary.word_enter_username}}">
+        <!--input type="email" id="user" name="user" class="addons-login-user" placeholder="{{dictionary.word_enter_username}}"-->
+        <label id="addons-login-pass" for="passwd" class="rl-label">{{dictionary.word_password}}</label>
+        <input type="password" id="passwd" name="passwd" class="addons-login-password" placeholder="{{dictionary.word_enter_pass}}">
         <!-- CHECKBOX -->
-        <input type="checkbox" id="remember2" name="remember2" checked>
-        <label for="remember2" class="label-check">
+        <input type="checkbox" id="rmb" name="rmb" checked>
+        <label for="rmb" class="label-check">
           <span class="checkbox primary primary"><span></span></span>
           {{dictionary.word_remember_user}}
         </label>

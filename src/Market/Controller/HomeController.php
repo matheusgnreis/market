@@ -16,12 +16,7 @@ class HomeController extends BaseController
      */
     public function index($request, $response, $args)
     {
-        // Render index view
-        $translate = $this->getDictionary($args['lang']);
-        $apps = new AppsController();
-        $themes = new ThemesController();
-        var_dump($request->getParams());
-        if ($request->getParams()['title'] && $request->getParams()['categories']) {
+        if ($request->getParams()['title'] && $request->getParams()['categories']) { // form search
             switch ($request->getParams()['categories']) {
                 case 'apps':
                     return $response->withStatus(302)->withHeader('Location', '/'.$args['lang'].'/apps?title='.$request->getParams()['title']);
@@ -34,6 +29,11 @@ class HomeController extends BaseController
                     break;
             }
         }
+        
+        // Render index view
+        $translate = $this->getDictionary($args['lang']);
+        $apps = new AppsController();
+        $themes = new ThemesController();
 
         return $this->view->render(
             $response,
@@ -61,7 +61,7 @@ class HomeController extends BaseController
         $themes = new ThemesController();
 
         $resp = $apps->getAll($request, $response, $args);
-
+        print_r(json_encode($resp, JSON_PRETTY_PRINT));
         return $this->view->render(
             $response,
             'apps.html',
