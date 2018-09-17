@@ -131,7 +131,7 @@ $('select#price_filter').on("change", function (ev) {
   }
   let path = window.location.pathname.split('/')[2];
   console.log(path)
-  window.location.href =  '/' + $('html')[0].lang + '/' + path  + '?filter=' + price_filter;
+  window.location.href = '/' + $('html')[0].lang + '/' + path + '?filter=' + price_filter;
 
   let qs = getUrlVars();
 
@@ -139,10 +139,10 @@ $('select#price_filter').on("change", function (ev) {
     switch (qs['filter']) {
       case 'all':
         //window.location.href = window.location.href + '&filter='
-        window.location.href = '/' + $('html')[0].lang + '/' + path  + '?filter=all&category=' + category_filter ;
+        window.location.href = '/' + $('html')[0].lang + '/' + path + '?filter=all&category=' + category_filter;
         break;
       case 'free':
-        window.location.href = '/' + $('html')[0].lang + '/' + path  + '?filter=free&category=' + category_filter ;
+        window.location.href = '/' + $('html')[0].lang + '/' + path + '?filter=free&category=' + category_filter;
         break;
       default:
         break;
@@ -179,6 +179,7 @@ $('select#category_filter').on("change", function (ev) {
 });
 
 $(".search-form").submit(function (event) {
+  event.preventDefault();
   let category_filter = $('select#category_filter').val(),
     price_filter = $('select#price_filter').val(),
     name_search = $('input#search_products').val(),
@@ -203,9 +204,9 @@ $(".search-form").submit(function (event) {
     type_page = 'themes';
   }
 
-  window.location.href = "/apps?title=";
+  //window.location.href = "/apps?title=";
   // alert( "Handler for .submit() called." );
-  event.preventDefault();
+
 });
 
 
