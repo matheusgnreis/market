@@ -165,11 +165,13 @@ trait Categories
         $categories = [
             [
                 'id' => 1 , 
-                'name' => $dictionary['word_app']
+                'name' => $dictionary['word_app'],
+                'slug' => 'apps'
             ],
             [
                 'id' => 0 , 
-                'name' => $dictionary['word_theme']
+                'name' => $dictionary['word_theme'],
+                'slug' => 'themes'
             ]
         ];
         return $categories;
