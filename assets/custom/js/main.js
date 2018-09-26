@@ -12,9 +12,11 @@ $("form.addons-partner-login").submit(function (event) {
         p: password,
         r: remember
       },
-      //dataType: "json",
+      dataType: "json",
       success: function (response) {
-        console.log(response);
+        if(response.login){
+          window.location.href = '/account';
+        }
       }
     });
 
