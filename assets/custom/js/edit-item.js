@@ -1,11 +1,14 @@
 (function ($) {
 
   let navigation = $('.item-navigation');
-
-  navigation.on('click', navigation_to);
-
+  let btn_auth = $('.label-check-auth');
+  let btn_save_edit = $('#btn_save_edit');
+  
   set_app_events();
   verify_auth();
+
+  btn_auth.on('click', verify_auth);
+  navigation.on('click', navigation_to);
 
   function navigation_to(event) {
     var to = $(this)[0].rel;
@@ -34,15 +37,17 @@
   }
 
   function verify_auth(){
-    
-    let el = $("[name='authentication']").val()
-    console.log(el);
-    if(el == 1){
-      $('#auth_resp').show();
-    }else{
-      $('#auth_resp').hide();
-    }
-
+    $("[name='authentication']").each(function(i, e){
+      console.log($(e)[0].checked)
+      console.log($(e)[0].id)
+      if($(e)[0].checked){
+        if($(this)[0].id == 'yes-id'){
+          $('#auth_resp').show();
+        }else if($(this)[0].id == 'no-id'){
+          $('#auth_resp').hide();
+        }
+      }
+    })
   }
 
 })(jQuery);
