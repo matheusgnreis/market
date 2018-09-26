@@ -75,6 +75,10 @@ class AppsController
             }
         }
 
+        if(isset($request->getParams()['author'])){
+            $search[] = ['partner_id', $request->getParams()['author']];
+        }
+
         if (isset($request->getParams()['category'])) {
             if ($request->getParams()['category'] !== 'all') {
                 $search[] = ['category', $request->getParams()['category']];
