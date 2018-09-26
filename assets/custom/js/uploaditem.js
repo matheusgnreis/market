@@ -1,440 +1,393 @@
-var num = 1; // variable for total value of categories added
-    num_plan = 1, // variable for total value of plans
-    num_faqs = 0, // variable for total value of faqs
-    max_faqs = 10,
-    max_plan_app = 10,
-    max_plan_theme = 2,
-    num_temple = 1,
-    max_temple = 3;
+(function ($) {
 
-$("form#upload_form").submit(function(event){
-  console.log('Sim');
-  let $form = $('form#upload_form'),
-      name_app = $form.find('input#item_name').val(), // not null
-      num_version = $form.find('input#item_numversion').val(),
-      description = $form.find('textarea#item_description').val(),// not null
-      script_url = $form.find('input#item_scripturl').val(),
-      github = $form.find('input#item_github').val(),
-      website = $form.find('input#item_website').val(),
-      video = $form.find('input#item_linkvideo').val(),
-      is_app = $form.find('input#inp-item_is_app').val(),
-      linkdoc = $form.find('input#item_linkdoc').val();
-      type_app = $form.find('select#type-app').val(),
-      module_app = $form.find('select#module-type').val();
-      authentication = $form.find('input#authentication').val(),
-      // plans
-      //num_categories =  num
-      // create a string to send in json format
-      categories_str = '{"total":' + num + ',"categories": [';
-      for (var i = 1; i <= num; i++) { // create string json format
-        categories_str += '{"id":'+ parseInt($form.find('select#category-'+is_app+'-'+i).val()) + '}' ;
-        if (i != num ) {
-          categories_str += ",";
-        }
-      }
-      categories_str += "]}";
-      // treat plans
-      plans_str = '{"total_plans":'+ num_plan + ',"plans": [';
-      var price_item;
-      var name_plan;
+  let btn_send_item = $('#send-app');
+  let btn_add_plan = $('#add-plan');
+  let btn_rmv_plan = $('#rm-plan');
+  let input_item_type = $('#type');
+  let input_slug = $('#slug');
+  let form_plans = $('#form_plans_clone');
+  let form_plans_clone = form_plans.html();
+  let form_files = $('#files');
+  let form_upload_files = $('#upload-img');
+  let form_item = $('#item_form');
+  let checkbox_item_is = $('.label-check.item_is');
+  let checkbox_auth = $('.label-check-auth');
 
-      for (var i = 1; i <= num_plan  ; i++) {
-        price_item = parseFloat($('input#item_value-'+i).val());
-        name_plan = $('input#name_plan-'+i).val();
+  define_item_type();
 
-        if (isNaN(price_item)) {
-          price_item = 0;
-        }
+  btn_send_item.unbind('click').on('click', send_item);
+  btn_add_plan.unbind('click').on('click', add_plan);
+  btn_rmv_plan.on('click', rmv_plan);
+  input_item_type.on('click', define_item_type);
+  input_slug.unbind('keyup').on('keyup', check_slug);
+  checkbox_item_is.on('click', deselect_linked);
+  checkbox_auth.on('click', check_authentication);
+  form_files.unbind('change').on('change', create_img_thumb);
+  form_upload_files.unbind('submit').on('submit', form_pictures);
 
-        if (name_plan == '') {
-          name_plan = 'Plan '+ i;
-        }
+  function send_item(event) {
+    event.preventDefault();
+    if (!form_is_valid(form_item)) return false;
 
-      plans_str += '{"id":' + i + ',"name":"' + name_plan
-        + '","value":' + price_item
-        + ',"desc":"' +  $('input#desc_plan-'+i).val()
-        + '"}';
-
-        if (i != num_plan) {
-          plans_str += ",";
-        }
-      }
-      plans_str += "]}";
-      console.log(plans_str);
-      //treat faqs
-      fqs_str = '{"total_faqs":'+ num_faqs + ',"faqs": [';
-
-      for (var i = 1; i <= num_faqs; i++) {
-          fqs_str += '{"id":' + i
-          + ',"question":"' + $('input#question-'+i).val()
-          + '","answer":"' + $('input#answer-'+i).val() + '"'
-          +'}';
-
-          if (i != num_faqs) {
-            fqs_str += ",";
-          }
-      }
-
-      fqs_str += "]}";
-      //question
-      //answer
-
-    // if fields are empty
-  if (name_app == '' || num_version == '' || description == '') {
-    alert('Error');
-    $form.find("#cat-required").css( "color", "red");
-    $form.find("#name-required").css( "color", "red");
-    $form.find("#version-required").css( "color", "red");
-    $form.find("#desc-required").css( "color", "red");
-
-  }else {
-    if (is_app == 1 ) { // app
-      $("#uploaditem-is_app").val(is_app);
-      $("#uploaditem-name_app").val(name_app);
-      $("#uploaditem-category").val(categories_str);
-      $("#uploaditem-item_numversion").val(num_version);
-      $("#uploaditem-item_description").val(description);
-      $("#uploaditem-item_scripturl").val(script_url);
-      $("#uploaditem-item_github").val(github);
-      $("#uploaditem-item_website").val(website);
-      $("#uploaditem-item_linkvideo").val(video);
-      $("#uploaditem-item_type_app").val(type_app);
-      $("#uploaditem-item_module_app").val(module_app);
-      $("#uploaditem-item_authetication").val(authentication);
-      $('#uploaditem-plans').val(plans_str);
-      $('#uploaditem-faqs').val(fqs_str);
-
-     $("#addons-uploaditem").submit();//
-    } else if (is_app == 0 ) { // theme
-      $("#uploaditem-is_app").val(is_app);
-      $("#uploaditem-name_app").val(name_app);
-      $("#uploaditem-category").val(categories_str);
-      $("#uploaditem-item_numversion").val(num_version);
-      $("#uploaditem-item_description").val(description);
-      $("#uploaditem-item_linkdoc").val(linkdoc);
-      $("#uploaditem-item_linkvideo").val(video);
-      $('#uploaditem-plans').val(plans_str);
-      $('#uploaditem-faqs').val(fqs_str);
-      $('#uploaditem-n_temp').val(num_temple);
-     $("#addons-uploaditem").submit();//
-    }
-  }
-  event.preventDefault();
-});
-
-//click the button add category
-$("#add-category").click(function(event){
-  let is_app = parseInt($('form#upload_form').find('input#inp-item_is_app').val());
-  // check it's an app or theme
-  if (is_app == 1) { // if app
-    let max_categories =  parseInt($('input#total_cat_app').val());
-    // maximum number of categories that can be added
-    if (num < max_categories) { // if maximum number not reached
-      num += 1;
-    }
-    for (var i = 1; i <= num; i++) { // displays (select) categories up to the value added
-      $("div#cat-app-"+i).attr('style','display:block;');
-    }
-  } else if(is_app == 0 ){ // if Theme
-    let max_categories =  parseInt($('input#total_cat_theme').val());
-    if (num < max_categories) { //if maximum number not reached
-      num += 1;
-    }
-    for (var i = 1; i <= num; i++) { // displays (select) categories up to the value added
-      $("div#cat-theme-"+i).attr('style','display:block;');
+    switch (item_is()) {
+      case 'apps':
+        create_plan();
+        create_form_scope();
+        create_app();
+        break;
+      case 'themes':
+        create_theme();
+        break;
+      default: break;
     }
   }
 
-  event.preventDefault();
-});
-// click the button remove category
-$("#rm-category").click(function(event){
-  let is_app = parseInt($('form#upload_form').find('input#inp-item_is_app').val());
-  // can not hide all
-  if (num > 1) {
-  num -= 1;
-  }
-  // check it's an app or theme
-  if (is_app == 1) {
-    $("div#cat-app-"+(num+1)).attr('style','display:none;');
-  }else if (is_app == 0) {
-    $("div#cat-theme-"+(num+1)).attr('style','display:none;');
-  }
-  event.preventDefault();
-});
-
-//click the button add plan
-$("#add-plan").click(function(event){
-
-  let is_app = parseInt($('form#upload_form').find('input#inp-item_is_app').val());
-  // check it's an app or theme
-  if (is_app == 1) { // if app
-    // maximum number of categories that can be added
-    if (num_plan < max_plan_app) { // if maximum number not reached
-      num_plan += 1;
-    }
-    for (var i = 1; i <= num_plan; i++) { // displays (select) categories up to the value added
-      $("div#plan-"+i).attr('style','display:block;');
-    }
-  } else if(is_app == 0 ){ // if Theme
-
-    if (num_plan < max_plan_theme) { //if maximum number not reached
-      num_plan += 1;
-    }
-    for (var i = 1; i <= num_plan; i++) { // displays (select) categories up to the value added
-      $("div#plan-"+i).attr('style','display:block;');
-    }
-  }
-  event.preventDefault();
-});
-//
-$("#rm-plan").click(function(event){
-  // maximum number of faqs that can be added
-  if (num_plan > 1) { // if maximum number not reached
-    $("div#plan-"+num_plan).attr('style','display:none;');
-    num_plan -= 1;
+  function request(url, data, type = 'POST', process_data = false, content_type = true) {
+    let jqXHR = $.ajax({
+      type: type,
+      url: url,
+      data: data,
+      dataType: 'json',
+      processData: process_data,
+      contentType: content_type === true ? 'application/x-www-form-urlencoded' : content_type,
+      erro: function (e) {
+        throw new Error('Failed api request.');
+      },
+      async: false
+    });
+    return jqXHR.responseText;
   }
 
-event.preventDefault();
-});
-
-//click the button add faq
-$("#add-faq").click(function(event){
-
-    // maximum number of faqs that can be added
-    if (num_faqs < max_faqs) { // if maximum number not reached
-      num_faqs += 1;
-    }
-    for (var i = 1; i <= num_faqs; i++) { // displays (select) categories up to the value added
-      $("div#faq-"+i).attr('style','display:block;');
-    }
-
-  event.preventDefault();
-});
-//click the button add faq
-$("#rm-faq").click(function(event){
-
-    // maximum number of faqs that can be added
-    if (num_faqs >= 0) { // if maximum number not reached
-      $("div#faq-"+num_faqs).attr('style','display:none;');
-      num_faqs -= 1;
-    }
-
-  event.preventDefault();
-});
-// TODO:
-//click the button add templete
-$("#add-temp").click(function(event){
-
-    // maximum number of templeate that can be added
-    if (num_temple < max_temple) { // if maximum number not reached
-      num_temple += 1;
-    }
-    for (var i = 1; i <= num_temple; i++) { // displays (select) categories up to the value added
-      $("div#tem"+num_temple).attr('style','display:block;');
-      $("div#img"+num_temple).attr('style','display:block;');
-
-      $("input#tem"+num_temple).attr('type','file');
-      $("input#img"+num_temple).attr('type','file');
-    }
-
-  event.preventDefault();
-});
-
-//click the button add faq
-$("#rm-temp").click(function(event){
-
-    // maximum number of faqs that can be added
-    if (num_temple > 1) { // if maximum number not reached
-      $("div#tem"+num_temple).attr('style','display:none;');
-      $("div#img"+num_temple).attr('style','display:none;');
-
-      $("input#tem"+num_temple).attr('type','hidden');
-      $("input#img"+num_temple).attr('type','hidden');
-      num_temple -= 1;
-    }
-
-  event.preventDefault();
-});
-
-(function($) {
-
-  let select = $('select#type-app');
-      // capture (select) to enable module_type
-	var $checkbox = $('.label-check'),
-      // capture (checkbox) to enable app or theme
-      $checkboxauth = $('.label-check-auth');
-      // capture (checkbox) to check whether the application needs authentication or not
-
-  // function treat to enable module_type
-  enableSelect(select.val());
-  // function treat click in (select) to treat enable module_type
-  select.on('click',selectType);
-  //  function treat click (checkbox) to enable app or app
-	$checkbox.on( 'click', deselectLinked );
-   // function treat click (checkbox) to authentication
-  $checkboxauth.on( 'click', checkAuth);
-
-  function checkAuth() {
-    var $this = $(this),
-    selectedCheckboxID = $this.prop('for'),
-    selectedCheckboxStatus = $("#"+selectedCheckboxID).prop('checked');
-    // function send yes or no
-    authentication(selectedCheckboxID);
-    $checkboxauth.each(function() {
-      var $this = $(this),
-        checkboxID = $this.prop('for'),
-        checkboxStatus = $("#"+checkboxID).prop('checked');
-      if( checkboxID != selectedCheckboxID ) {
-        deselect($("#"+checkboxID))
-      } else {
-
+  function form_is_valid(form) {
+    erros = 0;
+    form.find('input[required=true]').each(function () {
+      $(this).removeClass('is_not_valid');
+      if (!$(this).val()) {
+        erros++;
+        console.log('O campo ' + $(this).attr('id') + ' é obrigatório!');
+        input = $(this).attr('id');
+        $('#' + input).addClass('is_not_valid');
       }
     });
 
+    if (erros > 0) send_alert('Erro, verifique os campos obrigatórios.');
+
+    return erros > 0 ? false : true;
   }
 
-  function authentication(id){
-  if (id == 'yes-id') {
-    $('input#authentication').val(1);
-  }
-  else if (id == 'no-id') {
-    $('input#authentication').val(0);
-  }
-}
+  function form_pictures(event) {
 
-	function deselectLinked() {
+    let aid = $('#aid').val();
+    let url = '/ws/' +
+      item_is() +
+      '/media/' +
+      aid;
+
+    let formData = new FormData(this);
+
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: formData,
+      success: function (data) {
+        response = JSON.parse(data);
+        console.log(response);
+        if (response.erro) {
+          send_alert('Erro: image upload failed.');
+          return false;
+        } else if (response.status == 201) {
+          send_alert(item_is() + ' enviado com sucesso.', 's');
+          send_alert('upload completo.', 's');
+          clean_forms();
+          window.location.href = '/account/edit';
+          return true;
+        }
+      },
+      cache: false,
+      contentType: false,
+      processData: false
+    });
+
+    event.preventDefault();
+  }
+
+  function item_is() {
+    if ($("#item_is_app").is(':checked')) {
+      $('#category_theme').attr('name', '');
+      $('#category_apps').attr('name', 'category');
+      return 'apps';
+    } else if ($("#item_is_theme").is(':checked')) {
+      $('#category_apps').attr('name', '');
+      $('#category_theme').attr('name', 'category');
+      return 'themes';
+    }
+  }
+
+  function create_app() {
+    let data = form_item.serialize();
+    url = '/ws/apps';
+    response = JSON.parse(request(url, data, 'POST', false, true));
+
+    if (response.erro) {
+      send_alert('Erro, verifique os campos obrigatórios.');
+      return;
+    }
+
+    $('#aid').val(response.app.id);
+    form_upload_files.submit();
+
+  }
+
+  function create_theme() {
+    console.log(this);
+    let data = form_item.serialize();
+    url = '/ws/themes';
+    response = JSON.parse(request(url, data, 'POST', false, true));
+
+    if (response.erro) {
+      send_alert('Erro, verifique os campos obrigatórios.');
+      return;
+    }
+
+    $('#aid').val(response.app.id);
+    form_upload_files.submit();
+  }
+
+  function add_plan() {
+    let i = $('.plan_clone').length;
+    let elementos = form_plans_clone.replace(/\[[0\]]\]/g, '[' + i++ + ']');  //substitui o valor dos index e incrementa++
+    form_plans.append(elementos);
+    event.preventDefault();
+    return false;
+  }
+
+  function rmv_plan() {
+    let el = $('.plan_clone');
+    let i = --el.length;
+    if (i != 0) {
+      el[i].remove();
+    }
+    event.preventDefault();
+  }
+
+  function create_plan() {
+
+    let data = form_plans.serializeArray();
+    response = request('/ws/format/plans', data, 'post', true);
+    if (response) {
+      $('#plans_json').val(response);
+      $('#paid').val(1)
+      $('#value_plan_basic').val($("[name='plan_value[0]']").val());
+    } else {
+      $('#paid').val(0)
+    }
+
+  }
+
+  function create_form_scope() {
+    let data = $('#form-scope').serializeArray();
+    let resp = request('/ws/format/scope', data, 'post', true);
+    $('#auth_scope').val(resp);
+  }
+
+  function define_item_type() {
+
+    id = input_item_type.val();
+    let el_module_type = $('#module-type');
+    let el_load_events = $('#load_events-el');
+
+    if (id == 'module_package') {
+      el_module_type.show();
+      el_load_events.hide();
+    } else if (id == 'dashboard' || id == 'storefront') {
+      el_load_events.show();
+      el_module_type.hide();
+      $('#scripturl_el').show();
+    } else {
+      el_load_events.hide();
+      el_module_type.hide();
+      $('#scripturl_el').hide();
+    }
+  }
+
+  function enable_fields(id) {
+    //receives the (input) to verify that it is application or theme and
+    //to display the necessarios fields to fill the application or theme
+    if (id == 'item_is_app') { // if app
+      $('input#inp-item_is_app').val(1);
+      $('div#enable-app').attr('style', 'display:block;');
+      $('div#enable-theme').attr('style', 'display:none;');
+      $('#plans-section').attr('style', 'display:block;');
+      $('#value-license-section').attr('style', 'display:none;');
+
+    } else if (id == 'item_is_theme') { // if theme
+      $('div#enable-app').attr('style', 'display:none;');
+      $('div#enable-theme').attr('style', 'display:block;');
+      $('input#inp-item_is_app').val(0);
+
+      $('div#button_template').attr('style', 'display:block;');
+      $('#plans-section').attr('style', 'display:none;');
+      $('#value-license-section').attr('style', 'display:block;');
+    } else {
+      $('div#enable-app').attr('style', 'display:none;');
+      $('div#enable-theme').attr('style', 'display:none;');
+    }
+  }
+
+  function deselect_linked() {
+    console.log(item_is());
+    let $this = $(this);
+    let selectedCheckboxID = $this.prop('for');
+    //let selectedCheckboxStatus = $("#" + selectedCheckboxID).prop('checked');
+
+    enable_fields(selectedCheckboxID);
+
+    checkbox_item_is.each(function () {
       var $this = $(this),
-			selectedCheckboxID = $this.prop('for'),
-			selectedCheckboxStatus = $("#"+selectedCheckboxID).prop('checked');
-      //$('input#inv-'+selectedCheckboxID).attr('value','true');
-    	//showDescription(selectedCheckboxID);
-      enable(selectedCheckboxID);
+        checkboxID = $this.prop('for'),
+        checkboxStatus = $("#" + checkboxID).prop('checked');
 
-			$checkbox.each(function() {
-				var $this = $(this),
-					checkboxID = $this.prop('for'),
-					checkboxStatus = $("#"+checkboxID).prop('checked');
+      if (checkboxID != selectedCheckboxID) {
+        deselect_checkbox($("#" + checkboxID))
+      }
+    });
+  }
 
-				if( checkboxID != selectedCheckboxID ) {
-					deselect($("#"+checkboxID))
-          //desable(checkboxID);
-					//hideDescription(checkboxID);
-					//changePrice("<span>$</span>28.00");
-				} else {
-					//changePrice("<span>$</span>56.00");
-				}
-			});
-	}
-
-	function deselect(checkbox) {
+  function deselect_checkbox(checkbox) {
     /*
     this function is used to select only one check box for application or theme
     as well as hide the selection of application or theme categories
     */
     // with the checkbox received as value, set the property (checked) as false
-		checkbox.prop('checked', false);
+    checkbox.prop('checked', false);
     //receive value to verify that the application or theme
     //and in the opposite condition to that value, hides the (select)
     //of their respective categories and redefines the value (num)
 
-    let is_app = parseInt($('form#upload_form').find('input#inp-item_is_app').val());
+    let is_app = parseInt($('form#item_form').find('input#inp-item_is_app').val());
 
     if (is_app != 1) { // if value is the opposite value of the app
-      for (var i = num; i > 1; i--) {
-        $("div#cat-app-"+i).attr('style','display:none;');
+      for (var i = 0; i > 1; i--) {
+        $("div#cat-app-" + i).attr('style', 'display:none;');
       }
-    }else if (is_app != 0) { //if value is the opposite value of the Theme
-      for (var i = num; i > 1; i--) {
-        $("div#cat-theme-"+i).attr('style','display:none;');
+    } else if (is_app != 0) { //if value is the opposite value of the Theme
+      for (var i = 0; i > 1; i--) {
+        $("div#cat-theme-" + i).attr('style', 'display:none;');
       }
     }
-
-    for (var i = num_plan; i > 1; i--) {
-      $("div#plan-"+i).attr('style','display:none;');
-    }
-
-    for (var i = num_faqs; i > 0; i--) {
-      $("div#faq-"+i).attr('style','display:none;');
-    }
-
-    num = 1; // reset num
-    num_plan = 1; //
-    num_faqs = 0; //
-	}
-  //function to enable application or theme fields
-  function enable(id) {
-    //receives the (input) to verify that it is application or theme and
-    //to display the necessarios fields to fill the application or theme
-    if (id == 'item_is_app') { // if app
-      $('input#inp-item_is_app').val(1);
-      $('div#enable-app').attr('style','display:block;');
-      $('div#enable-theme').attr('style','display:none;');
-      enable_img();
-    }else if (id == 'item_is_theme') { // if theme
-      $('div#enable-app').attr('style','display:none;');
-      $('div#enable-theme').attr('style','display:block;');
-      $('input#inp-item_is_app').val(0);
-
-      for (var i = 2; i <= 6; i++) {
-        $('div#img'+i).attr('style','display:none;');
-      }
-        $('input#tem1').attr('type','file');
-        $('div#tem1').attr('style','display:block;');
-
-      for (var i = 2; i <= 3; i++) {
-        $('input#tem'+i).attr('type','hidden');
-        $('div#tem'+i).attr('style','display:none;');
-      }
-      $('div#button_template').attr('style','display:block;');
-
-    }else {
-      $('div#enable-app').attr('style','display:none;');
-      $('div#enable-theme').attr('style','display:none;');
-    }
-	}
-  function enable_img() {
-
-    for (var i = 1; i <= 6; i++) {
-      $('div#img'+i).attr('style','display:block;');
-      $('input#img'+i).attr('type','file');
-    }
-
-    for (var i = 1; i <= 3; i++) {
-      $('input#tem'+i).attr('type','hidden');
-      $('div#tem'+i).attr('style','display:none;');
-    }
-    $('div#button_template').attr('style','display:none;');
   }
-  // function selected type app
-  function selectType() {
+
+  function check_authentication() {
     let $this = $(this);
-    enableSelect($this.val());
+    let selectedCheckboxID = $this.prop('for');
+    enable_authentication(selectedCheckboxID);
   }
-  // function enable select module type
-  function enableSelect(id) {
 
-    let div = $('select#module-type'),
-        lable = $('label#module-type'),
-        divi = $('div#tem1'),
-        input = $('input#tem1');
+  function check_slug(event) {
 
-    if (id == 3) {
-      div.prop('disabled', false);
-      div.attr('style','display:block;');
-      lable.attr('style','display:block;');
-      divi.attr('style','display:block;');
-      input.attr('type','file');
+    $('#slug-sugg').html('');
 
-    }else {
-      div.prop('disabled', true);
-      div.attr('style','display:none;');
-      lable.attr('style','display:none;');
-      divi.attr('style','display:none;');
-      input.attr('type','hidden');
+    let s = $(this).val();
+    let sugg = '';
+    let response = JSON.parse(request('/ws/apps/slug/' + s, null, 'get'));
+
+    if (response.status > 302) {
+      for (let i = 0; i < response.suggestions.length; i++) {
+        console.log(response.suggestions[i]);
+        sugg += i < response.suggestions.length ? '<a class="slug-sugges">' + response.suggestions[i] + '</a>' + ', ' : '<a class="slug-sugges">' + response.suggestions[i] + '</a>';
+      }
+
+      $('#slug-sugg').html('<span> Slug em uso, sugestões: ' + sugg + '</span>');
+    }
+    event.preventDefault()
+  }
+
+  function enable_authentication(id) {
+    if (id == 'yes-id') {
+      $('input#authentication').val(1);
+      $('#auth_callback_el').show();
+      $("#no-id").prop('checked', false);
 
     }
+    else if (id == 'no-id') {
+      $('input#authentication').val(0);
+      $('#auth_callback_el').hide();
+      $("#yes-id").prop('checked', false);
 
+    }
+  }
+
+  function send_alert(message, type = 'e') {
+    $('body').xmalert({
+      x: 'right',
+      y: 'top',
+      xOffset: 30,
+      yOffset: 30,
+      alertSpacing: 40,
+      lifetime: 6000,
+      fadeDelay: 0.3,
+      template: type === 'e' ? 'messageError' : 'messageSuccess',
+      title: type === 'e' ? 'Erro:' : 'Sucesso',
+      paragraph: message
+    });
+  }
+
+  function GenericInputFileCleaner(selector) {
+    selector = $(selector);
+    selector.replaceWith(selector.val('').clone(true));
+  }
+
+  function create_img_thumb() {
+
+    let fileInput = $(this)[0].files;
+    let filesLenght = $(fileInput).length
+    let valid = /(\.jpg|\.png|\.gif)$/i;
+    let name = $(this).get(0).files["0"].name;
+
+    $('#upload-count').text(0);
+    $("#upload-queue").html();
+
+    if (!valid.test(name)) {
+      erroAlert('Formato inválido.');
+      GenericInputFileCleaner(this);
+      return;
+    }
+
+    if (filesLenght > 6) {
+      erroAlert('Máximo 6 imagens.');
+      GenericInputFileCleaner(this);
+      return;
+    }
+
+    $('#upload-count').text(filesLenght);
+
+    if (typeof (FileReader) != "undefined") {
+
+      var image_holder = $("#upload-queue");
+      image_holder.empty();
+
+      for (let i = 0; i < filesLenght; i++) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("<img />", {
+            "src": e.target.result,
+            "id": "thumb_" + i,
+            "class": "thumb-image"
+          }).appendTo(image_holder);
+        }
+        reader.readAsDataURL($(this)[0].files[i]);
+      }
+      //image_holder.show();
+
+    } else {
+      alert("Este navegador nao suporta FileReader.");
+    }
+  }
+
+  function clean_forms() {
+    $('form').each(function (index, element) {
+      $(element).find('input').val('');
+    });
   }
 
 })(jQuery);
