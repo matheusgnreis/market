@@ -1,0 +1,125 @@
+{% extends 'templates/layout.html' %}
+{% import 'templates/macros.html' as macro_main %}
+{% import 'templates/macros-single.html'
+as macro_item %}
+{% import 'templates/macros-author.html' as macro_profile %}
+{% block content %}
+{{macro_profile.autor_header(dictionary,partner)}}
+<div class="section-wrap">
+    <div class="section overflowable">
+        <!-- SIDEBAR -->
+        <div class="sidebar left author-profile">
+            <!-- SIDEBAR ITEM -->
+            {{macro_profile.bio_author(dictionary,partner)}}
+            <!-- /SIDEBAR ITEM -->
+
+            <!-- DROPDOWN -->
+            {{macro_profile.profile_board(dictionary,partner)}}
+            <!-- /DROPDOWN -->
+        </div>
+        <!-- /SIDEBAR -->
+
+        <!-- CONTENT -->
+        <div class="content right">
+            <!-- HEADLINE -->
+            <div class="headline buttons primary">
+                <h4>{{dictionary.word_app}}</h4>
+                <a href="/{{dictionary.lang}}/apps?author={{partner.id}}" class="button mid-short dark-light">{{dictionary.word_see_all_items}}</a>
+            </div>
+            <!-- /HEADLINE -->
+
+            <!-- PRODUCT LIST -->
+            <div class="product-list grid column3-4-wrap">
+                <!-- PRODUCT ITEM -->
+                {{macro_main.apps_themes(partner.apps, 0, 3, dictionary, "apps")}}
+                <!-- /PRODUCT ITEM -->
+            </div>
+            <!-- /PRODUCT LIST -->
+            {# show Themes #}
+            <div class="clearfix"></div>
+
+            <div class="headline buttons secondary">
+                <h4>{{dictionary.word_theme}}</h4>
+                <a href="/{{dictionary.lang}}/themes?author={{partner.id}}" class="button mid-short dark-light">{{dictionary.word_see_all_items}}</a>
+
+            </div>
+            <!-- /HEADLINE -->
+
+            <!-- PRODUCT LIST -->
+            <div class="product-list grid column3-4-wrap">
+                <!-- PRODUCT ITEM -->
+                {{macro_main.apps_themes(partner.themes, 0, 3, dictionary, "themes")}}
+                <!-- /PRODUCT ITEM -->
+            </div>
+            <!-- /PRODUCT LIST -->
+
+
+
+            <div class="clearfix"></div>
+            {# not implemented in moment obs: desable macro-profile too
+            <!-- HEADLINE -->
+            <div class="headline buttons primary">
+                <h4>{{dictionary.word_lastes_message}}</h4>
+                <a href="author-profile-messages.html" class="button mid-short dark-light">{{dictionary.word_see_all_message}}</a>
+            </div>
+            <!-- /HEADLINE -->
+
+            <!-- COMMENTS -->
+
+            <div class="comment-list">
+                <!-- COMMENT -->
+                {% for comment in comments %}
+                {{macro_profile.comments_user(dictionary,comment.name,comment.date,comment.comment,comment.is_buyer)}}
+                {% endfor %}
+                <!-- /COMMENTS -->
+            </div>
+            #}
+            <!-- /COMMENTS -->
+        </div>
+        <!-- CONTENT -->
+
+
+
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<!-- SVG ARROW -->
+<svg style="display: none;">
+    <symbol id="svg-arrow" viewbox="0 0 3.923 6.64014" preserveaspectratio="xMinYMin meet">
+        <path d="M3.711,2.92L0.994,0.202c-0.215-0.213-0.562-0.213-0.776,0c-0.215,0.215-0.215,0.562,0,0.777l2.329,2.329
+			L0.217,5.638c-0.215,0.215-0.214,0.562,0,0.776c0.214,0.214,0.562,0.215,0.776,0l2.717-2.718C3.925,3.482,3.925,3.135,3.711,2.92z" />
+    </symbol>
+</svg>
+<!-- /SVG ARROW -->
+
+<!-- SVG STAR -->
+<svg style="display: none;">
+    <symbol id="svg-star" viewbox="0 0 10 10" preserveaspectratio="xMinYMin meet">
+        <polygon points="4.994,0.249 6.538,3.376 9.99,3.878 7.492,6.313 8.082,9.751 4.994,8.129 1.907,9.751
+	2.495,6.313 -0.002,3.878 3.45,3.376 " />
+    </symbol>
+</svg>
+<!-- /SVG STAR -->
+
+<!-- SVG PLUS -->
+<svg style="display: none;">
+    <symbol id="svg-plus" viewbox="0 0 13 13" preserveaspectratio="xMinYMin meet">
+        <rect x="5" width="3" height="13" />
+        <rect y="5" width="13" height="3" />
+    </symbol>
+</svg>
+<!-- /SVG PLUS -->
+
+<!-- SVG CHECK -->
+<svg style="display: none;">
+    <symbol id="svg-check" viewbox="0 0 15 12" preserveaspectratio="xMinYMin meet">
+        <polygon points="12.45,0.344 5.39,7.404 2.562,4.575 0.429,6.708 3.257,9.536 3.257,9.536
+			5.379,11.657 14.571,2.465 " />
+    </symbol>
+</svg>
+<!-- /SVG CHECK -->
+
+<!-- /SECTION -->
+{{macro_item.single_scripts()}}
+{% endblock %}

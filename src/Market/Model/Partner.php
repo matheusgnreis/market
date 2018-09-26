@@ -13,4 +13,14 @@ class Partner extends Model
     protected $hidden = ['password_hash'];
     /** Indicates if the model should be timestamped. */
     public $timestamps = false;
+
+    public function apps()
+    {
+        return $this->hasMany(Apps::class, 'partner_id', 'id');
+    }
+
+    public function themes()
+    {
+        return $this->hasMany(Themes::class, 'partner_id', 'id');
+    }
 }

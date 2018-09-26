@@ -38,12 +38,12 @@ class PartnerController
 
         $img = new SimpleImage();
         $img->fromFile($upload['files'][0]['file'])
-            ->bestFit('300','300')
+            ->bestFit('300', '300')
             ->toFile($upload['files'][0]['file'], 'image/png', 80);
 
         $files = $upload['files'];
 
-        if(!isset($_SESSION)){
+        if (!isset($_SESSION)) {
             session_start();
         }
 
@@ -52,6 +52,13 @@ class PartnerController
             'path_image' => $files[0]['file']
         ]);
         return $update;
-        
+    }
+
+    public function getById($request, $response, $args)
+    {
+        $partner = Partner::find((int)$args['id']);
+        $partner->apps->toArray();
+        $partner->themes->toArray();
+        return $partner->toArray();
     }
 }

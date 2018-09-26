@@ -200,6 +200,37 @@ class HomeController extends BaseController
 
     public function author($request, $response, $args)
     {
+        // Render index view
+        $translate = $this->getDictionary($args['lang']);
+        $partnerController = new PartnerController();
+        $partner = $partnerController->getById($request, $response, $args);
+
+        // $resp = $apps->getBySlug($request, $response, $args);
+        
+        // if (!$resp) {
+        //     return $this->view->render($response->withStatus(404), '404.html', ['search' => ['type' => 'Author'], 'dictionary' => $translate]);
+        // }
+
+        return $this->view->render(
+                $response,
+                'author.html',
+                [
+                    'data' => [
+                        'page' => [
+                            'name' => 'Apps',
+                            'lang' => $args['lang'],
+                            'current' => 'apps',
+                            'app' => 1
+                        ]
+                    ],
+                    'app_category' => $this->appsCategories($translate),
+                    'theme_category' => $this->themesCategories($translate),
+                    'categories' => $this->appsCategories($translate),
+                    'dictionary' => $translate,
+                    'login' => false,
+                    'partner' => $partner
+                ]
+            );
     }
 
     public function signUp($request, $response, $args)
@@ -425,7 +456,7 @@ class HomeController extends BaseController
         $load_events = array_map(function($a){
             return str_replace('\\','',$a);
         }, $load_events);
-        var_dump($load_events);
+
         return $this->view->render(
                 $response,
                 'account-edit-app.html',
