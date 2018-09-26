@@ -36,6 +36,13 @@ class ThemesController
         return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
     }
 
+    public function getByPartnerId($request, $response, $args){
+        $id = $request->getAttribute('partner_id');
+        $ret = Themes::where('partner_id', $id)->get()->toArray();
+        return $ret ? (array)$ret : [];
+        //return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
+    }
+
     public function getBySlug($request, $response, $args)
     {
         $theme = Themes::where('slug', $args['slug'])->first();
@@ -96,7 +103,7 @@ class ThemesController
     {
         $body = $request->getParsedBody();
 
-        $theme = Apps::create([
+        $theme = Themes::create([
             'partner_id' => $body['partner_id'],
             'title' => $body['title'],
             'slug' => $body['slug'],
@@ -107,15 +114,15 @@ class ThemesController
             'paid' => $body['paid'],
             'version' => $body['version'],
             'version_date' => $body['version_date'],
-            'avg_stars' => $body['avg_stars'],
-            'evaluations' => $body['evaluations'],
+            'avg_stars' => 0,
+            'evaluations' => 0,
             'link_documentation' => $body['link_documentation'],
             'link_video' => $body['link_video'],
             'value_license_basic' => $body['value_license_basic'],
             'value_license_extend' => $body['value_license_extend']
         ]);
 
-        return $theme ? $response->withJson(['status' => 201, 'message' => 'created', 'theme_id' => $theme->id], 201) : $response->withJson(['erro' => 'Error with ThemesController request'], 400);
+        return $theme ? $response->withJson(['status' => 201, 'message' => 'created', 'app' => $theme], 201) : $response->withJson(['erro' => 'Error with ThemesController request'], 400);
     }
 
     public function update($request, $response, $args)
