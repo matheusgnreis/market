@@ -1,0 +1,51 @@
+{% extends 'templates/layout-account.html' %}
+{% block content %}
+    {% import 'templates/macros.html' as macro_main %}
+    {% import 'templates/macros-account.html' as macro_dashboad %}
+    <!-- SIDE MENU -->
+    {{macro_dashboad.all_menu(dictionary,user)}}
+    <!-- /SIDE MENU -->
+
+    <!-- DASHBOARD BODY -->
+    <div class="dashboard-body">
+        <!-- DASHBOARD HEADER -->
+        {{macro_dashboad.dashboard_header(dictionary)}}
+        <!-- DASHBOARD HEADER -->
+
+        <!-- DASHBOARD CONTENT -->
+        <div class="dashboard-content">
+            <!-- HEADLINE -->
+            <div class="headline buttons primary">
+                <h4>{{dictionary.word_account_settings}}</h4>
+                <button form="profile-info-form" class="button mid-short primary" id="addons-button-save">{{dictionary.word_save}}</button>
+            </div>
+            <!-- /HEADLINE -->
+
+            <!-- FORM BOX ITEMS -->
+            <div class="form-box-items">
+                <!-- FORM BOX ITEM -->
+                {{macro_dashboad.form_profile_info(dictionary,user)}}
+                <!-- /FORM BOX ITEM -->
+
+                <!-- FORM BOX ITEM -->
+                {# In moment not implemented
+            {{macro_dashboad.form_social_info(dictionary)}}
+            #}
+                <!-- /FORM BOX ITEM -->
+
+                <!-- FORM BOX ITEM -->
+                {# not used {macro_dashboad.form_billing_info(dictionary)}#}
+                <!-- /FORM BOX ITEM -->
+
+                <!-- FORM BOX ITEM -->
+                {#not used {macro_dashboad.form_shipping_info()}#}
+                <!-- /FORM BOX ITEM -->
+            </div>
+            <!-- /FORM BOX -->
+        </div>
+        <!-- DASHBOARD CONTENT -->
+    </div>
+    <!-- /DASHBOARD BODY -->
+
+    <div class="shadow-film closed"></div>
+{% endblock %}

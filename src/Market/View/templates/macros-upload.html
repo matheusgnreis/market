@@ -1,0 +1,666 @@
+{% macro up_file() %}
+    <div class="input-container">
+        <label class="rl-label required">Upload Main File</label>
+        <!-- UPLOAD FILE -->
+        <div class="upload-file">
+            <div class="upload-file-actions">
+                <a href="#" class="button dark-light">Upload File...</a>
+                <p>Pack of Cartoon Illustrations.zip</p>
+            </div>
+            <div class="upload-file-progress">
+                <!-- BADGE PROGRESS -->
+                <div class="upload-bar">
+                    <div class="upload-pg1"></div>
+                </div>
+                <!-- /BADGE PROGRESS -->
+                <p class="text-header">46%</p>
+                <a href="#" class="button dark-light square">
+                    <img src="../images/dashboard/close-icon-small.png" alt="close-icon">
+                </a>
+            </div>
+        </div>
+        <!-- UPLOAD FILE -->
+    </div>
+{% endmacro %}
+
+{% macro up_image() %}
+    <div class="input-container">
+        <label class="rl-label required">Upload Main Image</label>
+        <!-- UPLOAD FILE -->
+        <div class="upload-file">
+            <div class="upload-file-actions">
+                <a href="#" class="button dark-light">Upload File...</a>
+                <p>Cartoon Illustrations.jpeg</p>
+            </div>
+            <div class="upload-file-progress">
+                <!-- BADGE PROGRESS -->
+                <div class="upload-bar">
+                    <div class="upload-pg2"></div>
+                </div>
+                <!-- /BADGE PROGRESS -->
+                <p class="text-header">100%</p>
+                <a href="#" class="button dark-light square">
+                    <img src="../images/dashboard/close-icon-small.png" alt="close-icon">
+                </a>
+            </div>
+        </div>
+        <!-- UPLOAD FILE -->
+    </div>
+{% endmacro %}
+
+{% macro up_screenshots() %}
+    <div class="input-container">
+        <label class="rl-label">Additional Screenshots
+        </label>
+        <!-- UPLOAD FILE -->
+        <div class="upload-file">
+            <div class="upload-file-actions">
+                <a href="#" class="button dark-light">Upload File...</a>
+                <p>Screenshot 01.jpeg</p>
+            </div>
+            <div class="upload-file-progress">
+                <!-- BADGE PROGRESS -->
+                <div class="upload-bar">
+                    <div class="upload-pg3"></div>
+                </div>
+                <!-- /BADGE PROGRESS -->
+                <p class="text-header">68%</p>
+                <a href="#" class="button dark-light square">
+                    <img src="../images/dashboard/close-icon-small.png" alt="close-icon">
+                </a>
+            </div>
+        </div>
+        <!-- UPLOAD FILE -->
+
+        <!-- UPLOAD FILE -->
+        <div class="upload-file multiupload">
+            <div class="upload-file-actions">
+                <a href="#" class="button dark-light">Upload File...</a>
+                <p>Screenshot 02.jpeg</p>
+            </div>
+            <div class="upload-file-progress">
+                <!-- BADGE PROGRESS -->
+                <div class="upload-bar">
+                    <div class="upload-pg4"></div>
+                </div>
+                <!-- /BADGE PROGRESS -->
+                <p class="text-header">73%</p>
+                <a href="#" class="button dark-light square">
+                    <img src="../images/dashboard/close-icon-small.png" alt="close-icon">
+                </a>
+            </div>
+        </div>
+        <!-- UPLOAD FILE -->
+
+        <!-- UPLOAD FILE -->
+        <div class="upload-file multiupload">
+            <div class="upload-file-actions">
+                <a href="#" class="button dark-light">Upload File...</a>
+                <p>Screenshot 03.jpeg</p>
+            </div>
+            <div class="upload-file-progress">
+                <!-- BADGE PROGRESS -->
+                <div class="upload-bar">
+                    <div class="upload-pg5"></div>
+                </div>
+                <!-- /BADGE PROGRESS -->
+                <p class="text-header">92%</p>
+                <a href="#" class="button dark-light square">
+                    <img src="../images/dashboard/close-icon-small.png" alt="close-icon">
+                </a>
+            </div>
+        </div>
+        <!-- UPLOAD FILE -->
+    </div>
+{% endmacro %}
+
+{% macro select_category(all_category, id, num, dictionary, type) %}
+    <div class="input-container">
+        <label id="cat-required" for="category" class="rl-label required">{{dictionary.word_select_category}}</label>
+        <label for="category" class="select-block">
+            <select name="category" id="category_{{type}}">
+                {% for cate in all_category %}
+                    {% if loop.index0 > 0 %}
+                        <option value="{{cate.page}}">{{cate.name}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <!-- SVG ARROW -->
+            <!-- /SVG ARROW -->
+        </label>
+    </div>
+{% endmacro %}
+
+{% macro plans(dictionary) %}
+    <hr class="line-separator">
+    <div class="input-container">
+        <h4>
+            {{dictionary.word_plans}}
+        </h4>
+    </div>
+    <hr class="line-separator">
+    <form id="form_plans_clone">
+        <div id="plan" class="plan_clone" rel="[0]">
+
+            <div class="input-container"></div>
+            <div class="input-container">
+                <h6>
+                    {{dictionary.word_plan}}
+                </h6>
+            </div>
+            <!-- /INPUT CONTAINER -->
+            <div class="input-container half">
+                <label for="plan_name" class="rl-label">{{dictionary.word_name}}:</label>
+                <input type="text" id="plan_name" name="plan_name[0]" placeholder="Ex: Plan Basic" class="form_plans">
+            </div>
+            <!-- /INPUT CONTAINER -->
+
+            <!-- /INPUT CONTAINER -->
+            <div class="input-container half">
+                <label for="plan_value" class="rl-label">{{dictionary.word_value}}:
+                    {{dictionary.coin}}$</label>
+                <input type="number" id="plan_value" name="plan_value[0]" min="0" max="1000" step="any" placeholder="Ex: 10.00" class="form_plans">
+            </div>
+            <!-- /INPUT CONTAINER -->
+
+            <!-- /INPUT CONTAINER -->
+            <div class="input-container half">
+                <label for="plan_desc" class="rl-label">{{dictionary.word_description_single}}</label>
+                <input type="text" id="plan_desc" name="plan_desc[0]" placeholder="Ex: Is a plan" class="form_plans">
+            </div>
+            <!-- /INPUT CONTAINER -->
+            <!-- INPUT CONTAINER -->
+            <div class="input-container half" style="float: none;">
+                <label for="template" class="rl-label">Recorrência:</label>
+                <label for="template" class="select-block">
+                    <select name="plan_recorrencia[0]" id="template">
+                        <option value="mensal">Mensal</option>
+                        <option value="anual">Anual</option>
+                        <option value="semestral">Semestral</option>
+                    </select>
+                    <!-- SVG ARROW -->
+                    <svg class="svg-arrow">
+                        <use xlink:href="#svg-arrow"></use>
+                    </svg>
+                    <!-- /SVG ARROW -->
+                </label>
+            </div>
+            <!-- /INPUT CONTAINER -->
+
+            <!-- /INPUT CONTAINER -->
+        </div>
+    </form>
+    <hr class="input-container">
+    <!-- INPUT CONTAINER -->
+    <div class="input-container half">
+        <button class="button mid dark" id="add-plan" type="button">
+            {{dictionary.word_add}}
+            {{dictionary.word_plan}}</button>
+    </div>
+    <!-- /INPUT CONTAINER -->
+
+    <!-- INPUT CONTAINER -->
+    <div class="input-container half">
+        <button class="button mid dark" id="rm-plan" type="button">{{dictionary.word_remove}}
+            {{dictionary.word_plan}}</button>
+    </div>
+    <!-- /INPUT CONTAINER -->
+{% endmacro %}
+
+{% macro old_plans(total_plans_app, dictionary) %}
+    <hr class="line-separator">
+    <div class="input-container">
+        <h4>
+            {{dictionary.word_plans}}
+        </h4>
+    </div>
+    <hr class="line-separator">
+
+    {% for i in 1..total_plans_app %}
+        {% if loop.index == 1 %}
+            <div id="plan-{{i}}" style="display:block;">
+            {% else %}
+                <div id="plan-{{i}}" style="display:none;">
+                {% endif %}
+
+                <div class="input-container"></div>
+                <div class="input-container">
+                    <h6>
+                        {{dictionary.word_plan}}
+                        {{i}}
+                    </h6>
+                </div>
+                <!-- /INPUT CONTAINER -->
+                <div class="input-container">
+                    <label for="name_plan" class="rl-label">{{dictionary.word_name}}:</label>
+                    <input type="text" id="name_plan-{{i}}" name="name_plan" placeholder="Ex: Plan Basic" class="form_plans">
+                </div>
+                <!-- /INPUT CONTAINER -->
+
+                <!-- /INPUT CONTAINER -->
+                <div class="input-container">
+                    <label for="item_value" class="rl-label">{{dictionary.word_value}}:
+                        {{dictionary.coin}}$</label>
+                    <input type="number" id="item_value-{{i}}" name="item_value" min="0" max="1000" step="any" placeholder="Ex: 10.00" class="form_plans">
+                </div>
+                <!-- /INPUT CONTAINER -->
+
+                <!-- /INPUT CONTAINER -->
+                <div class="input-container">
+                    <label for="desc_plan" class="rl-label">{{dictionary.word_description_single}}</label>
+                    <input type="text" id="desc_plan-{{i}}" name="desc_plan" placeholder="Ex: Is a plan" class="form_plans">
+                </div>
+                <!-- /INPUT CONTAINER -->
+                <!-- /INPUT CONTAINER -->
+            </div>
+
+        {% endfor %}
+
+        <!-- INPUT CONTAINER -->
+        <div class="input-container half">
+            <button class="button mid dark" id="add-plan">
+                {{dictionary.word_add}}
+                {{dictionary.word_plan}}</button>
+        </div>
+        <!-- /INPUT CONTAINER -->
+
+        <!-- INPUT CONTAINER -->
+        <div class="input-container half">
+            <button class="button mid dark" id="rm-plan">{{dictionary.word_remove}}
+                {{dictionary.word_plan}}</button>
+        </div>
+        <!-- /INPUT CONTAINER -->
+    {% endmacro %}
+
+    {% macro faqs(total_faqs, dictionary) %}
+        <hr class="line-separator">
+        <div class="input-container">
+            <h4>
+                FAQ's
+            </h4>
+        </div>
+        <hr class="line-separator">
+
+        {% for i in 1..total_faqs %}
+
+            <div id="faq-{{i}}" style="display:none;">
+                <div class="input-container"></div>
+                <div class="input-container">
+                    <h6>
+                        FAQ
+                        {{i}}
+                    </h6>
+                </div>
+                <hr class="line-separator">
+                <!-- /INPUT CONTAINER -->
+                <div class="input-container">
+                    <label for="desc_plan" class="rl-label">Question</label>
+                    <input type="text" id="question-{{i}}" name="question" placeholder="Ex: ">
+                </div>
+                <!-- /INPUT CONTAINER -->
+                <!-- /INPUT CONTAINER -->
+                <div class="input-container">
+                    <label for="desc_plan" class="rl-label">Answer</label>
+                    <input type="text" id="answer-{{i}}" name="answer" placeholder="Ex: ">
+                </div>
+                <!-- /INPUT CONTAINER -->
+            </div>
+
+        {% endfor %}
+        <!-- INPUT CONTAINER -->
+        <div class="input-container half">
+            <button class="button mid dark" id="add-faq">
+                Add FAQ
+            </button>
+        </div>
+        <!-- /INPUT CONTAINER -->
+
+        <!-- INPUT CONTAINER -->
+        <div class="input-container half">
+            <button class="button mid dark" id="rm-faq">
+                Remove FAQ
+            </button>
+        </div>
+        <!-- /INPUT CONTAINER -->
+
+    {% endmacro %}
+
+    {% macro form_send(dictionary) %}
+        <form id="addons-uploaditem" enctype="multipart/form-data">
+            <input type="hidden" id="uploaditem-is_app" name="is_app"/>
+            <input type="hidden" id="uploaditem-name_app" name="name"/>
+            <input type="hidden" id="uploaditem-category" name="categories_json"/>
+            <input type="hidden" id="uploaditem-item_numversion" name="numversion"/>
+            <input type="hidden" id="uploaditem-item_description" name="description"/>
+            <input type="hidden" id="uploaditem-item_scripturl" name="scripturl"/>
+            <input type="hidden" id="uploaditem-item_github" name="github"/>
+            <input type="hidden" id="uploaditem-item_website" name="website"/>
+            <input type="hidden" id="uploaditem-item_linkvideo" name="linkvideo"/>
+            <input type="hidden" id="uploaditem-item_linkdoc" name="linkdoc"/>
+            <input type="hidden" id="uploaditem-item_type_app" name="type_app"/>
+            <input type="hidden" id="uploaditem-item_module_app" name="module_app"/>
+            <input type="hidden" id="uploaditem-item_authetication" name="authentication"/>
+            <input type="hidden" id="uploaditem-plans" name="plans"/>
+            <input type="hidden" id="uploaditem-faqs" name="faqs"/>
+            <input type="hidden" id="uploaditem-n_temp" name="n_temp"/>
+
+            {#
+        <div class="input-container half" id='button_template' style="display:none;">
+            <button class="button mid dark" id="add-temp"> Add Templete </button>
+        </div>
+        <div class="input-container half" id='button_template' style="display:none;">
+            <button class="button mid dark" id="rm-temp"> Remove Templete </button>
+        </div>
+        #}
+        </form>
+    {% endmacro %}
+
+    {% macro upload_files(dictionary) %}
+        <div id="upload-files">
+            <form enctype="multipart/form-data" id="upload-img">
+                <label for="files">
+                    <span class="button dark" style="width:120px">Screenshots</span>
+                    <input type="file" name="files[]" id="files" multiple="" style="display:none">
+                </label>
+                <div class="upload-queue" id="upload-queue"></div>
+            </form>
+        </div>
+    {% endmacro %}
+
+    {% macro load_events() %}
+
+        <label id="load_events-re" for="load_events-" class="rl-label required">Load events</label>
+        <label for="load_events" class="select-block">
+            <select name="load_events[]" id="load_events" multiple="multiple">
+                <option value="applications/data">applications/data</option>
+                <option value="applications/hidden_data">applications/hidden_data</option>
+                <option value="applications">applications</option>
+                <option value="authentications/api_key">authentications/api_key</option>
+                <option value="authentications/panel_cards">authentications/panel_cards</option>
+                <option value="authentications/panel_form_fields">authentications/panel_form_fields</option>
+                <option value="authentications/permissions">authentications/permissions</option>
+                <option value="authentications">authentications</option>
+                <option value="brands/i18n">brands/i18n</option>
+                <option value="brands/metafields">brands/metafields</option>
+                <option value="brands/pictures">brands/pictures</option>
+                <option value="brands">brands</option>
+                <option value="carts/customers">carts/customers</option>
+                <option value="carts/items">carts/items</option>
+                <option value="carts/metafields">carts/metafields</option>
+                <option value="carts/orders">carts/orders</option>
+                <option value="carts">carts</option>
+                <option value="categories/childs">categories/childs</option>
+                <option value="categories/grids">categories/grids</option>
+                <option value="categories/i18n">categories/i18n</option>
+                <option value="categories/metafields">categories/metafields</option>
+                <option value="categories/parent">categories/parent</option>
+                <option value="categories/pictures">categories/pictures</option>
+                <option value="categories">categories</option>
+                <option value="collections/i18n">collections/i18n</option>
+                <option value="collections/metafields">collections/metafields</option>
+                <option value="collections/pictures">collections/pictures</option>
+                <option value="collections/products">collections/products</option>
+                <option value="collections">collections</option>
+                <option value="customers/addresses">customers/addresses</option>
+                <option value="customers/favorites">customers/favorites</option>
+                <option value="customers/gifts_list">customers/gifts_list</option>
+                <option value="customers/gifts_list_info">customers/gifts_list_info</option>
+                <option value="customers/hidden_metafields">customers/hidden_metafields</option>
+                <option value="customers/lists">customers/lists</option>
+                <option value="customers/loyalty_points">customers/loyalty_points</option>
+                <option value="customers/metafields">customers/metafields</option>
+                <option value="customers/oauth_providers">customers/oauth_providers</option>
+                <option value="customers/orders">customers/orders</option>
+                <option value="customers/seller_recommendations">customers/seller_recommendations</option>
+                <option value="customers">customers</option>
+                <option value="grids/i18n">grids/i18n</option>
+                <option value="grids/metafields">grids/metafields</option>
+                <option value="grids/options">grids/options</option>
+                <option value="grids">grids</option>
+                <option value="orders/amount">orders/amount</option>
+                <option value="orders/buyers">orders/buyers</option>
+                <option value="orders/fullfilments">orders/fullfilments</option>
+                <option value="orders/gift_to">orders/gift_to</option>
+                <option value="orders/hidden_metafields">orders/hidden_metafields</option>
+                <option value="orders/items">orders/items</option>
+                <option value="orders/loyalty_points">orders/loyalty_points</option>
+                <option value="orders/metafields">orders/metafields</option>
+                <option value="orders/payments_history">orders/payments_history</option>
+                <option value="orders/shipping_lines">orders/shipping_lines</option>
+                <option value="orders/transactions">orders/transactions</option>
+                <option value="orders">orders</option>
+                <option value="procedures">procedures</option>
+                <option value="products/brands">products/brands</option>
+                <option value="products/categories">products/categories</option>
+                <option value="products/customizations/options">products/customizations/options</option>
+                <option value="products/customizations">products/customizations</option>
+                <option value="products/grids">products/grids</option>
+                <option value="products/hidden_metafields">products/hidden_metafields</option>
+                <option value="products/i18n">products/i18n</option>
+                <option value="products/inventory_records">products/inventory_records</option>
+                <option value="products/kit_composition">products/kit_composition</option>
+                <option value="products/metafields">products/metafields</option>
+                <option value="products/other_discounts">products/other_discounts</option>
+                <option value="products/other_prices">products/other_prices</option>
+                <option value="products/payment_methods">products/payment_methods</option>
+                <option value="products/pictures">products/pictures</option>
+                <option value="products/price">products/price</option>
+                <option value="products/price_change_records">products/price_change_records</option>
+                <option value="products/quantity">products/quantity</option>
+                <option value="products/related_produts">products/related_produts</option>
+                <option value="products/shipping_methods">products/shipping_methods</option>
+                <option value="products/specifications">products/specifications</option>
+                <option value="products/variations/price">products/variations/price</option>
+                <option value="products/variations/quantity">products/variations/quantity</option>
+                <option value="products/variations/specifications">products/variations/specifications</option>
+                <option value="products/variations">products/variations</option>
+                <option value="products">products</option>
+                <option value="stores">stores</option>
+                <option value="triggers">triggers</option>
+            </select>
+            <!-- SVG ARROW -->
+            <!-- /SVG ARROW -->
+        </label>
+
+    {% endmacro %}
+
+    {% macro load_events_app(event) %}
+
+    <label id="load_events-re" for="load_events-" class="rl-label required">Load events</label>
+    <label for="load_events" class="select-block">
+        <select name="load_events[]" id="load_events" multiple="multiple">
+            {% for data in event %}
+            <option value="applications/data" {% if(data == "applications/data") %} selected {% endif %}>applications/data</option>
+            <option value="applications/hidden_data" {% if(data == "applications/hidden_data") %} selected {% endif %}>applications/hidden_data</option>
+            <option value="applications" {% if(data == "applications") %} selected {% endif %}>applications</option>
+            <option value="authentications/api_key" {% if(data == "authentications/api_key") %} selected {% endif %}>authentications/api_key</option>
+            <option value="authentications/panel_cards" {% if(data == "authentications/panel_cards") %} selected {% endif %}>authentications/panel_cards</option>
+            <option value="authentications/panel_form_fields" {% if(data == "authentications/panel_form_fields") %} selected {% endif %}>authentications/panel_form_fields</option>
+            <option value="authentications/permissions" {% if(data == "authentications/permissions") %} selected {% endif %}>authentications/permissions</option>
+            <option value="authentications" {% if(data == "authentications") %} selected {% endif %}>authentications</option>
+            <option value="brands/i18n" {% if(data == "brands/i18n") %} selected {% endif %}>brands/i18n</option>
+            <option value="brands/metafields" {% if(data == "brands/metafields") %} selected {% endif %}>brands/metafields</option>
+            <option value="brands/pictures" {% if(data == "brands/pictures") %} selected {% endif %}>brands/pictures</option>
+            <option value="brands" {% if(data == "brands") %} selected {% endif %}>brands</option>
+            <option value="carts/customers" {% if(data == "carts/customers") %} selected {% endif %}>carts/customers</option>
+            <option value="carts/items" {% if(data == "carts/items") %} selected {% endif %}>carts/items</option>
+            <option value="carts/metafields" {% if(data == "carts/metafields") %} selected {% endif %}>carts/metafields</option>
+            <option value="carts/orders" {% if(data == "carts/orders") %} selected {% endif %}>carts/orders</option>
+            <option value="carts" {% if(data == "carts") %} selected {% endif %}>carts</option>
+            <option value="categories/childs" {% if(data == "categories/childs") %} selected {% endif %}>categories/childs</option>
+            <option value="categories/grids" {% if(data == "categories/grids") %} selected {% endif %}>categories/grids</option>
+            <option value="categories/i18n" {% if(data == "categories/i18n") %} selected {% endif %}>categories/i18n</option>
+            <option value="categories/metafields" {% if(data == "categories/metafields") %} selected {% endif %}>categories/metafields</option>
+            <option value="categories/parent" {% if(data == "categories/parent") %} selected {% endif %}>categories/parent</option>
+            <option value="categories/pictures" {% if(data == "categories/pictures") %} selected {% endif %}>categories/pictures</option>
+            <option value="categories" {% if(data == "categories") %} selected {% endif %}>categories</option>
+            <option value="collections/i18n" {% if(data == "collections/i18n") %} selected {% endif %}>collections/i18n</option>
+            <option value="collections/metafields" {% if(data == "collections/metafields") %} selected {% endif %}>collections/metafields</option>
+            <option value="collections/pictures" {% if(data == "collections/pictures") %} selected {% endif %}>collections/pictures</option>
+            <option value="collections/products" {% if(data == "collections/products") %} selected {% endif %}>collections/products</option>
+            <option value="collections" {% if(data == "collections") %} selected {% endif %}>collections</option>
+            <option value="customers/addresses" {% if(data == "customers/addresses") %} selected {% endif %}>customers/addresses</option>
+            <option value="customers/favorites" {% if(data == "customers/favorites") %} selected {% endif %}>customers/favorites</option>
+            <option value="customers/gifts_list" {% if(data == "customers/gifts_list") %} selected {% endif %}>customers/gifts_list</option>
+            <option value="customers/gifts_list_info" {% if(data == "customers/gifts_list_info") %} selected {% endif %}>customers/gifts_list_info</option>
+            <option value="customers/hidden_metafields" {% if(data == "customers/hidden_metafields") %} selected {% endif %}>customers/hidden_metafields</option>
+            <option value="customers/lists" {% if(data == "customers/lists") %} selected {% endif %}>customers/lists</option>
+            <option value="customers/loyalty_points" {% if(data == "customers/loyalty_points") %} selected {% endif %}>customers/loyalty_points</option>
+            <option value="customers/metafields" {% if(data == "customers/metafields") %} selected {% endif %}>customers/metafields</option>
+            <option value="customers/oauth_providers" {% if(data == "customers/oauth_providers") %} selected {% endif %}>customers/oauth_providers</option>
+            <option value="customers/orders" {% if(data == "customers/orders") %} selected {% endif %}>customers/orders</option>
+            <option value="customers/seller_recommendations" {% if(data == "customers/seller_recommendations") %} selected {% endif %}>customers/seller_recommendations</option>
+            <option value="customers" {% if(data == "customers") %} selected {% endif %}>customers</option>
+            <option value="grids/i18n" {% if(data == "grids/i18n") %} selected {% endif %}>grids/i18n</option>
+            <option value="grids/metafields" {% if(data == "grids/metafields") %} selected {% endif %}>grids/metafields</option>
+            <option value="grids/options" {% if(data == "grids/options") %} selected {% endif %}>grids/options</option>
+            <option value="grids" {% if(data == "grids") %} selected {% endif %}>grids</option>
+            <option value="orders/amount" {% if(data == "orders/amount") %} selected {% endif %}>orders/amount</option>
+            <option value="orders/buyers" {% if(data == "orders/buyers") %} selected {% endif %}>orders/buyers</option>
+            <option value="orders/fullfilments" {% if(data == "orders/fullfilments") %} selected {% endif %}>orders/fullfilments</option>
+            <option value="orders/gift_to" {% if(data == "orders/gift_to") %} selected {% endif %}>orders/gift_to</option>
+            <option value="orders/hidden_metafields" {% if(data == "orders/hidden_metafields") %} selected {% endif %}>orders/hidden_metafields</option>
+            <option value="orders/items" {% if(data == "orders/items") %} selected {% endif %}>orders/items</option>
+            <option value="orders/loyalty_points" {% if(data == "orders/loyalty_points") %} selected {% endif %}>orders/loyalty_points</option>
+            <option value="orders/metafields" {% if(data == "orders/metafields") %} selected {% endif %}>orders/metafields</option>
+            <option value="orders/payments_history" {% if(data == "orders/payments_history") %} selected {% endif %}>orders/payments_history</option>
+            <option value="orders/shipping_lines" {% if(data == "orders/shipping_lines") %} selected {% endif %}>orders/shipping_lines</option>
+            <option value="orders/transactions" {% if(data == "orders/transactions") %} selected {% endif %}>orders/transactions</option>
+            <option value="orders" {% if(data == "orders") %} selected {% endif %}>orders</option>
+            <option value="procedures" {% if(data == "procedures") %} selected {% endif %}>procedures</option>
+            <option value="products/brands" {% if(data == "products/brands") %} selected {% endif %}>products/brands</option>
+            <option value="products/categories" {% if(data == "products/categories") %} selected {% endif %}>products/categories</option>
+            <option value="products/customizations/options" {% if(data == "products/customizations/options") %} selected {% endif %}>products/customizations/options</option>
+            <option value="products/customizations" {% if(data == "products/customizations") %} selected {% endif %}>products/customizations</option>
+            <option value="products/grids" {% if(data == "products/grids") %} selected {% endif %}>products/grids</option>
+            <option value="products/hidden_metafields" {% if(data == "products/hidden_metafields") %} selected {% endif %}>products/hidden_metafields</option>
+            <option value="products/i18n" {% if(data == "products/i18n") %} selected {% endif %}>products/i18n</option>
+            <option value="products/inventory_records" {% if(data == "products/inventory_records") %} selected {% endif %}>products/inventory_records</option>
+            <option value="products/kit_composition" {% if(data == "products/kit_composition") %} selected {% endif %}>products/kit_composition</option>
+            <option value="products/metafields" {% if(data == "products/metafields") %} selected {% endif %}>products/metafields</option>
+            <option value="products/other_discounts" {% if(data == "products/other_discounts") %} selected {% endif %}>products/other_discounts</option>
+            <option value="products/other_prices" {% if(data == "products/other_prices") %} selected {% endif %}>products/other_prices</option>
+            <option value="products/payment_methods" {% if(data == "products/payment_methods") %} selected {% endif %}>products/payment_methods</option>
+            <option value="products/pictures" {% if(data == "products/pictures") %} selected {% endif %}>products/pictures</option>
+            <option value="products/price" {% if(data == "products/price") %} selected {% endif %}>products/price</option>
+            <option value="products/price_change_records" {% if(data == "products/price_change_records") %} selected {% endif %}>products/price_change_records</option>
+            <option value="products/quantity" {% if(data == "products/quantity") %} selected {% endif %}>products/quantity</option>
+            <option value="products/related_produts" {% if(data == "products/related_produts") %} selected {% endif %}>products/related_produts</option>
+            <option value="products/shipping_methods" {% if(data == "products/shipping_methods") %} selected {% endif %}>products/shipping_methods</option>
+            <option value="products/specifications" {% if(data == "products/specifications") %} selected {% endif %}>products/specifications</option>
+            <option value="products/variations/price" {% if(data == "products/variations/price") %} selected {% endif %}>products/variations/price</option>
+            <option value="products/variations/quantity" {% if(data == "products/variations/quantity") %} selected {% endif %}>products/variations/quantity</option>
+            <option value="products/variations/specifications" {% if(data == "products/variations/specifications") %} selected {% endif %}>products/variations/specifications</option>
+            <option value="products/variations" {% if(data == "products/variations") %} selected {% endif %}>products/variations</option>
+            <option value="products" {% if(data == "products") %} selected {% endif %}>products</option>
+            <option value="stores" {% if(data == "stores") %} selected {% endif %}>stores</option>
+            <option value="triggers" {% if(data == "triggers") %} selected {% endif %}>triggers</option>
+        {% endfor %}
+        </select>
+        <!-- SVG ARROW -->
+        <!-- /SVG ARROW -->
+    </label>
+
+{% endmacro %}
+
+    {% macro auth_scope(resources) %}
+        <!-- FORM POPUP -->
+        <form id="form-scope" class="form-popup mfp-hide">
+            <!-- CLOSE BTN -->
+            <div class="close-btn">
+                <!-- SVG PLUS -->
+                <svg class="svg-plus">
+                    <use xlink:href="#svg-plus"></use>
+                </svg>
+                <!-- /SVG PLUS -->
+            </div>
+            <!-- /CLOSE BTN -->
+
+            <!-- FORM POPUP CONTENT -->
+            <div class="form-popup-content">
+                <h4 class="popup-title">Authorizações</h4>
+                <table class="table-scope">
+                    <caption></caption>
+
+                    <thead>
+                        <!-- Passengers of flight 377 -->
+                        <tr>
+                            <th>Resource</th>
+                            <th>GET</th>
+                            <th>POST</th>
+                            <th>PUT</th>
+                            <th>PATCH</th>
+                            <th>DELETE</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- Table body -->
+
+                        {% for resource in resources %}
+                            <tr>
+                                <td class="resource-path">{{resource}}</td>
+                                <td>
+                                    <input type="checkbox" id="item-{{resource}}-get" name="{{resource}}[]" value="GET">
+                                    <label for="item-{{resource}}-get" class="label-check" style="margin: 0;">
+                                        <span class="checkbox primary">
+                                            <span></span></span>
+                                        {{dictionary.word_app}}
+                                    </label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" id="item-{{resource}}-post" name="{{resource}}[]" value="POST">
+                                    <label for="item-{{resource}}-post" class="label-check" style="margin: 0;">
+                                        <span class="checkbox primary">
+                                            <span></span></span>
+                                        {{dictionary.word_app}}
+                                    </label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" id="item-{{resource}}-put" name="{{resource}}[]" value="PUT">
+                                    <label for="item-{{resource}}-put" class="label-check" style="margin: 0;">
+                                        <span class="checkbox primary">
+                                            <span></span></span>
+                                        {{dictionary.word_app}}
+                                    </label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" id="item-{{resource}}-patch" name="{{resource}}[]" value="PATCH">
+                                    <label for="item-{{resource}}-patch" class="label-check" style="margin: 0;">
+                                        <span class="checkbox primary">
+                                            <span></span></span>
+                                        {{dictionary.word_app}}
+                                    </label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" id="item-{{resource}}-delete" name="{{resource}}[]" value="DELETE">
+                                    <label for="item-{{resource}}-delete" class="label-check" style="margin: 0;">
+                                        <span class="checkbox primary">
+                                            <span></span></span>
+                                        {{dictionary.word_app}}
+                                    </label>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /FORM POPUP CONTENT -->
+        </form>
+        <!-- /FORM POPUP -->
+
+    {% endmacro %}
+
+    {% macro value_license_themes(dictionary) %}
+        <!-- /INPUT CONTAINER -->
+        <div class="input-container half">
+            <label for="value_license_basic" class="rl-label">Value license Basic</label>
+            <input type="number" id="value_license_basic" name="value_license_basic" min="0" max="1000" step="any" placeholder="Ex: 0" class="form_plans" required="true">
+        </div>
+
+        <!-- /INPUT CONTAINER -->
+        <div class="input-container half">
+            <label for="value_license_extend" class="rl-label">Value license Extend</label>
+            <input type="number" id="value_license_extend" name="value_license_extend" min="0" max="1000" step="any" placeholder="Ex: 10.00" class="form_plans" required="true">
+        </div>
+    {% endmacro %}

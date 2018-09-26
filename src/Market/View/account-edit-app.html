@@ -1,0 +1,308 @@
+{% extends 'templates/layout-account.html' %}
+{% block content %}
+{% import 'templates/macros.html' as macro_main %}
+{% import 'templates/macros-account.html' as macro_dashboad %}
+{% import 'templates/macros-upload.html' as macro_dash_up %}
+<!-- SIDE MENU -->
+{{macro_dashboad.all_menu(dictionary,user)}}
+<!-- /SIDE MENU -->
+<!-- DASHBOARD BODY -->
+<div class="dashboard-body">
+    <!-- DASHBOARD HEADER -->
+    {{macro_dashboad.dashboard_header(dictionary)}}
+    <!-- DASHBOARD HEADER -->
+
+    <!-- DASHBOARD CONTENT -->
+    <div class="dashboard-content">
+
+        <div class="item-resume">
+            <div class="item-resume__side">
+                <ul>
+                    <li class="resume-side__links">
+                        <a rel="info" class="item-navigation">Info</a>
+                    </li>
+                    <li class="resume-side__links">
+                        <a rel="imagens" class="item-navigation">Imagens</a>
+                    </li>
+                    <li class="resume-side__links">
+                        <a rel="plans" class="item-navigation">Planos</a>
+                    </li>
+                    <li class="resume-side__links">
+                        <a rel="settings" class="item-navigation">Configurações</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="item-resume__content">
+                <div class="wrapper active" id="info">
+                    <div class="form-box-item">
+                        <form id="form-edit">
+                            <div class="input-container">
+                                <label for="slug" class="rl-label">ID:</label>
+                                <input type="text" id="app_id" value="{{app.app.id}}" disabled="disabled">
+                            </div>
+                            <div class="input-container">
+                                <label for="input_title" class="rl-label">{{dictionary.word_name_of_item}}:</label>
+                                <input type="text" id="input_title" name="title" required="true" value="{{app.app.title}}">
+                            </div>
+                            <div class="input-container">
+                                <label for="input_slug" class="rl-label">Slug:</label>
+                                <input type="text" id="input_slug" name="slug" required="true" value="{{app.app.slug}}"
+                                    disabled="disabled">
+                            </div>
+                            <div class="input-container">
+                                <label for="input_category" class="rl-label">{{dictionary.word_categories}}:</label>
+                                <input type="text" id="input_category" name="slug" required="true" value="{{app.app.category}}"
+                                    disabled="disabled">
+                            </div>
+                            <div class="input-container">
+                                <label for="input_description" class="rl-label required">{{dictionary.word_description_single}}:</label>
+                                <textarea id="input_description" name="description" placeholder="Enter them item description here..."
+                                    required="true">{{app.app.description}}</textarea>
+                            </div>
+                            <div class="input-container">
+                                <label for="input_version" class="rl-label required">{{dictionary.word_num_version}}:</label>
+                                <input type="text" id="input_version" name="version" value="{{app.app.version}}"
+                                    required="true">
+                            </div>
+                            <div class="input-container">
+                                <label for="input_version_date" class="rl-label">{{dictionary.word_date_version}}:</label>
+                                <input type="date" name="version_date" id="input_version_date" value="{{app.app.version_date}}">
+                            </div>
+                            <div class="input-container" id="type_app">
+                                <label for="type" class="rl-label required">{{dictionary.word_type_of_app}}:</label>
+                                <label for="type" class="select-block" id="type_app">
+                                    <select name="type" id="type" required="true">
+                                        <option value="storefront">Selecione</option>
+                                        <option value="dashboard" {% if app.app.type=='dashboard' %} selected="selected"
+                                            {% endif %}>Dashboard</option>
+                                        <option value="storefront" {% if app.app.type=='storefront' %} selected="selected"
+                                            {% endif %}>Storefront</option>
+                                        <option value="module_package" {% if app.app.type=='module_package' %} selected="selected"
+                                            {% endif %}>Module Package</option>
+                                        <option value="external" {% if app.app.type=='external' %} selected="selected"
+                                            {% endif %}>External</option>
+                                    </select>
+                                    <!-- SVG ARROW -->
+                                    <svg class="svg-arrow">
+                                        <use xlink:href="#svg-arrow"></use>
+                                    </svg>
+                                    <!-- /SVG ARROW -->
+                                </label>
+                            </div>
+                            {% if app.app.module %}
+                            <div class="input-container" id="module-type" style="display:none;">
+                                <label for="module-type" class="rl-label" id="module-type">Module</label>
+                                <label for="module" class="select-block" id="module-type">
+                                    <select name="module" id="module">
+                                        <option value="">Module</option>
+                                        <option value="al" {% if app.app.module=='al' %} selected="selected" {% endif
+                                            %}>al</option>
+                                        <option value="pd" {% if app.app.module=='pd' %} selected="selected" {% endif
+                                            %}>pd</option>
+                                        <option value="sc" {% if app.app.module=='sc' %} selected="selected" {% endif
+                                            %}>sc</option>
+                                        <option value="sh" {% if app.app.module=='sh' %} selected="selected" {% endif
+                                            %}>sh</option>
+                                        <option value="pa" {% if app.app.module=='pa' %} selected="selected" {% endif
+                                            %}>pa</option>
+                                        <option value="ck" {% if app.app.module=='ck' %} selected="selected" {% endif
+                                            %}>ck</option>
+                                        <option value="cf" {% if app.app.module=='cf' %} selected="selected" {% endif
+                                            %}>cf</option>
+                                        <option value="rg" {% if app.app.module=='rg' %} selected="selected" {% endif
+                                            %}>rg</option>
+                                        <option value="lg" {% if app.app.module=='lg' %} selected="selected" {% endif
+                                            %}>lg</option>
+                                        <option value="ct" {% if app.app.module=='ct' %} selected="selected" {% endif
+                                            %}>ct</option>
+                                        <option value="nw" {% if app.app.module=='nw' %} selected="selected" {% endif
+                                            %}>nw</option>
+                                    </select>
+                                    <svg class="svg-arrow">
+                                        <use xlink:href="#svg-arrow"></use>
+                                    </svg>
+                                </label>
+                            </div>
+                            {% endif %}
+                            <div class="input-container">
+                                <input type="hidden" name="load_events" id="input_load_events" value="{{app.app.load_events}}">
+                                {{macro_dash_up.load_events()}}
+                            </div>
+                            <div class="input-container">
+                                <label for="input_script_uri" class="rl-label">Script uri:</label>
+                                <input type="text" name="script_uri" id="input_script_uri" value="{{app.app.script_uri}}">
+                            </div>
+                            <div class="input-container">
+                                <label for="input_github_repository" class="rl-label">Github Repositório:</label>
+                                <input type="text" name="github_repository" id="input_github_repository" value="{{app.app.github_repository}}">
+                            </div>
+                            <div class="input-container">
+                                <label class="rl-label">{{dictionary.word_authentication}}:</label>
+                                <div class="input-container">
+                                    <input type="radio" id="yes-id" name="authentication" value="1" {% if
+                                        app.app.authentication == 1 %} checked="checked" {% endif %}>
+                                    <label for="yes-id" class="label-check-auth">
+                                        <span class="checkbox primary">
+                                            <span></span></span>
+                                        {{dictionary.word_yes}}
+                                    </label>
+                                </div>
+                                <div class="input-container">
+                                    <input type="radio" id="no-id" name="authentication" value="0" {% if
+                                        app.app.authentication == 0 %} checked="checked" {% endif %}>
+                                    <label for="no-id" class="label-check-auth">
+                                        <span class="checkbox primary">
+                                            <span></span></span>
+                                        {{dictionary.word_no}}
+                                    </label>
+                                </div>
+                                <input id="authentication" value="0" style="display:none;" />
+                            </div>
+                            <div id="auth_resp">
+                                <div class="input-container half">
+                                    <label for="input_auth_callback_uri" class="rl-label">Auth Callback Uri:</label>
+                                    <input type="text" name="auth_callback_uri" id="input_auth_callback_uri" value="{{app.app.auth_callback_uri}}">
+                                </div>
+                                <div class="input-container half" style="position: relative;top: 24px;">
+                                    <a href="#form-scope" class="button mid dark promo-popup">
+                                        <span class="primary">Rever autorizações.</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="input-container">
+                                <label for="input_website" class="rl-label">Site:</label>
+                                <input type="text" name="website" id="input_website" value="{{app.app.website}}">
+                            </div>
+                            <div class="input-container">
+                                <label for="input_link_video" class="rl-label">Auth Callback Uri:</label>
+                                <input type="text" name="link_video" id="input_link_video" value="{{app.app.link_video}}">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="wrapper" id="imagens">
+                    <div class="wrapper-content">
+                        {% for image in app.imagens %}
+                        <div class="thumb">
+                            <img src="{{image.path}}" alt="" />
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="wrapper" id="plans">
+                    <div class="wrapper-content-plans">
+                        <div class="form-box-item" id="add_new_plan">
+                            <form id="form_plans_clone">
+                                <div id="plan" class="plan_clone" rel="[0]">
+                                    <div class="input-container">
+                                        <h6>
+                                            {{dictionary.word_plan}}
+                                        </h6>
+                                    </div>
+                                    <div class="input-container">
+                                        <label for="plan_name" class="rl-label">{{dictionary.word_name}}:</label>
+                                        <input type="text" id="plan_name" name="plan_name[0]" placeholder="Ex: Plan Basic"
+                                            class="form_plans">
+                                    </div>
+                                    <div class="input-container">
+                                        <label for="plan_value" class="rl-label">{{dictionary.word_value}}:
+                                            {{dictionary.coin}}$</label>
+                                        <input type="number" id="plan_value" name="plan_value[0]" min="0" max="1000"
+                                            step="any" placeholder="Ex: 10.00" class="form_plans">
+                                    </div>
+                                    <div class="input-container">
+                                        <label for="plan_desc" class="rl-label">{{dictionary.word_description_single}}</label>
+                                        <input type="text" id="plan_desc" name="plan_desc[0]" placeholder="Ex: Is a plan"
+                                            class="form_plans">
+                                    </div>
+                                    <div class="input-container" style="float: none;">
+                                        <label for="template" class="rl-label">Recorrência:</label>
+                                        <label for="template" class="select-block">
+                                            <select name="plan_recorrencia[0]" id="template">
+                                                <option value="mensal">Mensal</option>
+                                                <option value="anual">Anual</option>
+                                                <option value="semestral">Semestral</option>
+                                            </select>
+                                            <svg class="svg-arrow">
+                                                <use xlink:href="#svg-arrow"></use>
+                                            </svg>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="input-container action">
+                                    <button class="button mid dark" id="btn-add_plan" type="button">
+                                        {{dictionary.word_add}}
+                                        {{dictionary.word_plan}}</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="show_plans">
+                            {% for plan in plans %}
+                            <div class="plan_resume">
+                                <div class="close-btn">
+                                    <svg class="svg-plus">
+                                        <use xlink:href="#svg-plus"></use>
+                                    </svg>
+                                </div>
+                                <ul>
+                                    <li class="li_resume">
+                                        <span class="resp">{{plan.name}}</span>
+                                    </li>
+                                    <li class="li_resume">
+                                        <span class="resp">{{plan.currency}}</span>
+                                    </li>
+                                    <li class="li_resume">
+                                        <span class="resp">{{plan.value}}</span>
+                                    </li>
+                                    <li class="li_resume">
+                                        <span class="resp">{{plan.description}}</span>
+                                    </li>
+                                    <li class="li_resume">
+                                        <span class="resp">{{plan.checked}}</span>
+                                        <div class="input-container">
+                                            <div class="input-container">
+                                                <input type="radio" id="{{plan.name}}" name="authentication" value="1"
+                                                    {% if plan.checked %} checked="checked" {% endif %}>
+                                                <label for="{{plan.name}}" class="label-check-auth">
+                                                    <span class="checkbox primary">
+                                                        <span></span></span>
+                                                    Principal
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper" id="settings">
+                    <div class="settings-content">
+                        <div class="content-settings">
+                            <div class="content-settings__action">
+                                <div class="content-title">
+                                    <h6>Pausar App?</h6>
+                                    <span>Pausar a publicação do aplicativo?</span>
+                                </div>
+                                <button class="button mid" id="btn-pause" type="button">Pausar</button>
+                            </div>
+                            <div class="content-settings__action">
+                                <div class="content-title">
+                                    <h6>Excluir o App?</h6>
+                                    <span>Excluir permanente o aplicativo?</span>
+                                </div>
+                                <button class="button mid" id="btn-delete" type="button">Deletar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- DASHBOARD CONTENT -->
+</div>
+{{macro_dash_up.auth_scope(resources)}}
+{% endblock %}
