@@ -15,3 +15,7 @@ $langRedirect = function ($request, $response, $next) {
     }
     return $next($request, $response);
 };
+
+$appIsValid = function($request, $response, $next){
+    
+};
