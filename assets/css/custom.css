@@ -420,15 +420,40 @@ li.resume-side__links {
     justify-content: space-around;
 }
 
+.wrapper-action {
+    margin: 20px 25px;
+    float: right;
+}
+
 .thumb {
     margin: 10px;
     padding: 5px;
     width: 200px;
-    height: 150px;
 }
 
 .thumb img {
     max-width: 100%;
+}
+
+.thumb-action {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    background: whitesmoke;
+    position: absolute;
+    width: 190px;
+    margin-top: -10px;
+    padding: 0 3px;
+}
+
+.thumb-action::before{
+    content:"Excluir";
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: .875em;
+    color: #888;
 }
 
 #add_new_plan {
@@ -476,4 +501,50 @@ li.li_resume {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
     z-index: 10000;
+}
+
+.wrapper-imagens_action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    border-bottom: 1px solid #eee;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: .875em;
+    background: whitesmoke;
+}
+
+.content-settings {
+    margin: 1em;
+    padding: 0 1em;
+}
+
+.content-settings__action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.content-settings__action #btn-pause {
+    float: right;
+}
+
+.content-settings__action:first-child {
+    border: 1px solid #06b99b;
+    padding: 15px;
+}
+
+.content-settings__action:not(:first-child) {
+    border: 1px solid #e61852;
+    padding: 15px;
+}
+
+.content-settings__action:not(:first-child) button {
+    background: #e61852;
+}
+
+.content-settings__action:first-child button {
+    background: #06b99b;
 }
