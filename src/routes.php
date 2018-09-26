@@ -6,20 +6,23 @@ use Market\Controller\AppsController;
 use Market\Services\Helpers;
 use Market\Controller\MediaController;
 use Market\Controller\ThemesController;
-$routes = function () use ($langRedirect) {
+
+$routes = function () use ($langRedirect, $verifyLogin) {
 
     // dashboard
     $this->get('/logout', HomeController::class . ':logout');
-    $this->get('/account', HomeController::class . ':account');
-    $this->get('/account/settings', HomeController::class . ':account_settings');
-    $this->get('/account/statement', HomeController::class . ':account_statement');
-    $this->get('/account/add', HomeController::class . ':account_add');
-    $this->get('/account/edit', HomeController::class . ':account_edit');
-    $this->get('/account/edit/app/{id}', HomeController::class . ':account_edit_app');
-    $this->get('/account/wallet', HomeController::class . ':account_wallet');
+    $this->get('/account', HomeController::class . ':account')->add($verifyLogin);
+    $this->get('/account/settings', HomeController::class . ':account_settings')->add($verifyLogin);
+    $this->get('/account/statement', HomeController::class . ':account_statement')->add($verifyLogin);
+    $this->get('/account/add', HomeController::class . ':account_add')->add($verifyLogin);
+    $this->get('/account/edit', HomeController::class . ':account_edit')->add($verifyLogin);
+    $this->get('/account/edit/app/{id}', HomeController::class . ':account_edit_app')->add($verifyLogin);
+    $this->get('/account/wallet', HomeController::class . ':account_wallet')->add($verifyLogin);
 
     //app routes
-    $this->get('/', function () {echo "redirect lang default.";})->add($langRedirect);
+    $this->get('/', function () {
+        echo "redirect lang default.";
+    })->add($langRedirect);
     $this->get('/{lang}', HomeController::class . ':index')->add($langRedirect);
     $this->get('/{lang}/apps', HomeController::class . ':apps')->add($langRedirect);
     $this->get('/{lang}/themes', HomeController::class . ':themes')->add($langRedirect);
@@ -47,7 +50,6 @@ $routes = function () use ($langRedirect) {
     // helper
     $this->post('/ws/format/plans', Helpers::class . ':arrayToJson');
     $this->post('/ws/format/scope', Helpers::class . ':validScope');
-
 };
 
 // Api Routes
