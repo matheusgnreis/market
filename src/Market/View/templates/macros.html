@@ -864,7 +864,7 @@
             <!-- ACCOUNT ACTIONS -->
             <div class="account-actions">
                 <!--(not implemented) a href="#" class="button primary">Become a Seller</a -->
-                <a href="?logout" class="button secondary">Logout</a>
+                <a href="/logout" class="button secondary">Logout</a>
 
             </div>
             <!-- /ACCOUNT ACTIONS -->
@@ -912,7 +912,7 @@
             <!-- /SIDE MENU HEADER -->
             {{macro_main.account_info_moblie(dictionary,user)}}
 
-            <a href="?logout" class="button medium secondary">Logout</a>
+            <a href="/logout" class="button medium secondary">Logout</a>
             <!--(not implemented) a href="#" class="button medium primary">Become a Seller</a -->
 
         {% else %}
@@ -1113,7 +1113,7 @@
     {% if user.is_store == false %}
         <div class="user-quickview">
             <!-- USER AVATAR -->
-            <a href="/{{dictionary.lang}}/author/{{user.id_user}}">
+            <a href="/{{dictionary.lang}}/author/{{user.id}}">
                 <div class="outer-ring">
                     <div class="inner-ring"></div>
                     <figure class="user-avatar">
@@ -1124,7 +1124,7 @@
             <!-- /USER AVATAR -->
 
             <!-- USER INFORMATION -->
-            <p class="user-name">{{ user.id_user }}
+            <p class="user-name">{{ user.id }}
                 -
                 {{ user.name }}
             </p>
@@ -1141,7 +1141,7 @@
             <ul class="dropdown small hover-effect closed">
                 <li class="dropdown-item">
                     <div class="dropdown-triangle"></div>
-                    <a href="/{{dictionary.lang}}/author/{{user.id_user}}">{{dictionary.word_profile_page}}</a>
+                    <a href="/{{dictionary.lang}}/author/{{user.id}}">{{dictionary.word_profile_page}}</a>
                 </li>
                 <li class="dropdown-item">
                     <a href="dashboard-settings">{{dictionary.word_account_settings}}</a>
@@ -1166,7 +1166,7 @@
     {% else %}
         <div class="user-quickview">
             <!-- USER AVATAR -->
-            <a href="/{{dictionary.lang}}/author/{{user.id_user}}">
+            <a href="/{{dictionary.lang}}/author/{{user.id}}">
                 <div class="outer-ring">
                     <div class="inner-ring"></div>
                     <figure class="user-avatar">
@@ -1177,7 +1177,7 @@
             <!-- /USER AVATAR -->
 
             <!-- USER INFORMATION -->
-            <p class="user-name">{{ user.id_user }}
+            <p class="user-name">{{ user.id }}
                 -
                 {{ user.name }}
             </p>
@@ -1206,7 +1206,7 @@
 {% macro user_quickview_moblie(dictionary, user) %}
     <div class="user-quickview">
         <!-- USER AVATAR -->
-        <a href="/{{dictionary.lang}}/author/{{user.id_user}}">
+        <a href="/{{dictionary.lang}}/author/{{user.id}}">
             <div class="outer-ring">
                 <div class="inner-ring"></div>
                 <figure class="user-avatar">
@@ -1217,7 +1217,7 @@
         <!-- /USER AVATAR -->
 
         <!-- USER INFORMATION -->
-        <p class="user-name">{{ user.id_user }}
+        <p class="user-name">{{ user.id }}
             -
             {{ user.name }}
         </p>
@@ -1533,7 +1533,7 @@
         <ul class="dropdown dark hover-effect">
             <!-- DROPDOWN ITEM -->
             <li class="dropdown-item">
-                <a href="/{{dictionary.lang}}/author/{{user.id_user}}">{{dictionary.word_profile_page}}</a>
+                <a href="/{{dictionary.lang}}/author/{{user.id}}">{{dictionary.word_profile_page}}</a>
             </li>
             <!-- /DROPDOWN ITEM -->
 
