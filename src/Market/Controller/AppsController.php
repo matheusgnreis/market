@@ -3,6 +3,7 @@ namespace Market\Controller;
 
 use Slug\Slugifier as Slugifier;
 use Market\Model\Apps;
+use Market\Services\Helpers;
 
 class AppsController
 {
@@ -25,13 +26,13 @@ class AppsController
 
     public function getById($request, $response, $args)
     {
-        $ret = Apps::find($args['id'])
-                                    ->evaluations()
-                                    ->partner()
-                                    ->comments()
-                                    ->imagens();
-
-        return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
+        //$ret = Apps::find($args['id'])->with('imagens')->toArray();
+        $ret = Apps::where('id', $args['id'])->first();
+        return $ret ? ['app'=>$ret->toArray(), 'imagens' => array_map(function ($a) {
+            $r['path'] = $a['path_image'];
+            return $r;
+        }, $ret->imagens->toArray())] : [];
+        //return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
     }
     
     public function getBySlug($request, $response, $args)
@@ -52,6 +53,13 @@ class AppsController
             ];
         }
         return false;
+    }
+
+    public function getByPartnerId($request, $response, $args){
+        $id = $request->getAttribute('partner_id');
+        $ret = Apps::where('partner_id', $id)->get()->toArray();
+        return $ret ? (array)$ret : [];
+        //return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
     }
 
     public function getSearchParams($request)
@@ -93,34 +101,34 @@ class AppsController
         $body = $request->getParsedBody();
 
         $app = Apps::create([
-            'partner_id' => $body['partner_id'],
-            'title' => $body['title'],
-            'slug' => $body['slug'],
-            'category' => $body['category'],
-            'thumbnail' => $body['thumbnail'],
-            'description' => $body['description'],
-            'json_body' => $body['json_body'],
-            'paid' => $body['paid'],
-            'version' => $body['version'],
-            'version_date' => $body['version_date'],
-            'type' => $body['type'],
-            'module' => $body['module'],
-            'load_events' => $body['load_events'],
-            'script_uri' => $body['script_uri'],
-            'github_repository' => $body['github_repository'],
-            'authentication' => $body['authentication'],
-            'auth_callback_uri' => $body['auth_callback_uri'],
-            'auth_scope' => $body['auth_scope'],
-            'avg_stars' => $body['avg_stars'],
-            'evaluations' => $body['evaluations'],
-            'website' => $body['website'],
-            'link_video' => $body['link_video'],
-            'plans_json' => $body['plans_json'],
-            'value_plan_basic' => $body['value_plan_basic'],
-            'active' => $body['active']
-        ]);
-
-        return $app ? $response->withJson(['status' => 201, 'message' => 'created', 'app_id' => $app->id], 201) : $response->withJson(['erro' => 'Error creating new app'], 400);
+                    'partner_id' => !empty($body['partner_id']) ? $body['partner_id'] : null,
+                    'title' => !empty($body['title']) ? $body['title'] : null,
+                    'slug' => !empty($body['slug']) ? $body['slug'] : null,
+                    'category' => !empty($body['category']) ? $body['category'] : null,
+                    'thumbnail' => !empty($body['thumbnail']) ? $body['thumbnail'] : null,
+                    'description' => !empty($body['description']) ? $body['description'] : null,
+                    'json_body' => !empty($body['json_body']) ? $body['json_body'] : null,
+                    'paid' => isset($body['paid']) ? $body['paid'] : null,
+                    'version' => !empty($body['version']) ? $body['version'] : null,
+                    'version_date' => !empty($body['version_date']) ? $body['version_date'] : null,
+                    'type' => !empty($body['type']) ? $body['type'] : null,
+                    'module' => !empty($body['module']) ? $body['module'] : null,
+                    'load_events' => !empty($body['load_events']) ? (string)(json_encode($body['load_events'])) : null,
+                    'script_uri' => !empty($body['script_uri']) ? $body['script_uri'] : null,
+                    'github_repository' => !empty($body['github_repository']) ? $body['github_repository'] : null,
+                    'authentication' => isset($body['authentication']) ? $body['authentication'] : null,
+                    'auth_callback_uri' => !empty($body['auth_callback_uri']) ? $body['auth_callback_uri'] : null,
+                    'auth_scope' => !empty($body['auth_scope']) ? $body['auth_scope'] : null,
+                    'avg_stars' => !empty($body['avg_stars']) ? $body['avg_stars'] : null,
+                    'evaluations' => !empty($body['evaluations']) ? $body['evaluations'] : null,
+                    'website' => !empty($body['website']) ? $body['website'] : null,
+                    'link_video' => !empty($body['link_video']) ? $body['link_video'] : null,
+                    'plans_json' => !empty($body['plans_json']) ? $body['plans_json'] : null,
+                    'value_plan_basic' => !empty($body['value_plan_basic']) ? $body['value_plan_basic'] : null,
+                    'active' => !empty($body['active']) ? $body['active'] : 1
+                ]);
+        
+        return $app ? $response->withJson(['status' => 201, 'message' => 'created', 'app' => $app], 201) : $response->withJson(['erro' => 'Error creating new app'], 400);
     }
 
     public function update($request, $response, $args)
@@ -170,5 +178,25 @@ class AppsController
     public function destroy($request, $response, $args)
     {
         return Apps::where('id', '=', $args['id'])->delete() ? $response->withJson(['success' => 'App deleted'], 204) : $response->withJson(['erro' => 'App not found'], 404);
+    }
+
+    public function verifySlug($request, $response, $args)
+    {
+        $slug = $args['slug'];
+        $app = Apps::where('slug', $slug)->first();
+
+        if ($app) {
+            return $response->withJson([
+                'status' => 409,
+                'message' => 'slug in use',
+                'suggestions' => [
+                    $slug.'-'.Helpers::randomSlug(),
+                    $slug.'-'.Helpers::randomSlug(),
+                    $slug.'-'.Helpers::randomSlug(),
+                    $slug.'-'.Helpers::randomSlug()
+                ]
+            ]);
+        }
+        return $response->withJson(['status' => 302, 'message' => 'valid']);
     }
 }
