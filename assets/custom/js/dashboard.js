@@ -36,13 +36,13 @@
 		} else if (pass.val() != pass_conf.val()) {
 			erroAlert('Senhas não conferem.')
 		}
-
+console.log($('#user_hash').val())
 		if (err == false) {
 			$.ajax({
 				type: "POST",
 				url: "/ws/login/pass",
 				data: {
-					u: $('#data_user').val(),
+					u: $('#user_hash').val(),
 					p: pass.val()
 				},
 				success: function (response) {

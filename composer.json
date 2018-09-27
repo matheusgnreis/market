@@ -35,9 +35,9 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "@php -r \"file_exists('.env') || copy('.env', '.env'); \""
+            "@php -r \"file_exists('example.env') || copy('.env', '.env'); \""
         ],
-        "start": "php -S localhost:8000 -t public public/index.php"
+        "start": "php -S localhost:8000 -t public index.php"
     },
     "license": "proprietary",
     "homepage": "https://market.e-com.plus/pt_br/"

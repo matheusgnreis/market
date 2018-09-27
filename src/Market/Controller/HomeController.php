@@ -4,6 +4,7 @@ namespace Market\Controller;
 use Market\Controller\BaseController;
 use Market\Controller\LoginController;
 use Market\Controller\BuyAppsController;
+
 class HomeController extends BaseController
 {
     use \Market\Services\Dictionary;
@@ -324,6 +325,11 @@ class HomeController extends BaseController
     public function account_settings($request, $response, $args)
     {
         $translate = $this->getDictionary('pt_br');
+        $login = new \Market\Model\Login();
+        $user_hash = $login->getApiLogin(LoginController::session()['email']);
+        //$encode = base64_encode(json_encode($user_hash));
+        $user_hash = base64_encode(json_encode($user_hash)); //json_encode(array('user' => $encode));
+
         return $this->view->render(
                 $response,
                 'account-settings.html',
@@ -341,7 +347,8 @@ class HomeController extends BaseController
                     'categories' => $this->appsCategories($translate),
                     'dictionary' => $translate,
                     'login' => true,
-                    'user' => LoginController::session()
+                    'user' => LoginController::session(),
+                    'hash' => $user_hash
                 ]
             );
     }
@@ -452,9 +459,10 @@ class HomeController extends BaseController
 
         $apps = (object)$appController->getById($request, $response, $args);
         $plans = json_decode($apps->app['plans_json']);
+        var_dump($apps->app['plans_json']);
         $load_events = explode(',', $apps->app['load_events']);
-        $load_events = array_map(function($a){
-            return str_replace('\\','',$a);
+        $load_events = array_map(function ($a) {
+            return str_replace('\\', '', $a);
         }, $load_events);
 
         return $this->view->render(

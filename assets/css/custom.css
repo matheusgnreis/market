@@ -458,6 +458,7 @@ li.resume-side__links {
 
 #add_new_plan {
     width: 50%;
+    min-height: 570px;
     margin: .5em;
 }
 
@@ -501,6 +502,7 @@ li.li_resume {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
     z-index: 10000;
+    cursor: pointer;
 }
 
 .wrapper-imagens_action {

@@ -3,12 +3,14 @@
   let navigation = $('.item-navigation');
   let btn_auth = $('.label-check-auth');
   let btn_save_edit = $('#btn_save_edit');
-  
+  let btn_plan = $('.close-btn .svg-plus');
+
   set_app_events();
   verify_auth();
 
   btn_auth.on('click', verify_auth);
   navigation.on('click', navigation_to);
+  btn_plan.on('click', delete_plan);
 
   function navigation_to(event) {
     var to = $(this)[0].rel;
@@ -48,6 +50,11 @@
         }
       }
     })
+  }
+
+  function delete_plan(){
+    console.log($(this)[0].id);
+    console.log(JSON.parse($('#my_plans').val()));
   }
 
 })(jQuery);
