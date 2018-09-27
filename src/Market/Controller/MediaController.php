@@ -43,7 +43,7 @@ class MediaController
             'extensions' => ['jpg', 'jpeg', 'png', 'JPG'],
             'required' => false,
             'uploadDir' => '/var/www/data/uploads/',
-            'title' => 'e_com_club_{random}',
+            'title' => '{random}',
             'replace' => false,
             'listInput' => true,
             'editor' => array(
@@ -100,7 +100,7 @@ class MediaController
                 [
                  'app_id' => $this->aid,
                  'name' => $this->data[$i]['name'],
-                 'path_image' => $this->data[$i]['file'],
+                 'path_image' => $this->data[$i]['name'],
                  'width_px' => 600,
                  'height_px' => 600
                 ]
@@ -121,7 +121,7 @@ class MediaController
                 [
                  'theme_id' => $this->aid,
                  'name' => $this->data[$i]['name'],
-                 'path_image' => $this->data[$i]['file'],
+                 'path_image' => $this->data[$i]['name'],
                  'width_px' => 600,
                  'height_px' => 600
                 ]
