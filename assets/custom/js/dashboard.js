@@ -36,7 +36,7 @@
 		} else if (pass.val() != pass_conf.val()) {
 			erroAlert('Senhas não conferem.')
 		}
-console.log($('#user_hash').val())
+
 		if (err == false) {
 			$.ajax({
 				type: "POST",
@@ -45,8 +45,14 @@ console.log($('#user_hash').val())
 					u: $('#user_hash').val(),
 					p: pass.val()
 				},
+				dataType:'json',
 				success: function (response) {
 					console.log(response);
+					if(response.success){
+						successAlert('Senha alterada com sucesso.');
+					}else{
+						erroAlert('Erro ao processar a nova senha.');
+					}
 				}
 			});
 		}

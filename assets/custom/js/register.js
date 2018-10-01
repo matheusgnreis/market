@@ -36,7 +36,6 @@
       });
     }
     else {
-      alert("Error E-mail!")
       $("#email-send").css("color", "red");
     }
 
@@ -79,6 +78,21 @@
         },
         success: function (response) {
           console.log(response);
+          if(response.success){
+            $('body').xmalert({
+              x: 'right',
+              y: 'top',
+              xOffset: 30,
+              yOffset: 30,
+              alertSpacing: 40,
+              lifetime: 6000,
+              fadeDelay: 0.3,
+              autoClose: false,
+              template: 'messageSuccess',
+              title: 'Sucess:',
+              paragraph: 'Senha alterada com sucesso! <button class="btn" style="padding: 10px;margin: 0 5px;border-radius: 8px;color: white;background-color: #56d8b4;font-weight: 700;"><a href="/">Login?</a></button>',
+            });
+          }
         }
       });
     }
