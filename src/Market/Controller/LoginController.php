@@ -50,7 +50,7 @@ class LoginController extends Login
 
         $user = json_decode(base64_decode($body['u']));
 
-        parent::setPassword($user[0], $body['p']);
+        return $response->withJson(parent::setPassword($user[0], $body['p']));
     }
 
     public function verify($request, $response, $args)
