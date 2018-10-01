@@ -1,23 +1,24 @@
 <?php
 use Market\Controller\HomeController;
+use Market\Controller\AccountController;
 use Market\Controller\LoginController;
 use Market\Controller\PartnerController;
 use Market\Controller\AppsController;
-use Market\Services\Helpers;
 use Market\Controller\MediaController;
 use Market\Controller\ThemesController;
+use Market\Services\Helpers;
 
 $routes = function () use ($langRedirect, $verifyLogin) {
 
     // dashboard
-    $this->get('/logout', HomeController::class . ':logout');
-    $this->get('/account', HomeController::class . ':account')->add($verifyLogin);
-    $this->get('/account/settings', HomeController::class . ':account_settings')->add($verifyLogin);
-    $this->get('/account/statement', HomeController::class . ':account_statement')->add($verifyLogin);
-    $this->get('/account/add', HomeController::class . ':account_add')->add($verifyLogin);
-    $this->get('/account/edit', HomeController::class . ':account_edit')->add($verifyLogin);
-    $this->get('/account/edit/app/{id}', HomeController::class . ':account_edit_app')->add($verifyLogin);
-    $this->get('/account/wallet', HomeController::class . ':account_wallet')->add($verifyLogin);
+    $this->get('/logout', AccountController::class . ':logout');
+    $this->get('/account', AccountController::class . ':account')->add($verifyLogin);
+    $this->get('/account/settings', AccountController::class . ':account_settings')->add($verifyLogin);
+    $this->get('/account/statement', AccountController::class . ':account_statement')->add($verifyLogin);
+    $this->get('/account/add', AccountController::class . ':account_add')->add($verifyLogin);
+    $this->get('/account/edit', AccountController::class . ':account_edit')->add($verifyLogin);
+    $this->get('/account/edit/app/{id}', AccountController::class . ':account_edit_app')->add($verifyLogin);
+    $this->get('/account/wallet', AccountController::class . ':account_wallet')->add($verifyLogin);
 
     //app routes
     $this->get('/', function () {
