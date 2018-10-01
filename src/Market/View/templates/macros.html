@@ -1,599 +1,591 @@
 <!-- These macros can be used on other page -->
 {% macro scripts() %}
-    <!-- xmAlert -->
-    <script src="/assets/js/vendor/jquery.xmalert.min.js"></script>
-    <!-- Magnific Popup -->
-    <script src="/assets/js/vendor/jquery.magnific-popup.min.js"></script>
-    <!-- Alerts Demo -->
-    <script src="/assets/js/alerts-demo.js"></script>
-    <!-- -->
-    <!-- -->
-    <script type="text/javascript" src="/assets/custom/js/main.js"></script>
-    <!-- script convert to md5 -->
-    <script type="text/javascript" src="/assets/custom/js/md5.min.js"></script>
-    <!-- script for checkbox -->
-    <script type="text/javascript" src="/assets/custom/js/checkbox-item.js"></script>
-    <!-- script in itempage -->
-    <script type="text/javascript" src="/assets/custom/js/item-page.js"></script>
-    <!-- script uploaditem -->
-    <script type="text/javascript" src="/assets/custom/js/uploaditem.js"></script>
-    <!-- script upload partner -->
-    <script type="text/javascript" src="/assets/custom/js/up-partner.js"></script>
-    <!-- script register -->
-    <script type="text/javascript" src="/assets/custom/js/register.js"></script>
+<!-- xmAlert -->
+<script src="/assets/js/vendor/jquery.xmalert.min.js"></script>
+<!-- Magnific Popup -->
+<script src="/assets/js/vendor/jquery.magnific-popup.min.js"></script>
+<!-- Alerts Demo -->
+<script src="/assets/js/alerts-demo.js"></script>
+<!-- -->
+<!-- -->
+<script type="text/javascript" src="/assets/custom/js/main.js"></script>
+<!-- script convert to md5 -->
+<script type="text/javascript" src="/assets/custom/js/md5.min.js"></script>
+<!-- script for checkbox -->
+<script type="text/javascript" src="/assets/custom/js/checkbox-item.js"></script>
+<!-- script in itempage -->
+<script type="text/javascript" src="/assets/custom/js/item-page.js"></script>
+<!-- script uploaditem -->
+<script type="text/javascript" src="/assets/custom/js/uploaditem.js"></script>
+<!-- script upload partner -->
+<script type="text/javascript" src="/assets/custom/js/up-partner.js"></script>
+<!-- script register -->
+<script type="text/javascript" src="/assets/custom/js/register.js"></script>
 {% endmacro %}
 <!-- macro to draw active star -->
 {% macro star_on(n)%}
-    {% for i in 0..n - 1 if n > 0 %}
-        <li class="rating-item">
-            <!-- SVG STAR -->
-            <svg class="svg-star">
-                <use xlink:href="#svg-star"></use>
-            </svg>
-            <!-- /SVG STAR -->
-        </li>
-    {% endfor %}
+{% for i in 0..n - 1 if n > 0 %}
+<li class="rating-item">
+    <!-- SVG STAR -->
+    <svg class="svg-star">
+        <use xlink:href="#svg-star"></use>
+    </svg>
+    <!-- /SVG STAR -->
+</li>
+{% endfor %}
 {% endmacro %}
 <!-- macro to draw star not active -->
 {% macro star_off(n)%}
-    {% for i in 0..n - 1 if n > 0 %}
-        <li class="rating-item empty">
-            <!-- SVG STAR -->
-            <svg class="svg-star">
-                <use xlink:href="#svg-star"></use>
-            </svg>
-            <!-- /SVG STAR -->
-        </li>
-    {% endfor %}
+{% for i in 0..n - 1 if n > 0 %}
+<li class="rating-item empty">
+    <!-- SVG STAR -->
+    <svg class="svg-star">
+        <use xlink:href="#svg-star"></use>
+    </svg>
+    <!-- /SVG STAR -->
+</li>
+{% endfor %}
 {% endmacro %}
 <!-- macro to use features main -->
 {% macro feature_menu(dictionary) %}
-    <!-- MENU ITEM -->
-    <li class="menu-item sub">
-        <a href="">
-            {{dictionary.word_categories}}
-            <!-- SVG ARROW -->
-            <svg class="svg-arrow">
-                <use xlink:href="#svg-arrow"></use>
-            </svg>
-            <!-- /SVG ARROW -->
-        </a>
-        <div class="content-dropdown">
-            <!-- FEATURE LIST BLOCK -->
-            <div class="feature-list-block">
-                <h6 class="feature-list-title">{{dictionary.word_app}}</h6>
-                <hr class="line-separator">
-                <!-- FEATURE LIST -->
-                <ul class="feature-list">
-                    <!-- FEATURE LIST ITEM -->
-                    {% for category in all_category if category.id > 0 and category.id < 10 %}
-                        <li class="feature-list-item">
-                            <a href="{{category.page}}">{{category.name}}</a>
-                        </li>
-                    {% endfor %}
-                    <!-- /FEATURE LIST ITEM -->
-                </ul>
-                <!-- /FEATURE LIST -->
-                <!-- FEATURE LIST -->
-                <ul class="feature-list">
-                    <!-- FEATURE LIST ITEM -->
-                    {% for category in all_category if category.id >= 10 and category.id < 12 %}
-                        <li class="feature-list-item">
-                            <a href="{{category.page}}">{{category.name}}</a>
-                        </li>
-                    {% endfor %}
-                    <!-- /FEATURE LIST ITEM -->
-                </ul>
-                <!-- /FEATURE LIST -->
+<!-- MENU ITEM -->
+<li class="menu-item sub">
+    <a href="">
+        {{dictionary.word_categories}}
+        <!-- SVG ARROW -->
+        <svg class="svg-arrow">
+            <use xlink:href="#svg-arrow"></use>
+        </svg>
+        <!-- /SVG ARROW -->
+    </a>
+    <div class="content-dropdown">
+        <!-- FEATURE LIST BLOCK -->
+        <div class="feature-list-block">
+            <h6 class="feature-list-title">{{dictionary.word_app}}</h6>
+            <hr class="line-separator">
+            <!-- FEATURE LIST -->
+            <ul class="feature-list">
+                <!-- FEATURE LIST ITEM -->
+                {% for category in all_category if category.id > 0 and category.id < 10 %} <li class="feature-list-item">
+                    <a href="{{category.page}}">{{category.name}}</a>
+</li>
+{% endfor %}
+<!-- /FEATURE LIST ITEM -->
+</ul>
+<!-- /FEATURE LIST -->
+<!-- FEATURE LIST -->
+<ul class="feature-list">
+    <!-- FEATURE LIST ITEM -->
+    {% for category in all_category if category.id >= 10 and category.id < 12 %} <li class="feature-list-item">
+        <a href="{{category.page}}">{{category.name}}</a>
+        </li>
+        {% endfor %}
+        <!-- /FEATURE LIST ITEM -->
+</ul>
+<!-- /FEATURE LIST -->
 
-            </div>
-            <!-- /FEATURE LIST BLOCK -->
+</div>
+<!-- /FEATURE LIST BLOCK -->
 
-            <!-- FEATURE LIST BLOCK -->
-            <div class="feature-list-block">
-                <h6 class="feature-list-title">{{dictionary.word_theme}}</h6>
-                <hr class="line-separator">
-                <!-- FEATURE LIST -->
-                <ul class="feature-list">
-                    <!-- FEATURE LIST ITEM -->
-                    {% for category in all_category if category.id >= 12 and category.id < 22 %}
-                        <li class="feature-list-item">
-                            <a href="{{category.page}}">{{category.name}}</a>
-                        </li>
-                    {% endfor %}
-                    <!-- /FEATURE LIST ITEM -->
-                </ul>
-                <!-- /FEATURE LIST -->
-                <!-- FEATURE LIST -->
-                <ul class="feature-list">
-                    <!-- FEATURE LIST ITEM -->
-                    {% for category in all_category if category.id >= 15 %}
-                        <li class="feature-list-item">
-                            <a href="{{category.page}}">{{category.name}}</a>
-                        </li>
-                    {% endfor %}
-                    <!-- /FEATURE LIST ITEM -->
-                </ul>
-                <!-- /FEATURE LIST -->
-            </div>
-            <!-- /FEATURE LIST BLOCK -->
-            {# not implemented
-      <!-- FEATURE LIST BLOCK -->
-      <div class="feature-list-block">
-        <h6 class="feature-list-title">Dashboard</h6>
-        <hr class="line-separator">
-        <!-- FEATURE LIST -->
-        <ul class="feature-list">
-          <!-- FEATURE LIST ITEM -->
-          <li class="feature-list-item">
+<!-- FEATURE LIST BLOCK -->
+<div class="feature-list-block">
+    <h6 class="feature-list-title">{{dictionary.word_theme}}</h6>
+    <hr class="line-separator">
+    <!-- FEATURE LIST -->
+    <ul class="feature-list">
+        <!-- FEATURE LIST ITEM -->
+        {% for category in all_category if category.id >= 12 and category.id < 22 %} <li class="feature-list-item">
+            <a href="{{category.page}}">{{category.name}}</a>
+            </li>
+            {% endfor %}
+            <!-- /FEATURE LIST ITEM -->
+    </ul>
+    <!-- /FEATURE LIST -->
+    <!-- FEATURE LIST -->
+    <ul class="feature-list">
+        <!-- FEATURE LIST ITEM -->
+        {% for category in all_category if category.id >= 15 %}
+        <li class="feature-list-item">
+            <a href="{{category.page}}">{{category.name}}</a>
+        </li>
+        {% endfor %}
+        <!-- /FEATURE LIST ITEM -->
+    </ul>
+    <!-- /FEATURE LIST -->
+</div>
+<!-- /FEATURE LIST BLOCK -->
+{# not implemented
+<!-- FEATURE LIST BLOCK -->
+<div class="feature-list-block">
+    <h6 class="feature-list-title">Dashboard</h6>
+    <hr class="line-separator">
+    <!-- FEATURE LIST -->
+    <ul class="feature-list">
+        <!-- FEATURE LIST ITEM -->
+        <li class="feature-list-item">
             <a href="dashboard-settings">Account Settings</a>
-          </li>
-          <!-- /FEATURE LIST ITEM -->
+        </li>
+        <!-- /FEATURE LIST ITEM -->
 
-          <!-- FEATURE LIST ITEM -->
-          <li class="feature-list-item">
+        <!-- FEATURE LIST ITEM -->
+        <li class="feature-list-item">
             <a href="dashboard-statistics.html">Statistics Page</a>
-          </li>
-          <!-- /FEATURE LIST ITEM -->
+        </li>
+        <!-- /FEATURE LIST ITEM -->
 
-          <!-- FEATURE LIST ITEM -->
-          <li class="feature-list-item">
+        <!-- FEATURE LIST ITEM -->
+        <li class="feature-list-item">
             <a href="dashboard-statement.html">Sales Statement</a>
-          </li>
-          <!-- /FEATURE LIST ITEM -->
+        </li>
+        <!-- /FEATURE LIST ITEM -->
 
-          <!-- FEATURE LIST ITEM -->
-          <li class="feature-list-item">
+        <!-- FEATURE LIST ITEM -->
+        <li class="feature-list-item">
             <a href="dashboard-inbox.html">Inbox Page</a>
-          </li>
-          <!-- /FEATURE LIST ITEM -->
+        </li>
+        <!-- /FEATURE LIST ITEM -->
 
-          <!-- FEATURE LIST ITEM -->
-          <li class="feature-list-item">
+        <!-- FEATURE LIST ITEM -->
+        <li class="feature-list-item">
             <a href="dashboard-openmessage.html">Open Message</a>
-          </li>
-          <!-- /FEATURE LIST ITEM -->
+        </li>
+        <!-- /FEATURE LIST ITEM -->
 
-          <!-- FEATURE LIST ITEM -->
-          <li class="feature-list-item">
+        <!-- FEATURE LIST ITEM -->
+        <li class="feature-list-item">
             <a href="dashboard-uploaditem.html">Upload Page</a>
-          </li>
-          <!-- /FEATURE LIST ITEM -->
-        </ul>
-        <!-- /FEATURE LIST -->
-      </div>
-      <!-- /FEATURE LIST BLOCK -->
+        </li>
+        <!-- /FEATURE LIST ITEM -->
+    </ul>
+    <!-- /FEATURE LIST -->
+</div>
+<!-- /FEATURE LIST BLOCK -->
 
-      <!-- FEATURE LIST BLOCK -->
-      <div class="feature-list-block">
-        <h6 class="feature-list-title">Gamification</h6>
-        <hr class="line-separator">
-        <!-- FEATURE LIST -->
-        <ul class="feature-list">
-          <!-- FEATURE LIST ITEM -->
-          <li class="feature-list-item">
+<!-- FEATURE LIST BLOCK -->
+<div class="feature-list-block">
+    <h6 class="feature-list-title">Gamification</h6>
+    <hr class="line-separator">
+    <!-- FEATURE LIST -->
+    <ul class="feature-list">
+        <!-- FEATURE LIST ITEM -->
+        <li class="feature-list-item">
             <a href="community-badges.html">Author Badges Page</a>
-          </li>
-          <!-- /FEATURE LIST ITEM -->
+        </li>
+        <!-- /FEATURE LIST ITEM -->
 
-          <!-- FEATURE LIST ITEM -->
-          <li class="feature-list-item">
+        <!-- FEATURE LIST ITEM -->
+        <li class="feature-list-item">
             <a href="badges.html">All Badges (Big and Small)</a>
-          </li>
-          <!-- /FEATURE LIST ITEM -->
+        </li>
+        <!-- /FEATURE LIST ITEM -->
 
-          <!-- FEATURE LIST ITEM -->
-          <li class="feature-list-item">
+        <!-- FEATURE LIST ITEM -->
+        <li class="feature-list-item">
             <a href="flag-badges.html">Flag Badges (Big and Small)</a>
-          </li>
-          <!-- /FEATURE LIST ITEM -->
+        </li>
+        <!-- /FEATURE LIST ITEM -->
 
-          <!-- FEATURE LIST ITEM -->
-          <li class="feature-list-item">
+        <!-- FEATURE LIST ITEM -->
+        <li class="feature-list-item">
             <a href="badges-boxes.html">Badge Boxes Versions</a>
-          </li>
-          <!-- /FEATURE LIST ITEM -->
+        </li>
+        <!-- /FEATURE LIST ITEM -->
 
-          <!-- FEATURE LIST ITEM -->
-          <li class="feature-list-item">
+        <!-- FEATURE LIST ITEM -->
+        <li class="feature-list-item">
             <a href="author-badges.html">Public Author Badges</a>
-          </li>
-          <!-- /FEATURE LIST ITEM -->
-        </ul>
-        <!-- /FEATURE LIST -->
-      </div>
-      <!-- /FEATURE LIST BLOCK -->
-      #}
-        </div>
-    </li>
-    <!-- /MENU ITEM -->
+        </li>
+        <!-- /FEATURE LIST ITEM -->
+    </ul>
+    <!-- /FEATURE LIST -->
+</div>
+<!-- /FEATURE LIST BLOCK -->
+#}
+</div>
+</li>
+<!-- /MENU ITEM -->
 {% endmacro %}
 <!-- macro to use submenu app -->
 {% macro subcategory_app(dictionary, all_category) %}
-    <!-- MENU ITEM -->
-    <li class="menu-item sub">
-        <a href="/apps">
-            {{ dictionary.word_app }}
-            <!-- SVG ARROW -->
-            <svg class="svg-arrow">
-                <use xlink:href="#svg-arrow"></use>
-            </svg>
-            <!-- /SVG ARROW -->
-        </a>
-        <div class="content-dropdown">
-            <!-- FEATURE LIST BLOCK -->
-            <div class="feature-list-block">
-                <h6 class="feature-list-title">{{dictionary.word_app}}</h6>
-                <hr class="line-separator">
-                <!-- FEATURE LIST -->
-                <ul class="feature-list">
-                    <!-- FEATURE LIST ITEM -->
-                    {% for category in all_category if category.id < 10 %}
-                        <li class="feature-list-item">
-                            <a href="/{{dictionary.lang}}/apps?category={{category.page}}">{{category.name}}</a>
-                        </li>
-                    {% endfor %}
-                    <!-- /FEATURE LIST ITEM -->
-                </ul>
-                <!-- /FEATURE LIST -->
-                <!-- FEATURE LIST -->
-                <ul class="feature-list">
-                    <!-- FEATURE LIST ITEM -->
-                    {% for category in all_category if category.id >= 10 and category.id < 12 %}
-                        <li class="feature-list-item">
-                            <a href="/{{dictionary.lang}}/apps?category={{category.page}}">{{category.name}}</a>
-                        </li>
-                    {% endfor %}
-                    <!-- /FEATURE LIST ITEM -->
-                </ul>
-                <!-- /FEATURE LIST -->
+<!-- MENU ITEM -->
+<li class="menu-item sub">
+    <a href="/{{dictionary.lang}}/apps">
+        {{ dictionary.word_app }}
+        <!-- SVG ARROW -->
+        <svg class="svg-arrow">
+            <use xlink:href="#svg-arrow"></use>
+        </svg>
+        <!-- /SVG ARROW -->
+    </a>
+    <div class="content-dropdown">
+        <!-- FEATURE LIST BLOCK -->
+        <div class="feature-list-block">
+            <h6 class="feature-list-title">{{dictionary.word_app}}</h6>
+            <hr class="line-separator">
+            <!-- FEATURE LIST -->
+            <ul class="feature-list">
+                <!-- FEATURE LIST ITEM -->
+                {% for category in all_category if category.id < 10 %} <li class="feature-list-item">
+                    <a href="/{{dictionary.lang}}/apps?category={{category.page}}">{{category.name}}</a>
+</li>
+{% endfor %}
+<!-- /FEATURE LIST ITEM -->
+</ul>
+<!-- /FEATURE LIST -->
+<!-- FEATURE LIST -->
+<ul class="feature-list">
+    <!-- FEATURE LIST ITEM -->
+    {% for category in all_category if category.id >= 10 and category.id < 12 %} <li class="feature-list-item">
+        <a href="/{{dictionary.lang}}/apps?category={{category.page}}">{{category.name}}</a>
+        </li>
+        {% endfor %}
+        <!-- /FEATURE LIST ITEM -->
+</ul>
+<!-- /FEATURE LIST -->
 
-            </div>
-            <!-- /FEATURE LIST BLOCK -->
-        </div>
-    </li>
-    <!-- /MENU ITEM -->
+</div>
+<!-- /FEATURE LIST BLOCK -->
+</div>
+</li>
+<!-- /MENU ITEM -->
 {% endmacro %}
 <!-- macro to use submenu app -->
 {% macro subcategory_theme(dictionary, all_category) %}
-    <!-- MENU ITEM -->
-    <li class="menu-item sub">
-        <a href="/themes">
-            {{ dictionary.word_theme }}
-            <!-- SVG ARROW -->
-            <svg class="svg-arrow">
-                <use xlink:href="#svg-arrow"></use>
-            </svg>
-            <!-- /SVG ARROW -->
-        </a>
-        <div class="content-dropdown">
-            <!-- FEATURE LIST BLOCK -->
-            <div class="feature-list-block">
-                <h6 class="feature-list-title">{{ dictionary.word_theme }}</h6>
-                <hr class="line-separator">
-                <!-- FEATURE LIST -->
-                <ul class="feature-list">
-                    <!-- FEATURE LIST ITEM -->
-                    {% for category in all_category if category.id < 10 %}
-                        <li class="feature-list-item">
-                            <a href="/{{dictionary.lang}}/themes?category={{category.page}}">{{category.name}}</a>
-                        </li>
-                    {% endfor %}
-                    <!-- /FEATURE LIST ITEM -->
-                </ul>
-                <!-- /FEATURE LIST -->
-                <!-- FEATURE LIST -->
-                <ul class="feature-list">
-                    <!-- FEATURE LIST ITEM -->
-                    {% for category in all_category if category.id >= 10 and category.id < 20 %}
-                        <li class="feature-list-item">
-                            <a href="/{{dictionary.lang}}/themes?category={{category.page}}">{{category.name}}</a>
-                        </li>
-                    {% endfor %}
-                    <!-- /FEATURE LIST ITEM -->
-                </ul>
-                <!-- /FEATURE LIST -->
+<!-- MENU ITEM -->
+<li class="menu-item sub">
+    <a href="/{{dictionary.lang}}/themes">
+        {{ dictionary.word_theme }}
+        <!-- SVG ARROW -->
+        <svg class="svg-arrow">
+            <use xlink:href="#svg-arrow"></use>
+        </svg>
+        <!-- /SVG ARROW -->
+    </a>
+    <div class="content-dropdown">
+        <!-- FEATURE LIST BLOCK -->
+        <div class="feature-list-block">
+            <h6 class="feature-list-title">{{ dictionary.word_theme }}</h6>
+            <hr class="line-separator">
+            <!-- FEATURE LIST -->
+            <ul class="feature-list">
+                <!-- FEATURE LIST ITEM -->
+                {% for category in all_category if category.id < 10 %} <li class="feature-list-item">
+                    <a href="/{{dictionary.lang}}/themes?category={{category.page}}">{{category.name}}</a>
+</li>
+{% endfor %}
+<!-- /FEATURE LIST ITEM -->
+</ul>
+<!-- /FEATURE LIST -->
+<!-- FEATURE LIST -->
+<ul class="feature-list">
+    <!-- FEATURE LIST ITEM -->
+    {% for category in all_category if category.id >= 10 and category.id < 20 %} <li class="feature-list-item">
+        <a href="/{{dictionary.lang}}/themes?category={{category.page}}">{{category.name}}</a>
+        </li>
+        {% endfor %}
+        <!-- /FEATURE LIST ITEM -->
+</ul>
+<!-- /FEATURE LIST -->
 
-            </div>
-            <!-- /FEATURE LIST BLOCK -->
-        </div>
-    </li>
-    <!-- /MENU ITEM -->
+</div>
+<!-- /FEATURE LIST BLOCK -->
+</div>
+</li>
+<!-- /MENU ITEM -->
 {% endmacro %}
 <!-- macro to use features moblie -->
 {% macro feature_moblie(dictionary) %}
-    <!-- DROPDOWN ITEM -->
-    <li class="dropdown-item interactive">
-        <a href="#">
-            {{dictionary.word_categories}}
-            <!-- SVG ARROW -->
-            <svg class="svg-arrow">
-                <use xlink:href="#svg-arrow"></use>
-            </svg>
-            <!-- /SVG ARROW -->
-        </a>
+<!-- DROPDOWN ITEM -->
+<li class="dropdown-item interactive">
+    <a href="#">
+        {{dictionary.word_categories}}
+        <!-- SVG ARROW -->
+        <svg class="svg-arrow">
+            <use xlink:href="#svg-arrow"></use>
+        </svg>
+        <!-- /SVG ARROW -->
+    </a>
 
-        <!-- INNER DROPDOWN -->
-        <ul class="inner-dropdown">
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <p>Emerald Dragon</p>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+    <!-- INNER DROPDOWN -->
+    <ul class="inner-dropdown">
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <p>Emerald Dragon</p>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="/{{dictionary.lang}}">Homepage V1</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="/{{dictionary.lang}}">Homepage V1</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="home-v2.html">Homepage V2</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="home-v2.html">Homepage V2</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="itemview-versions.html">Item View Versions</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="itemview-versions.html">Item View Versions</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="shop-gridview-v1.html">Shop Grid View V1</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="shop-gridview-v1.html">Shop Grid View V1</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="shop-gridview-v2.html">Shop Grid View V2</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="shop-gridview-v2.html">Shop Grid View V2</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="shop-listview-v1.html">Shop List View V1</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="shop-listview-v1.html">Shop List View V1</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="shop-listview-v2.html">Shop List View V2</a>
-                <!-- PIN -->
-                <span class="pin soft-edged primary">hot</span>
-                <!-- /PIN -->
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="shop-listview-v2.html">Shop List View V2</a>
+            <!-- PIN -->
+            <span class="pin soft-edged primary">hot</span>
+            <!-- /PIN -->
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="profile-page">Profile Page</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="profile-page">Profile Page</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="blog-v1.html">Blog Page V1</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="blog-v1.html">Blog Page V1</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="blog-v2.html">Blog Page V2</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="blog-v2.html">Blog Page V2</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="open-post.html">Open Post</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="open-post.html">Open Post</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="forum.html">Forum Board</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="forum.html">Forum Board</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="subforum.html">Subforum</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="subforum.html">Subforum</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="open-topic.html">Open Topic</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="open-topic.html">Open Topic</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="login-register.html">Login and Register</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="login-register.html">Login and Register</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="menu-dropdowns.html">Menu and Dropdowns</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="menu-dropdowns.html">Menu and Dropdowns</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <p>Product Pages</p>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <p>Product Pages</p>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="item-v1.html">Item Page V1</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="item-v1.html">Item Page V1</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="item-v2.html">Item Page V2</a>
-                <!-- PIN -->
-                <span class="pin soft-edged secondary">new</span>
-                <!-- /PIN -->
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="item-v2.html">Item Page V2</a>
+            <!-- PIN -->
+            <span class="pin soft-edged secondary">new</span>
+            <!-- /PIN -->
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="product-page.html">Product Page</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="product-page.html">Product Page</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="auction-page.html">Auction Page</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="auction-page.html">Auction Page</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="service-page.html">Service Page</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="service-page.html">Service Page</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="favourites.html">Favourite Products Grid View</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="favourites.html">Favourite Products Grid View</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="favourites-listview.html">Favourite Products List View</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="favourites-listview.html">Favourite Products List View</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="alerts-notifications.html">Alerts &amp; Notifications</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="alerts-notifications.html">Alerts &amp; Notifications</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <p>Dashboard</p>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <p>Dashboard</p>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="dashboard-settings">Account Settings</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="dashboard-settings">Account Settings</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="dashboard-statistics.html">Statistics Page</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="dashboard-statistics.html">Statistics Page</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="dashboard-statement.html">Sales Statement</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="dashboard-statement.html">Sales Statement</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="dashboard-inbox.html">Inbox Page</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="dashboard-inbox.html">Inbox Page</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="dashboard-openmessage.html">Open Message</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="dashboard-openmessage.html">Open Message</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="dashboard-uploaditem.html">Upload Page</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="dashboard-uploaditem.html">Upload Page</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <p>Gamification</p>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <p>Gamification</p>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="community-badges.html">Author Badges Page</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="community-badges.html">Author Badges Page</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="badges.html">All Badges (Big and Small)</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="badges.html">All Badges (Big and Small)</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="flag-badges.html">Flag Badges (Big and Small)</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="flag-badges.html">Flag Badges (Big and Small)</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="badges-boxes.html">Badge Boxes Versions</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="badges-boxes.html">Badge Boxes Versions</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
 
-            <!-- INNER DROPDOWN ITEM -->
-            <li class="inner-dropdown-item">
-                <a href="author-badges.html">Public Author Badges</a>
-            </li>
-            <!-- /INNER DROPDOWN ITEM -->
-        </ul>
-        <!-- /INNER DROPDOWN -->
-    </li>
-    <!-- /DROPDOWN ITEM -->
+        <!-- INNER DROPDOWN ITEM -->
+        <li class="inner-dropdown-item">
+            <a href="author-badges.html">Public Author Badges</a>
+        </li>
+        <!-- /INNER DROPDOWN ITEM -->
+    </ul>
+    <!-- /INNER DROPDOWN -->
+</li>
+<!-- /DROPDOWN ITEM -->
 {% endmacro %}
 <!-- use macro to print application or theme information -->
 {% macro apps_themes(apps, init, end, dictionary, type)%}
-    {% for app in apps %}
-        {% if loop.index0 >= init and loop.index0 < end %}
-            <div class="product-item column">
-                {% if app.is_app == 1 %}
-                    <span class="pin featured">APP</span>
-                {% endif %}
-                <!-- PRODUCT PREVIEW ACTIONS -->
-                <div class="product-preview-actions">
-                    <!-- PRODUCT PREVIEW IMAGE -->
-                    <figure class="product-preview-image">
-                        <a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
-                            <img src="{{app.thumbnail}}" alt="product-image" width="258" height="168">
-                        </figure>
-                        <!-- /PRODUCT PREVIEW IMAGE -->
+{% for app in apps %}
+{% if loop.index0 >= init and loop.index0 < end %} <div class="product-item column">
+    {% if app.is_app == 1 %}
+    <span class="pin featured">APP</span>
+    {% endif %}
+    <!-- PRODUCT PREVIEW ACTIONS -->
+    <div class="product-preview-actions">
+        <!-- PRODUCT PREVIEW IMAGE -->
+        <figure class="product-preview-image">
+            <a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
+                <img src="{{app.thumbnail}}" alt="product-image" width="258" height="168">
+        </figure>
+        <!-- /PRODUCT PREVIEW IMAGE -->
 
-                        <!-- PREVIEW ACTIONS -->
-                        {# not implemented
-  							<div class="preview-actions">
-  								<!-- PREVIEW ACTION -->
-  								<div class="preview-action">
-  									<a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
-  										<div class="circle tiny primary">
-  											<span class="icon-tag"></span>
-  										</div>
-  									</a>
-  									<a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
-  										<p>{{ dictionary.word_go_item }}</p>
-  									</a>
-  								</div>
-  								<!-- /PREVIEW ACTION -->
+        <!-- PREVIEW ACTIONS -->
+        {# not implemented
+        <div class="preview-actions">
+            <!-- PREVIEW ACTION -->
+            <div class="preview-action">
+                <a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
+                    <div class="circle tiny primary">
+                        <span class="icon-tag"></span>
+                    </div>
+                </a>
+                <a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
+                    <p>{{ dictionary.word_go_item }}</p>
+                </a>
+            </div>
+            <!-- /PREVIEW ACTION -->
 
-  								<!-- PREVIEW ACTION -->
-  								<!--(not implemented)div class="preview-action">
+            <!-- PREVIEW ACTION -->
+            <!--(not implemented)div class="preview-action">
   									<a href="#">
   										<div class="circle tiny secondary">
   											<span class="icon-heart"></span>
@@ -603,232 +595,233 @@
   										<p>{{ dictionary.word_favorate_add}}</p>
   									</a>
   								</div-->
-  								<!-- /PREVIEW ACTION -->
-  							</div>
-                #}
-                        <!-- /PREVIEW ACTIONS -->
-                    </div>
-                    <!-- /PRODUCT PREVIEW ACTIONS -->
+            <!-- /PREVIEW ACTION -->
+        </div>
+        #}
+        <!-- /PREVIEW ACTIONS -->
+    </div>
+    <!-- /PRODUCT PREVIEW ACTIONS -->
 
-                    <!-- PRODUCT INFO -->
-                    <div class="product-info">
-                        <a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
-                            <p class="text-header">
-                                {{ app.title }}
-                            </p>
-                        </a>
-                        <p class="product-description">{{ app.description |truncate(140) }}</p>
-                        <a href="/{{dictionary.lang}}/{{type}}?category={{app.category}}">
-                            <p class="category primary">{{ app.category }}</p>
-                        </a>
-                        <p class="price">
-                            <span>{{dictionary.coin}}$
-                            </span>{{ app.value | number_format(2, '.', ',') }}</p>
-                    </div>
-                    <!-- /PRODUCT INFO -->
-                    <hr class="line-separator">
+    <!-- PRODUCT INFO -->
+    <div class="product-info">
+        <a href="/{{dictionary.lang}}/{{type}}/{{app.slug}}">
+            <p class="text-header">
+                {{ app.title }}
+            </p>
+        </a>
+        <p class="product-description">{{ app.description |truncate(140) }}</p>
+        <a href="/{{dictionary.lang}}/{{type}}?category={{app.category}}">
+            <p class="category primary">{{ categories_name(app.category, dictionary.lang) | truncate(33)}}</p>
+        </a>
+        <p class="price">
+            <span>{{dictionary.coin}}$
+            </span>{{ app.value | number_format(2, '.', ',') }}</p>
+    </div>
+    <!-- /PRODUCT INFO -->
+    <hr class="line-separator">
 
-                    <!-- USER RATING -->
-                    <div class="user-rating">
-                        <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
-                            <figure class="user-avatar small">
-                                <img src="{{app.partner.path_image}}" alt="user-avatar">
-                            </figure>
-                        </a>
-                        <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
-                            <p class="text-header tiny">{{ app.partner.name }}</p>
-                        </a>
-                        <ul class="rating tooltip" title="{{ dictionary.word_reputation }}">
-                            {% import 'templates/macros.html' as macro_main %}
-                            <!-- use macros to render stars -->
+    <!-- USER RATING -->
+    <div class="user-rating">
+        <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
+            <figure class="user-avatar small">
+                <img src="{{app.partner.path_image}}" alt="user-avatar">
+            </figure>
+        </a>
+        <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
+            <p class="text-header tiny">{{ app.partner.name }}</p>
+        </a>
+        <ul class="rating tooltip" title="{{ dictionary.word_reputation }}">
+            {% import 'templates/macros.html' as macro_main %}
+            <!-- use macros to render stars -->
 
-                            {{macro_main.star_on(4)}}
-                            {{macro_main.star_off(1)}}
+            {{macro_main.star_on(4)}}
+            {{macro_main.star_off(1)}}
 
-                        </ul>
-                    </div>
-                    <!-- /USER RATING -->
-                </div>
-            {% endif %}
-        {% endfor %}
+        </ul>
+    </div>
+    <!-- /USER RATING -->
+    </div>
+    {% endif %}
+    {% endfor %}
     {% endmacro %}
     <!-- macro for mounting footer -->
     {% macro footer(dictionary, info_footer) %}
-        <!-- FOOTER -->
-        <footer>
-            <!-- FOOTER TOP -->
-            <div id="footer-top-wrap">
-                <div id="footer-top">
-                    <!-- COMPANY INFO -->
-                    <div class="company-info">
-                        <figure class="logo small">
-                            <img src="/assets/images/logo_small.png" alt="logo-small">
-                        </figure>
-                        <p>
-                            {{ dictionary.e_com }}
-                            {{ dictionary.addons }}
-                            {{ dictionary.description_mkp }}</p>
-                        {#comments
-          <ul class="company-info-list">
-            <li class="company-info-item">
-              <span class="icon-present"></span>
-              <p><span>{{ info_footer.total_apps_and_themes }} &nbsp; </span> {{  dictionary.word_app }} {{ dictionary.word_and }} {{dictionary.word_theme}}</p>
-            </li>
-            <li class="company-info-item">
-              <span class="icon-energy"></span>
-            </li>
-            <li class="company-info-item">
-              <span class="icon-user"></span>
-              <p><span>{{ info_footer.count_partners }} &nbsp; </span> {{ dictionary.word_partner }}</p>
-            </li>
-          </ul>
-          #}
-                        <!-- SOCIAL LINKS -->
-                        <ul class="social-links">
-                            <li class="social-link fb">
-                                <a href="https://www.facebook.com/ecom.clubpage/"></a>
-                            </li>
-                            <!-- (not implemented )li class="social-link twt"> <a href="#"></a> </li> <li class="social-link db"> <a href="#"></a> </li> <li class="social-link rss"> <a href="#"></a> </li-->
-                        </ul>
-                        <!-- /SOCIAL LINKS -->
-                    </div>
-                    <!-- /COMPANY INFO -->
-
-                    <!-- LINK INFO -->
+    <!-- FOOTER -->
+    <footer>
+        <!-- FOOTER TOP -->
+        <div id="footer-top-wrap">
+            <div id="footer-top">
+                <!-- COMPANY INFO -->
+                <div class="company-info">
+                    <figure class="logo small">
+                        <img src="/assets/images/logo_small.png" alt="logo-small">
+                    </figure>
+                    <p>
+                        {{ dictionary.e_com }}
+                        {{ dictionary.addons }}
+                        {{ dictionary.description_mkp }}</p>
                     {#comments
-        <div class="link-info">
-          <p class="footer-title">Our Community</p>
-          <!-- LINK LIST -->
-          <ul class="link-list">
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">How to Join us</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">Buying and Selling</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="forum.html">Emerald Forum</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="blog-v1.html">Emerald Blog</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">Free Goods</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">Job Oportunities</a>
-            </li>
-          </ul>
-          <!-- /LINK LIST -->
-        </div>
-        #}
-                    <!-- /LINK INFO -->
-
-                    <!-- LINK INFO -->
-                    {#commnets
-        <div class="link-info">
-          <p class="footer-title">Member Links</p>
-          <!-- LINK LIST -->
-          <ul class="link-list">
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">Partner Program</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">Starting a Shop</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">Purchase Credits</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">Withdrawals</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">World Meetings</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">How to Auction</a>
-            </li>
-          </ul>
-          <!-- /LINK LIST -->
-        </div>
-        #}
-                    <!-- /LINK INFO -->
-
-                    <!-- LINK INFO -->
-                    {#commnets
-        <div class="link-info">
-          <p class="footer-title">Help and FAQs</p>
-          <!-- LINK LIST -->
-          <ul class="link-list">
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">Help Center</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">FAQs</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">Terms and Conditions</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">Products Licenses</a>
-            </li>
-            <li class="link-item">
-              <div class="bullet"></div>
-              <a href="#">Security Information</a>
-            </li>
-          </ul>
-          <!-- /LINK LIST -->
-        </div>
-        #}
-                    <!-- /LINK INFO -->
-
-                    <!-- language -->
-                    <div class="link-info">
-                        <p class="footer-title">{{ dictionary.word_language }}</p>
-                        <!-- language LIST -->
-                        <ul class="link-list">
-                            <li class="link-item">
-                                <div class="bullet"></div>
-                                <a href="/en_us/{{info_footer.path_file}}">English (USA)</a>
-                            </li>
-                            <li class="link-item">
-                                <div class="bullet"></div>
-                                <a href="/{{info_footer.path_file}}">Português (Brasil)</a>
-                            </li>
-                        </ul>
-                        <!-- /language LIST -->
-                    </div>
-                    <!-- /language INFO -->
-
-                    <!-- TWITTER FEED -->
-                    {#commnets
-        <div class="twitter-feed">
-          <p class="footer-title">Twitter Feed</p>
-          <!-- TWEETS -->
-          <ul class="tweets"></ul>
-          <!-- /TWEETS -->
-        </div>
-        #}
-                    <!-- /TWITTER FEED -->
+                    <ul class="company-info-list">
+                        <li class="company-info-item">
+                            <span class="icon-present"></span>
+                            <p><span>{{ info_footer.total_apps_and_themes }} &nbsp; </span> {{ dictionary.word_app }}
+                                {{ dictionary.word_and }} {{dictionary.word_theme}}</p>
+                        </li>
+                        <li class="company-info-item">
+                            <span class="icon-energy"></span>
+                        </li>
+                        <li class="company-info-item">
+                            <span class="icon-user"></span>
+                            <p><span>{{ info_footer.count_partners }} &nbsp; </span> {{ dictionary.word_partner }}</p>
+                        </li>
+                    </ul>
+                    #}
+                    <!-- SOCIAL LINKS -->
+                    <ul class="social-links">
+                        <li class="social-link fb">
+                            <a href="https://www.facebook.com/ecom.clubpage/"></a>
+                        </li>
+                        <!-- (not implemented )li class="social-link twt"> <a href="#"></a> </li> <li class="social-link db"> <a href="#"></a> </li> <li class="social-link rss"> <a href="#"></a> </li-->
+                    </ul>
+                    <!-- /SOCIAL LINKS -->
                 </div>
+                <!-- /COMPANY INFO -->
 
+                <!-- LINK INFO -->
+                {#comments
+                <div class="link-info">
+                    <p class="footer-title">Our Community</p>
+                    <!-- LINK LIST -->
+                    <ul class="link-list">
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">How to Join us</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">Buying and Selling</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="forum.html">Emerald Forum</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="blog-v1.html">Emerald Blog</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">Free Goods</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">Job Oportunities</a>
+                        </li>
+                    </ul>
+                    <!-- /LINK LIST -->
+                </div>
+                #}
+                <!-- /LINK INFO -->
+
+                <!-- LINK INFO -->
+                {#commnets
+                <div class="link-info">
+                    <p class="footer-title">Member Links</p>
+                    <!-- LINK LIST -->
+                    <ul class="link-list">
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">Partner Program</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">Starting a Shop</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">Purchase Credits</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">Withdrawals</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">World Meetings</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">How to Auction</a>
+                        </li>
+                    </ul>
+                    <!-- /LINK LIST -->
+                </div>
+                #}
+                <!-- /LINK INFO -->
+
+                <!-- LINK INFO -->
+                {#commnets
+                <div class="link-info">
+                    <p class="footer-title">Help and FAQs</p>
+                    <!-- LINK LIST -->
+                    <ul class="link-list">
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">Help Center</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">FAQs</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">Terms and Conditions</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">Products Licenses</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="#">Security Information</a>
+                        </li>
+                    </ul>
+                    <!-- /LINK LIST -->
+                </div>
+                #}
+                <!-- /LINK INFO -->
+
+                <!-- language -->
+                <div class="link-info">
+                    <p class="footer-title">{{ dictionary.word_language }}</p>
+                    <!-- language LIST -->
+                    <ul class="link-list">
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="/en_us/{{info_footer.path_file}}">English (USA)</a>
+                        </li>
+                        <li class="link-item">
+                            <div class="bullet"></div>
+                            <a href="/{{info_footer.path_file}}">Português (Brasil)</a>
+                        </li>
+                    </ul>
+                    <!-- /language LIST -->
+                </div>
+                <!-- /language INFO -->
+
+                <!-- TWITTER FEED -->
+                {#commnets
+                <div class="twitter-feed">
+                    <p class="footer-title">Twitter Feed</p>
+                    <!-- TWEETS -->
+                    <ul class="tweets"></ul>
+                    <!-- /TWEETS -->
+                </div>
+                #}
+                <!-- /TWITTER FEED -->
             </div>
+
+        </div>
         </div>
         <!-- /FOOTER TOP -->
 
@@ -844,57 +837,57 @@
         <!-- /FOOTER BOTTOM -->
     </footer>
     <!-- /FOOTER -->
-{% endmacro %}
-<!-- macro to mount the main header -->
-{% macro header(login, dictionary, user) %}
+    {% endmacro %}
+    <!-- macro to mount the main header -->
+    {% macro header(login, dictionary, user) %}
     {% import 'templates/macros.html' as macro_main %}
     {% if login == true %}
-        <!-- USER BOARD -->
-        <div class="user-board">
-            <!-- USER QUICKVIEW -->
-            {{macro_main.user_quickview(dictionary,user)}}
-            <!-- /USER QUICKVIEW -->
+    <!-- USER BOARD -->
+    <div class="user-board">
+        <!-- USER QUICKVIEW -->
+        {{macro_main.user_quickview(dictionary,user)}}
+        <!-- /USER QUICKVIEW -->
 
-            <!-- ACCOUNT INFORMATION -->
-            {# comments
-          {{macro_main.account_info(dictionary,user)}}
-          end comments #}
-            <!-- /ACCOUNT INFORMATION -->
+        <!-- ACCOUNT INFORMATION -->
+        {# comments
+        {{macro_main.account_info(dictionary,user)}}
+        end comments #}
+        <!-- /ACCOUNT INFORMATION -->
 
-            <!-- ACCOUNT ACTIONS -->
-            <div class="account-actions">
-                <!--(not implemented) a href="#" class="button primary">Become a Seller</a -->
-                <a href="/logout" class="button secondary">Logout</a>
+        <!-- ACCOUNT ACTIONS -->
+        <div class="account-actions">
+            <!--(not implemented) a href="#" class="button primary">Become a Seller</a -->
+            <a href="/logout" class="button secondary">Logout</a>
 
-            </div>
-            <!-- /ACCOUNT ACTIONS -->
         </div>
-        <!-- /USER BOARD -->
+        <!-- /ACCOUNT ACTIONS -->
+    </div>
+    <!-- /USER BOARD -->
     {% else %}
-        <div class="user-board">
+    <div class="user-board">
 
-            <div class="account-actions no-space">
-                <!-- not implemented <a href="forum.html" class="interesting-link">Our Forums</a> <a href="#" class="interesting-link">Why Choose Emerald Dragon?</a> -->
-                <a href="/signup" class="button secondary">{{ dictionary.word_register }}</a>
-                <a href="#login-popup" class="button secondary promo-popup">
-                    {{dictionary.word_login}}
-                    <span class="primary">{{dictionary.word_partner}}</span>
-                </a>
-                <a href="/session/create_login" class="button primary">{{ dictionary.word_login }}
-                    <span class="primary">{{dictionary.word_shopkeeper}}</span></a>
-            </div>
+        <div class="account-actions no-space">
+            <!-- not implemented <a href="forum.html" class="interesting-link">Our Forums</a> <a href="#" class="interesting-link">Why Choose Emerald Dragon?</a> -->
+            <a href="/signup" class="button secondary">{{ dictionary.word_register }}</a>
+            <a href="#login-popup" class="button secondary promo-popup">
+                {{dictionary.word_login}}
+                <span class="primary">{{dictionary.word_partner}}</span>
+            </a>
+            <a href="/session/create_login" class="button primary">{{ dictionary.word_login }}
+                <span class="primary">{{dictionary.word_shopkeeper}}</span></a>
+        </div>
 
-        </div>
-        <!-- FORM POPUP -->
-        <div id="login-popup" class="form-popup mfp-hide">
-            {{macro_main.login_modal(dictionary)}}
-        </div>
-        <!-- /FORM POPUP -->
+    </div>
+    <!-- FORM POPUP -->
+    <div id="login-popup" class="form-popup mfp-hide">
+        {{macro_main.login_modal(dictionary)}}
+    </div>
+    <!-- /FORM POPUP -->
 
     {% endif %}
-{% endmacro %}
-<!-- macro to mount the mobile header -->
-{% macro header_moblie(login,dictionary,user)%}
+    {% endmacro %}
+    <!-- macro to mount the mobile header -->
+    {% macro header_moblie(login,dictionary,user)%}
     {% import 'templates/macros.html' as macro_main %}
     <div id="account-options-menu" class="side-menu right closed">
         <!-- SVG PLUS -->
@@ -903,39 +896,39 @@
         </svg>
         <!-- /SVG PLUS -->
         {% if login == true %}
-            <!-- SIDE MENU HEADER -->
-            <div class="side-menu-header">
-                <!-- USER QUICKVIEW -->
-                {{macro_main.user_quickview_moblie(dictionary,user)}}
-                <!-- /USER QUICKVIEW -->
-            </div>
-            <!-- /SIDE MENU HEADER -->
-            {{macro_main.account_info_moblie(dictionary,user)}}
+        <!-- SIDE MENU HEADER -->
+        <div class="side-menu-header">
+            <!-- USER QUICKVIEW -->
+            {{macro_main.user_quickview_moblie(dictionary,user)}}
+            <!-- /USER QUICKVIEW -->
+        </div>
+        <!-- /SIDE MENU HEADER -->
+        {{macro_main.account_info_moblie(dictionary,user)}}
 
-            <a href="/logout" class="button medium secondary">Logout</a>
-            <!--(not implemented) a href="#" class="button medium primary">Become a Seller</a -->
+        <a href="/logout" class="button medium secondary">Logout</a>
+        <!--(not implemented) a href="#" class="button medium primary">Become a Seller</a -->
 
         {% else %}
-            <div class="side-menu-header"></div>
+        <div class="side-menu-header"></div>
 
-            <a href="/signup" class="button secondary spaced">{{ dictionary.word_register }}</a>
-            <a>.</a>
-            <a href="#login-popup" class="button secondary promo-popup spaced">
-                {{dictionary.word_login}}
-                <span class="primary">{{dictionary.word_partner}}</span>
-            </a>
-            <a href="/scripts//session/create_login" class="button primary">{{ dictionary.word_login }}
-                <span class="primary">{{dictionary.word_shopkeeper}}</span></a>
-            <!-- FORM POPUP -->
-            <div id="login-popup" class="form-popup mfp-hide">
-                {{macro_main.login_modal(dictionary)}}
-            </div>
-            <!-- /FORM POPUP -->
+        <a href="/signup" class="button secondary spaced">{{ dictionary.word_register }}</a>
+        <a>.</a>
+        <a href="#login-popup" class="button secondary promo-popup spaced">
+            {{dictionary.word_login}}
+            <span class="primary">{{dictionary.word_partner}}</span>
+        </a>
+        <a href="/scripts//session/create_login" class="button primary">{{ dictionary.word_login }}
+            <span class="primary">{{dictionary.word_shopkeeper}}</span></a>
+        <!-- FORM POPUP -->
+        <div id="login-popup" class="form-popup mfp-hide">
+            {{macro_main.login_modal(dictionary)}}
+        </div>
+        <!-- /FORM POPUP -->
         {% endif %}
     </div>
-{% endmacro %}
-<!-- macro to mount the main menu -->
-{% macro menu_main(dictionary, app_category, theme_category, info_page) %}
+    {% endmacro %}
+    <!-- macro to mount the main menu -->
+    {% macro menu_main(dictionary, app_category, theme_category, info_page) %}
     {% import 'templates/macros.html' as macro_main %}
     <div class="main-menu-wrap">
         <div class="menu-bar">
@@ -949,40 +942,59 @@
 
                     <!-- MENU ITEM -->
                     {#comments
-        <i class="menu-item">
-          <a href="how-it-works">{{ dictionary.word_how_works }}</a>
-        </li>
-        #}
-                    <!-- /MENU ITEM -->
+                    <i class="menu-item">
+                        <a href="how-it-works">{{ dictionary.word_how_works }}</a>
+                        </li>
+                        #}
+                        <!-- /MENU ITEM -->
 
-                    <!-- MENU ITEM -->
-                    {{macro_main.subcategory_app(dictionary,app_category)}}
-                    <!-- /MENU ITEM -->
+                        <!-- MENU ITEM -->
+                        {{macro_main.subcategory_app(dictionary,app_category)}}
+                        <!-- /MENU ITEM -->
 
-                    <!-- MENU ITEM -->
-                    {{macro_main.subcategory_theme(dictionary,theme_category)}}
-                    <!-- /MENU ITEM -->
+                        <!-- MENU ITEM -->
+                        {{macro_main.subcategory_theme(dictionary,theme_category)}}
+                        <!-- /MENU ITEM -->
 
-                    <!-- MENU ITEM -->
-                    <!-- not implemented <li class="menu-item"> <a href="shop-gridview-v1.html">Online goods</a> </li> -->
-                    <!-- /MENU ITEM -->
-                    <!-- MENU ITEM -->
+                        <!-- MENU ITEM -->
+                        <!-- not implemented <li class="menu-item"> <a href="shop-gridview-v1.html">Online goods</a> </li> -->
+                        <!-- /MENU ITEM -->
+                        <!-- MENU ITEM -->
 
-                    {# not implemented
-        {{macro_main.feature_menu(dictionary)}}
-        #}
-                    <!-- /MENU ITEM -->
+                        {# not implemented
+                        {{macro_main.feature_menu(dictionary)}}
+                        #}
+                        <!-- /MENU ITEM -->
                 </ul>
             </nav>
             <form class="search-form">
-                <input type="text" class="rounded" name="title" id="search_products" placeholder="{{dictionary.word_search}}" value="{{info_page.search}}">
+                <input type="text" class="rounded" name="title" id="search_itens" placeholder="{{dictionary.word_search}}"
+                    value="{{info_page.search}}"  autocomplete="off">
                 <input type="image" src="/assets/images/search-icon.png" alt="search-icon">
+                <div id="search-type-header">
+                    <div class="input-container half">
+                        <input type="radio" id="item_is_app" name="search_type" checked="" value="apps">
+                        <label for="item_is_app" class="label-check item_is">
+                            <span class="checkbox primary">
+                                <span></span></span>
+                            {{dictionary.word_app}}
+                        </label>
+                    </div>
+                    <div class="input-container half">
+                        <input type="radio" id="item_is_theme" name="search_type" value="themes">
+                        <label for="item_is_theme" class="label-check item_is">
+                            <span class="checkbox primary">
+                                <span></span></span>
+                            {{dictionary.word_theme}}
+                        </label>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
-{% endmacro %}
-<!-- macro to mount the mobile menu -->
-{% macro menu_moblie(dictionary) %}
+    {% endmacro %}
+    <!-- macro to mount the mobile menu -->
+    {% macro menu_moblie(dictionary) %}
     <div id="mobile-menu" class="side-menu left closed">
         <!-- SVG PLUS -->
         <svg class="svg-plus">
@@ -1012,10 +1024,10 @@
 
             <!-- DROPDOWN ITEM -->
             {#comments
-    <li class="dropdown-item">
-      <a href="how-it-works">{{ dictionary.word_how_works }}</a>
-    </li>
-    #}
+            <li class="dropdown-item">
+                <a href="how-it-works">{{ dictionary.word_how_works }}</a>
+            </li>
+            #}
             <!-- /DROPDOWN ITEM -->
 
             <!-- DROPDOWN ITEM -->
@@ -1026,7 +1038,7 @@
 
             <!-- DROPDOWN ITEM -->
             <li class="dropdown-item">
-                <a href="/{{dictionary.lang}}/themes">{{  dictionary.word_theme }}</a>
+                <a href="/{{dictionary.lang}}/themes">{{ dictionary.word_theme }}</a>
             </li>
             <!-- /DROPDOWN ITEM -->
 
@@ -1036,25 +1048,25 @@
 
             <!-- DROPDOWN ITEM -->
             {# not implemented
-    {% import 'templates/macros.html' as macro_main %}
-    {{macro_main.feature_moblie(dictionary)}}
-    #}
+            {% import 'templates/macros.html' as macro_main %}
+            {{macro_main.feature_moblie(dictionary)}}
+            #}
             <!-- /DROPDOWN ITEM -->
 
         </ul>
         <!-- /DROPDOWN -->
     </div>
-{% endmacro %}
-<!-- macro image logo moblie -->
-{% macro logo_moblie() %}
+    {% endmacro %}
+    <!-- macro image logo moblie -->
+    {% macro logo_moblie() %}
     <img src="/assets/images/logo_mobile.png" alt="logo-mobile">
-{% endmacro %}
-<!-- macro image logo -->
-{% macro logo_main() %}
+    {% endmacro %}
+    <!-- macro image logo -->
+    {% macro logo_main() %}
     <img src="/assets/images/logo.png" alt="logo">
-{% endmacro %}
-<!-- macro image logo -->
-{% macro all_header(login, dictionary, user, app_category, theme_category, info_page) %}
+    {% endmacro %}
+    <!-- macro image logo -->
+    {% macro all_header(login, dictionary, user, app_category, theme_category, info_page) %}
     {% import 'templates/macros.html' as macro_main %}
     <!-- HEADER -->
     <div class="header-wrap">
@@ -1074,12 +1086,7 @@
             </div>
             <!-- /MOBILE MENU HANDLER -->
 
-            <!-- LOGO MOBILE -->
-            <a href="/{{dictionary.lang}}" class="header-logo">
-                <figure class="logo-mobile">
-                    {{ macro_main.logo_moblie() }}
-                </figure>
-            </a>
+
             <!-- /LOGO MOBILE -->
 
             <!-- MOBILE ACCOUNT OPTIONS HANDLER -->
@@ -1107,103 +1114,102 @@
     {{macro_main.menu_main(dictionary,app_category,theme_category,info_page)}}
     <!-- /MAIN MENU -->
 
-{% endmacro %}
-<!-- macro user quickview main -->
-{% macro user_quickview(dictionary, user) %}
+    {% endmacro %}
+    <!-- macro user quickview main -->
+    {% macro user_quickview(dictionary, user) %}
     {% if user.is_store == false %}
-        <div class="user-quickview">
-            <!-- USER AVATAR -->
-            <a href="/{{dictionary.lang}}/author/{{user.id}}">
-                <div class="outer-ring">
-                    <div class="inner-ring"></div>
-                    <figure class="user-avatar">
-                        <img src="{{user.path_image}}" alt="avatar">
-                    </figure>
-                </div>
-            </a>
-            <!-- /USER AVATAR -->
+    <div class="user-quickview">
+        <!-- USER AVATAR -->
+        <a href="/{{dictionary.lang}}/author/{{user.id}}">
+            <div class="outer-ring">
+                <div class="inner-ring"></div>
+                <figure class="user-avatar">
+                    <img src="{{user.path_image}}" alt="avatar">
+                </figure>
+            </div>
+        </a>
+        <!-- /USER AVATAR -->
 
-            <!-- USER INFORMATION -->
-            <p class="user-name">{{ user.id }}
-                -
-                {{ user.name }}
-            </p>
-            <!-- SVG ARROW -->
-            <svg class="svg-arrow">
-                <use xlink:href="#svg-arrow"></use>
-            </svg>
-            <!-- /SVG ARROW -->
-            <p class="user-money">{{dictionary.coin}}$
-                {{ user.credits | number_format(2, '.', ',') }}</p>
-            <!-- /USER INFORMATION -->
+        <!-- USER INFORMATION -->
+        <p class="user-name">{{ user.id }}
+            -
+            {{ user.name }}
+        </p>
+        <!-- SVG ARROW -->
+        <svg class="svg-arrow">
+            <use xlink:href="#svg-arrow"></use>
+        </svg>
+        <!-- /SVG ARROW -->
+        <p class="user-money">{{dictionary.coin}}$
+            {{ user.credits | number_format(2, '.', ',') }}</p>
+        <!-- /USER INFORMATION -->
 
-            <!-- DROPDOWN -->
-            <ul class="dropdown small hover-effect closed">
-                <li class="dropdown-item">
-                    <div class="dropdown-triangle"></div>
-                    <a href="/{{dictionary.lang}}/author/{{user.id}}">{{dictionary.word_profile_page}}</a>
-                </li>
-                <li class="dropdown-item">
-                    <a href="dashboard-settings">{{dictionary.word_account_settings}}</a>
-                </li>
-                <li class="dropdown-item">
-                    <a href="dashboard-statement">{{dictionary.word_sales_statment}}</a>
-                </li>
-                <li class="dropdown-item">
-                    <a href="dashboard-withdrawals">{{dictionary.word_withdrawals}}</a>
-                </li>
-                <li class="dropdown-item">
-                    <a href="dashboard-uploaditem">{{dictionary.word_upload_item}}</a>
-                </li>
-                {# not implemented
-        <li class="dropdown-item">
-          <a href="dashboard-manageitems">{{dictionary.word_manage_items}}</a>
-        </li>
-        #}
-            </ul>
-            <!-- /DROPDOWN -->
-        </div>
+        <!-- DROPDOWN -->
+        <ul class="dropdown small hover-effect closed">
+            <li class="dropdown-item">
+                <div class="dropdown-triangle"></div>
+                <a href="/{{dictionary.lang}}/author/{{user.id}}">{{dictionary.word_profile_page}}</a>
+            </li>
+            <li class="dropdown-item">
+                <a href="/account/settings">{{dictionary.word_account_settings}}</a>
+            </li>
+            <li class="dropdown-item">
+                <a href="/account/statement">{{dictionary.word_sales_statment}}</a>
+            </li>
+            <li class="dropdown-item">
+                <a href="/account/wallet">{{dictionary.word_withdrawals}}</a>
+            </li>
+            <li class="dropdown-item">
+                <a href="/account/add">{{dictionary.word_upload_item}}</a>
+            </li>
+            <li class="dropdown-item">
+                <a href="/account/edit">{{dictionary.word_manage_items}}</a>
+            </li>
+        
+        </ul>
+        <!-- /DROPDOWN -->
+    </div>
     {% else %}
-        <div class="user-quickview">
-            <!-- USER AVATAR -->
-            <a href="/{{dictionary.lang}}/author/{{user.id}}">
-                <div class="outer-ring">
-                    <div class="inner-ring"></div>
-                    <figure class="user-avatar">
-                        <img src="{{user.path_image}}" alt="avatar">
-                    </figure>
-                </div>
-            </a>
-            <!-- /USER AVATAR -->
+    <div class="user-quickview">
+        <!-- USER AVATAR -->
+        <a href="/{{dictionary.lang}}/author/{{user.id}}">
+            <div class="outer-ring">
+                <div class="inner-ring"></div>
+                <figure class="user-avatar">
+                    <img src="{{user.path_image}}" alt="avatar">
+                </figure>
+            </div>
+        </a>
+        <!-- /USER AVATAR -->
 
-            <!-- USER INFORMATION -->
-            <p class="user-name">{{ user.id }}
-                -
-                {{ user.name }}
-            </p>
-            <!-- SVG ARROW -->
-            <svg class="svg-arrow">
-                <use xlink:href="#svg-arrow"></use>
-            </svg>
-            <!-- /SVG ARROW -->
-            <p class="user-money">{{dictionary.coin}}$
-                {{ user.credits | number_format(2, '.', ',') }}</p>
-            <!-- /USER INFORMATION -->
-            <!-- DROPDOWN -->
-            <ul class="dropdown small hover-effect closed">
-                <!--(not implemented)li class="dropdown-item"> <a href="#favorite">{{dictionary.word_favorate}}</a> </li-->
-                <li class="dropdown-item">
-                    <a href="history-transaction">{{dictionary.word_transaction_history}}</a>
-                </li>
-                <li class="dropdown-item">
-                    <a href="car">CAR</a>
-                </li>
-            </ul>
-        </div>
+        <!-- USER INFORMATION -->
+        <p class="user-name">{{ user.id }}
+            -
+            {{ user.name }}
+        </p>
+        <!-- SVG ARROW -->
+        <svg class="svg-arrow">
+            <use xlink:href="#svg-arrow"></use>
+        </svg>
+        <!-- /SVG ARROW -->
+        <p class="user-money">{{dictionary.coin}}$
+            {{ user.credits | number_format(2, '.', ',') }}</p>
+        <!-- /USER INFORMATION -->
+        <!-- DROPDOWN -->
+        <ul class="dropdown small hover-effect closed">
+            <!--(not implemented)li class="dropdown-item"> <a href="#favorite">{{dictionary.word_favorate}}</a> </li-->
+            <li class="dropdown-item">
+                <a href="history-transaction">{{dictionary.word_transaction_history}}</a>
+            </li>
+            <li class="dropdown-item">
+                <a href="car">CAR</a>
+            </li>
+        </ul>
+    </div>
     {% endif %}
-{% endmacro %}
-<!-- macro user quivkview for moblie -->
-{% macro user_quickview_moblie(dictionary, user) %}
+    {% endmacro %}
+    <!-- macro user quivkview for moblie -->
+    {% macro user_quickview_moblie(dictionary, user) %}
     <div class="user-quickview">
         <!-- USER AVATAR -->
         <a href="/{{dictionary.lang}}/author/{{user.id}}">
@@ -1225,9 +1231,9 @@
             {{ user.credits | number_format(2, '.', ',') }}</p>
         <!-- /USER INFORMATION -->
     </div>
-{% endmacro %}
-<!-- macro account info main -->
-{% macro account_info(dictionary, user) %}
+    {% endmacro %}
+    <!-- macro account info main -->
+    {% macro account_info(dictionary, user) %}
     <div class="account-information">
         <a href="favourites.html">
             <div class="account-wishlist-quickview">
@@ -1488,112 +1494,112 @@
             <!-- /DROPDOWN NOTIFICATIONS -->
         </div>
     </div>
-{% endmacro %}
-<!-- macro account info for moblie -->
-{% macro account_info_moblie(dictionary, user) %}
+    {% endmacro %}
+    <!-- macro account info for moblie -->
+    {% macro account_info_moblie(dictionary, user) %}
     {% if user.is_store == false %}
-        {#comments
+    {#comments
     <!-- SIDE MENU TITLE -->
     <p class="side-menu-title">Your Account</p>
     <!-- /SIDE MENU TITLE -->
 
     <!-- DROPDOWN -->
     <ul class="dropdown dark hover-effect">
-      <!-- DROPDOWN ITEM -->
-      <li class="dropdown-item">
-        <a href="dashboard-notifications.html">Notifications</a>
-      </li>
-      <!-- /DROPDOWN ITEM -->
+        <!-- DROPDOWN ITEM -->
+        <li class="dropdown-item">
+            <a href="dashboard-notifications.html">Notifications</a>
+        </li>
+        <!-- /DROPDOWN ITEM -->
 
-      <!-- DROPDOWN ITEM -->
-      <li class="dropdown-item">
-        <a href="dashboard-inbox.html">Messages</a>
-      </li>
-      <!-- /DROPDOWN ITEM -->
+        <!-- DROPDOWN ITEM -->
+        <li class="dropdown-item">
+            <a href="dashboard-inbox.html">Messages</a>
+        </li>
+        <!-- /DROPDOWN ITEM -->
 
-      <!-- DROPDOWN ITEM -->
-      <li class="dropdown-item">
-        <a href="cart.html">Your Cart</a>
-      </li>
-      <!-- /DROPDOWN ITEM -->
+        <!-- DROPDOWN ITEM -->
+        <li class="dropdown-item">
+            <a href="cart.html">Your Cart</a>
+        </li>
+        <!-- /DROPDOWN ITEM -->
 
-      <!-- DROPDOWN ITEM -->
-      <li class="dropdown-item">
-        <a href="favourites.html">Favourites</a>
-      </li>
-      <!-- /DROPDOWN ITEM -->
+        <!-- DROPDOWN ITEM -->
+        <li class="dropdown-item">
+            <a href="favourites.html">Favourites</a>
+        </li>
+        <!-- /DROPDOWN ITEM -->
     </ul>
     <!-- /DROPDOWN -->
     end comments #}
-        <!-- SIDE MENU TITLE -->
-        <p class="side-menu-title">Dashboard</p>
-        <!-- /SIDE MENU TITLE -->
-
-        <!-- DROPDOWN -->
-        <ul class="dropdown dark hover-effect">
-            <!-- DROPDOWN ITEM -->
-            <li class="dropdown-item">
-                <a href="/{{dictionary.lang}}/author/{{user.id}}">{{dictionary.word_profile_page}}</a>
-            </li>
-            <!-- /DROPDOWN ITEM -->
-
-            <!-- DROPDOWN ITEM -->
-            <li class="dropdown-item">
-                <a href="dashboard-settings">{{dictionary.word_account_settings}}</a>
-            </li>
-            <!-- /DROPDOWN ITEM -->
-
-            <!-- DROPDOWN ITEM -->
-            <li class="dropdown-item">
-                <a href="dashboard-statement">{{dictionary.word_sales_statment}}</a>
-            </li>
-            <!-- /DROPDOWN ITEM -->
-            <!-- DROPDOWN ITEM -->
-            <li class="dropdown-item">
-                <a href="dashboard-withdrawalsl">{{dictionary.word_withdrawals}}</a>
-            </li>
-            <!-- /DROPDOWN ITEM -->
-            <!-- DROPDOWN ITEM -->
-            <li class="dropdown-item">
-                <a href="dashboard-uploaditem">{{dictionary.word_upload_item}}</a>
-            </li>
-            <!-- /DROPDOWN ITEM -->
-
-            <!-- DROPDOWN ITEM -->
-            {# not implemented
-      <li class="dropdown-item">
-        <a href="dashboard-manageitems">{{dictionary.word_manage_items}}</a>
-      </li>
-      #}
-            <!-- /DROPDOWN ITEM -->
-        </ul>
-        {#not implemented
-    <!-- /DROPDOWN -->
-  {% else %}
     <!-- SIDE MENU TITLE -->
     <p class="side-menu-title">Dashboard</p>
     <!-- /SIDE MENU TITLE -->
 
     <!-- DROPDOWN -->
     <ul class="dropdown dark hover-effect">
-      <!-- DROPDOWN ITEM -->
-      <li class="dropdown-item">
-        <a href="profile-page">{{dictionary.word_favorate}}</a>
-      </li>
-      <!-- /DROPDOWN ITEM -->
+        <!-- DROPDOWN ITEM -->
+        <li class="dropdown-item">
+            <a href="/{{dictionary.lang}}/author/{{user.id}}">{{dictionary.word_profile_page}}</a>
+        </li>
+        <!-- /DROPDOWN ITEM -->
 
-    <!-- DROPDOWN ITEM -->
-    <li class="dropdown-item">
-      <a href="dashboard-manageitems.html">{{dictionary.word_transaction_history}}</a>
-    </li>
-    <!-- /DROPDOWN ITEM -->
+        <!-- DROPDOWN ITEM -->
+        <li class="dropdown-item">
+            <a href="dashboard-settings">{{dictionary.word_account_settings}}</a>
+        </li>
+        <!-- /DROPDOWN ITEM -->
+
+        <!-- DROPDOWN ITEM -->
+        <li class="dropdown-item">
+            <a href="dashboard-statement">{{dictionary.word_sales_statment}}</a>
+        </li>
+        <!-- /DROPDOWN ITEM -->
+        <!-- DROPDOWN ITEM -->
+        <li class="dropdown-item">
+            <a href="dashboard-withdrawalsl">{{dictionary.word_withdrawals}}</a>
+        </li>
+        <!-- /DROPDOWN ITEM -->
+        <!-- DROPDOWN ITEM -->
+        <li class="dropdown-item">
+            <a href="dashboard-uploaditem">{{dictionary.word_upload_item}}</a>
+        </li>
+        <!-- /DROPDOWN ITEM -->
+
+        <!-- DROPDOWN ITEM -->
+        {# not implemented
+        <li class="dropdown-item">
+            <a href="dashboard-manageitems">{{dictionary.word_manage_items}}</a>
+        </li>
+        #}
+        <!-- /DROPDOWN ITEM -->
+    </ul>
+    {#not implemented
+    <!-- /DROPDOWN -->
+    {% else %}
+    <!-- SIDE MENU TITLE -->
+    <p class="side-menu-title">Dashboard</p>
+    <!-- /SIDE MENU TITLE -->
+
+    <!-- DROPDOWN -->
+    <ul class="dropdown dark hover-effect">
+        <!-- DROPDOWN ITEM -->
+        <li class="dropdown-item">
+            <a href="profile-page">{{dictionary.word_favorate}}</a>
+        </li>
+        <!-- /DROPDOWN ITEM -->
+
+        <!-- DROPDOWN ITEM -->
+        <li class="dropdown-item">
+            <a href="dashboard-manageitems.html">{{dictionary.word_transaction_history}}</a>
+        </li>
+        <!-- /DROPDOWN ITEM -->
     </ul>
     <!-- /DROPDOWN -->
     #}
     {% endif %}
-{% endmacro %}
-<!-- macro login | DEPRECADÍSSIMA usar login_modal -->
-{% macro login(dictionary) %}
+    {% endmacro %}
+    <!-- macro login | DEPRECADÍSSIMA usar login_modal -->
+    {% macro login(dictionary) %}
     <!-- FORM POPUP HEADLINE -->
     <div class="form-popup-headline secondary">
         <h2>{{dictionary.word_login_account}}</h2>
@@ -1616,9 +1622,9 @@
                 {{dictionary.word_remember_user}}
             </label>
             {#
-        <!-- /CHECKBOX -->
-        <p>{{dictionary.word_forgot_pssw}} <a href="#" class="primary">{{dictionary.word_click_here}}</a></p>
-        #}
+            <!-- /CHECKBOX -->
+            <p>{{dictionary.word_forgot_pssw}} <a href="#" class="primary">{{dictionary.word_click_here}}</a></p>
+            #}
             <button class="button mid dark">{{dictionary.word_login}}
                 <span class="primary">{{dictionary.word_now}}!</span></button>
             <!--a class="button mid dark" href="test-server"> ok </a-->
@@ -1630,81 +1636,80 @@
         <!-- a href="#" class="button mid twt half">Login with Twitter</a-->
     </div>
     <!-- /FORM POPUP CONTENT -->
-{% endmacro %}
+    {% endmacro %}
 
-{# 
-    Macros novas 
-#}
-{% macro apps_card(apps, page, init, end, dictionary) %}
+    {#
+    Macros novas
+    #}
+    {% macro apps_card(apps, page, init, end, dictionary) %}
     {% for app in apps %}
-        {% if loop.index0 >= init and loop.index0 < end %}
-            <div class="product-item column">
-                {% if app.is_app == 1 %}
-                    <span class="pin featured">APP</span>
-                {% endif %}
-                <!-- PRODUCT PREVIEW ACTIONS -->
-                <div class="product-preview-actions">
-                    <!-- PRODUCT PREVIEW IMAGE -->
-                    <figure class="product-preview-image">
-                        <a href="/{{dictionary.lang}}/{{page.current}}/{{app.slug}}">
-                            <img src="{{app.thumbnail}}" alt="product-image" width="258" height="168">
-                        </a>
-                    </figure>
-                </div>
-                <!-- /PRODUCT PREVIEW ACTIONS -->
-
-                <!-- PRODUCT INFO -->
-                <div class="product-info">
-                    <a href="/{{dictionary.lang}}/{{page.current}}/{{app.slug}}">
-                        <p class="text-header">
-                            {{ app.title }}
-                        </p>
-                    </a>
-                    <p class="product-description">{{ app.description |truncate(140) }}</p>
-                    <a href="/{{dictionary.lang}}/{{page.current}}?category={{app.category}}">
-                        <p class="category primary">{{ app.category }}</p>
-                    </a>
-                    <p class="price">
-                        <span>{{dictionary.coin}}$
-                        </span>{{ app.value | number_format(2, '.', ',') }}</p>
-                </div>
-                <!-- /PRODUCT INFO -->
-                <hr class="line-separator">
-
-                <!-- USER RATING -->
-                <div class="user-rating">
-                    <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
-                        <figure class="user-avatar small">
-                            <img src="{{app.partner.path_image}}" alt="user-avatar">
-                        </figure>
-                    </a>
-                    <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
-                        <p class="text-header tiny">{{ app.partner.name }}</p>
-                    </a>
-                    <ul class="rating tooltip" title="{{ dictionary.word_reputation }}">
-                        {% import 'templates/macros.html' as macro_main %}
-                        <!-- use macros to render stars -->
-
-                        {{macro_main.star_on(4)}}
-                        {{macro_main.star_off(1)}}
-
-                    </ul>
-                </div>
-                <!-- /USER RATING -->
-            </div>
+    {% if loop.index0 >= init and loop.index0 < end %} <div class="product-item column">
+        {% if app.is_app == 1 %}
+        <span class="pin featured">APP</span>
         {% endif %}
-    {% endfor %}
-{% endmacro %}
+        <!-- PRODUCT PREVIEW ACTIONS -->
+        <div class="product-preview-actions">
+            <!-- PRODUCT PREVIEW IMAGE -->
+            <figure class="product-preview-image">
+                <a href="/{{dictionary.lang}}/{{page.current}}/{{app.slug}}">
+                    <img src="{{app.thumbnail}}" alt="product-image" width="258" height="168">
+                </a>
+            </figure>
+        </div>
+        <!-- /PRODUCT PREVIEW ACTIONS -->
 
-{% macro apps_pagination(total, current, atual, lang) %}
-    {% if (total > 0) %}
+        <!-- PRODUCT INFO -->
+        <div class="product-info">
+            <a href="/{{dictionary.lang}}/{{page.current}}/{{app.slug}}">
+                <p class="text-header">
+                    {{ app.title }}
+                </p>
+            </a>
+            <p class="product-description">{{ app.description | truncate(140) }}</p>
+            <a href="/{{dictionary.lang}}/{{page.current}}?category={{app.category}}">
+                <p class="category primary">{{ categories_name(app.category, dictionary.lang) }}</p>
+            </a>
+            <p class="price">
+                <span>{{dictionary.coin}}$
+                </span>{{ app.value | number_format(2, '.', ',') }}</p>
+        </div>
+        <!-- /PRODUCT INFO -->
+        <hr class="line-separator">
+
+        <!-- USER RATING -->
+        <div class="user-rating">
+            <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
+                <figure class="user-avatar small">
+                    <img src="{{app.partner.path_image}}" alt="user-avatar">
+                </figure>
+            </a>
+            <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
+                <p class="text-header tiny">{{ app.partner.name }}</p>
+            </a>
+            <ul class="rating tooltip" title="{{ dictionary.word_reputation }}">
+                {% import 'templates/macros.html' as macro_main %}
+                <!-- use macros to render stars -->
+
+                {{macro_main.star_on(4)}}
+                {{macro_main.star_off(1)}}
+
+            </ul>
+        </div>
+        <!-- /USER RATING -->
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endmacro %}
+
+        {% macro apps_pagination(total, current, atual, lang) %}
+        {% if (total > 0) %}
         <div class="pager primary">
             {% for i in 1..total %}
-                <div class="pager-item {% if i == atual %} active {% endif %}">
-                    <a href="/{{lang}}/{{current}}?skip={{i*10}}">
-                        <p>{{i}}</p>
-                    </a>
-                </div>
+            <div class="pager-item {% if i == atual %} active {% endif %}">
+                <a href="/{{lang}}/{{current}}?skip={{i*10}}">
+                    <p>{{i}}</p>
+                </a>
+            </div>
             {% endfor %}
         </div>
         <style>
@@ -1722,9 +1727,9 @@
             }
         </style>
         {%endif%}
-    {% endmacro %}
+        {% endmacro %}
 
-    {% macro login_modal(dictionary) %}
+        {% macro login_modal(dictionary) %}
         <!-- FORM POPUP -->
         <div class="form-popup">
             <!-- CLOSE BTN -->
@@ -1770,4 +1775,4 @@
         </div>
         <!-- /FORM POPUP -->
 
-    {% endmacro %}
+        {% endmacro %}

@@ -57,7 +57,7 @@ as macro_item %}
                     <p class="price large" id="coin">
                         <span id="coin">{{dictionary.coin}}$
                             {% if data.is == 'theme' %}
-                            {{app.value_license_basic}}
+                                {{app.value_license_basic}}
                             {% endif %}
                         </span>
                     </p>
@@ -76,7 +76,7 @@ as macro_item %}
                         <!-- /CHECKBOX -->
                         <p class="license-text" data-license="{{plan.id}}" {% if plan.checked %} style="display: block;" {% endif %}>{{plan.description}}</p>
                     {% endfor %}
-                
+
                     <a href="#" class="button mid dark spaced" id="buy-item">
                         <span class="primary">{{dictionary.buy_now}}</span></a>
                     <!--a href="#" class="button mid primary half">Add to Cart</a> <a href="#" class="button mid secondary wicon half"><span class="icon-heart"></span>652</a-->
@@ -101,10 +101,11 @@ as macro_item %}
                 {{macro_item.product_info(app.app, dictionary)}}
                 <!-- /SIDEBAR ITEM -->
 
+                {#
                 <!-- SIDEBAR ITEM -->
                 {{macro_item.author_reputation(app, dictionary)}}
                 <!-- /SIDEBAR ITEM -->
-
+                #}
                 <!-- SIDEBAR ITEM -->
                 {#{macro_item.author_outher_items()}#}
                 <!-- /SIDEBAR ITEM -->
@@ -115,36 +116,52 @@ as macro_item %}
             <div class="content left" id="addons-items">
                 <!-- POST -->
                 <article class="post">
-                    {% if data.page.app == 1 %}
-                        <!-- POST IMAGE -->
-                        {{macro_item.image_main(image_main,info_page)}}
-                        <!-- /POST IMAGE -->
-                    {% else %}
-                        {% for i in data.app.imagens %}
-                            {% if loop.index0 > 0 %}
-                                <div id="image-{{i.id}}" style="display:none;">
-                                    {{macro_item.image_main(i,info_page)}}
-                                </div>
-                            {% else %}
-                                <div id="image-{{i.id}}" style="display: block;">
-                                    {{macro_item.image_main(i,info_page)}}
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    {# themes not outher images #}
-                    {% if data.page.app == 1 %}
+                    <div class="post-image">
+                        <figure class="product-preview-image large liquid">
+                            <!--img src="https://lh3.googleusercontent.com/wIcl3tehFmOUpq-Jl3hlVbZVFrLHePRtIDWV5lZwBVDr7kEAgLTChyvXUclMVQDRHDEcDhY=w640-h400-e365" alt=""-->
+                            <img src="https://lh3.googleusercontent.com/wIcl3tehFmOUpq-Jl3hlVbZVFrLHePRtIDWV5lZwBVDr7kEAgLTChyvXUclMVQDRHDEcDhY=w640-h400-e365" alt="product-image">
+                        </figure>
+                        <!-- SLIDE CONTROLS -->
+                        <div class="slide-control-wrap">
+                            <div class="slide-control rounded left">
+                                <!-- SVG ARROW -->
+                                <svg class="svg-arrow">
+                                    <use xlink:href="#svg-arrow"></use>
+                                </svg>
+                                <!-- /SVG ARROW -->
+                            </div>
 
-                        <!-- POST IMAGE SLIDES -->
-                        <div class="post-image-slides">
-                            <!-- IMAGE SLIDES WRAP -->
-                            {{macro_item.single_imagens(app.imagens)}}
-                            <!-- IMAGE SLIDES WRAP -->
+                            <div class="slide-control rounded right">
+                                <!-- SVG ARROW -->
+                                <svg class="svg-arrow">
+                                    <use xlink:href="#svg-arrow"></use>
+                                </svg>
+                                <!-- /SVG ARROW -->
+                            </div>
                         </div>
-                        <!-- /POST IMAGE SLIDES -->
-                    {% endif %}
-                    {% if app.app.video == '' %}
-                    {% else %}
+                        <!-- IMAGE SLIDES -->
+                    </div>
+                    {% for i in data.app.imagens %}
+                        {% if loop.index0 > 0 %}
+                            <div id="image-{{i.id}}" style="display:none;">
+                                {{macro_item.image_main(i,info_page)}}
+                            </div>
+                        {% else %}
+                            <div id="image-{{i.id}}" style="display: block;">
+                                {{macro_item.image_main(i,info_page)}}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    <!-- POST IMAGE SLIDES -->
+                    <div class="post-image-slides">
+                        <!-- IMAGE SLIDES WRAP -->
+                        {{macro_item.single_imagens(app.imagens)}}
+                        <!-- IMAGE SLIDES WRAP -->
+                    </div>
+                    <!-- /POST IMAGE SLIDES -->
+
+                    {% if app.app.video%}
                         <h3 style="text-align: left;">Video
                         </h3>
 

@@ -68,7 +68,7 @@
             <!-- INFORMATION LAYOUT ITEM -->
             <div class="information-layout-item">
                 <p class="text-header">{{dictionary.word_categories}}:</p>
-                <p>{{app.category}}</p>
+                <p title="{{categories_name(app.category, dictionary.lang)}}">{{categories_name(app.category, dictionary.lang) | truncate(30)}}</p>
             </div>
             <!-- /INFORMATION LAYOUT ITEM -->
 
@@ -442,7 +442,7 @@
                     <!-- /SVG ARROW -->
                 </div>
             </div>
-            <!-- /SLIDE CONTROLS -->
+            <!-- /SLIDE CONTROLS --> 
         {% endif %}
         <!--a href="#" class="button mid primary half">Go to Live Demo</a-->
     </div>
@@ -499,25 +499,6 @@
             {% endfor %}
             
         </div>
-        <!-- SLIDE CONTROLS -->
-            <div class="slide-control-wrap">
-                <div class="slide-control rounded left">
-                    <!-- SVG ARROW -->
-                    <svg class="svg-arrow">
-                        <use xlink:href="#svg-arrow"></use>
-                    </svg>
-                    <!-- /SVG ARROW -->
-                </div>
-
-                <div class="slide-control rounded right">
-                    <!-- SVG ARROW -->
-                    <svg class="svg-arrow">
-                        <use xlink:href="#svg-arrow"></use>
-                    </svg>
-                    <!-- /SVG ARROW -->
-                </div>
-            </div>
-        <!-- IMAGE SLIDES -->
     </div>
 {% endmacro %}
 
