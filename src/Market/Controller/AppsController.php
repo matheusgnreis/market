@@ -132,7 +132,7 @@ class AppsController
                     'plans_json' => !empty($body['plans_json']) ? $body['plans_json'] : null,
                     'value_plan_basic' => !empty($body['value_plan_basic']) ? $body['value_plan_basic'] : null,
                     'active' => !empty($body['active']) ? $body['active'] : 1
-                ]);
+        ]);
         
         return $app ? $response->withJson(['status' => 201, 'message' => 'created', 'app' => $app], 201) : $response->withJson(['erro' => 'Error creating new app'], 400);
     }
