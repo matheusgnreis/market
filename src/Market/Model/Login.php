@@ -41,12 +41,15 @@ class Login extends Model
     {
         
         $partner = Partner::find($user->id);
-
+        
         if ($partner) {
-            $ret = $partner->update([
-                'password_hash' => password_hash($password, PASSWORD_DEFAULT)
-            ]);
+            //$ret = $partner->update([
+            //    'password_hash' => password_hash($password, PASSWORD_DEFAULT)
+            //]);
+            $partner->password_hash =  password_hash($password, PASSWORD_DEFAULT);
+            $ret = $partner->save();
         } else {
+
             $ret = Partner::create([
                 'id' => $user->id,
                 'name' => $user->name,
