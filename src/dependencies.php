@@ -44,12 +44,11 @@ $container['view'] = function ($c) {
     ]);
     
     $view->addExtension(new Twig_Extensions_Extension_Text());
-
     // Instantiate and add Slim specific extension
     $router = $c->get('router');
     $uri = \Slim\Http\Uri::createFromEnvironment(new \Slim\Http\Environment($_SERVER));
     $view->addExtension(new \Slim\Views\TwigExtension($router, $uri));
-
+    $view->addExtension(new \Market\Services\MarketExtensions());
     return $view;
 };
 //Erro 404
