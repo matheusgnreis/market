@@ -617,17 +617,18 @@
             <span>{{dictionary.coin}}$
             </span>{{ app.value | number_format(2, '.', ',') }}</p>
     </div>
-    <!-- /PRODUCT INFO -->
-    <hr class="line-separator">
 
     <!-- USER RATING -->
-    <div class="user-rating">
-        <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
+    {% if app.partner.path_image %}
+        <!-- /PRODUCT INFO -->
+    <hr class="line-separator">
+        <div class="user-rating">
+        <a href="/{{dictionary.lang}}/author/{{app.partner.id}}">
             <figure class="user-avatar small">
                 <img src="{{app.partner.path_image}}" alt="user-avatar">
             </figure>
         </a>
-        <a href="/{{dictionary.lang}}/author/{{app.partner.id_partner}}">
+        <a href="/{{dictionary.lang}}/author/{{app.partner.id}}">
             <p class="text-header tiny">{{ app.partner.name }}</p>
         </a>
         <ul class="rating tooltip" title="{{ dictionary.word_reputation }}">
@@ -639,6 +640,8 @@
 
         </ul>
     </div>
+    {% endif %}
+    
     <!-- /USER RATING -->
     </div>
     {% endif %}
