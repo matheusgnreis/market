@@ -16,13 +16,13 @@ class PartnerController
     public function updatePicture($request, $response, $args)
     {
         $uploader = new FileUploader('files', array(
-            'limit' => 12,
-            'maxSize' => 12,
+            'limit' => 1,
+            'maxSize' => 5,
             'fileMaxSize' => null,
             'extensions' => ['jpg', 'jpeg', 'png', 'JPG'],
             'required' => false,
             'uploadDir' => '/var/www/data/uploads/',
-            'title' => 'e_com_club_{random}',
+            'title' => '{random}',
             'replace' => false,
             'listInput' => true,
             'editor' => array(
