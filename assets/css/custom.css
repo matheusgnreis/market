@@ -550,3 +550,41 @@ li.li_resume {
 .content-settings__action:first-child button {
     background: #06b99b;
 }
+
+/** header search */
+.menu-bar .search-form {
+    z-index: 1;
+}
+
+#search-type-header {
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 50px;
+    width: 285px;
+    background: white;
+    margin: 0 auto;
+    z-index: 9999;
+    border-radius: 7px;
+    opacity: 0;
+    transition: visibility 0s linear 0.3s,opacity 0.3s linear;
+}
+
+.search-visible {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transition-delay: 0s !important;
+}
+
+@media screen and (max-width: 1170px){
+    header .logo{
+        display: block;
+    }
+    
+    header {
+        justify-content: center;
+        }
+    
+    }
+    

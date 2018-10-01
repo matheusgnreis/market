@@ -22,6 +22,21 @@ $("form.addons-partner-login").submit(function (event) {
 
     event.preventDefault();
 });
+
+$('.search-widget-form').on('submit', function(){
+  if(!$("[name='title']")[1].value){
+    return false;
+  }
+})
+
+$('#search_itens').on('focus', function(){
+  $('#search-type-header').addClass('search-visible ');
+});
+
+$('.banner-wrap, .section-wrap').on('click', function(){
+  $('#search-type-header').removeClass('search-visible ');
+});
+
 // alert login sucess or error
 $(document).ready(function () {
   if ($(this).find("div.addons-error-login").length > 0) {
@@ -139,7 +154,7 @@ $('select#price_filter').on("change", function (ev) {
     type_page = 'themes';
   }
   let path = window.location.pathname.split('/')[2];
-  console.log(path)
+
   window.location.href = '/' + $('html')[0].lang + '/' + path + '?filter=' + price_filter;
 
   let qs = getUrlVars();
@@ -188,33 +203,17 @@ $('select#category_filter').on("change", function (ev) {
 });
 
 $(".search-form").submit(function (event) {
+
+  if($('#search_itens').val()){
+    let type;
+    $("[name='search_type']").each(function (index, element) {
+      if($(element)[0].checked){
+        type = $(element)[0].value;
+      }
+    });
+    window.location.href = '/' + $('html')[0].lang + '/' + type + '?title=' + $('#search_itens').val();
+  }
   event.preventDefault();
-  let category_filter = $('select#category_filter').val(),
-    price_filter = $('select#price_filter').val(),
-    name_search = $('input#search_products').val(),
-    type_page = $('input#type_page').val();
-
-  console.log(price_filter);
-  console.log(category_filter);
-  console.log(name_search);
-  console.log(type_page);
-
-  if (price_filter == undefined) {
-    price_filter = 'all';
-  }
-
-  if (category_filter == undefined || category_filter == 'ALL') {
-    category_filter = undefined;
-  } else if (category_filter == 'apps') {
-    category_filter = 0;
-    type_page = 'apps';
-  } else if (category_filter == 'themes') {
-    category_filter = 0;
-    type_page = 'themes';
-  }
-
-  //window.location.href = "/apps?title=";
-  // alert( "Handler for .submit() called." );
 
 });
 
