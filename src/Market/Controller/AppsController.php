@@ -28,12 +28,13 @@ class AppsController
     {
         //$ret = Apps::find($args['id'])->with('imagens')->toArray();
         $ret = Apps::where('id', $args['id'])->first();
-        return $ret ? ['app'=>$ret->toArray(), 'imagens' => array_map(function ($a) {
-            $r['path'] = $a['path_image'];
-            $r['id'] = $a['id'];
-            return $r;
-        }, $ret->imagens->toArray())] : [];
-        //return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
+        
+        //return $ret ? ['app'=>$ret->toArray(), 'imagens' => array_map(function ($a) {
+        //    $r['path'] = $a['path_image'];
+        //    $r['id'] = $a['id'];
+        //    return $r;
+        //}, $ret->imagens->toArray())] : [];
+        return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
     }
     
     public function getBySlug($request, $response, $args)

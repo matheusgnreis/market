@@ -8,7 +8,7 @@ use Market\Controller\MediaController;
 use Market\Controller\ThemesController;
 use Market\Services\Helpers;
 
-$routes = function () use ($langRedirect, $verifyLogin) {
+$routes = function () use ($langRedirect, $verifyLogitn) {
 
     // dashboard
     $this->get('/logout', AccountController::class . ':logout');
@@ -40,6 +40,8 @@ $routes = function () use ($langRedirect, $verifyLogin) {
     $this->post('/ws/partner/profile/picture', PartnerController::class . ':updatePicture');
 
     // path apps
+    $this->get('/ws/app/{id}', AppsController::class . ':getById');
+
     $this->post('/ws/apps', AppsController::class . ':create');
     $this->post('/ws/apps/media/{id}', MediaController::class . ':create');
     $this->get('/ws/apps/slug/{slug}', AppsController::class . ':verifySlug');
