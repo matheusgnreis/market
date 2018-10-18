@@ -26,17 +26,53 @@ class AppsController
 
     public function getById($request, $response, $args)
     {
-        //$ret = Apps::find($args['id'])->with('imagens')->toArray();
-        $ret = Apps::where('id', $args['id'])->first();
-        
-        //return $ret ? ['app'=>$ret->toArray(), 'imagens' => array_map(function ($a) {
-        //    $r['path'] = $a['path_image'];
-        //    $r['id'] = $a['id'];
-        //    return $r;
-        //}, $ret->imagens->toArray())] : [];
-        return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
+        //$ret = Apps::find($args['id'])->toArray();
+        //$ret = Apps::where('id', $args['id'])->first();
+
+        return $ret ? ['app'=>$ret->toArray(), 'imagens' => array_map(function ($a) {
+            $r['path'] = $a['path_image'];
+            $r['id'] = $a['id'];
+            return $r;
+        }, $ret->imagens->toArray())] : [];
+        return $ret ? $ret : $response->withJson([], 404);
     }
-    
+
+    public function _byId($request, $response, $args)
+    {
+        $query = Apps::where('id', $args['id'])->get();
+        //$query = Apps::find($args['id']);
+        $map = $query->map(function ($item) {
+            $data['app_id'] = $item->id;
+            $data['title'] = $item->title;
+            $data['slug'] = $item->slug;
+            $data['paid'] = (boolean)$item->paid;
+            $data['version'] = $item->version;
+            //$data['version_date'] = $item->version_date;
+            $data['type'] = $item->type;
+            if (!empty($item->module)) {
+                $data['module'] = $item->module ;
+            }
+            if (!empty($item->load_events)) {
+                $data['load_events' ] = explode(',', str_replace(["\\","[", "]", '"'], '', (string)$item->load_events));
+            }
+            if (!empty($item->script_uri)) {
+                $data['script_uri'] = $item->script_uri;
+            }
+            if (!empty($item->redirect_uri)) {
+                $data['redirect_uri'] = $item->redirect_uri;
+            }
+            $data['github_repository'] = $item->github_repository;
+            $data['authentication'] = (boolean)$item->authentication;
+            $data['auth_callback_uri'] = $item->auth_callback_uri;
+            $data['auth_scope'] = json_decode($item->auth_scope);
+            $data['state'] = 'active';
+            $data['status'] = 'active';
+            return $data;
+        });
+
+        return $map ? $response->withJson($map[0], 200) : $response->withJson([], 404);
+    }
+
     public function getBySlug($request, $response, $args)
     {
         $app = Apps::where('slug', $args['slug'])->first();
@@ -69,7 +105,7 @@ class AppsController
     {
         $search = [];
         $search[] = ['active', 1];
-        
+
         if (isset($request->getParams()['filter'])) {
             if ($request->getParams()['filter'] == 'free') {
                 $search[] = ['value_plan_basic', 0];
@@ -125,6 +161,7 @@ class AppsController
                     'github_repository' => !empty($body['github_repository']) ? $body['github_repository'] : null,
                     'authentication' => isset($body['authentication']) ? $body['authentication'] : null,
                     'auth_callback_uri' => !empty($body['auth_callback_uri']) ? $body['auth_callback_uri'] : null,
+                    'redirect_uri' => !empty($body['redirect_uri']) ? $body['redirect_uri'] : null,
                     'auth_scope' => !empty($body['auth_scope']) ? $body['auth_scope'] : null,
                     'avg_stars' => !empty($body['avg_stars']) ? $body['avg_stars'] : null,
                     'evaluations' => !empty($body['evaluations']) ? $body['evaluations'] : null,
@@ -134,7 +171,7 @@ class AppsController
                     'value_plan_basic' => !empty($body['value_plan_basic']) ? $body['value_plan_basic'] : null,
                     'active' => !empty($body['active']) ? $body['active'] : 1
         ]);
-        
+
         return $app ? $response->withJson(['status' => 201, 'message' => 'created', 'app' => $app], 201) : $response->withJson(['erro' => 'Error creating new app'], 400);
     }
 
