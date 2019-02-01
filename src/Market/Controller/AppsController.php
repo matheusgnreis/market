@@ -131,6 +131,53 @@ class AppsController
             ],
             'result' => $result,
         ];
+    }
 
+    public function create($request, $response)
+    {
+        $body = [
+            'partner_id' => !empty($body['partner_id']) ? $body['partner_id'] : null,
+            'title' => !empty($body['title']) ? $body['title'] : null,
+            'slug' => !empty($body['slug']) ? $body['slug'] : null,
+            'category' => !empty($body['category']) ? $body['category'] : null,
+            'thumbnail' => !empty($body['thumbnail']) ? $body['thumbnail'] : null,
+            'description' => !empty($body['description']) ? $body['description'] : null,
+            'json_body' => !empty($body['json_body']) ? $body['json_body'] : null,
+            'paid' => isset($body['paid']) ? $body['paid'] : null,
+            'version' => !empty($body['version']) ? $body['version'] : null,
+            'version_date' => !empty($body['version_date']) ? $body['version_date'] : null,
+            'type' => !empty($body['type']) ? $body['type'] : null,
+            'module' => !empty($body['module']) ? $body['module'] : null,
+            'load_events' => !empty($body['load_events']) ? (string) (json_encode($body['load_events'])) : null,
+            'script_uri' => !empty($body['script_uri']) ? $body['script_uri'] : null,
+            'github_repository' => !empty($body['github_repository']) ? $body['github_repository'] : null,
+            'authentication' => isset($body['authentication']) ? $body['authentication'] : null,
+            'auth_callback_uri' => !empty($body['auth_callback_uri']) ? $body['auth_callback_uri'] : null,
+            'redirect_uri' => !empty($body['redirect_uri']) ? $body['redirect_uri'] : null,
+            'auth_scope' => !empty($body['auth_scope']) ? $body['auth_scope'] : null,
+            'avg_stars' => !empty($body['avg_stars']) ? $body['avg_stars'] : null,
+            'evaluations' => !empty($body['evaluations']) ? $body['evaluations'] : null,
+            'website' => !empty($body['website']) ? $body['website'] : null,
+            'link_video' => !empty($body['link_video']) ? $body['link_video'] : null,
+            'plans_json' => !empty($body['plans_json']) ? $body['plans_json'] : null,
+            'value_plan_basic' => !empty($body['value_plan_basic']) ? $body['value_plan_basic'] : null,
+            'active' => !empty($body['active']) ? $body['active'] : 1,
+        ];
+
+        $application = Apps::create($body);
+
+        if (!$application) {
+            $return = [
+                'status' => 400,
+                'message' => 'Error with request on this resource',
+                'user_message' => [
+                    'en_us' => 'Error with request to creating new application.',
+                    'pt_br' => 'Erro na criação do novo aplicativo.',
+                ],
+            ];
+
+            return $response->withJson($return, 400);
+        }
+        return $response->withJson($app->id, 201);
     }
 }
