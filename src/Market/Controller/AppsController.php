@@ -171,13 +171,19 @@ class AppsController
                 'status' => 400,
                 'message' => 'Error with request on this resource',
                 'user_message' => [
-                    'en_us' => 'Error with request to creating new application.',
-                    'pt_br' => 'Erro na criação do novo aplicativo.',
+                    'en_us' => 'Unexpected error, report to support or responsible developer',
+                    'pt_br' => 'Erro inesperado, reportar ao suporte ou desenvolvedor responsável',
                 ],
             ];
 
             return $response->withJson($return, 400);
         }
         return $response->withJson($app->id, 201);
+    }
+
+    public function update($request, $response)
+    {
+        if (!$args['id']) {
+        }
     }
 }
