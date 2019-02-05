@@ -1,0 +1,207 @@
+
+// Write your custom style. Feel free to split your code to several files
+body {
+  margin: 0;
+    font-family: "Fira Sans",sans-serif;
+    font-size: .9375rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: #757575;
+    text-align: left;
+    background-color: #fff;
+}
+
+.apps-suggestion {
+  max-width: 250px;
+  width: 100%;
+}
+
+.apps-suggestion img {
+  overflow: hidden; 
+  width: 100%;
+  height: 100%;
+  position: relative; 
+}
+
+h5.card-title {
+  text-align: center;
+}
+
+.card-img img {border-radius: 50%;width: 50%;margin: 1em;}
+
+.card-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-brand img {
+  width: 132px;
+  height: 28px;
+  margin-right: 4px;
+}
+
+.navbar-brand span {
+  color: #37003c !important;
+  font-size: 24px;
+  font-weight: 300;
+  text-transform: lowercase;
+}
+
+form#search-home .form-group {
+  margin-bottom: 1rem;
+  margin-top:1rem;
+}
+
+/** btn */
+.btn-action {
+  background-color: #37003c;
+  color: #fff;
+}
+
+
+/** cards items */
+
+.card-items {
+
+}
+
+.card-items .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+}
+
+.card-items .card-body .card-title {font-weight: 500;font-size: 1.125em;}
+
+.card-items .card-body .card-img {margin-bottom: .75rem;}
+
+.card-items .card-body .card-img img {width: 72px;height: 72px;border-radius: 5% !important;}
+
+.card-items .card-body .card-paid,
+.card-items .card-body .card-categories,
+.card-items .card-body .card-hits .downloads-count {
+    font-size: 0.875em;
+    font-weight: 500;
+}
+
+.card-items .card-body .card-paid {
+    margin-bottom: .75rem;
+}
+
+.card-app-divide {}
+
+.card-items .card-body .card-hits {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+    border-top: 1px solid #f1f2f3;
+    border-bottom: 1px solid #f1f2f3;
+    margin-bottom: .75em;
+}
+
+.card-items .card-body .card-actions {}
+
+.card-items .card-body .card-hits .downloads-count {}
+
+
+/** global */
+section.section{
+  padding-bottom: 5em;
+  padding-top: 5em;
+}
+.section-actions {
+  padding: 2em 0;
+  text-align: center;
+}
+#page-pagination {
+  margin-top: 5em;
+}
+
+/** breadcrumb */
+/* Style the list */
+ul.breadcrumb {
+  padding: 10px 5px;
+  list-style: none;
+  background-color: #fff;
+}
+
+/* Display list items side by side */
+ul.breadcrumb li {
+  display: inline;
+  font-size: .95em;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+ul.breadcrumb li+li:before {
+  padding: 8px;
+  color: #9C27B0;
+  content: "/\00a0";
+}
+
+/* Add a color to all links inside the list */
+ul.breadcrumb li a {
+  color: #ff015b;
+  text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+ul.breadcrumb li a:hover {
+  color: #37003c;
+  opacity:.7;
+}
+
+
+ul.breadcrumb li:last-child {
+  font-weight: 500;
+}
+
+ul.breadcrumb li+li:last-child:before {
+ font-weight: 300
+}
+
+/* single app page */
+#item-content {
+  
+}
+
+.single-content.shadow-4 {
+  padding: 1em;
+}
+
+#page-breadcrumb {
+  padding: 1em 12px;
+}
+
+
+/* singles page app resume */
+.item-single-title {
+  font-size: 1.5em;
+  text-align: center;
+  margin: 0;
+  font-weight: 500;
+}
+
+.items-lists-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.items-lists-details:not(:last-child) {
+border-bottom: 1px solid #eee;
+}
+
+.items-lists-details span {
+  font-size: .87em;
+}
+
+.title-h1{
+    font-size: 17px;
+    font-weight: 300;
+}
