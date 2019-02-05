@@ -1,5 +1,5 @@
 <?php
-$langRedirect = function ($request, $response, $next) {
+$redirectToLang = function ($request, $response, $next) {
     $uri = $request->getUri();
     $route = $request->getAttribute('route');
     $args = $route->getArguments();
