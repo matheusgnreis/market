@@ -7,6 +7,7 @@ class Apps extends Model
 {
     /** db table */
     protected $table = 'apps';
+    protected $primaryKey = 'app_id';
     /** The attributes that are mass assignable. */
     protected $fillable = [
         'app_id',
