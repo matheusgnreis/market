@@ -23,10 +23,20 @@ class AppsController
 
     public function getAll($request, $response)
     {
+
+        /*
+            find multiples ids
+        */
+        if (isset($request->getParams()['app_id'])) {
+            $ids = explode(',', $request->getParams()['app_id']);
+            $apps = Apps::whereIn('app_id', $ids)->get($this->_fields);
+            return $response->withJson($this->response($apps->toArray()));
+        }
+
         /*
         metafields
          */
-        $this->requestHasMeta($request);
+        $this->requestHasMeta($request, $response);
         /*
         search
          */
@@ -73,7 +83,7 @@ class AppsController
         : $response->withJson([], 404);
     }
 
-    public function requestHasMeta($request)
+    public function requestHasMeta($request, $response)
     {
         /*
         Possíveis parametros para busca
