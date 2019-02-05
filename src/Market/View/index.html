@@ -1,205 +1,310 @@
-{% extends "templates/layout.html" %}
-{% import 'templates/macros.html' as macro_main %}
-
+{% extends "layout/main.html" %}
+{% import "macros/main.macros.html" as main %}
 {% block content %}
-<!-- /header -->
-<!-- BANNER -->
-<div class="banner-wrap">
-    <section class="banner">
-        <h5>{{ dictionary.welcome }}</h5>
-        <h1>
-            {{ dictionary.e_com }}
-            <span>{{ dictionary.addons }}</span></h1>
-        <p>{{ dictionary.subtitle }}</p>
-        <img src="/assets/images/top_items.png" alt="banner-img">
+  {{main.headerHero(params)}}
+  <main class="main-content">
+    <!--
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      | Apps Escolhidos
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      !-->
+    <!--
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      | Overflow content
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      !-->
+    <section class="section overflow-hidden">
+      <div class="container">
+        <div class="row flex-nowrap align-items-center">
+          <div class="col-4">
+            <h5>Turbine seu e-commerce.</h5>
+            <p>Meios de pagamento, soluções de envio, e-mails transacionais e muito mais.</p>
+          </div>
 
-        <!-- SEARCH WIDGET -->
-        <div class="search-widget">
-            <form class="search-widget-form">
-                <input type="text" name="title" placeholder="{{ dictionary.word_search_apps_themes }}">
-                <label for="categories" class="select-block">
-                    <select name="categories" id="categories">
-                        {% for feature in search %}
-                        <option value="{{feature.slug}}">{{ feature.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <!-- SVG ARROW -->
-                    <svg class="svg-arrow">
-                        <use xlink:href="#svg-arrow"></use>
-                    </svg>
-                    <!-- /SVG ARROW -->
-                </label>
-                <button class="button medium dark">
-                    {{ dictionary.word_search }}
-                    !</button>
-            </form>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3 apps-suggestion">
+                <img class="rounded" src="../assets/img/app/wirecard.jpg" alt="...">
+              </div>
+
+              <div class="col-3 apps-suggestion">
+                <img class="rounded" src="../assets/img/app/melhorenvio.png" alt="...">
+              </div>
+
+              <div class="col-3 apps-suggestion">
+                <img class="rounded" src="../assets/img/app/mailjet.png" alt="...">
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- /SEARCH WIDGET -->
+
+      </div>
     </section>
-</div>
-<!-- /BANNER -->
-
-<!-- SERVICES -->
-<div id="services-wrap">
-    <section id="services">
-        <!-- SERVICE LIST -->
-        <div class="service-list column4-wrap">
-            <!-- SERVICE ITEM -->
-            <div class="service-item column">
-                <div class="circle medium gradient"></div>
-                <div class="circle white-cover"></div>
-                <div class="circle dark">
-                    <span class="icon-present"></span>
+    <!--
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      | Basic
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      !-->
+    <section class="section">
+      <div class="container">
+        <header class="section-header">
+          <h2>Possibilidades para todas as necessidades.</h2>
+        </header>
+        <div class="row flex-nowrap align-items-center">
+          <div class="col-md-3">
+            <div class="card card-items border hover-shadow-4">
+              <div class="card-body">
+                <div class="card-img">
+                  <img src="https://lorempixel.com/output/technics-q-g-120-118-1.jpg">
                 </div>
-                <h3>{{ dictionary.word_buy_apps }}</h3>
-                <p>{{ dictionary.description_buy_apps}}.</p>
-            </div>
-            <!-- /SERVICE ITEM -->
-
-            <!-- SERVICE ITEM -->
-            <div class="service-item column">
-                <div class="circle medium gradient"></div>
-                <div class="circle white-cover"></div>
-                <div class="circle dark">
-                    <span class="icon-lock"></span>
+                <h5 class="card-title">Bosnia & Herzegovina</h5>
+                <span class="card-categories">Revenda de produtos</span>
+                <span class="card-paid">Grátis / Premium</span>
+                <span class="card-app-divide"></span>
+                <div class="card-hits">
+                  <div class="rating rating-xs">
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                  </div>
+                  <div class="downloads-count">
+                    1.8773.333
+                  </div>
                 </div>
-                <h3>{{ dictionary.word_secure_transation }}</h3>
-                <p>{{ dictionary.description_secure_transation }}.</p>
-            </div>
-            <!-- /SERVICE ITEM -->
-
-            <!-- SERVICE ITEM -->
-            <div class="service-item column">
-                <div class="circle medium gradient"></div>
-                <div class="circle white-cover"></div>
-                <div class="circle dark">
-                    <span class="icon-like"></span>
+                <div class="card-actions">
+                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
                 </div>
-                <h3>{{ dictionary.word_community}}</h3>
-                <p>{{ dictionary.description_community }}.</p>
+              </div>
             </div>
-            <!-- /SERVICE ITEM -->
-
-            <!-- SERVICE ITEM -->
-            <div class="service-item column">
-                <div class="circle medium gradient"></div>
-                <div class="circle white-cover"></div>
-                <div class="circle dark">
-                    <span class="icon-diamond"></span>
+          </div>
+          <div class="col-md-3">
+            <div class="card card-items border hover-shadow-4">
+              <div class="card-body">
+                <div class="card-img">
+                  <img src="https://lorempixel.com/output/technics-q-c-120-118-5.jpg">
                 </div>
-                <h3>{{ dictionary.word_mkp_quality }}</h3>
-                <p>{{ dictionary.description_mkp_quality }}</p>
+                <h5 class="card-title">Central African Republic</h5>
+                <span class="card-categories">Revenda de produtos</span>
+                <span class="card-paid">Grátis / Premium</span>
+                <span class="card-app-divide"></span>
+                <div class="card-hits">
+                  <div class="rating rating-xs">
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star empty"></label>
+                    <label class="fa fa-star empty"></label>
+                  </div>
+                  <div class="downloads-count">
+                    1.8773.333
+                  </div>
+                </div>
+                <div class="card-actions">
+                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
+                </div>
+              </div>
             </div>
-            <!-- /SERVICE ITEM -->
+          </div>
+          <div class="col-md-3">
+            <div class="card card-items border hover-shadow-4">
+              <div class="card-body">
+                <div class="card-img">
+                  <img src="https://lorempixel.com/output/technics-q-c-120-118-2.jpg">
+                </div>
+                <h5 class="card-title">Romania</h5>
+                <span class="card-categories">Revenda de produtos</span>
+                <span class="card-paid">Grátis / Premium</span>
+                <span class="card-app-divide"></span>
+                <div class="card-hits">
+                  <div class="rating rating-xs">
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star empty"></label>
+                    <label class="fa fa-star empty"></label>
+                    <label class="fa fa-star empty"></label>
+                    <label class="fa fa-star empty"></label>
+                  </div>
+                  <div class="downloads-count">
+                    1.8773.333
+                  </div>
+                </div>
+                <div class="card-actions">
+                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card card-items border hover-shadow-4">
+              <div class="card-body">
+                <div class="card-img">
+                  <img src="https://lorempixel.com/output/technics-q-c-120-118-7.jpg">
+                </div>
+                <h5 class="card-title">Puerto Rico</h5>
+                <span class="card-categories">Revenda de produtos</span>
+                <span class="card-paid">Grátis / Premium</span>
+                <span class="card-app-divide"></span>
+                <div class="card-hits">
+                  <div class="rating rating-xs">
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                  </div>
+                  <div class="downloads-count">
+                    1.8773.333
+                  </div>
+                </div>
+                <div class="card-actions">
+                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- /SERVICE LIST -->
-        <div class="clearfix"></div>
+        <hr>
+        <div class="row flex-nowrap align-items-center">
+          <div class="col-md-3">
+            <div class="card card-items border hover-shadow-4">
+              <div class="card-body">
+                <div class="card-img">
+                  <img src="https://lorempixel.com/output/technics-q-c-120-118-3.jpg">
+                </div>
+                <h5 class="card-title">Kazakhstan</h5>
+                <span class="card-categories">Revenda de produtos</span>
+                <span class="card-paid">Grátis / Premium</span>
+                <span class="card-app-divide"></span>
+                <div class="card-hits">
+                  <div class="rating rating-xs">
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                  </div>
+                  <div class="downloads-count">
+                    1.8773.333
+                  </div>
+                </div>
+                <div class="card-actions">
+                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card card-items border hover-shadow-4">
+              <div class="card-body">
+                <div class="card-img">
+                  <img src="https://lorempixel.com/output/technics-q-c-120-118-8.jpg">
+                </div>
+                <h5 class="card-title">Djibouti</h5>
+                <span class="card-categories">Revenda de produtos</span>
+                <span class="card-paid">Grátis / Premium</span>
+                <span class="card-app-divide"></span>
+                <div class="card-hits">
+                  <div class="rating rating-xs">
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                  </div>
+                  <div class="downloads-count">
+                    1.8773.333
+                  </div>
+                </div>
+                <div class="card-actions">
+                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card card-items border hover-shadow-4">
+              <div class="card-body">
+                <div class="card-img">
+                  <img src="https://lorempixel.com/output/technics-q-c-120-118-4.jpg">
+                </div>
+                <h5 class="card-title">American Samoa</h5>
+                <span class="card-categories">Revenda de produtos</span>
+                <span class="card-paid">Grátis / Premium</span>
+                <span class="card-app-divide"></span>
+                <div class="card-hits">
+                  <div class="rating rating-xs">
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star empty"></label>
+                  </div>
+                  <div class="downloads-count">
+                    1.8773.333
+                  </div>
+                </div>
+                <div class="card-actions">
+                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card card-items border hover-shadow-4">
+              <div class="card-body">
+                <div class="card-img">
+                  <img src="https://lorempixel.com/output/technics-q-c-120-118-9.jpg">
+                </div>
+                <h5 class="card-title">Eritrea</h5>
+                <span class="card-categories">Revenda de produtos</span>
+                <span class="card-paid">Grátis / Premium</span>
+                <span class="card-app-divide"></span>
+                <div class="card-hits">
+                  <div class="rating rating-xs">
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                    <label class="fa fa-star active"></label>
+                  </div>
+                  <div class="downloads-count">
+                    1.8773.333
+                  </div>
+                </div>
+                <div class="card-actions">
+                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section-actions">
+          <a href="" class="fs-12 fw-600">Ver todos os aplicativos</a>
+        </div>
+      </div>
     </section>
-</div>
-<!-- /SERVICES -->
 
-{% if login == false %}
-<!-- PROMO -->
-<div class="promo-banner dark left">
-    <span class="icon-wallet"></span>
-    <h5>{{ dictionary.desc_promo_partners }}
-        {{ dictionary.title }}!</h5>
-    <h1>{{ dictionary.word_start }}
-        <span>{{ dictionary.word_now }}</span></h1>
-    <a href="/signup" class="button medium primary">{{ dictionary.word_register }}!</a>
-</div>
-<!-- /PROMO -->
+    <!--
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      | Help cta
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      !-->
 
-<!-- PROMO -->
-<div class="promo-banner secondary right">
-    <span class="icon-tag"></span>
-    <h5>{{ dictionary.desc_promo_store }}</h5>
-    <h1>{{dictionary.word_start}}
-        {{ dictionary.word_buying }}</h1>
-    <a href="#" class="button medium dark">{{ dictionary.buy_now }}</a>
-</div>
-<!-- /PROMO -->
-{% endif %}
-<div class="clearfix"></div>
+    <section class="section" style="background-image: linear-gradient(-31deg,  #fafafa 50%, #fafafa 100%);">
+      <div class="container">
+        <div class="row gap-y align-items-center">
+          <div class="col-md-6 text-center">
+            <img src="../assets/img/13.png" alt="...">
+          </div>
 
-<!-- PRODUCT SIDESHOW -->
-<div id="product-sideshow-wrap">
-    <div id="product-sideshow">
-        <!-- PRODUCT SHOWCASE -->
-        <div class="product-showcase">
-            <!-- HEADLINE -->
-            <div class="headline primary">
-                <h4>{{ dictionary.apps_trends }}</h4>
-                <!-- SLIDE CONTROLS -->
-                <div class="slide-control-wrap">
-                    <div class="slide-control left">
-                        <!-- SVG ARROW -->
-                        <svg class="svg-arrow">
-                            <use xlink:href="#svg-arrow"></use>
-                        </svg>
-                        <!-- /SVG ARROW -->
-                    </div>
-
-                    <div class="slide-control right">
-                        <!-- SVG ARROW -->
-                        <svg class="svg-arrow">
-                            <use xlink:href="#svg-arrow"></use>
-                        </svg>
-                        <!-- /SVG ARROW -->
-                    </div>
-                </div>
-                <!-- /SLIDE CONTROLS -->
-            </div>
-            <!-- /HEADLINE -->
-
-            <!-- PRODUCT LIST -->
-            <div id="pl-1" class="product-list grid column4-wrap owl-carousel">
-                <!-- PRODUCT ITEM -->
-                <!-- /PRODUCT ITEM -->
-                {{macro_main.apps_themes(apps,0,8,dictionary, 'apps')}}
-            </div>
-
-            <!-- /PRODUCT LIST -->
+          <div class="col-md-6 text-center text-md-left">
+            <h2>Precisa de ajuda?</h2>
+            <p class="lead mb-6">Visite nosso help center.</p>
+            <p><a class="btn btn-sm btn-round btn-success" href="#">Ir para ajuda</a></p>
+          </div>
         </div>
-        <!-- /PRODUCT SHOWCASE -->
-
-        <!-- PRODUCT SHOWCASE -->
-        <div class="product-showcase">
-            <!-- HEADLINE -->
-            <div class="headline secondary">
-                <h4>{{ dictionary.themes_trends }}</h4>
-                <!-- SLIDE CONTROLS -->
-                <div class="slide-control-wrap">
-                    <div class="slide-control left">
-                        <!-- SVG ARROW -->
-                        <svg class="svg-arrow">
-                            <use xlink:href="#svg-arrow"></use>
-                        </svg>
-                        <!-- /SVG ARROW -->
-                    </div>
-
-                    <div class="slide-control right">
-                        <!-- SVG ARROW -->
-                        <svg class="svg-arrow">
-                            <use xlink:href="#svg-arrow"></use>
-                        </svg>
-                        <!-- /SVG ARROW -->
-                    </div>
-                </div>
-                <!-- /SLIDE CONTROLS -->
-            </div>
-            <!-- /HEADLINE -->
-
-            <!-- PRODUCT LIST -->
-            <div id="pl-4" class="product-list grid column4-wrap owl-carousel">
-                {{macro_main.apps_themes(themes,0,12,dictionary, 'themes')}}
-            </div>
-            <!-- /PRODUCT LIST -->
-        </div>
-        <!-- /PRODUCT SHOWCASE -->
-
-    </div>
-</div>
-<!-- /PRODUCTS SIDESHOW -->
-
+      </div>
+    </section>
+  </main>
 {% endblock %}
