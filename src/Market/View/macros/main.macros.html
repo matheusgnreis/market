@@ -1,0 +1,110 @@
+{% macro header(params) %}
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark" data-navbar="static">
+    <div class="container">
+      <div class="navbar-left">
+        <button class="navbar-toggler" type="button">&#9776;</button>
+        <a class="navbar-brand" href="/" title="e-com.plus market">
+          <img alt="logo" class="logo-dark" src="../assets/img/logo-dark.png">
+          <img alt="logo" class="logo-light" src="../assets/img/logo-light.png">
+          <span>Market</span>
+        </a>
+      </div>
+      <section class="navbar-mobile">
+        <ul class="nav nav-navbar ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/{{params.dictionary.lang}}/apps">
+              {{ params.dictionary.word_app }}
+              <span class="arrow"></span>
+            </a>
+            <nav class="nav columns-1">
+              {% for category in params.categories.applications %}
+              <a class="nav-link" href="/{{params.dictionary.lang}}/apps?category={{category.page}}">
+                {{category.name}}</a>
+              {% endfor %}
+            </nav>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/{{params.dictionary.lang}}/themes">
+              {{ params.dictionary.word_theme }}<span class="arrow"></span>
+            </a>
+            <nav class="nav columns-1">
+            {% for category in params.categories.themes  %}
+            <a class="nav-link" href="/{{params.dictionary.lang}}/themes?category={{category.page}}">
+              {{category.name}}</a>
+            {% endfor %}
+            </nav>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/partner">{{params.dictionary.word_partner}}</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </nav>
+  <!-- /.navbar -->
+{% endmacro %}
+
+{% macro footer(params) %}
+    <footer class="footer py-7">
+    <div class="container">
+      <div class="row gap-y">
+
+        <div class="col-md-6 col-xl-5">
+          <h1 class="title-h1">E-com.plus market</h1>
+          <p>E-Com Plus Market é o melhor marketplace de apps e temas para e-commerce, criado para possibilitar que
+            lojistas que não tem grande capacidade de investimento tenham acesso a um layout personalizado de qualidade
+            pelo melhor preço.</p>
+        </div>
+
+        <div class="col-6 col-md-3 col-xl-4">
+          <div class="nav flex-column">
+            <a class="nav-link">Community</a>
+            <a class="nav-link">Partners program</a>
+            <a class="nav-link">App store</a>
+            <a class="nav-link">Status</a>
+            <a class="nav-link">Dashboard</a>
+            <a class="nav-link">About</a>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-xl-3 text-center">
+          <p><a class="btn btn-block btn-round btn-primary" href="#">Registrar-se</a></p>
+          <p><a class="btn btn-block btn-round btn-action" href="#">Login Parceiro</a></p>
+          <p><a class="btn btn-block btn-round btn-action" href="#">Login Logistas</a></p>
+          <br>
+          <div class="social social-bordered">
+            <a class="social-facebook" href="#"><i class="fa fa-facebook"></i></a>
+            <a class="social-twitter" href="#"><i class="fa fa-twitter"></i></a>
+            <a class="social-youtube" href="#"><i class="fa fa-youtube"></i></a>
+            <a class="social-instagram" href="#"><i class="fa fa-instagram"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+{% endmacro %}
+
+{% macro headerHero(params) %}
+    <!-- Header -->
+  <header class="header text-white pb-10" style="background-image: linear-gradient(-9deg, #670070 50%, #04F1FF 100%);">
+    <canvas class="constellation"></canvas>
+    <div class="container">
+      <h1 class="display-5">Bem vindo a E-Com Plus Market.</h1>
+      <p class="lead-2">Explore todas as possibilidades do markerplace de aplicativos e temas para e-commerce.</p>
+      <div class="card shadow-4">
+        <div class="card-body">
+          <form class="input-round" id="search-home">
+            <div class="form-group input-group">
+              <input type="text" class="form-control" placeholder="Busque por...">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">Buscar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header><!-- /.header -->
+{% endmacro %}
