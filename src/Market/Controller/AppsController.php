@@ -10,7 +10,7 @@ class AppsController
 {
     private $_limit = 1000;
     private $_offset = 0;
-    private $_fields = ["id", "title", "slug", "thumbnail", "version", "paid"];
+    private $_fields = ['app_id', 'title', 'slug', 'icon', 'version', 'paid'];
     private $_result = [];
     private $_params = ['active' => 1];
     /**
@@ -40,15 +40,14 @@ class AppsController
 
     public function getById($request, $response, $args)
     {
-        $query = Apps::where('id', $args['id'])->get();
-        //$query = Apps::find($args['id']);
+        $query = Apps::where('app_id', $args['id'])->with('imagens')->get();
+
         $map = $query->map(function ($item) {
-            $data['app_id'] = $item->id;
+            $data['app_id'] = $item->app_id;
             $data['title'] = $item->title;
             $data['slug'] = $item->slug;
             $data['paid'] = (boolean) $item->paid;
             $data['version'] = $item->version;
-            //$data['version_date'] = $item->version_date;
             $data['type'] = $item->type;
             if (!empty($item->module)) {
                 $data['module'] = $item->module;
@@ -66,8 +65,7 @@ class AppsController
             $data['authentication'] = (boolean) $item->authentication;
             $data['auth_callback_uri'] = $item->auth_callback_uri;
             $data['auth_scope'] = json_decode($item->auth_scope);
-            $data['state'] = 'active';
-            $data['status'] = 'active';
+            $data['pictures'] = $item->imagens;
             return $data;
         });
 
@@ -140,7 +138,7 @@ class AppsController
             'title' => !empty($body['title']) ? $body['title'] : null,
             'slug' => !empty($body['slug']) ? $body['slug'] : null,
             'category' => !empty($body['category']) ? $body['category'] : null,
-            'thumbnail' => !empty($body['thumbnail']) ? $body['thumbnail'] : null,
+            'icon' => !empty($body['icon']) ? $body['icon'] : null,
             'description' => !empty($body['description']) ? $body['description'] : null,
             'json_body' => !empty($body['json_body']) ? $body['json_body'] : null,
             'paid' => isset($body['paid']) ? $body['paid'] : null,
@@ -181,9 +179,79 @@ class AppsController
         return $response->withJson($app->id, 201);
     }
 
-    public function update($request, $response)
+    public function update($request, $response, $args)
     {
         if (!$args['id']) {
+            $return = [
+                'status' => 400,
+                'message' => 'Resource ID expected and not specified on request UR',
+                'user_message' => [
+                    'en_us' => 'Unexpected error, report to support or responsible developer',
+                    'pt_br' => 'Erro inesperado, reportar ao suporte ou desenvolvedor responsável',
+                ],
+            ];
+
+            return $response->withJson($return, 400);
         }
+
+        $application = Apps::find($args['id']);
+
+        if (!$application) {
+            $return = [
+                'status' => 400,
+                'message' => 'Invalid value on resource ID',
+                'user_message' => [
+                    'en_us' => 'The informed ID is invalid',
+                    'pt_br' => 'O ID informado é inválido',
+                ],
+            ];
+
+            return $response->withJson($return, 400);
+        }
+
+        $requestBody = $request->getParsedBody();
+
+        $updateBody = [
+            'title' => isset($requestBody['title']) ? $requestBody['title'] : $application->title,
+            'slug' => isset($requestBody['slug']) ? $requestBody['slug'] : $application->slug,
+            'category' => isset($requestBody['category']) ? $requestBody['category'] : $application->category,
+            'icon' => isset($requestBody['icon']) ? $requestBody['icon'] : $application->icon,
+            'description' => isset($requestBody['description']) ? $requestBody['description'] : $application->description,
+            'json_body' => isset($requestBody['json_body']) ? $requestBody['json_body'] : $application->json_body,
+            'paid' => isset($requestBody['paid']) ? $requestBody['paid'] : $application->paid,
+            'version' => isset($requestBody['version']) ? $requestBody['version'] : $application->version,
+            'version_date' => isset($requestBody['version_date']) ? $requestBody['version_date'] : $application->version_date,
+            'type' => isset($requestBody['type']) ? $requestBody['type'] : $application->type,
+            'module' => isset($requestBody['module']) ? $requestBody['module'] : $application->module,
+            'load_events' => isset($requestBody['load_events']) ? $requestBody['load_events'] : $application->load_events,
+            'script_uri' => isset($requestBody['script_uri']) ? $requestBody['script_uri'] : $application->script_uri,
+            'github_repository' => isset($requestBody['github_repository']) ? $requestBody['github_repository'] : $application->github_repository,
+            'authentication' => isset($requestBody['authentication']) ? $requestBody['authentication'] : $application->authentication,
+            'auth_callback_uri' => isset($requestBody['auth_callback_uri']) ? $requestBody['auth_callback_uri'] : $application->auth_callback_uri,
+            'auth_scope' => isset($requestBody['auth_scope']) ? $requestBody['auth_scope'] : $application->auth_scope,
+            'avg_stars' => isset($requestBody['avg_stars']) ? $requestBody['avg_stars'] : $application->avg_stars,
+            'evaluations' => isset($requestBody['evaluations']) ? $requestBody['evaluations'] : $application->evaluations,
+            'website' => isset($requestBody['website']) ? $requestBody['website'] : $application->website,
+            'link_video' => isset($requestBody['link_video']) ? $requestBody['link_video'] : $application->link_video,
+            'plans_json' => isset($requestBody['plans_json']) ? $requestBody['plans_json'] : $application->plans_json,
+            'value_plan_basic' => isset($requestBody['value_plan_basic']) ? $requestBody['value_plan_basic'] : $application->value_plan_basic,
+        ];
+
+        $update = $application->update($updateBody);
+
+        if (!$update) {
+            $return = [
+                'status' => 400,
+                'message' => 'Bad-formatted JSON body, details in user_message',
+                'user_message' => [
+                    'en_us' => 'data should NOT have additional properties',
+                    'pt_br' => 'data Não são permitidas propriedades adicionais',
+                ],
+            ];
+
+            return $response->withJson($return, 400);
+        }
+
+        return $response->withStatus(204);
     }
 }
