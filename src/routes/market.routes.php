@@ -19,5 +19,6 @@ $app->group(
     function () use ($app, $redirectToLang) {
         $app->get('', HomeController::class . ':home')->add($redirectToLang);
         $app->get('/apps', HomeController::class . ':apps')->add($redirectToLang);
+        $app->get('/apps/{slug}', HomeController::class . ':single')->add($redirectToLang);
     }
 );
