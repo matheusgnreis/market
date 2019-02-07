@@ -1,0 +1,269 @@
+{% extends "layout/main.html" %}
+{% import "macros/single.macros.html" as single %}
+{% block content %}
+<main class="main-content">
+  <section id="resume-header" class="section-resume-app">
+    {{single.singleHeader(params)}}
+  </section>
+  <section id="resume-content" class="section-resume-app">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8" id="item-content">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#tab-home-1">Descrição</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#tab-recursos-1">Recursos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#tab-comments-1">Comentarios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#tab-plans-1">Planos</a>
+            </li>
+          </ul>
+
+          <div class="tab-content p-4">
+            <div class="tab-pane fade show active" id="tab-home-1">
+
+            </div>
+            <div class="tab-pane fade" id="tab-recursos-1">
+              <!--
+                      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+                      | Light accordion
+                      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+                      !-->
+              <div class="accordion accordion-light" id="accordion-3">
+                <div class="card">
+                  <h5 class="card-title">
+                    <a data-toggle="collapse" href="#collapse-3-1">Como funciona o aplicativo</a>
+                  </h5>
+
+                  <div id="collapse-3-1" class="collapse show" data-parent="#accordion-3">
+                    <div class="card-body">aboard needle hit thirty struck manner dirty are building doctor
+                      appropriate behavior twenty bent medicine pilot built progress program amount sudden satellites
+                      grew would</div>
+                  </div>
+                </div>
+
+
+                <div class="card">
+                  <h5 class="card-title">
+                    <a class="collapsed" data-toggle="collapse" href="#collapse-3-2">É possível calcular frete?</a>
+                  </h5>
+
+                  <div id="collapse-3-2" class="collapse" data-parent="#accordion-3">
+                    <div class="card-body">period furniture mad kind recent sense greatest none birds coast girl
+                      shout method crowd key loose solar enjoy pocket took tune while glad opposite</div>
+                  </div>
+                </div>
+
+
+                <div class="card">
+                  <h5 class="card-title">
+                    <a class="collapsed" data-toggle="collapse" href="#collapse-3-3">Posso comprar etiquetas de envio
+                      pelo app?</a>
+                  </h5>
+
+                  <div id="collapse-3-3" class="collapse" data-parent="#accordion-3">
+                    <div class="card-body">
+                      caught test use also wise trade military compass doctor scientific baseball nor oil bigger
+                      choice difference forward apart fairly table soft knowledge kids stop
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="tab-comments-1">
+              <div class="container">
+
+                <div class="row">
+                  <div class="col">
+
+                    <div class="media-list">
+
+                      <div class="media">
+                        <img class="avatar avatar-sm mr-4" src="/assets/img/comments/c1.jpeg" alt="...">
+
+                        <div class="media-body">
+                          <div class="small-1">
+                            <strong>Maryam Amiri</strong>
+                            <time class="ml-4 opacity-70 small-3" datetime="2018-07-14 20:00">24 min ago</time>
+                          </div>
+                          <p class="small-2 mb-0">Thoughts his tend and both it fully to would the their reached
+                            drew project the
+                            be I hardly just tried constructing I his wonder, that his software and need out where
+                            didn't the
+                            counter productive.</p>
+                        </div>
+                      </div>
+
+
+
+                      <div class="media">
+                        <img class="avatar avatar-sm mr-4" src="/assets/img/comments/c2.jpg" alt="...">
+
+                        <div class="media-body">
+                          <div class="small-1">
+                            <strong>Hossein Shams</strong>
+                            <time class="ml-4 opacity-70 small-3" datetime="2018-07-14 20:00">6 hours ago</time>
+                          </div>
+                          <p class="small-2 mb-0">Was my suppliers, has concept how few everything task music.</p>
+                        </div>
+                      </div>
+
+
+
+                      <div class="media">
+                        <img class="avatar avatar-sm mr-4" src="/assets/img/comments/c3.jpg" alt="...">
+
+                        <div class="media-body">
+                          <div class="small-1">
+                            <strong>Sarah Hanks</strong>
+                            <time class="ml-4 opacity-70 small-3" datetime="2018-07-14 20:00">Yesterday</time>
+                          </div>
+                          <p class="small-2 mb-0">Been me have the no a themselves, agency, it that if conduct,
+                            posts, another who
+                            to assistant done rattling forth there the customary imitation.</p>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="tab-plans-1">
+              <section class="section-plans">
+                <div class="container">
+                  <h2>Planos</h2>
+
+                  <a class="row no-gutters pricing-4" href="#">
+                    <div class="col-md-9 plan-description">
+                      <h5>Free</h5>
+                      <p class="mb-0">First image behold. Behold abundantly fly god together place us fly one subdue
+                        fly a, moved Appear morning.</p>
+                    </div>
+
+                    <div class="col-md-3 plan-price">
+                      <h3>$0</h3>
+                      <p>mensal</p>
+                    </div>
+                  </a>
+
+                  <br>
+
+                  <a class="row no-gutters pricing-4 popular" href="#">
+                    <div class="col-md-9 plan-description">
+                      <h5>Personal</h5>
+                      <p class="mb-0">First image behold. Behold abundantly fly god together place us fly one subdue
+                        fly a, moved Appear morning.</p>
+                    </div>
+
+                    <div class="col-md-3 plan-price">
+                      <h3>$9</h3>
+                      <p>semestral</p>
+                    </div>
+                  </a>
+
+                  <br>
+
+                  <a class="row no-gutters pricing-4" href="#">
+                    <div class="col-md-9 plan-description">
+                      <h5>Team</h5>
+                      <p class="mb-0">First image behold. Behold abundantly fly god together place us fly one subdue
+                        fly a, moved Appear morning.</p>
+                    </div>
+
+                    <div class="col-md-3 plan-price">
+                      <h3>$29</h3>
+                      <p>anual</p>
+                    </div>
+                  </a>
+
+                  <br>
+
+                  <a class="row no-gutters pricing-4" href="#">
+                    <div class="col-md-9 plan-description">
+                      <h5>Business</h5>
+                      <p class="mb-0">First image behold. Behold abundantly fly god together place us fly one subdue
+                        fly a, moved Appear morning.</p>
+                    </div>
+
+                    <div class="col-md-3 plan-price">
+                      <h3>$49</h3>
+                    </div>
+                  </a>
+
+                </div>
+              </section>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4" id="item-resume">
+          <h2>Detalhes</h2>
+          <ul>
+            <li class="items-lists">
+              <span>Categoria: </span>
+              <span>Solução de Envio</span>
+            </li>
+            <li class="items-lists">
+              <span>Versão:</span>
+              <span>1.0</span>
+            </li>
+            <li class="items-lists">
+              <span>Atualizado à: </span>
+              <span> 1 mês atrás</span>
+            </li>
+            <li class="items-lists">
+              <span>Site oficial</span>
+              <span>link</span>
+            </li>
+            <li class="items-lists">
+              <span>Suporte</span>
+              <span>link</span>
+            </li>
+            <li class="items-lists">
+              <span>Instalações</span>
+              <span> 4.000.000</span>
+            </li>
+            <li class="items-lists">
+              <span>Avaliações</span>
+              <div class="rating rating-xs">
+                <label class="fa fa-star active"></label>
+                <label class="fa fa-star active"></label>
+                <label class="fa fa-star active"></label>
+                <label class="fa fa-star active"></label>
+                <label class="fa fa-star active"></label>
+              </div>
+            </li>
+          </ul>
+          <h2>Galeria</h2>
+          <div class="gallery gallery-3-type1">
+            <a class="gallery-item" href="#">
+              <img src="/assets/img/app/melhorenvio.png" alt="..." data-provide="lightbox">
+            </a>
+            <a class="gallery-item" href="#">
+              <img src="/assets/img/app/melhorenvio.png" alt="..." data-provide="lightbox">
+            </a>
+            <a class="gallery-item" href="#">
+              <img src="/assets/img/app/melhorenvio.png" alt="..." data-provide="lightbox">
+            </a>
+            <a class="gallery-item" href="#">
+              <img src="/assets/img/app/melhorenvio.png" alt="..." data-provide="lightbox">
+            </a>
+            <a class="gallery-item" href="#">
+              <img src="/assets/img/app/melhorenvio.png" alt="..." data-provide="lightbox">
+            </a>
+            <a class="gallery-item" href="#">
+              <img src="/assets/img/app/melhorenvio.png" alt="..." data-provide="lightbox">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

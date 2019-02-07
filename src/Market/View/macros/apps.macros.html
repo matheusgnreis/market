@@ -1,0 +1,39 @@
+{#
+Sidebar search apps component
+#}
+{% macro sidebarSearch(params) %}
+<div class="sidebar px-4 py-md-0">
+  <h6 class="sidebar-title">
+    {{params.dictionary.word_search}}</h6>
+  <form class="input-group" action="/{{params.dictionary.lang}}/apps?title=" method="GET">
+    <input class="form-control" name="title" placeholder="Search" type="text">
+    <div class="input-group-addon">
+      <span class="input-group-text">
+        <i class="ti-search"></i>
+      </span>
+    </div>
+  </form>
+  <hr>
+  <h6 class="sidebar-title">
+    {{params.dictionary.word_categories}}</h6>
+  <div class="row link-color-default fs-14 lh-24">
+    {% for category in params.categories.applications %}
+    <div class="col-6">
+      <a href="/{{params.dictionary.lang}}/apps?category={{category.page}}">
+        {{category.name}}</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endmacro %}
+{#
+Result search component
+#}
+{% macro resultSearch(params) %}
+{% import "parts/components.html" as component %}
+<div class="row">
+  {% for application in params.data %}
+  {{component.cards(params, application)}}
+  {%endfor%}
+</div>
+{% endmacro %}
