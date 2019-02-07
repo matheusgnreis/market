@@ -1,0 +1,31 @@
+{% macro cards(params, application, type, colSize) %}
+<div class="col-6">
+  <div class="card card-item border hover-shadow-4">
+    <div class="card-item-body">
+      <div class="card-item-thumb">
+        <img src="{{application.icon}}">
+        <div class="card-hits">
+          <div class="rating rating-xs">
+            <label class="fa fa-star active"></label>
+            <label class="fa fa-star active"></label>
+            <label class="fa fa-star active"></label>
+            <label class="fa fa-star active"></label>
+            <label class="fa fa-star active"></label>
+          </div>
+          <div class="downloads-count">
+            {{application.downloads | number_format(0, '.', '.')}}
+          </div>
+        </div>
+      </div>
+      <div class="card-item resume">
+        <h5 class="card-item-title">{{application.title}}</h5>
+        <small><a href="/{{params.dictionary.lang}}/apps?category={{application.category}}" title="{{categories_name(application.category, params.dictionary.lang)}}">{{ categories_name(application.category, params.dictionary.lang) | truncate(20) }} </a> | Free</small>
+        <small>{{application.short_description}}.</small>
+        <a class="fs-12 fw-600" href="/{{params.dictionary.lang}}/apps/{{application.slug}}">{{params.dictionary.word_go_item}}
+          <i class="fa fa-angle-right pl-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endmacro %}
