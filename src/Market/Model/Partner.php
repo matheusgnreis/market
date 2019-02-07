@@ -16,7 +16,7 @@ class Partner extends Model
 
     public function apps()
     {
-        return $this->hasMany(Apps::class, 'partner_id', 'id');
+        return $this->hasMany(Apps::class, 'partner_id', 'app_id');
     }
 
     public function themes()
