@@ -1,5 +1,6 @@
 <?php
 namespace Market\Controller;
+
 use Market\Controller\AppsController;
 
 class HomeController extends BaseController
@@ -51,9 +52,38 @@ class HomeController extends BaseController
                 'page' => [
                     'name' => 'Apps',
                 ],
-                'data' => $all['result']
+                'data' => $all['result'],
             ],
         ];
         return $this->view->render($response, 'apps.html', $params);
+    }
+
+    /**
+     * Single app View
+     */
+    public function single($request, $response, $args)
+    {
+        $apps = new AppsController();
+        $app = $apps->getBySlug($args['slug']);
+        $translate = $this->getDictionary($args['lang']);
+
+        $params = [
+            'params' => [
+                'dictionary' => $translate,
+                'categories' => [
+                    'applications' => $this->appsCategories($translate),
+                    'themes' => $this->themesCategories($translate),
+                ],
+                'page' => [
+                    'name' => 'Apps',
+                ],
+                $app,
+            ],
+        ];
+        
+        if ($app) {
+            return $this->view->render($response, 'single.html', $params);
+        }
+        return $this->view->render($response, '404.html', $params);
     }
 }
