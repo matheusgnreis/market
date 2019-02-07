@@ -95,11 +95,11 @@
       <p class="lead-2">Explore todas as possibilidades do markerplace de aplicativos e temas para e-commerce.</p>
       <div class="card shadow-4">
         <div class="card-body">
-          <form class="input-round" id="search-home">
+          <form class="input-round" id="search-home" action="/{{params.dictionary.lang}}/apps?title=" method="GET">
             <div class="form-group input-group">
-              <input type="text" class="form-control" placeholder="Busque por...">
+              <input type="text" class="form-control" name="title" placeholder="Busque por..." >
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">Buscar</button>
+                <button class="btn btn-primary" type="submit">Buscar</button>
               </div>
             </div>
           </form>
