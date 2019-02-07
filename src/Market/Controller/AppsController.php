@@ -82,6 +82,20 @@ class AppsController
         return $map;
     }
 
+    public function getBySlug($applicationSlug)
+    {
+        $app = Apps::where('slug', $applicationSlug)->first();
+        if ($app) {
+        /*             return [
+                'application' => $app->toArray(),
+                'imagens' => $app->imagens->toArray(),
+                'comments' => $app->comments->toArray(),
+            ]; */
+            return $app;
+        }
+        return false;
+    }
+
     public function requestHasMeta($params)
     {
         /*
