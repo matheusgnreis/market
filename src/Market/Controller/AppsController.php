@@ -8,9 +8,9 @@ use Market\Model\Apps;
  */
 class AppsController
 {
-    private $_limit = 1000;
+    private $_limit = 30;
     private $_offset = 0;
-    private $_fields = ['app_id', 'title', 'slug', 'icon', 'version', 'paid'];
+    private $_fields = ['app_id', 'title', 'category', 'slug', 'icon', 'version', 'paid', 'short_description', 'evaluations', 'downloads'];
     private $_result = [];
     private $_params = ['active' => 1];
     /**
@@ -21,22 +21,22 @@ class AppsController
         new \Market\Services\Database();
     }
 
-    public function getAll($request, $response)
+    public function getAll($params)
     {
 
         /*
-            find multiples ids
-        */
-        if (isset($request->getParams()['app_id'])) {
-            $ids = explode(',', $request->getParams()['app_id']);
+        find multiples ids
+         */
+        if (isset($params['app_id'])) {
+            $ids = explode(',', $params['app_id']);
             $apps = Apps::whereIn('app_id', $ids)->get($this->_fields);
-            return $response->withJson($this->response($apps->toArray()));
+            return $this->response($apps->toArray());
         }
 
         /*
         metafields
          */
-        $this->requestHasMeta($request, $response);
+        $this->requestHasMeta($params);
         /*
         search
          */
@@ -45,12 +45,12 @@ class AppsController
             ->limit($this->_limit)
             ->get($this->_fields)
             ->toArray();
-        return $response->withJson($this->response($result));
+        return $this->response($result);
     }
 
-    public function getById($request, $response, $args)
+    public function getById($applicationId)
     {
-        $query = Apps::where('app_id', $args['id'])->with('imagens')->get();
+        $query = Apps::where('app_id', $applicationId)->with('imagens')->get();
 
         $map = $query->map(function ($item) {
             $data['app_id'] = $item->app_id;
@@ -79,51 +79,50 @@ class AppsController
             return $data;
         });
 
-        return $map ? $response->withJson($map[0], 200)
-        : $response->withJson([], 404);
+        return $map;
     }
 
-    public function requestHasMeta($request, $response)
+    public function requestHasMeta($params)
     {
         /*
         Possíveis parametros para busca
          */
-        if (isset($request->getParams()['filter'])) {
-            if ($request->getParams()['filter'] == 'free') {
+        if (isset($params['filter'])) {
+            if ($params['filter'] == 'free') {
                 $this->_params[] = ['value_plan_basic', 0];
             }
         }
 
-        if (isset($request->getParams()['author'])) {
-            $this->_params[] = ['partner_id', $request->getParams()['author']];
+        if (isset($params['author'])) {
+            $this->_params[] = ['partner_id', $params['author']];
         }
 
-        if (isset($request->getParams()['slug'])) {
-            $this->_params[] = ['slug', $request->getParams()['slug']];
+        if (isset($params['slug'])) {
+            $this->_params[] = ['slug', $params['slug']];
         }
 
-        if (isset($request->getParams()['category'])) {
-            if ($request->getParams()['category'] !== 'all') {
-                $this->_params[] = ['category', $request->getParams()['category']];
+        if (isset($params['category'])) {
+            if ($params['category'] !== 'all') {
+                $this->_params[] = ['category', $params['category']];
             }
         }
 
-        if (isset($request->getParams()['title'])) {
-            $this->_params[] = ['title', 'like', '%' . $request->getParams()['title'] . '%'];
+        if (isset($params['title'])) {
+            $this->_params[] = ['title', 'like', '%' . $params['title'] . '%'];
         }
 
         /*
         offset
          */
-        if (isset($request->getParams()['offset'])) {
-            $this->_offset = (int) $request->getParams()['offset'];
+        if (isset($params['offset'])) {
+            $this->_offset = (int) $params['offset'];
         }
 
         /*
         limit
          */
-        if (isset($request->getParams()['limit'])) {
-            $this->_limit = (int) $request->getParams()['limit'];
+        if (isset($params['limit'])) {
+            $this->_limit = (int) $params['limit'];
         }
     }
 
@@ -141,9 +140,9 @@ class AppsController
         ];
     }
 
-    public function create($request, $response)
+    public function create($body)
     {
-        $body = [
+        $applicationbody = [
             'partner_id' => !empty($body['partner_id']) ? $body['partner_id'] : null,
             'title' => !empty($body['title']) ? $body['title'] : null,
             'slug' => !empty($body['slug']) ? $body['slug'] : null,
@@ -172,10 +171,10 @@ class AppsController
             'active' => !empty($body['active']) ? $body['active'] : 1,
         ];
 
-        $application = Apps::create($body);
+        $application = Apps::create($applicationbody);
 
         if (!$application) {
-            $return = [
+            return [
                 'status' => 400,
                 'message' => 'Error with request on this resource',
                 'user_message' => [
@@ -183,16 +182,14 @@ class AppsController
                     'pt_br' => 'Erro inesperado, reportar ao suporte ou desenvolvedor responsável',
                 ],
             ];
-
-            return $response->withJson($return, 400);
         }
-        return $response->withJson($app->id, 201);
+        return $app->id;
     }
 
-    public function update($request, $response, $args)
+    public function update($applicationId, $requestBody)
     {
-        if (!$args['id']) {
-            $return = [
+        if (!$applicationId) {
+            return [
                 'status' => 400,
                 'message' => 'Resource ID expected and not specified on request UR',
                 'user_message' => [
@@ -200,14 +197,12 @@ class AppsController
                     'pt_br' => 'Erro inesperado, reportar ao suporte ou desenvolvedor responsável',
                 ],
             ];
-
-            return $response->withJson($return, 400);
         }
 
         $application = Apps::find($args['id']);
 
         if (!$application) {
-            $return = [
+            return [
                 'status' => 400,
                 'message' => 'Invalid value on resource ID',
                 'user_message' => [
@@ -215,11 +210,7 @@ class AppsController
                     'pt_br' => 'O ID informado é inválido',
                 ],
             ];
-
-            return $response->withJson($return, 400);
         }
-
-        $requestBody = $request->getParsedBody();
 
         $updateBody = [
             'title' => isset($requestBody['title']) ? $requestBody['title'] : $application->title,
@@ -250,7 +241,7 @@ class AppsController
         $update = $application->update($updateBody);
 
         if (!$update) {
-            $return = [
+            return [
                 'status' => 400,
                 'message' => 'Bad-formatted JSON body, details in user_message',
                 'user_message' => [
@@ -258,10 +249,8 @@ class AppsController
                     'pt_br' => 'data Não são permitidas propriedades adicionais',
                 ],
             ];
-
-            return $response->withJson($return, 400);
         }
 
-        return $response->withStatus(204);
+        return 204;
     }
 }
