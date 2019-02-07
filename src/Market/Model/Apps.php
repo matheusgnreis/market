@@ -37,22 +37,12 @@ class Apps extends Model
         'website',
         'link_video',
         'plans_json',
-        'value_plan_basic'
+        'value_plan_basic',
     ];
     /** The attributes that will be hidden */
     protected $hidden = [];
     /** Indicates if the model should be timestamped. */
     public $timestamps = false;
-
-    /**
-     *  Create evaluations relationship with app
-     *
-     * @return void
-     */
-    public function evaluations()
-    {
-        return $this->hasMany(AppsEvaluation::class, 'app_id');
-    }
 
     /**
      * Create partner relationship with app
@@ -61,7 +51,7 @@ class Apps extends Model
      */
     public function partner()
     {
-        return $this->hasOne(Partner::class, 'app_id', 'partner_id');
+        return $this->hasOne(Partner::class, 'id', 'partner_id');
     }
 
     /**
@@ -82,5 +72,15 @@ class Apps extends Model
     public function imagens()
     {
         return $this->hasMany(AppsImagens::class, 'app_id', 'app_id');
+    }
+    
+    /**
+     * Create evaluations relationship with app
+     *
+     * @return void
+     */
+    public function evaluations()
+    {
+        return $this->hasMany(AppsEvaluation::class, 'app_id', 'app_id');
     }
 }
