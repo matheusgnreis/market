@@ -11,6 +11,7 @@
   <link href="/assets/css/page.min.css" rel="stylesheet">
 </head>
 {% import "macros/main.macros.html" as main %}
+{% import "macros/scripts.macros.html" as scripts %}
 <body>
   <!--
     HEADER
@@ -25,8 +26,8 @@
   -->
   {{main.footer(params)}}
   <!-- Scripts -->
+  {{scripts.loadScripts(params)}}
   <script src="/assets/js/page.min.js"></script>
-
 </body>
 
 </html>
