@@ -18,6 +18,7 @@ trait Dictionary
                 $description_mkp = 'is the best e-commerce theme and app marketplace designed to enable retailers who do not have large investment capacity to access a customized quality layout at the best price.';
                 $welcome = 'Welcome to ';
                 $welcome_only = 'Welcome';
+                $word_details = 'Details';
                 $word_partner = 'Partners ';
                 $word_shopkeeper = 'Shopkeeper ';
                 $word_app = 'Apps ';
@@ -42,6 +43,8 @@ trait Dictionary
                 $word_now = 'Now ';
                 $buy_now = 'Buy Now ';
                 $word_buying = 'Buying ';
+                $word_in = 'In';
+                $word_by = 'By';
                 $apps_trends = 'Apps Trends ';
                 $themes_trends = 'Themes Trends ';
                 $word_reputation = "Author's Reputation";
@@ -99,6 +102,7 @@ trait Dictionary
                 $word_lastes_message = 'Latest Messages';
                 $word_buyer = 'PURCHASED';
                 $word_read_all_reviews = 'Read all the Customer Reviews ';
+                $word_comments = 'Reviews';
                 $word_your_account = 'Your Account';
                 $word_info_account = 'Account information';
                 $word_tool_acoount = 'Account Tools';
@@ -159,6 +163,9 @@ trait Dictionary
                 $word_create_password = 'Create password';
                 $word_info_create_password = 'is the page for creating your password to register your items in our Marketplace.';
                 $word_verify = 'Verify';
+                $word_installations = 'installations';
+                $word_galery = 'Galery';
+                $word_support = 'Support';
                 break;
 
             default:
@@ -167,6 +174,7 @@ trait Dictionary
                 $description_mkp = 'é o melhor marketplace de apps e temas para e-commerce, criado para possibilitar que lojistas que não tem grande capacidade de investimento tenham acesso a um layout personalizado de qualidade pelo melhor preço.';
                 $welcome = 'Bem vindo a ';
                 $welcome_only = 'Bem vindo';
+                $word_details = 'Detalhes';
                 $word_partner = 'Parceiros ';
                 $word_shopkeeper = 'Lojistas ';
                 $word_app = 'Apps ';
@@ -191,6 +199,8 @@ trait Dictionary
                 $word_now = 'Agora ';
                 $buy_now = 'Comprar Agora ';
                 $word_buying = 'Comprar ';
+                $word_in = 'Em';
+                $word_by = 'Por';
                 $apps_trends = 'Apps em Destaques';
                 $themes_trends = 'Temas em Destaques';
                 $word_reputation = 'Reputação do Autor';
@@ -248,6 +258,7 @@ trait Dictionary
                 $word_lastes_message = 'Últimas Mensagens';
                 $word_buyer = 'COMPRADOR';
                 $word_read_all_reviews = 'Ler Todos os Comentários';
+                $word_comments = 'Comentários';
                 $word_your_account = 'Sua Conta';
                 $word_info_account = 'Informações da Conta';
                 $word_tool_acoount = 'Ferramentas da Conta';
@@ -308,6 +319,9 @@ trait Dictionary
                 $word_create_password = 'Criar senha';
                 $word_info_create_password = 'Nessa página você poderá criar sua senha para registrar seus itens em nosso Marketplace.';
                 $word_verify = 'Verificar';
+                $word_installations = 'Instalações';
+                $word_galery = 'Galeria';
+                $word_support = 'Suporte';
                 break;
         }
         // array dictionary
@@ -319,6 +333,7 @@ trait Dictionary
             'e_com' => 'E-Com Plus ',
             'addons' => 'Market',
             'word_partner' => $word_partner,
+            'word_details' => $word_details,
             'word_shopkeeper' => $word_shopkeeper,
             'word_app' => $word_app,
             'word_theme' => $word_theme,
@@ -344,6 +359,8 @@ trait Dictionary
             'word_now' => $word_now,
             'buy_now' => $buy_now,
             'word_buying' => $word_buying,
+            'word_in' => $word_in,
+            'word_by' => $word_by,
             'apps_trends' => $apps_trends,
             'themes_trends' => $themes_trends,
             'word_reputation' => $word_reputation,
@@ -403,6 +420,7 @@ trait Dictionary
             'word_lastes_message' => $word_lastes_message,
             'word_buyer' => $word_buyer,
             'word_read_all_reviews' => $word_read_all_reviews,
+            'word_comments' => $word_comments,
             'word_your_account' => $word_your_account,
             'word_info_account' => $word_info_account,
             'word_tool_acoount' => $word_tool_acoount,
@@ -468,6 +486,9 @@ trait Dictionary
             'word_create_password' => $word_create_password,
             'word_info_create_password' => $word_info_create_password,
             'word_verify' => $word_verify,
+            'word_installations' => $word_installations,
+            'word_galery' => $word_galery,
+            'word_support' => $word_support,
             'lang' => $lang,
         );
         return $dictionary;
