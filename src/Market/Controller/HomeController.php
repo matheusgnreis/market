@@ -77,10 +77,15 @@ class HomeController extends BaseController
                 'page' => [
                     'name' => 'Apps',
                 ],
-                $app,
+                'data' => $app,
+                'view' => [
+                    'scripts' => [
+                        'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js'
+                    ]
+                ]
             ],
         ];
-        
         if ($app) {
             return $this->view->render($response, 'single.html', $params);
         }
