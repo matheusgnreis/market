@@ -1,0 +1,10 @@
+{#
+  Carrega scripts adicionais
+#}
+{% macro loadScripts(params) %}
+  {% if params.view.scripts %}
+    {% for script in params.view.scripts %}
+      <script src="{{script}}"></script>
+    {% endfor %}
+  {% endif %} 
+{% endmacro %}
