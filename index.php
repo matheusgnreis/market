@@ -28,6 +28,7 @@ require __DIR__ . '/src/middleware.php';
 
 require __DIR__ . '/src/routes/api.routes.php';
 require __DIR__ . '/src/routes/market.routes.php';
+require __DIR__ . '/src/routes/helpers.routes.php';
 
 // Run app
 $app->run();
