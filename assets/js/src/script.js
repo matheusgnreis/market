@@ -10,12 +10,14 @@
 |
 */
 
-$(function () {
+/* $(function () {
   $.ajax({
     type: "GET",
-    url: "/teste.md",
+    url: "/v1/applications/"+ $('#app-resume').data('id'),
     success: function (response) {
-      $('#tab-home-1').html(marked(response));
+      console.log(response.description);
+      $('#application-description').html(marked(response.description));
     }
   });
 });
+ */
