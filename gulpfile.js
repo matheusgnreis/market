@@ -20,7 +20,7 @@ var pkg = require('./package.json')
 var production = false;
 
 var file = {
-  html: '**/*.html',
+  html: 'src/Market/View/**/*.html',
   scss: 'assets/scss/**/*.scss',
   js: 'assets/js/src/**/*.js',
 }
