@@ -50,48 +50,65 @@ class AppsController
 
     public function getById($applicationId)
     {
-        $query = Apps::where('app_id', $applicationId)->with('imagens')->get();
-
-        $map = $query->map(function ($item) {
-            $data['app_id'] = $item->app_id;
-            $data['title'] = $item->title;
-            $data['slug'] = $item->slug;
-            $data['paid'] = (boolean) $item->paid;
-            $data['version'] = $item->version;
-            $data['type'] = $item->type;
-            if (!empty($item->module)) {
-                $data['module'] = $item->module;
-            }
-            if (!empty($item->load_events)) {
-                $data['load_events'] = explode(',', str_replace(["\\", "[", "]", '"'], '', (string) $item->load_events));
-            }
-            if (!empty($item->script_uri)) {
-                $data['script_uri'] = $item->script_uri;
-            }
-            if (!empty($item->redirect_uri)) {
-                $data['redirect_uri'] = $item->redirect_uri;
-            }
-            $data['github_repository'] = $item->github_repository;
-            $data['authentication'] = (boolean) $item->authentication;
-            $data['auth_callback_uri'] = $item->auth_callback_uri;
-            $data['auth_scope'] = json_decode($item->auth_scope);
-            $data['pictures'] = $item->imagens;
-            return $data;
-        });
-
-        return $map;
+        $app = Apps::where('app_id', $applicationId)->get();
+        if ($app) {
+            $map = $app->map(function ($application) {
+                $data['app_id'] = $application->app_id;
+                $data['title'] = $application->title;
+                $data['slug'] = $application->slug;
+                $data['category'] = $application->category;
+                $data['icon'] = $application->icon;
+                $data['description'] = (string)$application->description;
+                $data['short_description'] = $application->short_description;
+                $data['json_body'] = json_decode($application->json_body);
+                $data['paid'] = (boolean) $application->paid;
+                $data['free_trial'] = $application->free_trial;
+                $data['version'] = $application->version;
+                $data['version_date'] = $application->version_date;
+                $data['type'] = $application->type;
+                if (!empty($application->module)) {
+                    $data['module'] = $application->module;
+                }
+                if (!empty($application->load_events)) {
+                    $data['load_events'] = explode(',', str_replace(["\\", "[", "]", '"'], '', (string) $application->load_events));
+                }
+                if (!empty($application->script_uri)) {
+                    $data['script_uri'] = $application->script_uri;
+                }
+                if (!empty($application->redirect_uri)) {
+                    $data['redirect_uri'] = $application->redirect_uri;
+                }
+                $data['github_repository'] = $application->github_repository;
+                $data['authentication'] = (boolean) $application->authentication;
+                $data['auth_callback_uri'] = $application->auth_callback_uri;
+                $data['auth_scope'] = json_decode($application->auth_scope);
+                $data['avg_stars'] = $application->avg_stars;
+                $data['evaluations'] = $application->evaluations;
+                $data['downloads'] = $application->downloads;
+                $data['website'] = $application->website;
+                $data['link_video'] = $application->link_video;
+                $data['plans_json'] = json_decode($application->plans_json);
+                $data['value_plan_basic'] = $application->value_plan_basic;
+                $data['pictures'] = $application->imagens;
+                $data['comments'] = $application->comments->toArray();
+                $data['partner'] = $application->partner->toArray();
+                return $data;
+            });
+            return $map[0];
+        }
+        return [];
     }
 
     public function getBySlug($applicationSlug)
     {
         $app = Apps::where('slug', $applicationSlug)->first();
         if ($app) {
-        /*             return [
+            return [
                 'application' => $app->toArray(),
                 'imagens' => $app->imagens->toArray(),
                 'comments' => $app->comments->toArray(),
-            ]; */
-            return $app;
+                'partner' => $app->partner->toArray(),
+            ];
         }
         return false;
     }
