@@ -5,6 +5,7 @@
  * @todo Check if required properties is set on request when is put/patch/post [middleware]
  */
 use Market\Controller\AppsController;
+use Market\Controller\PartnerController;
 
 $app->group('/v1', function () use ($app) {
     /**
@@ -45,6 +46,20 @@ $app->group('/v1', function () use ($app) {
              * Update Application
              */
             $app->put('/{id}', AppsController::class . ':update');
+        }
+    );
+
+    /**
+     * Partner resource
+     */
+    $app->group(
+        '/partners',
+        function () use ($app) {
+            $app->get('/{id}', function ($request, $response, $args) {
+                $partnet = new PartnerController();
+                $find = $partnet->getById(($args['id']));
+                return $response->withJson($find);
+            });
         }
     );
 });
