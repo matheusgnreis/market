@@ -1,5 +1,5 @@
-{% macro cards(params, application, type, colSize) %}
-<div class="col-6">
+{% macro cards(params, application, colSize) %}
+<div class="{{ colSize|default('col-md-6 col-lg-6') }}">
   <div class="card card-item border hover-shadow-4">
     <div class="card-item-body">
       <div class="card-item-thumb">
