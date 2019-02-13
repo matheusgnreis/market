@@ -12,6 +12,7 @@
 </head>
 {% import "macros/main.macros.html" as main %}
 {% import "macros/scripts.macros.html" as scripts %}
+{% import "parts/components.html" as components %}
 <body>
   <!--
     HEADER
@@ -25,7 +26,13 @@
     FOOTER
   -->
   {{main.footer(params)}}
-  <!-- Scripts -->
+  <!-- 
+    modal
+  -->
+  {{components.modalLogin(params)}}
+  <!-- 
+    Scripts 
+  -->
   {{scripts.loadScripts(params)}}
   <script src="/assets/js/page.min.js"></script>
 </body>
