@@ -18,6 +18,9 @@ class HomeController extends BaseController
      */
     public function home($request, $response, $args)
     {
+        $apps = new AppsController();
+        $all = $apps->getAll(['limit' => 8]);
+
         $translate = $this->getDictionary($args['lang']);
         $params = [
             'params' => [
@@ -29,6 +32,7 @@ class HomeController extends BaseController
                 'page' => [
                     'name' => 'Home',
                 ],
+                'data' => $all['result']
             ],
         ];
         return $this->view->render($response, 'index.html', $params);
