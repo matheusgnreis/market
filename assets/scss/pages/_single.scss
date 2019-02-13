@@ -36,6 +36,12 @@
       font-size: 1.5rem;
     }
   }
+
+  #application-plans {
+    .app-prices {
+      margin-bottom: 2em;
+    }
+  }
 }
 
 #resume-header {
@@ -129,4 +135,11 @@
 
 #resume-content {
   padding-top: 0;
+}
+
+.publish-comment-col #publish-comment {
+  max-width: 250px;
+  width: 100%;
+  margin: 0 auto;
+  color: #fff;
 }
