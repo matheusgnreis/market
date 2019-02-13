@@ -26,7 +26,7 @@
 {% endmacro %}
 
 {% macro itemResume(params) %}
-{% import _self as this %} 
+{% import _self as this %}
 <h2>{{params.dictionary.word_details}}</h2>
 <ul>
   <li class="items-lists">
@@ -40,9 +40,9 @@
   <li class="items-lists">
     <span>{{params.dictionary.word_version_date}}</span>
     {% if params.dictionary.lang == 'pt_br' %}
-      <span>{{params.data.application.version_date | date("d/m/Y")}} </span>
+    <span>{{params.data.application.version_date | date("d/m/Y")}} </span>
     {% else %}
-      <span>{{params.data.application.version_date | date("m/d/Y")}} </span>
+    <span>{{params.data.application.version_date | date("m/d/Y")}} </span>
     {% endif %}
   </li>
   <li class="items-lists">
@@ -54,7 +54,7 @@
     <span>{{params.data.application.downloads}}</span>
   </li>
   <li class="items-lists">
-    <span>Avaliações</span>
+    <span>{{params.dictionary.word_evaluation}}</span>
     <div class="rating rating-xs">
       <label class="fa fa-star active"></label>
       <label class="fa fa-star active"></label>
@@ -71,25 +71,25 @@
 {% endmacro %}
 
 {% macro galery(imagens) %}
-  {% for imagem in imagens %}
-    <a class="gallery-item" href="#">
-      <img src="{{imagem.path_image}}" alt="{{imagem.alt}}" data-provide="lightbox">
-    </a>
-  {% endfor %}
+{% for imagem in imagens %}
+<a class="gallery-item" href="#">
+  <img src="{{imagem.path_image}}" alt="{{imagem.alt}}" data-provide="lightbox">
+</a>
+{% endfor %}
 {% endmacro %}
 
 {% macro tabsList(params) %}
 <ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#application-description">{{params.dictionary.word_description_single}}</a>
-    </li>
-    {% if params.data.application.paid %}
-      <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#application-plans">{{params.dictionary.word_price}}</a>
-        </li>
-    {% endif %}
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#application-comments">{{params.dictionary.word_comments}}</a>
-    </li>
-  </ul>
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#application-description">{{params.dictionary.word_description_single}}</a>
+  </li>
+  {% if params.data.application.paid %}
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#application-plans">{{params.dictionary.word_price}}</a>
+  </li>
+  {% endif %}
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#application-comments">{{params.dictionary.word_comments}}</a>
+  </li>
+</ul>
 {% endmacro %}
