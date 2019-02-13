@@ -37,7 +37,7 @@ $(document).ready(function () {
 
       var commentsContainer = $('<div>', { class: 'container' })
       var commentsRow = $('<div>', { class: 'row' })
-      var commentsCol = $('<div>', { class: 'col' })
+      var commentsCol = $('<div>', { class: 'col-12' })
       var mediaList = $('<div>', { class: 'media-list' })
       //
       var commentsList = $.map(application.comments, function (comment, key) {
@@ -60,10 +60,15 @@ $(document).ready(function () {
 
       })
 
+      // button public a comment
+      var publishCommentCol = $('<div>', { class: 'col-12 publish-comment-col' })
+      var buttonComment = $('<a>', { class: 'btn btn-block btn-round btn-primary', id: 'publish-comment', text: 'Publicar um comentário' })
+      buttonComment.appendTo(publishCommentCol)
       //
       mediaList.append(commentsList)
       commentsCol.append(mediaList)
       commentsRow.append(commentsCol)
+      publishCommentCol.appendTo(commentsRow)
       commentsContainer.append(commentsRow)
       //
       elements.comments.html(commentsContainer)
@@ -78,15 +83,15 @@ $(document).ready(function () {
 
       var plansRow = $.map(application.plans_json, function (plan, key) {
         //
-        var row = $('<a>', { class: 'row no-gutters pricing-4' })
+        var row = $('<a>', { class: 'row no-gutters pricing-4 app-prices' })
         //
-        var planDescription = $('<div>', { class: 'col-md-9 plan-description' })
+        var planDescription = $('<div>', { class: 'col-9 col-sm-9 col-md-9 plan-description' })
         //
         $('<h5>', { text: plan.title }).appendTo(planDescription)
-        $(plan.description).appendTo(planDescription)
-
+        $('<p>', { text: plan.description }).appendTo(planDescription)
+        //$(planDescription).text(plan.description)
         //
-        var planPrice = $('<div>', { class: 'col-md-3 plan-price' })
+        var planPrice = $('<div>', { class: 'col-3 col-sm-3 col-md-3 plan-price' })
 
         $('<h3>', { text: plan.value }).appendTo(planPrice)
         $('<p>', { text: plan.currency }).appendTo(planPrice)
@@ -117,7 +122,7 @@ $(document).ready(function () {
    * @param {*} error 
    */
   var requestFail = function (jqxhr, textStatus, error) {
-    console.log(err)
+    console.log(error)
   }
 
   /**
