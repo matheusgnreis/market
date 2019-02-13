@@ -166,6 +166,7 @@ trait Dictionary
                 $word_installations = 'installations';
                 $word_galery = 'Galery';
                 $word_support = 'Support';
+                $word_evaluation = 'Evaluation';
                 break;
 
             default:
@@ -322,6 +323,7 @@ trait Dictionary
                 $word_installations = 'Instalações';
                 $word_galery = 'Galeria';
                 $word_support = 'Suporte';
+                $word_evaluation = 'Avaliações';
                 break;
         }
         // array dictionary
@@ -489,6 +491,7 @@ trait Dictionary
             'word_installations' => $word_installations,
             'word_galery' => $word_galery,
             'word_support' => $word_support,
+            'word_evaluation' => $word_evaluation,
             'lang' => $lang,
         );
         return $dictionary;
