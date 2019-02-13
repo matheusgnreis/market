@@ -32,8 +32,13 @@ Result search component
 {% macro resultSearch(params) %}
 {% import "parts/components.html" as component %}
 <div class="row">
-  {% for application in params.data %}
-  {{component.cards(params, application)}}
-  {%endfor%}
+  {% if params.data %}
+    {% for application in params.data %}
+      {{component.cards(params, application)}}
+    {%endfor%}
+  {% else %}
+    <div id="notfound"><strong>sem resultado</strong></div>    
+  {% endif %}
+
 </div>
 {% endmacro %}
