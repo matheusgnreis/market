@@ -1,21 +1,24 @@
 {% extends "layout/main.html" %}
 {% import "macros/main.macros.html" as main %}
+{% import "parts/components.html" as component %}
+
 {% block content %}
-  {{main.headerHero(params)}}
-  <main class="main-content">
-    <!--
+{{main.headerHero(params)}}
+<main class="main-content">
+  <!--
       |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
       | Apps Escolhidos
       |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
       !-->
-    <!--
+  <!--
       |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
       | Overflow content
       |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
       !-->
-    <section class="section overflow-hidden">
-      <div class="container">
-        <div class="row flex-nowrap align-items-center">
+  <section class="section overflow-hidden">
+    <div class="container">
+      <div class="d-none d-lg-block">
+        <div class="row flex-nowrap">
           <div class="col-4">
             <h5>Turbine seu e-commerce.</h5>
             <p>Meios de pagamento, soluções de envio, e-mails transacionais e muito mais.</p>
@@ -23,288 +26,84 @@
 
           <div class="col-12">
             <div class="row">
-              <div class="col-3 apps-suggestion">
-                <img class="rounded" src="../assets/img/app/wirecard.jpg" alt="...">
+              <div class="col-4 apps-suggestion">
+                <img class="rounded" src="../assets/img/app/wirecard.png" alt="...">
               </div>
 
-              <div class="col-3 apps-suggestion">
+              <div class="col-4 apps-suggestion">
                 <img class="rounded" src="../assets/img/app/melhorenvio.png" alt="...">
               </div>
 
-              <div class="col-3 apps-suggestion">
+              <div class="col-4 apps-suggestion">
                 <img class="rounded" src="../assets/img/app/mailjet.png" alt="...">
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="d-block d-lg-none">
+        <div class="row">
+          <div class="col-12">
+            <h5>Turbine seu e-commerce.</h5>
+            <p>Meios de pagamento, soluções de envio, e-mails transacionais e muito mais.</p>
+          </div>
+          <div class="col-4 apps-suggestion">
+            <img class="rounded" src="../assets/img/app/wirecard.jpg" alt="...">
+          </div>
+
+          <div class="col-4 apps-suggestion">
+            <img class="rounded" src="../assets/img/app/melhorenvio.png" alt="...">
+          </div>
+
+          <div class="col-4 apps-suggestion">
+            <img class="rounded" src="../assets/img/app/mailjet.png" alt="...">
+          </div>
+        </div>
 
       </div>
-    </section>
-    <!--
+    </div>
+  </section>
+  <!--
       |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
       | Basic
       |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
       !-->
-    <section class="section">
-      <div class="container">
-        <header class="section-header">
-          <h2>Possibilidades para todas as necessidades.</h2>
-        </header>
-        <div class="row flex-nowrap align-items-center">
-          <div class="col-md-3">
-            <div class="card card-items border hover-shadow-4">
-              <div class="card-body">
-                <div class="card-img">
-                  <img src="https://lorempixel.com/output/technics-q-g-120-118-1.jpg">
-                </div>
-                <h5 class="card-title">Bosnia & Herzegovina</h5>
-                <span class="card-categories">Revenda de produtos</span>
-                <span class="card-paid">Grátis / Premium</span>
-                <span class="card-app-divide"></span>
-                <div class="card-hits">
-                  <div class="rating rating-xs">
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                  </div>
-                  <div class="downloads-count">
-                    1.8773.333
-                  </div>
-                </div>
-                <div class="card-actions">
-                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card card-items border hover-shadow-4">
-              <div class="card-body">
-                <div class="card-img">
-                  <img src="https://lorempixel.com/output/technics-q-c-120-118-5.jpg">
-                </div>
-                <h5 class="card-title">Central African Republic</h5>
-                <span class="card-categories">Revenda de produtos</span>
-                <span class="card-paid">Grátis / Premium</span>
-                <span class="card-app-divide"></span>
-                <div class="card-hits">
-                  <div class="rating rating-xs">
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star empty"></label>
-                    <label class="fa fa-star empty"></label>
-                  </div>
-                  <div class="downloads-count">
-                    1.8773.333
-                  </div>
-                </div>
-                <div class="card-actions">
-                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card card-items border hover-shadow-4">
-              <div class="card-body">
-                <div class="card-img">
-                  <img src="https://lorempixel.com/output/technics-q-c-120-118-2.jpg">
-                </div>
-                <h5 class="card-title">Romania</h5>
-                <span class="card-categories">Revenda de produtos</span>
-                <span class="card-paid">Grátis / Premium</span>
-                <span class="card-app-divide"></span>
-                <div class="card-hits">
-                  <div class="rating rating-xs">
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star empty"></label>
-                    <label class="fa fa-star empty"></label>
-                    <label class="fa fa-star empty"></label>
-                    <label class="fa fa-star empty"></label>
-                  </div>
-                  <div class="downloads-count">
-                    1.8773.333
-                  </div>
-                </div>
-                <div class="card-actions">
-                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card card-items border hover-shadow-4">
-              <div class="card-body">
-                <div class="card-img">
-                  <img src="https://lorempixel.com/output/technics-q-c-120-118-7.jpg">
-                </div>
-                <h5 class="card-title">Puerto Rico</h5>
-                <span class="card-categories">Revenda de produtos</span>
-                <span class="card-paid">Grátis / Premium</span>
-                <span class="card-app-divide"></span>
-                <div class="card-hits">
-                  <div class="rating rating-xs">
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                  </div>
-                  <div class="downloads-count">
-                    1.8773.333
-                  </div>
-                </div>
-                <div class="card-actions">
-                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div class="row flex-nowrap align-items-center">
-          <div class="col-md-3">
-            <div class="card card-items border hover-shadow-4">
-              <div class="card-body">
-                <div class="card-img">
-                  <img src="https://lorempixel.com/output/technics-q-c-120-118-3.jpg">
-                </div>
-                <h5 class="card-title">Kazakhstan</h5>
-                <span class="card-categories">Revenda de produtos</span>
-                <span class="card-paid">Grátis / Premium</span>
-                <span class="card-app-divide"></span>
-                <div class="card-hits">
-                  <div class="rating rating-xs">
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                  </div>
-                  <div class="downloads-count">
-                    1.8773.333
-                  </div>
-                </div>
-                <div class="card-actions">
-                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card card-items border hover-shadow-4">
-              <div class="card-body">
-                <div class="card-img">
-                  <img src="https://lorempixel.com/output/technics-q-c-120-118-8.jpg">
-                </div>
-                <h5 class="card-title">Djibouti</h5>
-                <span class="card-categories">Revenda de produtos</span>
-                <span class="card-paid">Grátis / Premium</span>
-                <span class="card-app-divide"></span>
-                <div class="card-hits">
-                  <div class="rating rating-xs">
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                  </div>
-                  <div class="downloads-count">
-                    1.8773.333
-                  </div>
-                </div>
-                <div class="card-actions">
-                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card card-items border hover-shadow-4">
-              <div class="card-body">
-                <div class="card-img">
-                  <img src="https://lorempixel.com/output/technics-q-c-120-118-4.jpg">
-                </div>
-                <h5 class="card-title">American Samoa</h5>
-                <span class="card-categories">Revenda de produtos</span>
-                <span class="card-paid">Grátis / Premium</span>
-                <span class="card-app-divide"></span>
-                <div class="card-hits">
-                  <div class="rating rating-xs">
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star empty"></label>
-                  </div>
-                  <div class="downloads-count">
-                    1.8773.333
-                  </div>
-                </div>
-                <div class="card-actions">
-                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card card-items border hover-shadow-4">
-              <div class="card-body">
-                <div class="card-img">
-                  <img src="https://lorempixel.com/output/technics-q-c-120-118-9.jpg">
-                </div>
-                <h5 class="card-title">Eritrea</h5>
-                <span class="card-categories">Revenda de produtos</span>
-                <span class="card-paid">Grátis / Premium</span>
-                <span class="card-app-divide"></span>
-                <div class="card-hits">
-                  <div class="rating rating-xs">
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                    <label class="fa fa-star active"></label>
-                  </div>
-                  <div class="downloads-count">
-                    1.8773.333
-                  </div>
-                </div>
-                <div class="card-actions">
-                  <a class="fs-12 fw-600" href="#">Ver Aplicativo</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="section-actions">
-          <a href="" class="fs-12 fw-600">Ver todos os aplicativos</a>
-        </div>
+  <section class="section">
+    <div class="container">
+      <header class="section-header">
+        <h2>Possibilidades para todas as necessidades.</h2>
+      </header>
+      <div class="row">
+        {% for application in params.data %}
+        {{component.cards(params, application)}}
+        {%endfor%}
       </div>
-    </section>
+      <div class="section-actions">
+        <a href="/{{params.dictionary.lang}}/apps" class="fs-12 fw-600">Ver todos os aplicativos</a>
+      </div>
+    </div>
+  </section>
 
-    <!--
+  <!--
       |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
       | Help cta
       |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
       !-->
 
-    <section class="section" style="background-image: linear-gradient(-31deg,  #fafafa 50%, #fafafa 100%);">
-      <div class="container">
-        <div class="row gap-y align-items-center">
-          <div class="col-md-6 text-center">
-            <img src="../assets/img/13.png" alt="...">
-          </div>
+  <section class="section" style="background-image: linear-gradient(-31deg,  #fafafa 50%, #fafafa 100%);">
+    <div class="container">
+      <div class="row gap-y align-items-center">
+        <div class="col-md-6 text-center">
+          <img src="../assets/img/13.png" alt="...">
+        </div>
 
-          <div class="col-md-6 text-center text-md-left">
-            <h2>Precisa de ajuda?</h2>
-            <p class="lead mb-6">Visite nosso help center.</p>
-            <p><a class="btn btn-sm btn-round btn-success" href="#">Ir para ajuda</a></p>
-          </div>
+        <div class="col-md-6 text-center text-md-left">
+          <h2>Precisa de ajuda?</h2>
+          <p class="lead mb-6">Visite nosso help center.</p>
+          <p><a class="btn btn-sm btn-round btn-success" href="#">Ir para ajuda</a></p>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 {% endblock %}
