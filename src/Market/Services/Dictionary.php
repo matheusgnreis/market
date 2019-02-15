@@ -90,6 +90,8 @@ trait Dictionary
                 $word_enter_pass = 'Enter your Password here...';
                 $word_invalid_login = 'Login or password invalid';
                 $word_sucess_login = 'Login done successfully';
+                $word_email_invalid = 'E-mail invalid';
+                $word_passwd_invalid = 'Password invalid';
                 $word_profile_author = "Author's Profile";
                 $word_member_since = 'Member Since:';
                 $word_total_sales = 'Total Sales:';
@@ -247,6 +249,8 @@ trait Dictionary
                 $word_enter_pass = 'Digite sua Senha aqui ...';
                 $word_invalid_login = 'Login ou Senha Inválidos';
                 $word_sucess_login = 'Login efetuado com Sucesso';
+                $word_email_invalid = 'E-mail inválido';
+                $word_passwd_invalid = 'Senha inválida';
                 $word_profile_author = 'Perfil do Autor';
                 $word_member_since = 'Membro desde:';
                 $word_total_sales = 'Total de Vendas';
@@ -410,6 +414,8 @@ trait Dictionary
             'word_enter_pass' => $word_enter_pass,
             'word_invalid_login' => $word_invalid_login,
             'word_sucess_login' => $word_sucess_login,
+            'word_email_invalid' => $word_email_invalid,
+            'word_passwd_invalid' => $word_passwd_invalid,
             'word_profile_author' => $word_profile_author,
             'word_member_since' => $word_member_since,
             'word_total_sales' => $word_total_sales,
