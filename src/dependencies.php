@@ -2,7 +2,6 @@
 $app->add(new Psr7Middlewares\Middleware\TrailingSlash(false));
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
-
     return $response
         ->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
@@ -38,11 +37,11 @@ $container['cache'] = function () {
 };
 
 $container['view'] = function ($c) {
-    $view = new \Slim\Views\Twig(__DIR__.'/Market/View', [
+    $view = new \Slim\Views\Twig(__DIR__ . '/Market/View', [
         'cache' => false,
         //'cache' => 'cache/twig/cache'
     ]);
-    
+
     $view->addExtension(new Twig_Extensions_Extension_Text());
     // Instantiate and add Slim specific extension
     $router = $c->get('router');
