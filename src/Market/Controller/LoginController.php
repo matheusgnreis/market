@@ -2,8 +2,8 @@
 namespace Market\Controller;
 
 use Market\Model\Login;
-use Market\Services\Database;
 use Market\Model\Partner;
+use Market\Services\Database;
 
 class LoginController extends Login
 {
@@ -21,13 +21,13 @@ class LoginController extends Login
     public function login($request, $response, $args)
     {
         $requestBody = $request->getParsedBody();
-        $user_api = parent::getApiLogin($requestBody['u']);
+        $user_api = parent::getApiLogin($requestBody['user_email']);
 
         if ($user_api) {
             $u = Partner::find($user_api[0]->id);
-            $u = (object)$u->makeVisible(['password_hash'])->toArray();
+            $u = (object) $u->makeVisible(['password_hash'])->toArray();
 
-            if (password_verify($requestBody['p'], $u->password_hash)) {
+            if (password_verify($requestBody['user_password'], $u->password_hash)) {
                 if ($this->sessao) {
                     if (!isset($_SESSION)) {
                         session_start();
@@ -39,9 +39,10 @@ class LoginController extends Login
                     $_SESSION['login'] = true;
                     $_SESSION['email'] = $requestBody['u'];
                 }
+                return $response->withJson(['login' => true]);
             }
         }
-        return $response->withJson(['login' => true]);
+        return $response->withJson(['login' => false]);
     }
 
     public function password($request, $response, $args)
@@ -57,7 +58,7 @@ class LoginController extends Login
     {
         $body = $request->getParsedBody();
         $ret = parent::getApiLogin($body['user_email']);
-        
+
         if (!$ret['erro']) {
             return json_encode(['user' => base64_encode(json_encode($ret))]);
         }
