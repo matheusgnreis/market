@@ -126,7 +126,7 @@ $(document).ready(function () {
   }
 
   /**
-   * 
+   * init
    */
   $.getJSON(apiPath + appId)
     .done(initComponents)
