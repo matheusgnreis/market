@@ -33,7 +33,7 @@ $(function () {
         $(img).appendTo(content)
         $($('<span>', { text: application.title })).appendTo(itemResume)
         $($('<span>', { text: application.category })).appendTo(itemResume)
-        $($('<span>', { text: application.version_date })).appendTo(itemResume)
+        $($('<span>', { text: moment(application.version_date).fromNow()  })).appendTo(itemResume)
         $(itemResume).appendTo(content)
         $(content).appendTo(col)
         return col
