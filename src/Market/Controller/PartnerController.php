@@ -10,10 +10,10 @@ class PartnerController
         new Database();
     }
 
-    public function getById($applicationId)
+    public function getById($partnerId)
     {
-        $partner = Partner::find((int)$applicationId);
-        $partner->apps->toArray();
+        $partner = Partner::find((int)$partnerId);
+        $partner->applications->toArray();
         $partner->themes->toArray();
         return $partner->toArray();
     }
