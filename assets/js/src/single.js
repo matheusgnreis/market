@@ -128,7 +128,9 @@ $(document).ready(function () {
   /**
    * init
    */
-  $.getJSON(apiPath + appId)
-    .done(initComponents)
-    .fail(requestFail)
+  if (typeof appId === 'number' && isNaN(appId) === false) {
+    $.getJSON(apiPath + appId)
+      .done(initComponents)
+      .fail(requestFail)
+  }
 })
