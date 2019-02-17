@@ -14,9 +14,9 @@ class Partner extends Model
     /** Indicates if the model should be timestamped. */
     public $timestamps = false;
 
-    public function apps()
+    public function applications()
     {
-        return $this->hasMany(Apps::class, 'partner_id', 'app_id');
+        return $this->hasMany(Apps::class, 'partner_id', 'id');
     }
 
     public function themes()
