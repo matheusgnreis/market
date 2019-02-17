@@ -18,6 +18,9 @@
   -webkit-box-shadow: 0 2px 25px rgba(0,0,0,0.07);
   box-shadow: 0 2px 25px rgba(0,0,0,0.07);
   transition: .25s linear;
+  position: fixed;
+  top: 0;
+  bottom: 0;
 }
 
 .account-content .section-wrapper {
@@ -69,11 +72,61 @@
   position: absolute;
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
   flex-shrink: 0;
-  width: calc(100vw - 300px);
-  height: 100vh;
+  width: calc(100vw - 330px);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .current-section {
   visibility: visible;
+}
+
+
+/** My-items */
+.card-item-account {
+  padding: 1em;
+  box-shadow: 0 2px 16px rgba(158, 158, 158, 0.56);
+  margin: 37px;
+  border: 1px solid #f1f2f3 !important;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card-item-account .item-content {
+  display: flex;
+}
+
+.card-item-account .item-content .item-media {
+  position: relative;
+  margin-right: 30px;
+}
+
+.card-item-account .item-content .item-resume {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1em;
+}
+
+.card-item-account .item-content .item-media img {
+  max-width: 60px;
+  border-radius: 5px;
+  position: absolute;
+  right: -30px;
+  box-shadow: 0 2px 16px rgba(158, 158, 158, 0.56);
+  border: 1px solid #eee;
+}
+
+.card-item-account .item-content .item-resume span {
+  font-size: 16px;
+  font-weight: 500;
+  opacity:0.7;
+}
+
+.card-item-account .item-content .item-resume span:first-child {
+  font-size: 18px;
+  opacity:1;
 }
