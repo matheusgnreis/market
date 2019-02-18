@@ -22,18 +22,18 @@ $(function () {
     myItems: function (data) {
       var myItemSection = $('#my-items')
       var itemRow = $('<div>', { class: 'row' })
-      var itemContainer = $('<div>', { class: 'container' })
+      var itemContainer = $('<div>', { class: 'container' }).hide()
       //
       var items = $.map(data.applications, function (application) {
         var col = $('<div>', { class: 'col-md-3 col-lg-3 card-item-account' })
         var content = $('<div>', { class: 'item-content' })
         var img = $('<div>', { class: 'item-media' }).append($('<img>', { src: application.icon }))
         //
-        var itemResume = $('<div>', { class: 'item-resume' })
+        var itemResume = $('<div>', { class: 'item-resume', title: 'Editar item', 'data-app-id': application.app_id, 'data-toggle': 'offcanvas', 'data-target': '#my-item-form' })
         $(img).appendTo(content)
         $($('<span>', { text: application.title })).appendTo(itemResume)
         $($('<span>', { text: application.category })).appendTo(itemResume)
-        $($('<span>', { text: moment(application.version_date).fromNow()  })).appendTo(itemResume)
+        $($('<span>', { text: moment(application.version_date).fromNow() })).appendTo(itemResume)
         $(itemResume).appendTo(content)
         $(content).appendTo(col)
         return col
@@ -44,6 +44,7 @@ $(function () {
       itemContainer.append(itemRow)
       //myItemSection.html(itemContainer)
       $(itemContainer).appendTo(myItemSection)
+      itemContainer.fadeIn('slow')
       console.log("My Item setted up.")
     }
   }
