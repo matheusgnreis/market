@@ -157,6 +157,8 @@ trait Dictionary
                 $word_categories = 'Categories';
                 $word_search_empty = 'The search is empty.';
                 $word_title_description = 'Title Description';
+                $word_title_short_description = 'Short Description';
+                $word_placeholde_description = 'you can use markdown syntax';
                 $word_version = 'Version';
                 $word_version_date = 'Version date';
                 $word_type_of_app = 'Type';
@@ -316,6 +318,8 @@ trait Dictionary
                 $word_categories = 'Categorias';
                 $word_search_empty = 'A busca está vazia.';
                 $word_title_description = 'Descrição';
+                $word_title_short_description = 'Descrição curta';
+                $word_placeholde_description = 'Você pode usar markdown para melhorar a descrição do seu aplicativo.';
                 $word_version = 'Versão';
                 $word_version_date = 'Data da versão';
                 $word_type_of_app = 'Tipo';
@@ -486,6 +490,8 @@ trait Dictionary
             'word_categories' => $word_categories,
             'word_search_empty' => $word_search_empty,
             'word_description_single' => $word_title_description,
+            'word_title_short_description' => $word_title_short_description,
+            'word_placeholde_description' => $word_placeholde_description,
             'word_version' => $word_version,
             'word_version_date' => $word_version_date,
             'word_type_of_app' => $word_type_of_app,
