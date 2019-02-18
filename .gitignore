@@ -1,4 +1,5 @@
 /vendor
 /cache
 .env
-node_module/
+node_modules/
+vendor/
