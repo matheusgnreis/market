@@ -69,4 +69,5 @@ require('./config.js');
 require('./script.js');
 require('./single.js');
 require('./login.js');
-require('./account');
+require('./account.js');
+require('./my-items.js')
