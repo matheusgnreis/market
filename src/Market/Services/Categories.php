@@ -180,15 +180,6 @@ trait Categories
     public function resources()
     {
         return [
-            "regate",
-            "@_token",
-            "@analytics",
-            "@channels",
-            "@domains",
-            "@logs",
-            "@notifications",
-            "@searches",
-            "@visits",
             "applications",
             "authentications",
             "brands",
