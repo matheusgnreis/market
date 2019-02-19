@@ -7,13 +7,13 @@
 use Market\Controller\AppsController;
 use Market\Controller\PartnerController;
 
-$app->group('/v1', function () use ($app) {
+$app->group('/v1', function () use ($app, $applicationIsValid) {
     /**
      * Applications resource
      */
     $app->group(
         '/applications',
-        function () use ($app) {
+        function () use ($app, $applicationIsValid) {
             // controller
             $applicationController = new AppsController();
 
@@ -28,7 +28,27 @@ $app->group('/v1', function () use ($app) {
             /**
              * Create new application
              */
-            $app->post('', AppsController::class . ':create');
+            $app->post('', function ($request, $response) use ($applicationController) {
+                print_r($request->getAttribute('has_errors'));
+                if ($request->getAttribute('has_errors')) {
+                    //There are errors, read them
+                    $validateErrors = $request->getAttribute('errors');
+                    foreach ($validateErrors as $key => $value) {
+                        print_r($key);
+                        $errors[] = [
+                            'status' => 400,
+                            'property' => $key,
+                            'message' => 'Bad-formatted JSON {' . $key . '} invalid, details in user_message',
+                            'user_message' => str_replace('null ', '', implode(', ', $value)),
+                        ];
+                    }
+                    return $response->withJson(['erros' => $errors], 400);
+                } else {
+                    $body = $request->getParsedBody();
+                    $resp = $applicationController->create($body);
+                    return $response->withJson($resp);
+                }
+            })->add(new \DavidePastore\Slim\Validation\Validation($applicationIsValid));
 
             /**
              * Request application by Id
