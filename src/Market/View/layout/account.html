@@ -69,7 +69,7 @@
         <div class="row">
           <div class="col">
             <h4>{{params.dictionary.word_specifications}}</h4>
-            <form action="">
+            <form id="form-item">
               <!--
                 type app or theme
               -->
@@ -101,8 +101,9 @@
               -->
               <div class="col-md-6" id="apps-category">
                 <div class="form-group">
-                  <label>{{params.dictionary.word_select_category}}*</label>
-                  <select class="form-control form-control-sm">
+                  <label>{{params.dictionary.word_select_category}}</label>
+                  <select class="form-control form-control-sm" required="true" name="category">
+                    <option value="">{{params.dictionary.word_select_category}}</option>
                     {% for category in params.categories.applications %}
                     <option value="{{category.page}}">{{category.name}}</option>
                     {% endfor %}
@@ -112,7 +113,7 @@
               <div class="col-md-6" id="theme-category" style="display: none">
                 <div class="form-group">
                   <label>{{params.dictionary.word_select_category}}</label>
-                  <select class="form-control form-control-sm">
+                  <select class="form-control form-control-sm" name="category">
                     {% for category in params.categories.themes %}
                     <option value="{{category.page}}">{{category.name}}</option>
                     {% endfor %}
@@ -129,6 +130,19 @@
                     maxlength="40" required="true">
                 </div>
               </div>
+              <!--
+                upload icon
+              -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Icon</label>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="iconFile" accept=".png, .jpg, .jpeg" required="true">
+                    <label class="custom-file-label" for="iconFile">Choose file</label>
+                  </div>
+                </div>
+              </div>
+
               <!--
                 slug
               -->
@@ -154,8 +168,7 @@
               <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                   <label>{{params.dictionary.word_date_version}}</label>
-                  <input class="form-control form-control-sm" type="date" name="version_date" placeholder="{{dictionary.word_date_version}}"
-                    required="true">
+                  <input class="form-control form-control-sm" type="date" name="version_date" placeholder="{{dictionary.word_date_version}}">
                 </div>
               </div>
               <!--
@@ -175,7 +188,7 @@
                 <div class="form-group">
                   <label>{{params.dictionary.word_description_single}}</label>
                   <textarea class="form-control" placeholder="{{params.dictionary.word_placeholde_description}}" name="description"
-                    rows="7" required="true"></textarea>
+                    rows="7"></textarea>
                 </div>
               </div>
               <!--
@@ -185,6 +198,7 @@
                 <div class="form-group">
                   <label>{{params.dictionary.word_type_of_app}}</label>
                   <select class="form-control form-control-sm" name="type" required="true">
+                    <option value="">{{params.dictionary.word_select_category}}</option>
                     <option value="dashboard">Dashboard</option>
                     <option value="storefront">Storefront</option>
                     <option value="module_package">Module Package</option>
@@ -198,7 +212,7 @@
               <div class="col-sm-12 col-md-6" id="module_type" style="display:none">
                 <div class="form-group">
                   <label>Module</label>
-                  <select class="form-control form-control-sm" name="module" required="true">
+                  <select class="form-control form-control-sm" name="module">
                     <option value="">Module</option>
                     <option value="al">al</option>
                     <option value="pd">pd</option>
@@ -365,7 +379,6 @@
                   <label>Redirect URL</label>
                   <input class="form-control form-control-sm" type="text" name="redirect_uri" placeholder="https://meuapp.com/oauth">
                 </div>
-                <br>
               </div>
               <!--
                 site url
@@ -376,8 +389,55 @@
                   <input class="form-control form-control-sm" type="text" name="website">
                 </div>
               </div>
+              <!--
+                paid
+              -->
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                  <label>{{params.dictionary.word_paid}}</label>
+                  <div class="custom-controls-stacked">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" name="paid" value="1">
+                      <label class="custom-control-label">{{params.dictionary.word_yes}}</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" name="paid" value="0" checked>
+                      <label class="custom-control-label">{{params.dictionary.word_no}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--
+                plans
+              -->
+              <div class="col-sm-12 col-md-6" id="plans-element" style="display: none;">
+                <button class="btn btn-block btn-round btn-primary" type="button" data-toggle="modal" data-target="#modal-plans">Adicionar
+                  Planos</button>
+              </div>
+              <!--
+                upload screenshot
+              -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Screenshot</label>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="screenshot" accept=".png, .jpg, .jpeg" multiple>
+                    <label class="custom-file-label" for="screenshot">Choose file</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div id="upload-queue"></div>
+              </div>
+              <!--
+                submits
+              -->
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                  <button class="btn btn-block btn-round btn-primary" type="button" id="submit-form">Enviar Item</button>
+                </div>
+              </div>
             </form>
-
           </div>
         </div>
       </div>
@@ -387,8 +447,7 @@
   <!--
     application scope authorization
   -->
-  <div class="modal fade" id="modal-scope" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="modal-scope" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -471,6 +530,66 @@
               </table>
             </div>
             <!-- /FORM POPUP CONTENT -->
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--
+    plans form
+  -->
+  <div class="modal fade" id="modal-plans" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{params.dictionary.word_plan}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form id="form-plans">
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group">
+                <label>{{params.dictionary.word_name}}</label>
+                <input class="form-control form-control-sm" type="text" name="title[0]">
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group">
+                <label>{{params.dictionary.word_value}}</label>
+                <input class="form-control form-control-sm" type="text" name="value[0]">
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group">
+                <label>{{params.dictionary.word_description_single}}</label>
+                <input class="form-control form-control-sm" type="text" name="description[0]">
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group">
+                <label>{{params.dictionary.word_frequency}}</label>
+                <select class="form-control form-control-sm">
+                  <option value="monthly">Mensal</option>
+                  <option value="yearly">Anual</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <button type="button" class="btn btn-block btn-round btn-action">{{params.dictionary.word_remove}}
+                {{params.dictionary.word_plan}}</button>
+              <button type="button" class="btn btn-block btn-round btn-primary">{{params.dictionary.word_add}}
+                {{params.dictionary.word_plan}}</button>
+            </div>
           </form>
         </div>
 
