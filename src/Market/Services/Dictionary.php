@@ -68,6 +68,10 @@ trait Dictionary
                 $word_items_found = 'Items found';
                 $word_not_found = 'not found';
                 $word_price = 'Price';
+                $word_paid = 'Paid';
+                $word_free_trial = 'Free Trial';
+                $word_frequency = 'Frequency';
+                $word_frequency = 'Frequency';
                 $word_themes_store = 'Themes Store';
                 $word_profile_page = 'Profile page ';
                 $word_account_settings = 'Change Password';
@@ -229,6 +233,9 @@ trait Dictionary
                 $word_items_found = 'Items encontrados';
                 $word_not_found = 'não encontrado';
                 $word_price = 'Preço';
+                $word_paid = 'Pago';
+                $word_free_trial = 'Período de teste';
+                $word_frequency = 'Frequência';
                 $word_themes_store = 'Loja de Temas';
                 $word_profile_page = 'Perfil ';
                 $word_account_settings = 'Alterar Senha';
@@ -396,6 +403,9 @@ trait Dictionary
             'word_items_found' => $word_items_found,
             'word_not_found' => $word_not_found,
             'word_price' => $word_price,
+            'word_paid' => $word_paid,
+            'word_free_trial' => $word_free_trial,
+            'word_frequency' => $word_frequency,
             'word_themes_store' => $word_themes_store,
             'word_profile_page' => $word_profile_page,
             'word_account_settings' => $word_account_settings,
