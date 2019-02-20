@@ -9,7 +9,6 @@
 | initialize them in this file.
 |
 */
-
 /* $(function () {
   $.ajax({
     type: "GET",
