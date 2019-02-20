@@ -22,7 +22,7 @@ $(function () {
     myItems: function (data) {
       var myItemSection = $('#my-items')
       var itemRow = $('<div>', { class: 'row' })
-      var itemContainer = $('<div>', { class: 'container' }).hide()
+      var itemContainer = $('<div>', { class: 'container container-overflow-x' }).hide()
       //
       var items = $.map(data.applications, function (application) {
         var col = $('<div>', { class: 'col-md-3 col-lg-3 card-item-account' })
