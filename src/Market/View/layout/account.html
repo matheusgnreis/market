@@ -34,12 +34,14 @@
       </div>
       <div class="section-wrapper">
         <section class="account-sections current-section" id="my-items">
-          <div class="row">
-            <div class="col">
-              <div class="account-section-header" id="my-item-header">
-                <h2 class="header-title">Meus Items</h2>
-                <a href="#" data-action="add-item" class="link-action" title="Adicionar novo item." data-toggle="offcanvas"
-                  data-target="#my-item-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="account-section-header" id="my-item-header">
+                  <h2 class="header-title">Meus Items</h2>
+                  <a href="#" data-action="add-item" class="link-action" title="Adicionar novo item." data-toggle="offcanvas"
+                    data-target="#my-item-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+                </div>
               </div>
             </div>
           </div>
@@ -76,10 +78,10 @@
               <div class="col-sm-12 col-md-6">
                 <!-- hidden inputs -->
                 <input type="hidden" name="partner_id" id="uid" value="{{params.data.partner_id}}">
-                <input type="hidden" name="plans_json" id="plans_json" value="{}">
-                <input type="hidden" name="paid" id="paid" value="0">
-                <input type="hidden" name="value_plan_basic" id="value_plan_basic" value="0">
-                <input type="hidden" name="auth_scope" id="auth_scope" value="{}">
+                <input type="hidden" name="plans_json" id="plans_json" value="">
+                <input type="hidden" name="value_plan_basic" id="value_plan_basic" value=0>
+                <input type="hidden" name="auth_scope" id="auth_scope" value="">
+                <input type="hidden" name="icon" id="icon" value="">
                 <!-- / hidden inputs -->
                 <label>Tipo</label>
                 <div class="form-group">
@@ -137,8 +139,9 @@
                 <div class="form-group">
                   <label>Icon</label>
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="iconFile" accept=".png, .jpg, .jpeg" required="true">
-                    <label class="custom-file-label" for="iconFile">Choose file</label>
+                    <input type="file" class="custom-file-input" id="iconFile" name="files" accept=".png, .jpg, .jpeg, .icon"
+                      required="true">
+                    <label class="custom-file-label" for="iconFile">Icone</label>
                   </div>
                 </div>
               </div>
@@ -349,11 +352,11 @@
                   <label>{{params.dictionary.word_authentication}}</label>
                   <div class="custom-controls-stacked">
                     <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" name="authentication" value="1">
+                      <input type="radio" class="custom-control-input" name="authentication" value=1>
                       <label class="custom-control-label">{{params.dictionary.word_yes}}</label>
                     </div>
                     <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" name="authentication" value="0" checked>
+                      <input type="radio" class="custom-control-input" name="authentication" value=0 checked>
                       <label class="custom-control-label">{{params.dictionary.word_no}}</label>
                     </div>
                   </div>
@@ -421,7 +424,8 @@
                 <div class="form-group">
                   <label>Screenshot</label>
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="screenshot" accept=".png, .jpg, .jpeg" multiple>
+                    <input type="file" class="custom-file-input" id="screenshot" name="screenshot" accept=".png, .jpg, .jpeg"
+                      multiple>
                     <label class="custom-file-label" for="screenshot">Choose file</label>
                   </div>
                 </div>
@@ -451,7 +455,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Autorizações</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -462,7 +466,7 @@
 
             <!-- FORM POPUP CONTENT -->
             <div class="form-popup-content">
-              <h4 class="popup-title">Autorizações</h4>
+              <h4 class="popup-title">{{params.dictionary.word_description_scopes}}</h4>
               <table class="table-scope">
                 <caption></caption>
 
@@ -485,44 +489,39 @@
                   <tr>
                     <td class="resource-path">{{resource}}</td>
                     <td>
-                      <input type="checkbox" id="item-{{resource}}-get" name="{{resource}}[]" value="GET">
-                      <label for="item-{{resource}}-get" class="label-check" style="margin: 0;">
-                        <span class="checkbox primary">
-                          <span></span></span>
-                        {{params.dictionary.word_app}}
-                      </label>
+                      <div class="switch">
+                        <input type="checkbox" class="switch-input" id="item-{{resource}}-get" name="{{resource}}[]"
+                          value="GET">
+                        <label class="switch-label">On</label>
+                      </div>
                     </td>
                     <td>
-                      <input type="checkbox" id="item-{{resource}}-post" name="{{resource}}[]" value="POST">
-                      <label for="item-{{resource}}-post" class="label-check" style="margin: 0;">
-                        <span class="checkbox primary">
-                          <span></span></span>
-                        {{params.dictionary.word_app}}
-                      </label>
+                      <div class="switch">
+                        <input type="checkbox" class="switch-input" id="item-{{resource}}-get" name="{{resource}}[]"
+                          value="POST">
+                        <label class="switch-label">On</label>
+                      </div>
                     </td>
                     <td>
-                      <input type="checkbox" id="item-{{resource}}-put" name="{{resource}}[]" value="PUT">
-                      <label for="item-{{resource}}-put" class="label-check" style="margin: 0;">
-                        <span class="checkbox primary">
-                          <span></span></span>
-                        {{params.dictionary.word_app}}
-                      </label>
+                      <div class="switch">
+                        <input type="checkbox" class="switch-input" id="item-{{resource}}-get" name="{{resource}}[]"
+                          value="PUT">
+                        <label class="switch-label">On</label>
+                      </div>
                     </td>
                     <td>
-                      <input type="checkbox" id="item-{{resource}}-patch" name="{{resource}}[]" value="PATCH">
-                      <label for="item-{{resource}}-patch" class="label-check" style="margin: 0;">
-                        <span class="checkbox primary">
-                          <span></span></span>
-                        {{params.dictionary.word_app}}
-                      </label>
+                      <div class="switch">
+                        <input type="checkbox" class="switch-input" id="item-{{resource}}-get" name="{{resource}}[]"
+                          value="PATCH">
+                        <label class="switch-label">On</label>
+                      </div>
                     </td>
                     <td>
-                      <input type="checkbox" id="item-{{resource}}-delete" name="{{resource}}[]" value="DELETE">
-                      <label for="item-{{resource}}-delete" class="label-check" style="margin: 0;">
-                        <span class="checkbox primary">
-                          <span></span></span>
-                        {{params.dictionary.word_app}}
-                      </label>
+                      <div class="switch">
+                        <input type="checkbox" class="switch-input" id="item-{{resource}}-get" name="{{resource}}[]"
+                          value="DELETE">
+                        <label class="switch-label">On</label>
+                      </div>
                     </td>
                   </tr>
                   {% endfor %}
@@ -534,8 +533,8 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{params.dictionary.word_close}}</button>
+          <button type="button" class="btn btn-primary" id="submit-scope">{{params.dictionary.word_save}}</button>
         </div>
       </div>
     </div>
@@ -558,36 +557,37 @@
         <div class="modal-body">
           <form id="form-plans">
             <div class="col-sm-12 col-md-6">
+              <input name="id" id="plan-aid" value="1" hidden>
               <div class="form-group">
                 <label>{{params.dictionary.word_name}}</label>
-                <input class="form-control form-control-sm" type="text" name="title[0]">
+                <input class="form-control form-control-sm" type="text" name="title" required="true">
               </div>
             </div>
             <div class="col-sm-12 col-md-6">
               <div class="form-group">
                 <label>{{params.dictionary.word_value}}</label>
-                <input class="form-control form-control-sm" type="text" name="value[0]">
+                <input class="form-control form-control-sm" type="number" name="value" required="true">
               </div>
             </div>
             <div class="col-sm-12 col-md-6">
               <div class="form-group">
                 <label>{{params.dictionary.word_description_single}}</label>
-                <input class="form-control form-control-sm" type="text" name="description[0]">
+                <textarea class="form-control" placeholder="{{params.dictionary.word_description_single}}" name="description"
+                  rows="4" style="height: 100px" required="true"></textarea>
               </div>
             </div>
             <div class="col-sm-12 col-md-6">
               <div class="form-group">
                 <label>{{params.dictionary.word_frequency}}</label>
-                <select class="form-control form-control-sm">
+                <select class="form-control form-control-sm" name="frequency" required="true">
+                  <option value="">{{params.dictionary.word_select_category}}</option>
                   <option value="monthly">Mensal</option>
                   <option value="yearly">Anual</option>
                 </select>
               </div>
             </div>
             <div class="col-sm-12 col-md-6">
-              <button type="button" class="btn btn-block btn-round btn-action">{{params.dictionary.word_remove}}
-                {{params.dictionary.word_plan}}</button>
-              <button type="button" class="btn btn-block btn-round btn-primary">{{params.dictionary.word_add}}
+              <button type="button" class="btn btn-block btn-round btn-primary" id="add-plan">{{params.dictionary.word_add}}
                 {{params.dictionary.word_plan}}</button>
             </div>
           </form>
@@ -601,6 +601,19 @@
     </div>
   </div>
 
+  <!--
+    popup erros
+  -->
+  <!-- Cookie 3 -->
+  <div id="popup-erros" class="popup text-white bg-dark col-10 py-4" data-position="bottom-center" data-animation="slide-up">
+    <div class="row gap-y align-items-center">
+      <div class="col-md" id="popup-erros-content">
+      </div>
+      <div class="col-md-auto">
+        <button class="btn btn-sm btn-outline-light" data-dismiss="popup">Ok</button>
+      </div>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
   <script src="/assets/js/page.min.js"></script>
