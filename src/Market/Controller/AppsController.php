@@ -180,6 +180,7 @@ class AppsController
             'category' => !empty($body['category']) ? $body['category'] : null,
             'icon' => !empty($body['icon']) ? $body['icon'] : null,
             'description' => !empty($body['description']) ? $body['description'] : null,
+            'short_description' => !empty($body['short_description']) ? $body['short_description'] : null,
             'json_body' => !empty($body['json_body']) ? $body['json_body'] : null,
             'paid' => isset($body['paid']) ? $body['paid'] : null,
             'version' => !empty($body['version']) ? $body['version'] : null,
@@ -214,7 +215,7 @@ class AppsController
                 ],
             ];
         }
-        return $app->id;
+        return $application;
     }
 
     public function update($applicationId, $requestBody)
