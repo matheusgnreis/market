@@ -1,17 +1,17 @@
 <?php
 namespace Market\Controller;
 
-use Market\Services\FileUploader;
 use Market\Model\AppsImagens;
 use Market\Model\ThemesImagens;
 use Market\Services\Database;
+use Market\Services\FileUploader;
 
 class MediaController
 {
     private $dirUpload = '/var/www/data/uploads';
-    private $aid;
+    private $app_id;
     private $quality = 80;
-    private $data;
+    private $data = [];
     private $type;
     private $_request;
     private $_response;
@@ -36,45 +36,56 @@ class MediaController
 
     public function create($request, $response, $args)
     {
-        $uploader = new FileUploader('files', array(
-            'limit' => 6,
-            'maxSize' => 5,
-            'fileMaxSize' => null,
-            'extensions' => ['jpg', 'jpeg', 'png', 'JPG'],
-            'required' => false,
-            'uploadDir' => '/var/www/data/uploads/',
-            'title' => '{random}',
-            'replace' => false,
-            'listInput' => true,
-            'editor' => array(
-                'quality' => $this->quality,
-            ),
-        ));
+        if ($request->getParams()['type'] === 'screenshots') {
+            $uploader = new FileUploader('files', array(
+                'limit' => 6,
+                'maxSize' => 5,
+                'fileMaxSize' => null,
+                'extensions' => ['jpg', 'jpeg', 'png', 'JPG'],
+                'required' => false,
+                'uploadDir' => '/var/www/data/uploads/',
+                'title' => '{random}',
+                'replace' => false,
+                'listInput' => true,
+                'editor' => array(
+                    'quality' => $this->quality,
+                ),
+            ));
 
-        $upload = $uploader->upload();
+            $upload = $uploader->upload();
 
-        if ($upload['hasWarnings']) {
-            return $response->withJson(['erros' => ['erro' => '415', 'message' => 'Arquivo inválido.', 'Avisos' => $upload['warnings']]]);
+            if ($upload['hasWarnings']) {
+                return $response->withJson(['erros' => ['status' => '400', 'user_message' => 'Inválid file', 'message' => $upload['warnings']]], 400);
+            } else {
+                $this->data = $upload['files'];
+                $this->app_id = $request->getParams()['item_id'];
+                $this->_request = $request;
+                $this->_response = $response;
+                switch ($request->getParams()['item']) {
+                    case 'theme':
+                        $this->type = 'theme';
+                        // no break
+                    default:
+                        $this->type = 'apps';
+                }
+                return $this->save();
+            }
+        } elseif ($request->getParams()['type'] === 'icon') {
+            $uploader = new FileUploader('files', [
+                'extensions' => ['jpg', 'jpeg', 'png', 'JPG', 'icon'],
+                'uploadDir' => '/var/www/data/uploads/',
+                'title' => '{random}',
+                'replace' => false,
+            ]);
+
+            $upload = $uploader->upload();
+
+            if ($upload['hasWarnings']) {
+                return $response->withJson(['erros' => ['status' => '400', 'user_message' => 'Inválid file', 'message' => $upload['warnings']]], 400);
+            } else {
+                return $response->withJson($upload['files'], 201);
+            }
         }
-
-        $uri = $request->getUri();
-        $this->data = $upload['files'];
-        $this->aid = $args['id'];
-        $this->type = explode('/', $uri->getPath())[2];
-        $this->_request = $request;
-        $this->_response = $response;
-        $this->save();
-
-        //$img = new SimpleImage();
-        //$img->fromFile($upload['files'][0]['file'])
-        //    ->bestFit($this->medium['mw'], $this->medium['mh'])
-        //    ->toFile($upload['files'][0]['file'], 'image/png', 80);
-
-        //$apps = Apps::find($_SESSION['id']);
-        //$update = $apps->update([
-        //    'path_image' => $files[0]['file']
-        //]);
-        //return $update;
     }
 
     public function save()
@@ -95,35 +106,33 @@ class MediaController
     {
         $count = count($this->data);
         $resp = [];
-        for ($i=0; $i < $count; $i++) {
-            $resp[] = AppsImagens::create(
-                [
-                 'app_id' => $this->aid,
-                 'name' => $this->data[$i]['name'],
-                 'path_image' => $this->data[$i]['name'],
-                 'width_px' => 600,
-                 'height_px' => 600
-                ]
-            );
+        for ($i = 0; $i < $count; $i++) {
+            $media = [
+                'app_id' => $this->app_id,
+                'name' => $this->data[$i]['name'],
+                'path_image' => $this->data[$i]['name'],
+                'width_px' => 600,
+                'height_px' => 600,
+            ];
+            AppsImagens::create($media);
+            $resp[] = $media;
         }
-        //var_dump(!empty($resp));
-        //return !empty($resp) ? $this->_response->withJson(['status' => 201, 'message' => 'created', 'data' => $resp], 201) : $this->_response->withJson(['erro' => 'Error: media request'], 400);        
-        //return !empty($resp) ? json_encode(['status' => 201, 'message' => 'created', 'data' => $resp]) : json_encode(['erro' => 'Error: media request']);        
-        print_r(json_encode(['status' => 201, 'message' => 'created', 'data' => $resp]));
+
+        return $this->_response->withJson($resp, 201);
     }
 
     public function theme()
     {
         $count = count($this->data);
         $resp = [];
-        for ($i=0; $i < $count; $i++) {
+        for ($i = 0; $i < $count; $i++) {
             $resp[] = ThemesImagens::create(
                 [
-                 'theme_id' => $this->aid,
-                 'name' => $this->data[$i]['name'],
-                 'path_image' => $this->data[$i]['name'],
-                 'width_px' => 600,
-                 'height_px' => 600
+                    'theme_id' => $this->app_id,
+                    'name' => $this->data[$i]['name'],
+                    'path_image' => $this->data[$i]['name'],
+                    'width_px' => 600,
+                    'height_px' => 600,
                 ]
             );
         }
