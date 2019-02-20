@@ -29,12 +29,10 @@ $app->group('/v1', function () use ($app, $applicationIsValid) {
              * Create new application
              */
             $app->post('', function ($request, $response) use ($applicationController) {
-                print_r($request->getAttribute('has_errors'));
                 if ($request->getAttribute('has_errors')) {
                     //There are errors, read them
                     $validateErrors = $request->getAttribute('errors');
                     foreach ($validateErrors as $key => $value) {
-                        print_r($key);
                         $errors[] = [
                             'status' => 400,
                             'property' => $key,
@@ -46,7 +44,8 @@ $app->group('/v1', function () use ($app, $applicationIsValid) {
                 } else {
                     $body = $request->getParsedBody();
                     $resp = $applicationController->create($body);
-                    return $response->withJson($resp);
+
+                    return $response->withJson($resp, 201);
                 }
             })->add(new \DavidePastore\Slim\Validation\Validation($applicationIsValid));
 
