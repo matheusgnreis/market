@@ -31,6 +31,7 @@ trait Dictionary
                 $word_and = 'and ';
                 $word_yes = 'Yes';
                 $word_no = 'No';
+                $word_close = 'Close';
                 $word_documentation = 'Documentation';
                 $word_authentication = 'Authentication';
                 $word_register = 'Register ';
@@ -54,6 +55,7 @@ trait Dictionary
                 $word_max_char = 'Max 40 Characters';
                 $word_num_version = 'Num Version';
                 $word_date_version = 'Date Version';
+                $word_description_scopes = 'Use the switches below to indicate which features your application will consume from the user.';
                 $word_search_apps_themes = 'Search For apps or themes ...';
                 $word_buy_apps = 'Buy & Sell easily Apps Easily';
                 $description_buy_apps = 'Marketplace for shopkeepers and developers for e-commerce ';
@@ -196,6 +198,7 @@ trait Dictionary
                 $word_and = 'e ';
                 $word_yes = 'Sim';
                 $word_no = 'Não';
+                $word_close = 'Fechar';
                 $word_documentation = 'Documentação';
                 $word_authentication = 'Autenticação';
                 $word_register = 'Registar-se ';
@@ -219,6 +222,7 @@ trait Dictionary
                 $word_max_char = 'Max 40 caracteres';
                 $word_num_version = 'Número da Versão';
                 $word_date_version = 'Data da Versão';
+                $word_description_scopes = 'Use os switches abaixo para indicar quais recursos seu aplicativo irá consumir do usuário.';
                 $word_search_apps_themes = 'Buscar por Apps ou Temas ...';
                 $word_buy_apps = 'Compre & Venda facilmente';
                 $description_buy_apps = 'Marketplace para lojistas e desenvolvedores para e-commerce ';
@@ -359,6 +363,7 @@ trait Dictionary
             'word_value' => $word_value,
             'word_and' => $word_and,
             'word_yes' => $word_yes,
+            'word_close' => $word_close,
             'word_no' => $word_no,
             'word_add' => $word_add,
             'word_remove' => $word_remove,
@@ -387,6 +392,7 @@ trait Dictionary
             'word_max_char' => $word_max_char,
             'word_num_version' => $word_num_version,
             'word_date_version' => $word_date_version,
+            'word_description_scopes' => $word_description_scopes,
             'word_search_apps_themes' => $word_search_apps_themes,
             'word_buy_apps' => $word_buy_apps,
             'description_buy_apps' => $description_buy_apps,
