@@ -14,6 +14,12 @@ $(function () {
   var scopeForm = $('#form-scope')
   var iconFile = $('#iconFile')
   var screenshotFiles = $('#screenshot')
+  var applicationDataInput = $('[name="app_data"]')
+  var applicationHiddenDataInput = $('[name="hidden_data"]')
+  var buttonSaveAppData = $('#save-data-app')
+  var appData
+  var appHiddenData
+
   // globals
   var iconFileUpload
   var screenshotFilesUpload
@@ -296,6 +302,50 @@ $(function () {
     })
   }
 
+  var appDataToJson = function () {
+    try {
+      appData = JSON.parse($(this).val())
+      var editor = new JsonEditor('#json-data-parse', appData)
+      editor.load(appData)
+    } catch (ex) {
+      return ex
+    }
+  }
+
+  var appHiddenDataToJson = function () {
+    try {
+      appHiddenData = JSON.parse($(this).val())
+      console.log(appHiddenData)
+      var editor = new JsonEditor('#json-hidden-data-parse', appHiddenData)
+      editor.load(appHiddenData)
+    } catch (ex) {
+      return ex
+    }
+
+  }
+
+  var setAppData = function () {
+    try {
+      var data = {}
+
+      if (appData) {
+        data.data = appData
+        console.log(data)
+      }
+
+      if (appHiddenData) {
+        data.hidden_data = appHiddenData
+        console.log(data)
+      }
+
+      if (data) {
+        $('[name="json_body"]').val(JSON.stringify(data))
+      }
+    } catch (error) {
+      console.log('Erro com o Json Schema' + error)
+    }
+  }
+
   $.fn.serializeObject = function () {
     var o = {}
     var a = this.serializeArray()
@@ -339,4 +389,9 @@ $(function () {
     }
     console.log(screenshotFilesUpload);
   })
+
+  // data app change 
+  applicationDataInput.on('change', appDataToJson)
+  applicationHiddenDataInput.on('change', appHiddenDataToJson)
+  buttonSaveAppData.on('click', setAppData)
 });
