@@ -18,7 +18,6 @@ $redirectToLang = function ($request, $response, $next) {
 };
 
 $verifyLogin = function ($request, $response, $next) {
-
     if (!\Market\Controller\LoginController::hasLogin()) {
         return $response->withStatus(302)->withHeader('Location', '/pt_br');
     }
@@ -31,31 +30,31 @@ $verifyLogin = function ($request, $response, $next) {
  */
 
 $applicationIsValid = array(
-    'partner_id' => v::intVal()->notEmpty(),
-    'title' => v::stringType()->notEmpty()->length(1, 40),
-    'slug' => v::slug()->notEmpty(),
-    'category' => v::stringType()->notEmpty(),
-    'icon' => v::stringType()->notEmpty(),
-    'description' => v::stringType(),
-    'short_description' => v::stringType()->notEmpty()->length(1, 300),
-    'json_body' => v::stringType(),
-    'paid' => v::boolVal()->notEmpty(),
-    'version' => v::version()->notEmpty(),
-    'version_date' => v::date(),
-    'type' => v::stringType(),
-    'module' => v::stringType(),
-    'load_events' => v::arrayVal(),
-    'script_uri' => v::url(),
-    'github_repository' => v::url(),
-    'authentication' => v::boolVal()->notEmpty(),
-    'auth_callback_uri' => v::url(),
-    'redirect_uri' => v::url(),
-    'auth_scope' => v::stringType(),
-    'avg_stars' => v::intVal(),
-    'evaluations' => v::intVal(),
-    'downloads' => v::intVal(),
-    'website' => v::url(),
-    'link_video' => v::url(),
-    'plans_json' => v::stringType(),
-    'value_plan_basic' => v::intVal(),
+    'partner_id' => v::notOptional()->intVal(),
+    'title' => v::notOptional()->stringType()->length(1, 40),
+    'slug' => v::notOptional()->slug(),
+    'category' => v::notOptional()->stringType(),
+    'icon' => v::notOptional()->stringType(),
+    'description' => v::optional(v::stringType()),
+    'short_description' => v::notOptional()->stringType()->length(1, 300),
+    'json_body' => v::optional(v::stringType()),
+    'paid' => v::notOptional()->boolVal(),
+    'version' => v::notOptional()->version(),
+    'version_date' => v::optional(v::date()),
+    'type' => v::optional(v::stringType()),
+    'module' => v::optional(v::stringType()),
+    'load_events' => v::optional(v::arrayVal()),
+    'script_uri' => v::optional(v::url()),
+    'github_repository' => v::optional(v::url()),
+    'authentication' => v::notOptional()->boolVal(),
+    'auth_callback_uri' => v::optional(v::url()),
+    'redirect_uri' => v::optional(v::url()),
+    'auth_scope' => v::optional(v::stringType()),
+    'avg_stars' => v::optional(v::intVal()),
+    'evaluations' => v::optional(v::intVal()),
+    'downloads' => v::optional(v::intVal()),
+    'website' => v::optional(v::url()),
+    'link_video' => v::optional(v::url()),
+    'plans_json' => v::optional(v::stringType()),
+    'value_plan_basic' => v::optional(v::intVal()),
 );
