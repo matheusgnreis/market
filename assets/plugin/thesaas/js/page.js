@@ -34,7 +34,6 @@ require('./vendors/shuffle.js');        // 25 kb
 require('./vendors/slick.js');          // 43 kb
 require('./vendors/typed.js');          // 11 kb
 
-
 /*
 |--------------------------------------------------------------------------
 | Partials
