@@ -70,4 +70,4 @@ require('./script.js');
 require('./single.js');
 require('./login.js');
 require('./account.js');
-require('./my-items.js')
+require('./my-items.js');
