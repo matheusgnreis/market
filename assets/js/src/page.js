@@ -56,6 +56,10 @@ require('../../plugin/thesaas/js/loaders/partials.js');
 */
 require('./config.js');
 
+/** dependecys */
+
+require('./../jquery.json-editor');
+require('./../jquery.json-viewer');
 
 /*
 |--------------------------------------------------------------------------
