@@ -15,7 +15,7 @@ $app->get(
                 custom.locale; custom.edit_storefront; custom.store_id;
                  */
                 if ($user['email']) {
-                   
+
                     $expires = time() + 3600;
                     setCookie('store_id', $user['custom_store_id'], $expires);
                     setCookie('username', $user['username'], $expires);
@@ -32,7 +32,9 @@ $app->get(
             }
         } else {
             // invalid request
-            return $response->withRedirect('/');
+            if (isset($_COOKIE['prev_page'])) {
+                return $response->withRedirect($_COOKIE['prev_page']);
+            }
         }
     }
 );
