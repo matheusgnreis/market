@@ -72,384 +72,318 @@
           <div class="col">
             <h4>{{params.dictionary.word_specifications}}</h4>
             <form id="form-item">
-              <!--
-                type app or theme
-              -->
-              <div class="col-sm-12 col-md-6">
-                <!-- hidden inputs -->
-                <input type="hidden" name="partner_id" id="uid" value="{{params.data.partner_id}}">
-                <input type="hidden" name="plans_json" id="plans_json" value="">
-                <input type="hidden" name="json_body" id="json_body" value="">
-                <input type="hidden" name="value_plan_basic" id="value_plan_basic" value=0>
-                <input type="hidden" name="auth_scope" id="auth_scope" value="">
-                <input type="hidden" name="icon" id="icon" value="">
-                <!-- / hidden inputs -->
-                <label>Tipo</label>
-                <div class="form-group">
-                  <div class="custom-controls-stacked">
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" name="itemType" value="app" checked>
-                      <label class="custom-control-label">{{params.dictionary.word_app}}</label>
-                    </div>
+              <!-- hidden inputs -->
+              <input type="hidden" name="partner_id" id="uid" value="{{params.data.partner_id}}">
+              <input type="hidden" name="plans_json" id="plans_json" value="">
+              <input type="hidden" name="json_body" id="json_body" value="">
+              <input type="hidden" name="value_plan_basic" id="value_plan_basic" value=0>
+              <input type="hidden" name="auth_scope" id="auth_scope" value="">
+              <input type="hidden" name="icon" id="icon" value="">
 
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" name="itemType" value="theme">
-                      <label class="custom-control-label">{{params.dictionary.word_theme}}</label>
+              <div class="row gap-y">
+                <!-- first colum -->
+                <div class="col-md-6">
+                  <!--
+                  type app or theme
+                -->
+                  <div class="form-group">
+                    <label>Tipo</label>
+                    <div class="custom-controls-stacked">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="itemType" value="app" checked>
+                        <label class="custom-control-label">{{params.dictionary.word_app}}</label>
+                      </div>
+
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="itemType" value="theme">
+                        <label class="custom-control-label">{{params.dictionary.word_theme}}</label>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <!--
-                category
-              -->
-              <div class="col-md-6" id="apps-category">
-                <div class="form-group">
-                  <label>{{params.dictionary.word_select_category}}</label>
-                  <select class="form-control form-control-sm" required="true" name="category">
-                    <option value="">{{params.dictionary.word_select_category}}</option>
-                    {% for category in params.categories.applications %}
-                    <option value="{{category.page}}">{{category.name}}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6" id="theme-category" style="display: none">
-                <div class="form-group">
-                  <label>{{params.dictionary.word_select_category}}</label>
-                  <select class="form-control form-control-sm" name="category">
-                    {% for category in params.categories.themes %}
-                    <option value="{{category.page}}">{{category.name}}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              </div>
-              <!--
-                title
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>{{params.dictionary.word_name_of_item}}</label>
-                  <input class="form-control form-control-sm" type="text" name="title" placeholder="{{params.dictionary.word_max_char}}"
-                    maxlength="40" required="true">
-                </div>
-              </div>
-              <!--
-                upload icon
-              -->
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Icon</label>
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="iconFile" name="files" accept=".png, .jpg, .jpeg, .icon"
+                  <!--
+                  title
+                -->
+                  <div class="form-group">
+                    <label>{{params.dictionary.word_name_of_item}}</label>
+                    <input class="form-control form-control-sm" type="text" name="title" placeholder="{{params.dictionary.word_max_char}}"
+                      maxlength="40" required="true">
+                  </div>
+                  <!--
+                  category
+                -->
+                  <div class="form-group">
+                    <label>{{params.dictionary.word_select_category}}</label>
+                    <select class="form-control form-control-sm" required="true" name="category">
+                      <option value="">{{params.dictionary.word_select_category}}</option>
+                      {% for category in params.categories.applications %}
+                      <option value="{{category.page}}">{{category.name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <!--
+                  version
+                -->
+                  <div class="form-group">
+                    <label>{{params.dictionary.word_num_version}}</label>
+                    <input class="form-control form-control-sm" type="text" name="version" placeholder="Ex: 1.0"
                       required="true">
-                    <label class="custom-file-label" for="iconFile">Icone</label>
                   </div>
-                </div>
-              </div>
+                  <!--
+                  short description
+                -->
+                  <div class="form-group">
+                    <label>{{params.dictionary.word_title_short_description}}</label>
+                    <textarea class="form-control" placeholder="{{params.dictionary.word_title_short_description}}"
+                      name="short_description" rows="4" style="height: 100px" required="true"></textarea>
+                  </div>
+                  <!--
+                  item type
+                -->
+                  <div class="form-group" id="type_app">
+                    <label>{{params.dictionary.word_type_of_app}}</label>
+                    <select class="form-control form-control-sm" name="type" required="true">
+                      <option value="">{{params.dictionary.word_select_category}}</option>
+                      <option value="dashboard">Dashboard</option>
+                      <option value="storefront">Storefront</option>
+                      <option value="module_package">Module Package</option>
+                      <option value="external">External</option>
+                    </select>
+                  </div>
+                  <!--
+                  script url
+                -->
+                  <div class="form-group">
+                    <label>Script url</label>
+                    <input class="form-control form-control-sm" type="text" name="script_uri">
+                  </div>
+                  <!--
+                  github url
+                -->
+                  <div class="form-group">
+                    <label>Github</label>
+                    <input class="form-control form-control-sm" type="text" name="github_repository">
+                  </div>
+                  <!--
+                  authentication app
+                -->
+                  <div class="form-group">
+                    <label>{{params.dictionary.word_authentication}}</label>
+                    <div class="custom-controls-stacked">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="authentication" value=1>
+                        <label class="custom-control-label">{{params.dictionary.word_yes}}</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="authentication" value=0 checked>
+                        <label class="custom-control-label">{{params.dictionary.word_no}}</label>
+                      </div>
+                    </div>
+                  </div>
 
-              <!--
-                slug
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>Slug</label>
-                  <input class="form-control form-control-sm" type="text" name="slug" placeholder="Slug" maxlength="80"
-                    required="true">
-                </div>
-              </div>
-              <!--
-                version
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>{{params.dictionary.word_num_version}}</label>
-                  <input class="form-control form-control-sm" type="text" name="version" placeholder="Ex: 1.0" required="true">
-                </div>
-              </div>
-              <!--
-                version_date
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>{{params.dictionary.word_date_version}}</label>
-                  <input class="form-control form-control-sm" type="date" name="version_date" placeholder="{{dictionary.word_date_version}}">
-                </div>
-              </div>
-              <!--
-                short description
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>{{params.dictionary.word_title_short_description}}</label>
-                  <textarea class="form-control" placeholder="{{params.dictionary.word_title_short_description}}" name="short_description"
-                    rows="4" style="height: 100px" required="true"></textarea>
-                </div>
-              </div>
-              <!--
-                description
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>{{params.dictionary.word_description_single}}</label>
-                  <textarea class="form-control" placeholder="{{params.dictionary.word_placeholde_description}}" name="description"
-                    rows="7"></textarea>
-                </div>
-              </div>
-              <!--
-                item type
-              -->
-              <div class="col-sm-12 col-md-6" id="type_app">
-                <div class="form-group">
-                  <label>{{params.dictionary.word_type_of_app}}</label>
-                  <select class="form-control form-control-sm" name="type" required="true">
-                    <option value="">{{params.dictionary.word_select_category}}</option>
-                    <option value="dashboard">Dashboard</option>
-                    <option value="storefront">Storefront</option>
-                    <option value="module_package">Module Package</option>
-                    <option value="external">External</option>
-                  </select>
-                </div>
-              </div>
-              <!--
-                module type
-              -->
-              <div class="col-sm-12 col-md-6" id="module_type" style="display:none">
-                <div class="form-group">
-                  <label>Module</label>
-                  <select class="form-control form-control-sm" name="module">
-                    <option value="">Module</option>
-                    <option value="al">al</option>
-                    <option value="pd">pd</option>
-                    <option value="sc">sc</option>
-                    <option value="sh">sh</option>
-                    <option value="pa">pa</option>
-                    <option value="ck">ck</option>
-                    <option value="cf">cf</option>
-                    <option value="rg">rg</option>
-                    <option value="lg">lg</option>
-                    <option value="ct">ct</option>
-                    <option value="nw">nw</option>
-                  </select>
-                </div>
-              </div>
-              <!--
-                load events
-              -->
-              <div class="col-sm-12 col-md-6" id="load_events-element" style="display: none;">
-                <div class="form-group">
-                  <label>Load Events</label>
-                  <select class="form-control form-control-sm" name="load_events[]" id="load_events" multiple="multiple">
-                    <option value="applications/data">applications/data</option>
-                    <option value="applications/hidden_data">applications/hidden_data</option>
-                    <option value="applications">applications</option>
-                    <option value="authentications/api_key">authentications/api_key</option>
-                    <option value="authentications/panel_cards">authentications/panel_cards</option>
-                    <option value="authentications/panel_form_fields">authentications/panel_form_fields</option>
-                    <option value="authentications/permissions">authentications/permissions</option>
-                    <option value="authentications">authentications</option>
-                    <option value="brands/i18n">brands/i18n</option>
-                    <option value="brands/metafields">brands/metafields</option>
-                    <option value="brands/pictures">brands/pictures</option>
-                    <option value="brands">brands</option>
-                    <option value="carts/customers">carts/customers</option>
-                    <option value="carts/items">carts/items</option>
-                    <option value="carts/metafields">carts/metafields</option>
-                    <option value="carts/orders">carts/orders</option>
-                    <option value="carts">carts</option>
-                    <option value="categories/childs">categories/childs</option>
-                    <option value="categories/grids">categories/grids</option>
-                    <option value="categories/i18n">categories/i18n</option>
-                    <option value="categories/metafields">categories/metafields</option>
-                    <option value="categories/parent">categories/parent</option>
-                    <option value="categories/pictures">categories/pictures</option>
-                    <option value="categories">categories</option>
-                    <option value="collections/i18n">collections/i18n</option>
-                    <option value="collections/metafields">collections/metafields</option>
-                    <option value="collections/pictures">collections/pictures</option>
-                    <option value="collections/products">collections/products</option>
-                    <option value="collections">collections</option>
-                    <option value="customers/addresses">customers/addresses</option>
-                    <option value="customers/favorites">customers/favorites</option>
-                    <option value="customers/gifts_list">customers/gifts_list</option>
-                    <option value="customers/gifts_list_info">customers/gifts_list_info</option>
-                    <option value="customers/hidden_metafields">customers/hidden_metafields</option>
-                    <option value="customers/lists">customers/lists</option>
-                    <option value="customers/loyalty_points">customers/loyalty_points</option>
-                    <option value="customers/metafields">customers/metafields</option>
-                    <option value="customers/oauth_providers">customers/oauth_providers</option>
-                    <option value="customers/orders">customers/orders</option>
-                    <option value="customers/seller_recommendations">customers/seller_recommendations</option>
-                    <option value="customers">customers</option>
-                    <option value="grids/i18n">grids/i18n</option>
-                    <option value="grids/metafields">grids/metafields</option>
-                    <option value="grids/options">grids/options</option>
-                    <option value="grids">grids</option>
-                    <option value="orders/amount">orders/amount</option>
-                    <option value="orders/buyers">orders/buyers</option>
-                    <option value="orders/fullfilments">orders/fullfilments</option>
-                    <option value="orders/gift_to">orders/gift_to</option>
-                    <option value="orders/hidden_metafields">orders/hidden_metafields</option>
-                    <option value="orders/items">orders/items</option>
-                    <option value="orders/loyalty_points">orders/loyalty_points</option>
-                    <option value="orders/metafields">orders/metafields</option>
-                    <option value="orders/payments_history">orders/payments_history</option>
-                    <option value="orders/shipping_lines">orders/shipping_lines</option>
-                    <option value="orders/transactions">orders/transactions</option>
-                    <option value="orders">orders</option>
-                    <option value="procedures">procedures</option>
-                    <option value="products/brands">products/brands</option>
-                    <option value="products/categories">products/categories</option>
-                    <option value="products/customizations/options">products/customizations/options</option>
-                    <option value="products/customizations">products/customizations</option>
-                    <option value="products/grids">products/grids</option>
-                    <option value="products/hidden_metafields">products/hidden_metafields</option>
-                    <option value="products/i18n">products/i18n</option>
-                    <option value="products/inventory_records">products/inventory_records</option>
-                    <option value="products/kit_composition">products/kit_composition</option>
-                    <option value="products/metafields">products/metafields</option>
-                    <option value="products/other_discounts">products/other_discounts</option>
-                    <option value="products/other_prices">products/other_prices</option>
-                    <option value="products/payment_methods">products/payment_methods</option>
-                    <option value="products/pictures">products/pictures</option>
-                    <option value="products/price">products/price</option>
-                    <option value="products/price_change_records">products/price_change_records</option>
-                    <option value="products/quantity">products/quantity</option>
-                    <option value="products/related_produts">products/related_produts</option>
-                    <option value="products/shipping_methods">products/shipping_methods</option>
-                    <option value="products/specifications">products/specifications</option>
-                    <option value="products/variations/price">products/variations/price</option>
-                    <option value="products/variations/quantity">products/variations/quantity</option>
-                    <option value="products/variations/specifications">products/variations/specifications</option>
-                    <option value="products/variations">products/variations</option>
-                    <option value="products">products</option>
-                    <option value="stores">stores</option>
-                    <option value="triggers">triggers</option>
-                  </select>
-                </div>
-              </div>
-              <!--
-                script url
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>Script url</label>
-                  <input class="form-control form-control-sm" type="text" name="script_uri">
-                </div>
-              </div>
-              <!--
-                github url
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>Github</label>
-                  <input class="form-control form-control-sm" type="text" name="github_repository">
-                </div>
-              </div>
-              <!--
-                authentication app
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>{{params.dictionary.word_authentication}}</label>
-                  <div class="custom-controls-stacked">
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" name="authentication" value=1>
-                      <label class="custom-control-label">{{params.dictionary.word_yes}}</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" name="authentication" value=0 checked>
-                      <label class="custom-control-label">{{params.dictionary.word_no}}</label>
+                  <!--
+                  paid
+                -->
+                  <div class="form-group">
+                    <label>{{params.dictionary.word_paid}}</label>
+                    <div class="custom-controls-stacked">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="paid" value="1">
+                        <label class="custom-control-label">{{params.dictionary.word_yes}}</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="paid" value="0" checked>
+                        <label class="custom-control-label">{{params.dictionary.word_no}}</label>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <!--
-                authentication uri
-              -->
-              <div class="col-sm-12 col-md-6" id="autentication_callback-element" style="display: none;">
-                <div class="form-group">
-                  <label>Application Callback URI</label>
-                  <input class="form-control form-control-sm" type="text" name="auth_callback_uri" placeholder="https://meuapp.com/callback">
-                </div>
-                <button class="btn btn-block btn-round btn-primary" type="button" data-toggle="modal" data-target="#modal-scope">Selecionar
-                  scope</button>
-                <br>
-              </div>
-              <!--
-                redirect uri
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>Redirect URL</label>
-                  <input class="form-control form-control-sm" type="text" name="redirect_uri" placeholder="https://meuapp.com/oauth">
-                </div>
-              </div>
-              <!--
-                app data
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>Data do Aplicativo</label>
-                  <button class="btn btn-block btn-round btn-primary" type="button" data-toggle="modal" data-target="#modal-app-data">Selecionar
-                    o data do applicativo</button>
-                </div>
-              </div>
-              <!--
-                site url
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>Website url</label>
-                  <input class="form-control form-control-sm" type="text" name="website">
-                </div>
-              </div>
-              <!--
-                paid
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <label>{{params.dictionary.word_paid}}</label>
-                  <div class="custom-controls-stacked">
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" name="paid" value="1">
-                      <label class="custom-control-label">{{params.dictionary.word_yes}}</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" name="paid" value="0" checked>
-                      <label class="custom-control-label">{{params.dictionary.word_no}}</label>
-                    </div>
+                  <!--
+                  plans
+                -->
+                  <div class="form-group" id="plans-element">
+                    <button class="btn btn-block btn-round btn-primary" type="button" data-toggle="modal" data-target="#modal-plans"
+                      id="btn-plans" disabled>Adicionar
+                      Planos</button>
                   </div>
                 </div>
-              </div>
-              <!--
-                plans
-              -->
-              <div class="col-sm-12 col-md-6" id="plans-element" style="display: none;">
-                <button class="btn btn-block btn-round btn-primary" type="button" data-toggle="modal" data-target="#modal-plans">Adicionar
-                  Planos</button>
-              </div>
-              <!--
-                upload screenshot
-              -->
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Screenshot</label>
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="screenshot" name="screenshot" accept=".png, .jpg, .jpeg"
-                      multiple>
-                    <label class="custom-file-label" for="screenshot">Choose file</label>
+                <!-- second colum-->
+                <div class="col-md-6">
+                  <!--
+                  slug
+                -->
+                  <div class="form-group">
+                    <label>Slug</label>
+                    <input class="form-control form-control-sm" type="text" name="slug" placeholder="Slug" maxlength="80"
+                      required="true">
+                  </div>
+                  <!--
+                  upload icon
+                -->
+                  <div class="form-group">
+                    <label>Icon</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="iconFile" name="files" accept=".png, .jpg, .jpeg, .icon"
+                        required="true">
+                      <label class="custom-file-label" for="iconFile">Icone</label>
+                    </div>
+                  </div>
+                  <!--
+                  version_date
+                -->
+                  <div class="form-group">
+                    <label>{{params.dictionary.word_date_version}}</label>
+                    <input class="form-control form-control-sm" type="date" name="version_date" placeholder="{{dictionary.word_date_version}}">
+                  </div>
+                  <!--
+                  description
+                -->
+                  <div class="form-group">
+                    <label>{{params.dictionary.word_description_single}}</label>
+                    <textarea class="form-control" placeholder="{{params.dictionary.word_placeholde_description}}" name="description"
+                      rows="7"></textarea>
+                  </div>
+                  <!--
+                  load events
+                -->
+                  <div class="form-group" id="load_events-element">
+                    <label>Load Events</label>
+                    <select class="form-control form-control-sm" name="load_events[]" id="load_events" multiple="multiple"
+                      disabled>
+                      <option value="applications/data">applications/data</option>
+                      <option value="applications/hidden_data">applications/hidden_data</option>
+                      <option value="applications">applications</option>
+                      <option value="authentications/api_key">authentications/api_key</option>
+                      <option value="authentications/panel_cards">authentications/panel_cards</option>
+                      <option value="authentications/panel_form_fields">authentications/panel_form_fields</option>
+                      <option value="authentications/permissions">authentications/permissions</option>
+                      <option value="authentications">authentications</option>
+                      <option value="brands/i18n">brands/i18n</option>
+                      <option value="brands/metafields">brands/metafields</option>
+                      <option value="brands/pictures">brands/pictures</option>
+                      <option value="brands">brands</option>
+                      <option value="carts/customers">carts/customers</option>
+                      <option value="carts/items">carts/items</option>
+                      <option value="carts/metafields">carts/metafields</option>
+                      <option value="carts/orders">carts/orders</option>
+                      <option value="carts">carts</option>
+                      <option value="categories/childs">categories/childs</option>
+                      <option value="categories/grids">categories/grids</option>
+                      <option value="categories/i18n">categories/i18n</option>
+                      <option value="categories/metafields">categories/metafields</option>
+                      <option value="categories/parent">categories/parent</option>
+                      <option value="categories/pictures">categories/pictures</option>
+                      <option value="categories">categories</option>
+                      <option value="collections/i18n">collections/i18n</option>
+                      <option value="collections/metafields">collections/metafields</option>
+                      <option value="collections/pictures">collections/pictures</option>
+                      <option value="collections/products">collections/products</option>
+                      <option value="collections">collections</option>
+                      <option value="customers/addresses">customers/addresses</option>
+                      <option value="customers/favorites">customers/favorites</option>
+                      <option value="customers/gifts_list">customers/gifts_list</option>
+                      <option value="customers/gifts_list_info">customers/gifts_list_info</option>
+                      <option value="customers/hidden_metafields">customers/hidden_metafields</option>
+                      <option value="customers/lists">customers/lists</option>
+                      <option value="customers/loyalty_points">customers/loyalty_points</option>
+                      <option value="customers/metafields">customers/metafields</option>
+                      <option value="customers/oauth_providers">customers/oauth_providers</option>
+                      <option value="customers/orders">customers/orders</option>
+                      <option value="customers/seller_recommendations">customers/seller_recommendations</option>
+                      <option value="customers">customers</option>
+                      <option value="grids/i18n">grids/i18n</option>
+                      <option value="grids/metafields">grids/metafields</option>
+                      <option value="grids/options">grids/options</option>
+                      <option value="grids">grids</option>
+                      <option value="orders/amount">orders/amount</option>
+                      <option value="orders/buyers">orders/buyers</option>
+                      <option value="orders/fullfilments">orders/fullfilments</option>
+                      <option value="orders/gift_to">orders/gift_to</option>
+                      <option value="orders/hidden_metafields">orders/hidden_metafields</option>
+                      <option value="orders/items">orders/items</option>
+                      <option value="orders/loyalty_points">orders/loyalty_points</option>
+                      <option value="orders/metafields">orders/metafields</option>
+                      <option value="orders/payments_history">orders/payments_history</option>
+                      <option value="orders/shipping_lines">orders/shipping_lines</option>
+                      <option value="orders/transactions">orders/transactions</option>
+                      <option value="orders">orders</option>
+                      <option value="procedures">procedures</option>
+                      <option value="products/brands">products/brands</option>
+                      <option value="products/categories">products/categories</option>
+                      <option value="products/customizations/options">products/customizations/options</option>
+                      <option value="products/customizations">products/customizations</option>
+                      <option value="products/grids">products/grids</option>
+                      <option value="products/hidden_metafields">products/hidden_metafields</option>
+                      <option value="products/i18n">products/i18n</option>
+                      <option value="products/inventory_records">products/inventory_records</option>
+                      <option value="products/kit_composition">products/kit_composition</option>
+                      <option value="products/metafields">products/metafields</option>
+                      <option value="products/other_discounts">products/other_discounts</option>
+                      <option value="products/other_prices">products/other_prices</option>
+                      <option value="products/payment_methods">products/payment_methods</option>
+                      <option value="products/pictures">products/pictures</option>
+                      <option value="products/price">products/price</option>
+                      <option value="products/price_change_records">products/price_change_records</option>
+                      <option value="products/quantity">products/quantity</option>
+                      <option value="products/related_produts">products/related_produts</option>
+                      <option value="products/shipping_methods">products/shipping_methods</option>
+                      <option value="products/specifications">products/specifications</option>
+                      <option value="products/variations/price">products/variations/price</option>
+                      <option value="products/variations/quantity">products/variations/quantity</option>
+                      <option value="products/variations/specifications">products/variations/specifications</option>
+                      <option value="products/variations">products/variations</option>
+                      <option value="products">products</option>
+                      <option value="stores">stores</option>
+                      <option value="triggers">triggers</option>
+                    </select>
+                  </div>
+                  <!--
+                  redirect uri
+                -->
+                  <div class="form-group">
+                    <label>Redirect URL</label>
+                    <input class="form-control form-control-sm" type="text" name="redirect_uri" placeholder="https://meuapp.com/oauth">
+                  </div>
+                  <!--
+                  authentication uri
+                -->
+                  <div id="autentication_callback-element">
+                    <div class="form-group">
+                      <label>Application Callback URI</label>
+                      <input class="form-control form-control-sm" type="text" name="auth_callback_uri" placeholder="https://meuapp.com/callback"
+                        disabled>
+                    </div>
+                    <button class="btn btn-block btn-round btn-primary" type="button" data-toggle="modal" data-target="#modal-scope"
+                      id="btn-scope" disabled>Selecionar
+                      scope</button disabled>
+                    <br>
+                  </div>
+                  <!--
+                  app data
+                -->
+                  <div class="form-group">
+                    <label>Data do Aplicativo</label>
+                    <button class="btn btn-block btn-round btn-primary" type="button" data-toggle="modal" data-target="#modal-app-data">Selecionar
+                      o data do applicativo</button>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div id="upload-queue"></div>
-              </div>
-              <!--
-                submits
-              -->
-              <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                  <button class="btn btn-block btn-round btn-primary" type="button" id="submit-form">Enviar Item</button>
+                <!-- upload screenshots -->
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Screenshot</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="screenshot" name="screenshot" accept=".png, .jpg, .jpeg"
+                        multiple>
+                      <label class="custom-file-label" for="screenshot">Choose file</label>
+                    </div>
+                  </div>
+                  <div id="upload-queue"></div>
+                </div>
+                <!--
+                  submits
+                -->
+                <div class="col-sm-12 my-item-actions">
+                  <div class="form-group">
+                    <button class="btn btn-sm btn-round btn-success" type="button" id="submit-form">Enviar Item</button>
+                  </div>
                 </div>
               </div>
             </form>
@@ -659,6 +593,27 @@
     </div>
   </div>
 
+    <!--
+    modal sucess
+  -->
+  <div class="modal fade" id="modal-success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h3>Item Adicionado</h3>
+              <br>
+              <p class="lead mb-0">Seu aplicativo foi enviado com sucesso, você pode alterá-lo posteriormente em meus itens.</p>
+            </div>
+
+          </div>
+      </div>
+    </div>
+  </div>
   <!--
     popup erros
   -->
