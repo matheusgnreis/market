@@ -50,9 +50,9 @@ $(function () {
   // enable load events
   var enableLoadEvents = function () {
     if ($(this).val() === 'dashboard' || $(this).val() === 'storefront') {
-      $('#load_events-element').css('display', 'block')
+      $('#load_events').prop('disabled', false)
     } else {
-      $('#load_events-element').css('display', 'none')
+      $('#load_events').prop('disabled', true)
     }
   }
 
@@ -60,10 +60,12 @@ $(function () {
   // when application is required
   var enableScope = function () {
     if (parseInt($(this).val()) === 1) {
-      $('#autentication_callback-element').css('display', 'block')
+      $('[name="auth_callback_uri"]').prop('disabled', false)
+      $('#btn-scope').prop('disabled', false)
       $('[name="redirect_uri"]').attr('required', true)
     } else {
-      $('#autentication_callback-element').css('display', 'none')
+      $('[name="auth_callback_uri"]').prop('disabled', true)
+      $('#btn-scope').prop('disabled', true)
       $('[name="redirect_uri"]').removeAttr('required')
     }
   }
@@ -78,9 +80,9 @@ $(function () {
   // if application is pain
   var enablePlans = function () {
     if (parseInt($(this).val()) === 1) {
-      $('#plans-element').css('display', 'block')
+      $('#btn-plans').prop('disabled', false)
     } else {
-      $('#plans-element').css('display', 'none')
+      $('#btn-plans').prop('disabled', true)
     }
   }
 
@@ -122,6 +124,7 @@ $(function () {
         if (!$(this).val()) {
           console.log($(this).attr('name'))
           $(this).addClass('is-invalid')
+          $(this).focus()
           hasInputRequiredNotInformed.push($(this).attr('name'))
         }
       }
@@ -218,7 +221,7 @@ $(function () {
             'src': e.target.result,
             'id': 'thumb_' + i,
             'class': 'thumb-image'
-          }).appendTo(imageHolder)
+          }).fadeIn().appendTo(imageHolder)
         }
         reader.readAsDataURL($(this)[0].files[i])
       }
