@@ -380,3 +380,30 @@ a.json-placeholder {
 a.json-placeholder:hover {
   text-decoration: underline;
 }
+
+
+/** form my-items */
+#form-item .form-group {
+  min-height: 80px;
+}
+
+[name='short_description'] {
+  height: 115px !important;
+}
+
+#form-item .form-group .custom-controls-stacked {
+  display: flex;
+}
+
+#form-item .form-group .custom-controls-stacked .custom-control.custom-radio {
+  margin-right: 2em;
+}
+
+#form-item .form-control:focus {
+  border-color: #9E9E9E;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+}
+
+#form-item #load_events {
+  height: 148px;
+}

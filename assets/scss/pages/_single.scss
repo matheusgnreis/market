@@ -143,3 +143,24 @@
   margin: 0 auto;
   color: #fff;
 }
+
+/** */
+.scope-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.scope-li {
+  display: flex;
+  justify-content: space-between;
+  padding: .2em;
+}
+
+.scope-li:not(:last-child) {
+  border-bottom: 1px solid #f1f2f3;
+}
+
+.scope-li {
+  text-transform: capitalize;
+}
