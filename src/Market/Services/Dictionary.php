@@ -174,8 +174,11 @@ trait Dictionary
                 $word_info_create_password = 'is the page for creating your password to register your items in our Marketplace.';
                 $word_verify = 'Verify';
                 $word_installations = 'installations';
+                $word_install = 'Install';
+                $word_cancel = 'Cancel';
                 $word_galery = 'Galery';
                 $word_support = 'Support';
+                $word_installation_title = 'The application request the following authorizations';
                 $word_evaluation = 'Evaluation';
                 break;
 
@@ -340,8 +343,11 @@ trait Dictionary
                 $word_info_create_password = 'Nessa página você poderá criar sua senha para registrar seus itens em nosso Marketplace.';
                 $word_verify = 'Verificar';
                 $word_installations = 'Instalações';
+                $word_install = 'Instalar';
+                $word_cancel = 'Cancelar';
                 $word_galery = 'Galeria';
                 $word_support = 'Suporte';
+                $word_installation_title = 'O aplicativo solicita as seguintes autorizações';
                 $word_evaluation = 'Avaliações';
                 break;
         }
@@ -517,8 +523,11 @@ trait Dictionary
             'word_info_create_password' => $word_info_create_password,
             'word_verify' => $word_verify,
             'word_installations' => $word_installations,
+            'word_install' => $word_install,
+            'word_cancel' => $word_cancel,
             'word_galery' => $word_galery,
             'word_support' => $word_support,
+            'word_installation_title' => $word_installation_title,
             'word_evaluation' => $word_evaluation,
             'lang' => $lang,
         );
