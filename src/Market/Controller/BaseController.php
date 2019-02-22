@@ -16,7 +16,7 @@ abstract class BaseController
     {
         $this->ci = $container;
     }
-
+    
     /**
      * @param $name
      * @return mixed
