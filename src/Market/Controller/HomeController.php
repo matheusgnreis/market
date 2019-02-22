@@ -20,7 +20,6 @@ class HomeController extends BaseController
     {
         $apps = new AppsController();
         $all = $apps->getAll(['limit' => 8]);
-
         $translate = $this->getDictionary($args['lang']);
         $params = [
             'params' => [
@@ -32,7 +31,7 @@ class HomeController extends BaseController
                 'page' => [
                     'name' => 'Home',
                 ],
-                'data' => $all['result']
+                'data' => $all['result'],
             ],
         ];
         return $this->view->render($response, 'index.html', $params);
@@ -85,9 +84,9 @@ class HomeController extends BaseController
                 'view' => [
                     'scripts' => [
                         'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
-                        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js'
-                    ]
-                ]
+                        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js',
+                    ],
+                ],
             ],
         ];
         if ($app) {
