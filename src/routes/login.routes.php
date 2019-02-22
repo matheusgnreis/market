@@ -15,11 +15,11 @@ $app->get(
                 custom.locale; custom.edit_storefront; custom.store_id;
                  */
                 if ($user['email']) {
-                   
-                    $expires = time() + 3600;
-                    setCookie('store_id', $user['custom_store_id'], $expires);
-                    setCookie('username', $user['username'], $expires);
-                    setCookie('sso_logged', true, $expires);
+                    // save session cookies on domain root
+                    // expires when browser session closes
+                    setCookie('store_id', $user['custom_store_id'], 0, '/');
+                    setCookie('username', $user['username'], 0, '/');
+                    setCookie('sso_logged', true, 0, '/');
 
                     if (isset($_COOKIE['prev_page'])) {
                         return $response->withRedirect($_COOKIE['prev_page']);
