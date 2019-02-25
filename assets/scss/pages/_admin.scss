@@ -1,0 +1,52 @@
+aside#admin-aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 200px;
+  background-color: #1d0020;
+  white-space: nowrap;
+  box-shadow: 1px 10px 13px rgba(0, 0, 0, 0.17);
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  z-index: 997;
+  transform: translateZ(0);
+  transition: .3s ease;
+  backface-visibility: hidden;
+  perspective: 1000;
+  will-change: transform;
+}
+
+aside#admin-aside ~ main {
+  margin-left: 200px;
+}
+
+#admin-body > main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: margin-left .3s ease-out;
+}
+
+.sidebar-admin {
+  padding: 0;
+  margin: 0;
+  box-shadow: 1px 10px 13px rgba(0, 0, 0, 0.17);
+}
+
+.sidebar-admin ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar-admin ul li {padding: .5em 1em;}
+
+.sidebar-admin ul li a {
+  color: #fff;
+  height: 56px;
+  padding: 0 12px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  transition: .2s linear;
+}
