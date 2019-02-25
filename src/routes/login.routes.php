@@ -21,11 +21,19 @@ $app->get(
                     setCookie('username', $user['username'], 0, '/');
                     setCookie('sso_logged', true, 0, '/');
 
-                    if (isset($_COOKIE['prev_page'])) {
-                        return $response->withRedirect($_COOKIE['prev_page']);
+                    if (!$_SESSION) {
+                        session_start();
                     }
 
-                    return $response->withRedirect('/');
+                    $_SESSION['custom_store_id'] = $user['custom_store_id'];
+                    $_SESSION['username'] = $user['username'];
+                    $_SESSION['sso_login'] = true;
+
+                    if (isset($_COOKIE['prev_page']) && !empty($_COOKIE['prev_page'])) {
+                        return $response->withRedirect($_COOKIE['prev_page']);
+                    } else {
+                        return $response->withRedirect('/');
+                    }
                 }
             } else {
                 return $response->withRedirect('/session/create');
