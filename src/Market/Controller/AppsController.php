@@ -58,7 +58,7 @@ class AppsController
                 $data['slug'] = $application->slug;
                 $data['category'] = $application->category;
                 $data['icon'] = $application->icon;
-                $data['description'] = (string)$application->description;
+                $data['description'] = (string) $application->description;
                 $data['short_description'] = $application->short_description;
                 $data['json_body'] = json_decode($application->json_body);
                 $data['paid'] = (boolean) $application->paid;
