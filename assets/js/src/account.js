@@ -94,5 +94,7 @@ $(function () {
     getPatnerData()
   }
 
-  init()
+  if ($('#main-account').length) {
+    init()
+  }
 })
