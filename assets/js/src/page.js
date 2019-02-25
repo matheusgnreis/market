@@ -75,3 +75,4 @@ require('./single.js');
 require('./login.js');
 require('./account.js');
 require('./my-items.js');
+require('./admin.js');
