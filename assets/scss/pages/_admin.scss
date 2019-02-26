@@ -50,3 +50,28 @@ aside#admin-aside ~ main {
   align-items: center;
   transition: .2s linear;
 }
+
+ul.settings-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li.settings-list {
+  display: flex;
+  justify-content: space-between;
+  height: 46px;
+  align-items: center;
+  border-bottom: 1px solid #F1F2F2;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/** brutusin fix */
+form.brutusin-form td.prop-value {
+  width: 80% !important;
+}
+
+form.brutusin-form td {
+  white-space: pre-wrap !important;
+}
