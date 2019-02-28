@@ -220,30 +220,6 @@ class AppsController
 
     public function update($applicationId, $requestBody)
     {
-        if (!$applicationId) {
-            return [
-                'status' => 400,
-                'message' => 'Resource ID expected and not specified on request UR',
-                'user_message' => [
-                    'en_us' => 'Unexpected error, report to support or responsible developer',
-                    'pt_br' => 'Erro inesperado, reportar ao suporte ou desenvolvedor responsável',
-                ],
-            ];
-        }
-
-        $application = Apps::find($args['id']);
-
-        if (!$application) {
-            return [
-                'status' => 400,
-                'message' => 'Invalid value on resource ID',
-                'user_message' => [
-                    'en_us' => 'The informed ID is invalid',
-                    'pt_br' => 'O ID informado é inválido',
-                ],
-            ];
-        }
-
         $updateBody = [
             'title' => isset($requestBody['title']) ? $requestBody['title'] : $application->title,
             'slug' => isset($requestBody['slug']) ? $requestBody['slug'] : $application->slug,
