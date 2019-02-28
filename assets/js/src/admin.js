@@ -3,7 +3,7 @@
  */
 $(function () {
   var myId = '5b1abe30a4d4531b8fe40726'
-  var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1YjFhYmUzMGE0ZDQ1MzFiOGZlNDA3MjYiLCJjb2QiOjkyODY2NzAyLCJleHAiOjE1NTEzNjY2ODYxNDV9.4Zcu4nfuDWGYWggZ5iwJfEW2KCdKHkmzfpI4qWMik_4'
+  var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1YjFhYmUzMGE0ZDQ1MzFiOGZlNDA3MjYiLCJjb2QiOjkyODY2NzAyLCJleHAiOjE1NTE0NjQwNTIwNTJ9.AmpJMTjJkz0xYupYFZi1WFmkeeJ7EoRH2vRlCE_7BzA'
   var storeId = 1011
   var applicationPathEcomP = 'https://api.e-com.plus/v1/applications.json'
   var applicationPathMarket = '/v1/applications'
@@ -19,7 +19,7 @@ $(function () {
     applications: function (apps) {
 
       if (apps) {
-        $.map(apps, function (app, index) {
+        $.map(apps, function (app) {
 
           var card = $('<div>', { class: 'card' })
           var cardTitle = $('<h6>', { class: 'card-title' })
@@ -27,18 +27,20 @@ $(function () {
           //
           var cardLink = $('<a>', { class: 'd-flex align-items-center', 'data-toggle': 'collapse', href: '#collapse-app-' + app._id })
           $('<strong>', { class: 'mr-auto', text: app.title }).appendTo(cardLink)
+          cardLink.appendTo(cardTitle)
 
           var switcher = $('<div>', { class: 'switch' })
           $('<input>', { type: 'checkbox', class: 'switch-input', checked: app.state === 'active' ? true : false }).appendTo(switcher)
           $('<label>', { class: 'switch-label', text: 'Ativo' }).appendTo(switcher)
-          var span = $('<span>', { class: 'small text-lighter' })
-          switcher.appendTo(span)
-          span.appendTo(cardLink)
-          cardLink.appendTo(cardTitle)
+
+          var appState = $('<div>', { class: 'app-state' })
+          $('<span>', { text: 'Status' }).appendTo(appState)
+          switcher.appendTo(appState)
+
           //
           var collapse = $('<div>', { id: 'collapse-app-' + app._id, class: 'collapse', 'data-parent': '#accordion-apps' })
           var cardBody = $('<div>', { class: 'card-body', id: 'card-body-' + app.app_id })
-
+          appState.appendTo(collapse)
           cardBody.appendTo(collapse)
           // card body
 
@@ -47,24 +49,30 @@ $(function () {
           card.appendTo('#accordion-apps')
           //
           var editBody = document.getElementById('card-body-' + app.app_id)
+
           $('#accordion-apps').hide()
           //
-          $.when(getAppData(app.app_id))
+          getAppData(app.app_id)
             .done(function (json) {
               bf = brutusin['json-forms'].create(json.json_body)
-              //var editBody = document.getElementById('card-body-' + app.app_id)
+
               let datas = []
 
-              if (app.data || data.hidden_data) {
+              if (app.data || app.hidden_data) {
                 datas.data = app.data
                 datas.hidden_data = app.hidden_data
               }
 
               bf.render(editBody, datas)
-
-              var btn = $('<p>').append($('<a>', { class: 'btn btn-lg btn-primary account-action', text: 'Alterar', 'data-app-id': app.app_id }))
-              btn.appendTo(cardBody)
+              // if not has json_body removes acordion body
+              if (!json.json_body) {
+                editBody.remove()
+                console.log(editBody)
+              }
               $('#accordion-apps').slideDown()
+            })
+            .fail(function (xhr) {
+              console.log(xhr)
             })
         })
       }
@@ -83,33 +91,6 @@ $(function () {
     }
   }
 
-  var listSettings = function (data) {
-
-    var ul = $('<ul>', { class: 'settings-ul' })
-
-    for (var key in data) {
-      if (data.hasOwnProperty(key)) {
-        switch (typeof data[key]) {
-          case 'number':
-          case 'string':
-          case 'boolean':
-            var li = $('<li>', { class: 'settings-list' })
-            $('<span>', { class: 'span-key', text: key }).appendTo(li)
-            $('<span>', { class: 'span-value', text: data[key] }).appendTo(li)
-            li.appendTo(ul)
-            break;
-          case 'object':
-            $(listSettings(data[key])).appendTo(ul)
-            break
-          default:
-            break;
-        }
-      }
-    }
-
-    return ul
-
-  }
   /**
    * 
    * @param {*} event 
@@ -118,7 +99,6 @@ $(function () {
     return $.ajax({
       type: 'GET',
       url: applicationPathMarket + '/' + appId,
-      data: 'data',
       dataType: 'json'
     })
   }
