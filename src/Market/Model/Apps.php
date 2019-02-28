@@ -73,7 +73,7 @@ class Apps extends Model
     {
         return $this->hasMany(AppsImagens::class, 'app_id', 'app_id');
     }
-    
+
     /**
      * Create evaluations relationship with app
      *
