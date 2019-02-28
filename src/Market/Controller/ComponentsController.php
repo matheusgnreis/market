@@ -7,7 +7,7 @@ class ComponentsController
 {
     private $_limit = 30;
     private $_offset = 0;
-    private $_fields = [];
+    private $_fields = ['partner_id','title','slug','ejs','js','json_schema','icon'];
     private $_result = [];
     private $_params = ['active' => 1];
 
