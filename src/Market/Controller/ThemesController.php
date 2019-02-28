@@ -7,7 +7,7 @@ class ThemesController
 {
     private $_limit = 30;
     private $_offset = 0;
-    private $_fields = ['id', 'partner_id', 'title', 'slug', 'category', 'thumbnail', 'description', 'json_body', 'paid', 'version', 'version_date', 'avg_stars', 'evaluations', 'link_documentation', 'link_video', 'value_license_basic', 'value_license_extend'];
+    private $_fields = ['id', 'title', 'slug', 'category', 'thumbnail', 'paid', 'value_license_basic', 'value_license_extend'];
     private $_result = [];
     private $_params = [];
 
@@ -67,10 +67,8 @@ class ThemesController
         /*
         Possíveis parametros para busca
          */
-        if (isset($params['filter'])) {
-            if ($params['filter'] == 'free') {
-                $this->_params[] = ['value_plan_basic', 0];
-            }
+        if (isset($params['paid'])) {
+            $this->_params[] = ['paid', $params['paid']];
         }
 
         if (isset($params['author'])) {
@@ -122,51 +120,54 @@ class ThemesController
 
     public function create($body)
     {
-        $theme = Themes::create([
-            'partner_id' => $body['partner_id'],
-            'title' => $body['title'],
-            'slug' => $body['slug'],
-            'category' => $body['category'],
-            'thumbnail' => $body['thumbnail'],
-            'description' => $body['description'],
-            'json_body' => $body['json_body'],
-            'paid' => $body['paid'],
-            'version' => $body['version'],
-            'version_date' => $body['version_date'],
-            'avg_stars' => 0,
-            'evaluations' => 0,
-            'link_documentation' => $body['link_documentation'],
-            'link_video' => $body['link_video'],
-            'value_license_basic' => $body['value_license_basic'],
-            'value_license_extend' => $body['value_license_extend'],
-        ]);
+        $theme = Themes::create(
+            [
+                'partner_id' => $body['partner_id'],
+                'title' => $body['title'],
+                'slug' => $body['slug'],
+                'category' => $body['category'],
+                'thumbnail' => $body['thumbnail'],
+                'description' => $body['description'],
+                'json_body' => $body['json_body'],
+                'paid' => $body['paid'],
+                'version' => $body['version'],
+                'version_date' => $body['version_date'],
+                'avg_stars' => 0,
+                'evaluations' => 0,
+                'link_documentation' => $body['link_documentation'],
+                'link_video' => $body['link_video'],
+                'value_license_basic' => isset($body['value_license_basic']) ? $body['value_license_basic'] : 0,
+                'value_license_extend' => isset($body['value_license_extend']) ? $body['value_license_extend'] : 0,
+            ]
+        );
 
         return $theme;
     }
 
     public function update($themeId, $bodyUpdate)
     {
-
         $theme = Themes::find($themeId);
 
         $body = $bodyUpdate;
-        $update = $theme->update([
-            'title' => isset($body['title']) ? $body['title'] : $theme->title,
-            'slug' => isset($body['slug']) ? $body['slug'] : $theme->slug,
-            'category' => isset($body['category']) ? $body['category'] : $theme->category,
-            'thumbnail' => isset($body['thumbnail']) ? $body['thumbnail'] : $theme->thumbnail,
-            'description' => isset($body['description']) ? $body['description'] : $theme->description,
-            'json_body' => isset($body['json_body']) ? $body['json_body'] : $theme->json_body,
-            'paid' => isset($body['paid']) ? $body['paid'] : $theme->paid,
-            'version' => isset($body['version']) ? $body['version'] : $theme->version,
-            'version_date' => isset($body['version_date']) ? $body['version_date'] : $theme->version_date,
-            'avg_stars' => isset($body['avg_stars']) ? $body['avg_stars'] : $theme->avg_stars,
-            'evaluations' => isset($body['evaluations']) ? $body['evaluations'] : $theme->evaluations,
-            'link_documentation' => isset($body['link_documentation']) ? $body['link_documentation'] : $theme->link_documentation,
-            'link_video' => isset($body['link_video']) ? $body['link_video'] : $theme->link_video,
-            'value_license_basic' => isset($body['value_license_basic']) ? $body['value_license_basic'] : $theme->value_license_basic,
-            'value_license_extend' => isset($body['value_license_extend']) ? $body['value_license_extend'] : $theme->value_license_extend,
-        ]);
+        $update = $theme->update(
+            [
+                'title' => isset($body['title']) ? $body['title'] : $theme->title,
+                'slug' => isset($body['slug']) ? $body['slug'] : $theme->slug,
+                'category' => isset($body['category']) ? $body['category'] : $theme->category,
+                'thumbnail' => isset($body['thumbnail']) ? $body['thumbnail'] : $theme->thumbnail,
+                'description' => isset($body['description']) ? $body['description'] : $theme->description,
+                'json_body' => isset($body['json_body']) ? $body['json_body'] : $theme->json_body,
+                'paid' => isset($body['paid']) ? $body['paid'] : $theme->paid,
+                'version' => isset($body['version']) ? $body['version'] : $theme->version,
+                'version_date' => isset($body['version_date']) ? $body['version_date'] : $theme->version_date,
+                'avg_stars' => isset($body['avg_stars']) ? $body['avg_stars'] : $theme->avg_stars,
+                'evaluations' => isset($body['evaluations']) ? $body['evaluations'] : $theme->evaluations,
+                'link_documentation' => isset($body['link_documentation']) ? $body['link_documentation'] : $theme->link_documentation,
+                'link_video' => isset($body['link_video']) ? $body['link_video'] : $theme->link_video,
+                'value_license_basic' => isset($body['value_license_basic']) ? $body['value_license_basic'] : $theme->value_license_basic,
+                'value_license_extend' => isset($body['value_license_extend']) ? $body['value_license_extend'] : $theme->value_license_extend,
+            ]
+        );
 
         return $update;
     }
