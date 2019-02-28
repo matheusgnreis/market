@@ -11,7 +11,7 @@ class AppsController
     private $_limit = 30;
     private $_offset = 0;
     private $_fields = ['app_id', 'title', 'category', 'slug', 'icon', 'version', 'paid', 'short_description', 'evaluations', 'downloads'];
-    private $_result = [];
+    private $_result = ['id', 'partner_id', 'title', 'slug', 'css', 'js', 'json_schema', 'icon'];
     private $_params = ['active' => 1];
     /**
      * Construtor
