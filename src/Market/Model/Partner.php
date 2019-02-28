@@ -23,4 +23,9 @@ class Partner extends Model
     {
         return $this->hasMany(Themes::class, 'partner_id', 'id');
     }
+
+    public function components()
+    {
+        return $this->hasMany(Components::class, 'partner_id', 'id');
+    }
 }
