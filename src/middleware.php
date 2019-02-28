@@ -1,5 +1,7 @@
 <?php
 use Respect\Validation\Validator as v;
+use Market\Model\Themes;
+
 
 $redirectToLang = function ($request, $response, $next) {
     $uri = $request->getUri();
@@ -58,3 +60,75 @@ $applicationIsValid = array(
     'plans_json' => v::optional(v::stringType()),
     'value_plan_basic' => v::optional(v::intVal()),
 );
+
+/**
+ * Validate components post
+ */
+
+$componentsIsValid = array(
+    'partner_id' => v::notOptional()->intVal(),
+    'title' => v::notOptional()->stringType()->length(1, 40),
+    'slug' => v::notOptional()->slug(),
+    'ejs' => v::optional(v::url()),
+    'js' => v::optional(v::url()),
+    'json_schema' => v::optional(v::stringType()),
+    'icon' => v::notOptional()->stringType(),
+);
+
+/**
+ * Validate themes post
+ */
+
+$themeIsValid = array(
+    'partner_id' => v::notOptional()->intVal(),
+    'title' => v::notOptional()->stringType()->length(1, 40),
+    'slug' => v::notOptional()->slug(),
+    'category' => v::notOptional()->stringType(),
+    'thumbnail' => v::notOptional()->stringType(),
+    'description' => v::optional(v::stringType()),
+    'json_body' => v::optional(v::stringType()),
+    'paid' => v::notOptional()->boolVal(),
+    'version' => v::notOptional()->version(),
+    'version_date' => v::optional(v::date()),
+    'avg_stars' => v::optional(v::intVal()),
+    'evaluations' => v::optional(v::intVal()),
+    'link_documentation' => v::optional(v::url()),
+    'link_video' => v::optional(v::url()),
+    'value_license_basic' => v::optional(v::intVal()),
+    'value_license_extend' => v::optional(v::intVal()),
+);
+
+
+/** update theme */
+$updateThemeIsValid = function ($request, $response, $next) {
+    $route = $request->getAttribute('route');
+    $args = $route->getArguments();
+
+    if (!$args['id']) {
+        $resp = [
+            'status' => 400,
+            'message' => 'Resource ID expected and not specified on request URL',
+            'user_message' => [
+                'en_us' => 'Unexpected error, report to support or responsible developer',
+                'pt_br' => 'Erro inesperado, reportar ao suporte ou desenvolvedor responsável',
+            ],
+        ];
+        return $response->withJson($resp, 400);
+    }
+
+    $application = Themes::find($args['id']);
+
+    if (!$application) {
+        $resp =  [
+            'status' => 400,
+            'message' => 'Invalid value on resource ID',
+            'user_message' => [
+                'en_us' => 'The informed ID is invalid',
+                'pt_br' => 'O ID informado é inválido',
+            ],
+        ];
+        return $response->withJson($resp, 400);
+    }
+
+    return $next($request, $response);
+};
