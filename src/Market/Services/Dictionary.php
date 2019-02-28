@@ -25,6 +25,7 @@ trait Dictionary
                 $word_theme = 'Themes ';
                 $word_plans = 'Plans';
                 $word_plan = 'Plan';
+                $word_components = 'Components';
                 $word_add = 'Add';
                 $word_remove = 'Remove';
                 $word_value = 'Value';
@@ -195,6 +196,7 @@ trait Dictionary
                 $word_theme = 'Temas ';
                 $word_plans = 'Planos';
                 $word_plan = 'Plano';
+                $word_components = 'Componentes';
                 $word_value = 'Valor';
                 $word_add = 'Adicionar';
                 $word_remove = 'Remover';
@@ -366,6 +368,7 @@ trait Dictionary
             'word_theme' => $word_theme,
             'word_plans' => $word_plans,
             'word_plan' => $word_plan,
+            'word_components' => $word_components,
             'word_value' => $word_value,
             'word_and' => $word_and,
             'word_yes' => $word_yes,
