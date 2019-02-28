@@ -1,6 +1,8 @@
 <?php
 use Respect\Validation\Validator as v;
 use Market\Model\Themes;
+use Market\Model\Apps;
+use Market\Model\Components;
 
 
 $redirectToLang = function ($request, $response, $next) {
@@ -117,6 +119,75 @@ $updateThemeIsValid = function ($request, $response, $next) {
     }
 
     $application = Themes::find($args['id']);
+
+    if (!$application) {
+        $resp =  [
+            'status' => 400,
+            'message' => 'Invalid value on resource ID',
+            'user_message' => [
+                'en_us' => 'The informed ID is invalid',
+                'pt_br' => 'O ID informado é inválido',
+            ],
+        ];
+        return $response->withJson($resp, 400);
+    }
+
+    return $next($request, $response);
+};
+
+
+/** update theme */
+$updateApplicationIsValid = function ($request, $response, $next) {
+    $route = $request->getAttribute('route');
+    $args = $route->getArguments();
+
+    if (!$args['id']) {
+        $resp = [
+            'status' => 400,
+            'message' => 'Resource ID expected and not specified on request URL',
+            'user_message' => [
+                'en_us' => 'Unexpected error, report to support or responsible developer',
+                'pt_br' => 'Erro inesperado, reportar ao suporte ou desenvolvedor responsável',
+            ],
+        ];
+        return $response->withJson($resp, 400);
+    }
+
+    $application = Apps::find($args['id']);
+
+    if (!$application) {
+        $resp =  [
+            'status' => 400,
+            'message' => 'Invalid value on resource ID',
+            'user_message' => [
+                'en_us' => 'The informed ID is invalid',
+                'pt_br' => 'O ID informado é inválido',
+            ],
+        ];
+        return $response->withJson($resp, 400);
+    }
+
+    return $next($request, $response);
+};
+
+/** update theme */
+$updateComponentsIsValid = function ($request, $response, $next) {
+    $route = $request->getAttribute('route');
+    $args = $route->getArguments();
+
+    if (!$args['id']) {
+        $resp = [
+            'status' => 400,
+            'message' => 'Resource ID expected and not specified on request URL',
+            'user_message' => [
+                'en_us' => 'Unexpected error, report to support or responsible developer',
+                'pt_br' => 'Erro inesperado, reportar ao suporte ou desenvolvedor responsável',
+            ],
+        ];
+        return $response->withJson($resp, 400);
+    }
+
+    $application = Components::find($args['id']);
 
     if (!$application) {
         $resp =  [
