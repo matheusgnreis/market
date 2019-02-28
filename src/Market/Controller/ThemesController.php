@@ -1,108 +1,127 @@
 <?php
 namespace Market\Controller;
 
-use Slug\Slugifier as Slugifier;
-
 use Market\Model\Themes;
 
 class ThemesController
 {
+    private $_limit = 30;
+    private $_offset = 0;
+    private $_fields = ['id', 'partner_id', 'title', 'slug', 'category', 'thumbnail', 'description', 'json_body', 'paid', 'version', 'version_date', 'avg_stars', 'evaluations', 'link_documentation', 'link_video', 'value_license_basic', 'value_license_extend'];
+    private $_result = [];
+    private $_params = [];
+
     public function __construct()
     {
         new \Market\Services\Database();
     }
 
-    public function getAll($request, $response, $args)
+    public function getAll($params)
     {
-        $params = $this->getSearchParams($request);
-        $skip = $this->getSearchSkip($request);
-        $take = $this->getSearchTake($request);
-        $themes = Themes::where($params)->skip($skip)->take($take)->with('partner')->get()->toArray();
-        return (object)[
-            'themes' => $themes,
-            'total' => Themes::where($params)->count()
-        ];
-        //return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
+
+        /*
+        find multiples ids
+         */
+        if (isset($params['theme_id'])) {
+            $ids = explode(',', $params['theme_id']);
+            $apps = Themes::whereIn('id', $ids)->get($this->_fields);
+            return $this->response($apps->toArray());
+        }
+
+        /*
+        metafields
+         */
+        $this->requestHasMeta($params);
+        /*
+        search
+         */
+        $result = Themes::where($this->_params)
+            ->offset($this->_offset)
+            ->limit($this->_limit)
+            ->get($this->_fields)
+            ->toArray();
+        return $this->response($result);
     }
 
-    public function getById($request, $response, $args)
+    public function getById($themeId)
     {
-        $ret = Themes::find($args['id'])
-                                    ->evaluations()
-                                    ->partner()
-                                    ->comments()
-                                    ->imagens();
-        
-        return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
+        return Themes::find($themeId);
     }
 
-    public function getByPartnerId($request, $response, $args){
-        $id = $request->getAttribute('partner_id');
-        $ret = Themes::where('partner_id', $id)->get()->toArray();
-        return $ret ? (array)$ret : [];
-        //return $ret ? $response->withJson($ret, 200) : $response->withJson([], 404);
-    }
-
-    public function getBySlug($request, $response, $args)
+    public function getBySlug($slug)
     {
-        $theme = Themes::where('slug', $args['slug'])->first();
+        $theme = Apps::where('slug', $applicationSlug)->first();
         if ($theme) {
-            return (object) [
-                'app' => $theme->toArray(),
-                //'imagens' => $theme->imagens->toArray(),
-                'imagens' => array_map(function ($a) {
-                    $r['path'] = $a['path_image'];
-                    return $r;
-                }, $theme->imagens->toArray()),
-                'partner' => $theme->partner->toArray(),
+            return [
+                'theme' => $theme->toArray(),
+                'imagens' => $theme->imagens->toArray(),
                 'comments' => $theme->comments->toArray(),
-                'evaluations' => $theme->evaluations
+                'partner' => $theme->partner->toArray(),
             ];
         }
         return false;
     }
 
-    public function getSearchParams($request)
+    public function requestHasMeta($params)
     {
-        $search = [];
-        
-        if (isset($request->getParams()['filter'])) {
-            if ($request->getParams()['filter'] == 'free') {
-                $search[] = ['value_plan_basic', 0];
+        /*
+        Possíveis parametros para busca
+         */
+        if (isset($params['filter'])) {
+            if ($params['filter'] == 'free') {
+                $this->_params[] = ['value_plan_basic', 0];
             }
         }
 
-        if (isset($request->getParams()['category'])) {
-            if ($request->getParams()['category'] !== 'all') {
-                $search[] = ['category', $request->getParams()['category']];
+        if (isset($params['author'])) {
+            $this->_params[] = ['partner_id', $params['author']];
+        }
+
+        if (isset($params['slug'])) {
+            $this->_params[] = ['slug', $params['slug']];
+        }
+
+        if (isset($params['category'])) {
+            if ($params['category'] !== 'all') {
+                $this->_params[] = ['category', $params['category']];
             }
         }
 
-        if (isset($request->getParams()['title'])) {
-            $search[] = ['title','like', '%' . $request->getParams()['title'] . '%'];
+        if (isset($params['title'])) {
+            $this->_params[] = ['title', 'like', '%' . $params['title'] . '%'];
         }
 
-        if (isset($request->getParams()['partner'])) {
-            $search[] = ['partner_id', $request->getParams()['partner_id']];
+        /*
+        offset
+         */
+        if (isset($params['offset'])) {
+            $this->_offset = (int) $params['offset'];
         }
 
-        return $search;
+        /*
+        limit
+         */
+        if (isset($params['limit'])) {
+            $this->_limit = (int) $params['limit'];
+        }
     }
 
-    public function getSearchSkip($request)
+    public function response($result)
     {
-        return isset($request->getParams()['skip']) ? (int) $request->getParams()['skip'] : 0;
+        return [
+            'meta' => (object) [
+                'limit' => $this->_limit,
+                'offset' => $this->_offset,
+                'sort' => [],
+                'fields' => $this->_fields,
+                'query' => (object) $this->_params,
+            ],
+            'result' => $result,
+        ];
     }
 
-    public function getSearchTake($request)
+    public function create($body)
     {
-        return isset($request->getParams()['take']) ? (int) $request->getParams()['take'] : 12;
-    }
-    
-    public function create($request, $response, $args)
-    {
-        $body = $request->getParsedBody();
-
         $theme = Themes::create([
             'partner_id' => $body['partner_id'],
             'title' => $body['title'],
@@ -119,25 +138,18 @@ class ThemesController
             'link_documentation' => $body['link_documentation'],
             'link_video' => $body['link_video'],
             'value_license_basic' => $body['value_license_basic'],
-            'value_license_extend' => $body['value_license_extend']
+            'value_license_extend' => $body['value_license_extend'],
         ]);
 
-        return $theme ? $response->withJson(['status' => 201, 'message' => 'created', 'app' => $theme], 201) : $response->withJson(['erro' => 'Error with ThemesController request'], 400);
+        return $theme;
     }
 
-    public function update($request, $response, $args)
+    public function update($themeId, $bodyUpdate)
     {
-        if (!$args['id']) {
-            return $response->withJson(['status' => 400, 'message' => 'theme_id not found'], 400);
-        }
 
-        $theme = Themes::find($args['id']);
+        $theme = Themes::find($themeId);
 
-        if (!$theme) {
-            return $response->withJson(['status' => 400, 'message' => 'theme not found'], 400);
-        }
-
-        $body = $request->getParsedBody();
+        $body = $bodyUpdate;
         $update = $theme->update([
             'title' => isset($body['title']) ? $body['title'] : $theme->title,
             'slug' => isset($body['slug']) ? $body['slug'] : $theme->slug,
@@ -156,7 +168,7 @@ class ThemesController
             'value_license_extend' => isset($body['value_license_extend']) ? $body['value_license_extend'] : $theme->value_license_extend,
         ]);
 
-        return $update ? $response->withJson(['status' => 201, 'message' => 'updated'], 201) : false;
+        return $update;
     }
 
     public function destroy($request, $response, $args)
