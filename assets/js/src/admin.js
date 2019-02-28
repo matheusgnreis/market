@@ -2,7 +2,9 @@
  * 
  */
 $(function () {
-
+  var myId = '5b1abe30a4d4531b8fe40726'
+  var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1YjFhYmUzMGE0ZDQ1MzFiOGZlNDA3MjYiLCJjb2QiOjkyODY2NzAyLCJleHAiOjE1NTEzNjY2ODYxNDV9.4Zcu4nfuDWGYWggZ5iwJfEW2KCdKHkmzfpI4qWMik_4'
+  var storeId = 1011
   var applicationPathEcomP = 'https://api.e-com.plus/v1/applications.json'
   var applicationPathMarket = '/v1/applications'
   var btnTrigger = $('a.btn.btn-lg.btn-primary.account-action')
@@ -23,13 +25,18 @@ $(function () {
           var cardTitle = $('<h6>', { class: 'card-title' })
 
           //
-          var cardLink = $('<a>', { class: 'd-flex align-items-center', 'data-toggle': 'collapse', href: '#collapse-app-' + index })
+          var cardLink = $('<a>', { class: 'd-flex align-items-center', 'data-toggle': 'collapse', href: '#collapse-app-' + app._id })
           $('<strong>', { class: 'mr-auto', text: app.title }).appendTo(cardLink)
-          $('<span>', { class: 'small text-lighter', text: app.state }).appendTo(cardLink)
 
+          var switcher = $('<div>', { class: 'switch' })
+          $('<input>', { type: 'checkbox', class: 'switch-input', checked: app.state === 'active' ? true : false }).appendTo(switcher)
+          $('<label>', { class: 'switch-label', text: 'Ativo' }).appendTo(switcher)
+          var span = $('<span>', { class: 'small text-lighter' })
+          switcher.appendTo(span)
+          span.appendTo(cardLink)
           cardLink.appendTo(cardTitle)
           //
-          var collapse = $('<div>', { id: 'collapse-app-' + index, class: 'collapse', 'data-parent': '#accordion-apps' })
+          var collapse = $('<div>', { id: 'collapse-app-' + app._id, class: 'collapse', 'data-parent': '#accordion-apps' })
           var cardBody = $('<div>', { class: 'card-body', id: 'card-body-' + app.app_id })
 
           cardBody.appendTo(collapse)
@@ -38,23 +45,26 @@ $(function () {
           cardTitle.appendTo(card)
           collapse.appendTo(card)
           card.appendTo('#accordion-apps')
-
+          //
+          var editBody = document.getElementById('card-body-' + app.app_id)
+          $('#accordion-apps').hide()
+          //
           $.when(getAppData(app.app_id))
             .done(function (json) {
-              var BrutusinForms = brutusin['json-forms']
               bf = brutusin['json-forms'].create(json.json_body)
-              var editBody = document.getElementById('card-body-' + app.app_id)
+              //var editBody = document.getElementById('card-body-' + app.app_id)
               let datas = []
 
               if (app.data || data.hidden_data) {
                 datas.data = app.data
                 datas.hidden_data = app.hidden_data
               }
-              console.log(typeof datas)
+
               bf.render(editBody, datas)
 
               var btn = $('<p>').append($('<a>', { class: 'btn btn-lg btn-primary account-action', text: 'Alterar', 'data-app-id': app.app_id }))
               btn.appendTo(cardBody)
+              $('#accordion-apps').slideDown()
             })
         })
       }
