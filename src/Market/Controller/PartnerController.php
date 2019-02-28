@@ -15,6 +15,7 @@ class PartnerController
         $partner = Partner::find((int)$partnerId);
         $partner->applications->toArray();
         $partner->themes->toArray();
+        $partner->components->toArray();
         return $partner->toArray();
     }
 }
