@@ -49,6 +49,7 @@
     <span>{{params.dictionary.word_support}}</span>
     <span><a href="{{params.data.application.website}}">Website</a></span>
   </li>
+  <!-- 
   <li class="items-lists">
     <span>{{params.dictionary.word_installations}}</span>
     <span>{{params.data.application.downloads}}</span>
@@ -62,7 +63,7 @@
       <label class="fa fa-star active"></label>
       <label class="fa fa-star active"></label>
     </div>
-  </li>
+  </li> -->
 </ul>
 <h2>{{params.dictionary.word_galery}}</h2>
 <div class="gallery gallery-3-type1">
@@ -83,13 +84,13 @@
   <li class="nav-item">
     <a class="nav-link active" data-toggle="tab" href="#application-description">{{params.dictionary.word_description_single}}</a>
   </li>
-  {% if params.data.application.paid %}
+  {% if params.data.application.plans_json%}
   <li class="nav-item">
     <a class="nav-link" data-toggle="tab" href="#application-plans">{{params.dictionary.word_price}}</a>
   </li>
   {% endif %}
-  <li class="nav-item">
+<!--   <li class="nav-item">
     <a class="nav-link" data-toggle="tab" href="#application-comments">{{params.dictionary.word_comments}}</a>
-  </li>
+  </li> -->
 </ul>
 {% endmacro %}

@@ -12,17 +12,20 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/dist/css/brutusin-json-forms.min.css">
 </head>
 
-<body id="admin-body">
-  <header id="admin-header">
-
-  </header>
+<body id="admin-body" style="display: none;">
   <aside id="admin-aside">
+    <header class="sidebar-header">
+      <span class="logo">
+        <a href="/#/"><img src="/assets/img/logo-light.png"></a>
+      </span>
+    </header>
     <div class="sidebar-admin">
       <ul>
-        <li>
+        <li class="active">
+          <span class="icon fa fa-puzzle-piece"></span>
           <a href="#">Aplicativos</a>
         </li>
-<!--         <li>
+        <!--         <li>
           <a href="#">Avaliações</a>
         </li>
         <li>
@@ -32,14 +35,14 @@
     </div>
   </aside>
   <main id="admin-main">
+    <div class="content-header">
+      <h4 id="current-section-action">Aplicativos Instalados</h4>
+    </div>
     <section id="admin-applications">
       <div class="container">
         <div class="row">
           <div class="col">
             <div id="applications-content">
-              <div class="content-header">
-                <h4>Aplicativos Instalados</h4>
-              </div>
               <!--
               |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
               | Light accordion

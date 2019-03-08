@@ -1,85 +1,31 @@
 {% extends "layout/main.html" %}
 {% import "macros/single.macros.html" as single %}
 {% block content %}
-<main class="main-content">
-  <section id="resume-header" class="section-resume-app">
-    {{single.singleHeader(params)}}
-  </section>
-  <section id="resume-content" class="section-resume-app">
-    <div class="container">
-      <div class="row flex-column-reverse flex-lg-row">
-        <div class="col-lg-8" id="item-content">
-          {{single.tabsList(params)}}
-          <div class="tab-content p-4">
-            <div class="tab-pane fade show active" id="application-description">
+  <main class="main-content">
+    <section class="section-resume-app" id="resume-header">
+      {{single.singleHeader(params)}}
+    </section>
+    <section class="section-resume-app" id="resume-content">
+      <div class="container">
+        <div class="row flex-column-reverse flex-lg-row">
+          <div class="col-lg-8" id="item-content">
+            {{single.tabsList(params)}}
+            <div class="tab-content p-4">
+              <div class="tab-pane fade show active" id="application-description"></div>
+              {% if params.data.application.plans_json %}
+                <div class="tab-pane fade" id="application-plans"></div>
+              {% endif %}
+              <div class="tab-pane fade" id="application-comments"></div>
+              <div class="tab-pane fade" id="application-resume-mobile">
+                {{single.itemResume(params)}}
+              </div>
             </div>
-            <div class="tab-pane fade" id="application-plans">
-            </div>
-            <div class="tab-pane fade" id="application-comments">
-            </div>
-            <div class="tab-pane fade" id="application-resume-mobile">
-              {{single.itemResume(params)}}
-            </div>
+          </div>
+          <div class="col-lg-4" id="item-resume">
+            {{single.itemResume(params)}}
           </div>
         </div>
-        <div class="col-lg-4" id="item-resume">
-          {{single.itemResume(params)}}
-        </div>
       </div>
-    </div>
-  </section>
-</main>
-
-<!-- Login to ecom plus api -->
-<div class="modal fade" id="modal-confirm-installation" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-
-      <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <form class="text-center">
-          <h4 class="mb-5">Sign into your account</h4>
-          <div class="form-group">
-            <input class="form-control" type="text" name="username" id="username" value="" disabled>
-          </div>
-
-          <div class="form-group">
-            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
-          </div>
-
-          <button class="btn btn-lg btn-block btn-primary" type="button" id="btn-ecom-login">Login</button>
-
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- application scope -->
-<!-- Modal - Default -->
-<div class="modal fade" id="modal-scope-installation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{params.dictionary.word_installation_title}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body" id="scope-list">
-
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{params.dictionary.word_cancel}}</button>
-        <button type="button" class="btn btn-primary" id="btn-confirmation">{{params.dictionary.word_install}}</button>
-      </div>
-    </div>
-  </div>
-</div>
+    </section>
+  </main>
 {% endblock %}

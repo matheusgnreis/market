@@ -34,7 +34,7 @@ Result search component
 <div class="row">
   {% if params.data %}
     {% for application in params.data %}
-      {{component.cards(params, application, 'col-md-4 col-lg-4')}}
+      {{component.cards(params, application, 'col-md-6 col-lg-6')}}
     {%endfor%}
   {% else %}
     <div id="notfound"><strong>sem resultado</strong></div>    

@@ -21,7 +21,7 @@
         <h5 class="card-item-title">{{application.title}}</h5>
         <small><a href="/{{params.dictionary.lang}}/apps?category={{application.category}}" title="{{categories_name(application.category, params.dictionary.lang)}}">{{
             categories_name(application.category, params.dictionary.lang) | truncate(20) }} </a> | Free</small>
-        <small>{{application.short_description}}.</small>
+        <small>{{application.short_description | truncate(80) }}.</small>
         <a class="fs-12 fw-600" href="/{{params.dictionary.lang}}/apps/{{application.slug}}">{{params.dictionary.word_go_item}}
           <i class="fa fa-angle-right pl-1"></i>
         </a>
@@ -66,6 +66,122 @@
         </form>
       </div>
 
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+
+{% macro modals(params) %}
+<div class="modal fade" id="modal-login" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <form class="text-center" id="form-loggin__partner">
+          <h4 class="mb-5">{{params.dictionary.word_login_account}}</h4>
+          <div class="form-group">
+            <input class="form-control" type="text" name="email" id="form_email" autocomplete="email" placeholder="E-mail">
+            <div class="invalid-feedback">{{params.dictionary.word_email_invalid}}</div>
+          </div>
+
+          <div class="form-group">
+            <input class="form-control" type="password" name="password" id="form_password" autocomplete="current-password" placeholder="Password">
+            <div class="invalid-feedback">{{params.dictionary.word_passwd_invalid}}</div>
+          </div>
+          <button class="btn btn-lg btn-block btn-primary button-submit" type="button">{{params.dictionary.word_login}}</button>
+          <div class="form-group-erro">
+            {{params.dictionary.word_invalid_login}}
+          </div>
+          <hr>
+
+          <p class="small mb-0">{{params.dictionary.word_forgot_pssw}}<a href="/{{params.dictionary.lang}}/login/recovery"> {{params.dictionary.word_click_here}}</a></p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Login to ecom plus api -->
+<div class="modal fade" id="modal-confirm-installation" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <form class="text-center">
+          <h4 class="mb-5">Sign into your account</h4>
+          <div class="form-group">
+            <input class="form-control" type="text" name="username" id="username" value="" disabled>
+          </div>
+
+          <div class="form-group">
+            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+          </div>
+
+          <button class="btn btn-lg btn-block btn-primary" type="button" id="btn-ecom-login">Login</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Login to ecom plus api -->
+<div class="modal fade" id="modal-login-admin" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <form class="text-center">
+          <h4 class="mb-5">Sign into your account</h4>
+          <div class="form-group">
+            <input class="form-control" type="text" name="username" id="username" value="" disabled>
+          </div>
+
+          <div class="form-group">
+            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+          </div>
+
+          <button class="btn btn-lg btn-block btn-primary" type="button" id="btn-admin-login">Login</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- application scope -->
+<!-- Modal - Default -->
+<div class="modal fade" id="modal-scope-installation" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{params.dictionary.word_installation_title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body" id="scope-list">
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{params.dictionary.word_cancel}}</button>
+        <button type="button" class="btn btn-primary" id="btn-confirmation">{{params.dictionary.word_install}}</button>
+      </div>
     </div>
   </div>
 </div>
