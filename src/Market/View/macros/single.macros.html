@@ -10,7 +10,8 @@
           <div class="app-infor">
             <span class="app-infor__name">{{params.data.application.title}}</span>
             <span class="app-infor__short">{{params.data.application.short_description}}</span>
-            <span class="app-infor__author">{{params.dictionary.word_by}} <a href="/{{params.dictionary.lang}}/author/{{params.data.partner.id}}">{{params.data.partner.name}}</a></span>
+            <span class="app-infor__author">{{params.dictionary.word_by}} <a href="#">{{params.data.partner.name}}</a></span>
+            <!-- <span class="app-infor__author">{{params.dictionary.word_by}} <a href="/{{params.dictionary.lang}}/author/{{params.data.partner.id}}">{{params.data.partner.name}}</a></span> -->
             <span class="app-infor_category">{{params.dictionary.word_in}} <a href="/{{params.dictionary.lang}}/apps?category={{params.data.application.category}}"
                 title="{{categories_name(params.data.application.category, params.dictionary.lang)}}">{{
                 categories_name(params.data.application.category, params.dictionary.lang) }} </a></span>
