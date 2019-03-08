@@ -3,12 +3,12 @@ namespace Market\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Components extends Model
+class Widgets extends Model
 {
     /** db table */
-    protected $table = 'components';
+    protected $table = 'widgets';
     /** The attributes that are mass assignable. */
-    protected $fillable = ['id', 'partner_id', 'title', 'slug', 'ejs', 'js', 'json_schema', 'icon'];
+    protected $fillable = ['id', 'partner_id', 'title', 'slug', 'css', 'html', 'ejs', 'js', 'json_schema', 'icon'];
     /** The attributes that will be hidden */
     protected $hidden = [];
     /** Indicates if the model should be timestamped. */

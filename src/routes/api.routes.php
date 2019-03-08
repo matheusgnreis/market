@@ -5,7 +5,7 @@
  * @todo Check if required properties is set on request when is put/patch/post [middleware]
  */
 use Market\Controller\AppsController;
-use Market\Controller\ComponentsController;
+use Market\Controller\WidgetsController;
 use Market\Controller\PartnerController;
 use Market\Controller\ThemesController;
 
@@ -73,23 +73,23 @@ $app->group(
          * Applications resource
          */
         $app->group(
-            '/components',
+            '/widgets',
             function () use ($app, $componentsIsValid, $updateComponentsIsValid) {
                 // controller
-                $componentsController = new ComponentsController();
+                $widgetsController = new WidgetsController();
 
                 /**
                  * Request all components
                  */
-                $app->get('', function ($request, $response) use ($componentsController) {
+                $app->get('', function ($request, $response) use ($widgetsController) {
                     $params = $request->getParams();
-                    return $response->withJson($componentsController->getAll($params), 200);
+                    return $response->withJson($widgetsController->getAll($params), 200);
                 });
 
                 /**
                  * Create new components
                  */
-                $app->post('', function ($request, $response) use ($componentsController) {
+                $app->post('', function ($request, $response) use ($widgetsController) {
                     if ($request->getAttribute('has_errors')) {
                         //There are errors, read them
                         $validateErrors = $request->getAttribute('errors');
@@ -104,7 +104,7 @@ $app->group(
                         return $response->withJson(['erros' => $errors], 400);
                     } else {
                         $body = $request->getParsedBody();
-                        $resp = $componentsController->create($body);
+                        $resp = $widgetsController->create($body);
 
                         return $response->withJson($resp, 201);
                     }
@@ -113,8 +113,8 @@ $app->group(
                 /**
                  * Request components by Id
                  */
-                $app->get('/{id}', function ($request, $response, $args) use ($componentsController) {
-                    $component = $componentsController->getById($args['id']);
+                $app->get('/{id}', function ($request, $response, $args) use ($widgetsController) {
+                    $component = $widgetsController->getById($args['id']);
                     $result = $component ? $component : [];
                     return $response->withJson((object) $result, 200);
                 });

@@ -1,13 +1,13 @@
 <?php
 namespace Market\Controller;
 
-use Market\Model\Components;
+use Market\Model\Widgets;
 
-class ComponentsController
+class WidgetsController
 {
     private $_limit = 30;
     private $_offset = 0;
-    private $_fields = ['partner_id','title','slug','ejs','js','json_schema','icon'];
+    private $_fields = ['id', 'partner_id', 'title', 'slug', 'css', 'html', 'ejs', 'js', 'json_schema', 'icon'];
     private $_result = [];
     private $_params = ['active' => 1];
 
@@ -23,7 +23,7 @@ class ComponentsController
          */
         if (isset($params['id'])) {
             $ids = explode(',', $params['id']);
-            $apps = Components::whereIn('id', $ids)->get($this->_fields);
+            $apps = Widgets::whereIn('id', $ids)->get($this->_fields);
             return $this->response($apps->toArray());
         }
 
@@ -34,13 +34,13 @@ class ComponentsController
         /*
         search
          */
-        $result = Components::where($this->_params)
+        $result = Widgets::where($this->_params)
             ->offset($this->_offset)
             ->limit($this->_limit)
             ->get($this->_fields)
             ->toArray();
 
-        /*             $result = Components::limit(30)->offset(30)->get(['id']); */
+        /*             $result = Widgets::limit(30)->offset(30)->get(['id']); */
         return $this->response($result);
     }
 
@@ -81,12 +81,12 @@ class ComponentsController
 
     public function getById($componentId)
     {
-        return Components::find($componentId);
+        return Widgets::find($componentId);
     }
 
     public function getBySlug($component)
     {
-        return Components::where('slug', $component)->first();
+        return Widgets::where('slug', $component)->first();
     }
 
     public function create($body)
@@ -101,7 +101,7 @@ class ComponentsController
             'icon' => !empty($body['icon']) ? $body['icon'] : null,
         ];
 
-        $result = Components::create($component);
+        $result = Widgets::create($component);
 
         if (!$result) {
             return [
@@ -130,7 +130,7 @@ class ComponentsController
             ];
         }
 
-        $component = Components::find($componentId);
+        $component = Widgets::find($componentId);
 
         if (!$component) {
             return [
