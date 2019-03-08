@@ -216,3 +216,11 @@ border-bottom: 1px solid #eee;
   font-weight: 400;
 }
 
+.card-item .card-item-body {
+  min-height: 161px;
+}
+
+.card-item.resume {
+  justify-content: space-around;
+  width: 100%;
+}

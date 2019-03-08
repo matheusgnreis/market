@@ -3,7 +3,7 @@ aside#admin-aside {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 200px;
+  width: 260px;
   background-color: #1d0020;
   white-space: nowrap;
   box-shadow: 1px 10px 13px rgba(0, 0, 0, 0.17);
@@ -19,7 +19,7 @@ aside#admin-aside {
 }
 
 aside#admin-aside ~ main {
-  margin-left: 200px;
+  margin-left: 260px;
 }
 
 #admin-body > main {
@@ -38,16 +38,70 @@ aside#admin-aside ~ main {
   list-style: none;
   padding: 0;
 }
-.sidebar-admin ul li {padding: .5em 1em;}
+.sidebar-admin ul li {
+  height: 56px;
+  padding: 0 22px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  transition: .2s linear;
+}
+
+.sidebar-admin ul li .icon {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-align: center;
+  flex-basis: 30px;
+  flex-shrink: 0;
+  color: #fff;
+}
 
 .sidebar-admin ul li a {
   color: #fff;
   height: 56px;
   padding: 0 12px;
-  font-weight: 400;
+  font-weight: 500;
+  display: -webkit-box;
   display: flex;
+  -webkit-box-align: center;
   align-items: center;
+  -webkit-transition: .2s linear;
   transition: .2s linear;
+}
+
+.sidebar-admin ul li.active {
+  color: #fff;
+  background-color: #140016;
+}
+
+.sidebar-header {
+  background-color: #37003c;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  border: none;
+  margin-bottom: 0;
+  height: 64px;
+  padding-left: 20px;
+  padding-bottom: 0;
+
+}
+
+.sidebar-header>.logo img {
+  width: auto;
+  height: 26px;
+}
+
+.content-header {
+  padding: 0 18px;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  box-shadow:4px 0 5px rgba(0,0,0,0.08);
 }
 
 ul.settings-ul {
@@ -114,4 +168,8 @@ form.brutusin-form td {
 .app-state span {
   font-weight: 500;
   font-size: 17px;
+}
+
+.app-state .switch .switch-label {
+  color: #323d47;
 }
