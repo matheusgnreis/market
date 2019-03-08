@@ -343,7 +343,6 @@ $(document).ready(function () {
   }
 })
 
-
 function getCookie(cookie) {
   return cookie
     .trim()
