@@ -8,6 +8,19 @@ class HomeController extends BaseController
     use \Market\Services\Dictionary;
     use \Market\Services\Categories;
 
+        /**
+     * Home view
+     *
+     * @param [Object] $request
+     * @param [Object] $response
+     * @param [Object] $args
+     * @return void
+     */
+    public function default($request, $response, $args)
+    {
+        return $response->withRedirect('/');
+    }
+
     /**
      * Home view
      *
