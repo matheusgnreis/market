@@ -34,7 +34,6 @@ require('../../plugin/thesaas/js/vendors/shuffle.js');        // 25 kb
 require('../../plugin/thesaas/js/vendors/slick.js');          // 43 kb
 require('../../plugin/thesaas/js/vendors/typed.js');          // 11 kb
 
-
 /*
 |--------------------------------------------------------------------------
 | Partials
@@ -70,6 +69,7 @@ require('./../jquery.json-viewer');
 | files and import the other files here or inside script.js.
 |
 */
+require('./md5.js');
 require('./script.js');
 require('./single.js');
 require('./login.js');
