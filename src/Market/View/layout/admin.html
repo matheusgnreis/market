@@ -12,11 +12,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/dist/css/brutusin-json-forms.min.css">
 </head>
 
-<body id="admin-body" style="display: none;">
+<body id="admin-body" data-store-id="{{params.user.store_id}}" data-store-username="{{params.user.username}}"
+  data-store-sso="{{params.user.sso_login}}">
   <aside id="admin-aside">
     <header class="sidebar-header">
       <span class="logo">
-        <a href="/#/"><img src="/assets/img/logo-light.png"></a>
+        <a href="/"><img src="/assets/img/logo-light.png"></a>
       </span>
     </header>
     <div class="sidebar-admin">
@@ -58,6 +59,34 @@
     <section id="admin-evaluations"></section>
     <section id="admin-settings"></section>
   </main>
+
+  <!-- Login to ecom plus api -->
+  <div class="modal fade" id="modal-login-admin" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <form id="form-admin">
+            <h4 class="mb-5">Sign into your account</h4>
+            <div class="form-group">
+              <input class="form-control" type="text" name="username" id="username" value="{{params.user.username}}" disabled>
+            </div>
+
+            <div class="form-group">
+              <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+            </div>
+
+            <button class="btn btn-lg btn-block btn-primary" type="button" id="btn-admin-login">Login</button>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/src/js/brutusin-json-forms.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/src/js/brutusin-json-forms-bootstrap.js"></script>

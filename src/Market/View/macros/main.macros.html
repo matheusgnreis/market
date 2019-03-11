@@ -76,7 +76,12 @@
         <p><a class="btn btn-block btn-round btn-primary" href="https://docs.google.com/forms/d/1L3B2yqQyMfdzzeXLyKqQHEx0wJ8utZWBw9Hv2WdQG9o/"
             target="_blank">Registrar-se</a></p>
         <p><a class="btn btn-block btn-round btn-action" data-toggle="modal" data-target="#modal-login">Login Parceiro</a></p>
-        <p><a class="btn btn-block btn-round btn-action" id="login-logista" href="#">Login Logistas</a></p>
+        {% if not params.user.sso_login %}
+          <p><a class="btn btn-block btn-round btn-action" id="login-logista" href="#">Login Logistas</a></p>
+        {% else %}
+          <p><a class="btn btn-block btn-round btn-action" id="admin-logista" href="/admin">Admin Logistas</a></p>
+        {% endif %}
+
         <br>
         <div class="social social-bordered">
           <a class="social-facebook" href="https://www.facebook.com/ecom.clubpage/" target="_blank" title="facebook"><i
@@ -97,7 +102,7 @@
 
 {% macro headerHero(params) %}
 <!-- Header -->
-<header class="header text-white pb-10" style="background-image: linear-gradient(-9deg, #670070 50%, #04F1FF 100%);">
+<header class="header text-white pb-10" style="background-image: linear-gradient(to bottom, #09000a, #210024, #310035);">
   <canvas class="constellation"></canvas>
   <div class="container">
     <h1 class="display-5">Bem vindo a E-Com Plus Market.</h1>
