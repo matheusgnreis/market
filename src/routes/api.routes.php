@@ -5,9 +5,10 @@
  * @todo Check if required properties is set on request when is put/patch/post [middleware]
  */
 use Market\Controller\AppsController;
-use Market\Controller\WidgetsController;
+use Market\Controller\InstallationsController;
 use Market\Controller\PartnerController;
 use Market\Controller\ThemesController;
+use Market\Controller\WidgetsController;
 
 $app->group(
     '/v1',
@@ -192,6 +193,34 @@ $app->group(
                 $app->get('/{id}', function ($request, $response, $args) {
                     $partnet = new PartnerController();
                     $find = $partnet->getById(($args['id']));
+                    return $response->withJson($find, 200);
+                });
+            }
+        );
+
+        /**
+         * Partner resource
+         */
+        $app->group(
+            '/installations',
+            function () use ($app) {
+                /**
+                 *
+                 */
+                $controller = new InstallationsController();
+                /**
+                 *
+                 */
+                $app->get('', function ($request, $response, $args) use ($controller) {
+                    $params = $request->getParams();
+                    $find = $controller->getAll($params);
+                    return $response->withJson($find, 200);
+                });
+                /**
+                 * 
+                 */
+                $app->get('/{store_id}', function ($request, $response, $args) use ($controller) {
+                    $find = $controller->getByStoreId($args['store_id']);
                     return $response->withJson($find, 200);
                 });
             }
