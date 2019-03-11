@@ -1,9 +1,8 @@
 <?php
-use Respect\Validation\Validator as v;
-use Market\Model\Themes;
 use Market\Model\Apps;
 use Market\Model\Components;
-
+use Market\Model\Themes;
+use Respect\Validation\Validator as v;
 
 $redirectToLang = function ($request, $response, $next) {
     $uri = $request->getUri();
@@ -71,9 +70,11 @@ $componentsIsValid = array(
     'partner_id' => v::notOptional()->intVal(),
     'title' => v::notOptional()->stringType()->length(1, 40),
     'slug' => v::notOptional()->slug(),
-    'ejs' => v::optional(v::url()),
-    'js' => v::optional(v::url()),
-    'json_schema' => v::optional(v::stringType()),
+    'url_css' => v::optional(v::url()),
+    'url_js' => v::optional(v::url()),
+    'template' => v::optional(v::stringType()),
+    'config' => v::optional(v::stringType()),
+    'paid' => v::notOptional()->boolVal(),
     'icon' => v::notOptional()->stringType(),
 );
 
@@ -100,7 +101,6 @@ $themeIsValid = array(
     'value_license_extend' => v::optional(v::intVal()),
 );
 
-
 /** update theme */
 $updateThemeIsValid = function ($request, $response, $next) {
     $route = $request->getAttribute('route');
@@ -121,7 +121,7 @@ $updateThemeIsValid = function ($request, $response, $next) {
     $application = Themes::find($args['id']);
 
     if (!$application) {
-        $resp =  [
+        $resp = [
             'status' => 400,
             'message' => 'Invalid value on resource ID',
             'user_message' => [
@@ -134,7 +134,6 @@ $updateThemeIsValid = function ($request, $response, $next) {
 
     return $next($request, $response);
 };
-
 
 /** update theme */
 $updateApplicationIsValid = function ($request, $response, $next) {
@@ -156,7 +155,7 @@ $updateApplicationIsValid = function ($request, $response, $next) {
     $application = Apps::find($args['id']);
 
     if (!$application) {
-        $resp =  [
+        $resp = [
             'status' => 400,
             'message' => 'Invalid value on resource ID',
             'user_message' => [
@@ -190,7 +189,7 @@ $updateComponentsIsValid = function ($request, $response, $next) {
     $application = Components::find($args['id']);
 
     if (!$application) {
-        $resp =  [
+        $resp = [
             'status' => 400,
             'message' => 'Invalid value on resource ID',
             'user_message' => [
