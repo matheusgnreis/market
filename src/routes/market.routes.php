@@ -21,7 +21,7 @@ $app->group(
         $app->get('/apps', HomeController::class . ':apps')->add($redirectToLang);
         $app->get('/apps/{slug}', HomeController::class . ':single')->add($redirectToLang);
         $app->get('/themes', HomeController::class . ':default')->add($redirectToLang);
-        $app->get('/components', HomeController::class . ':default')->add($redirectToLang);
+        $app->get('/widgets', HomeController::class . ':default')->add($redirectToLang);
         $app->get('/partner', HomeController::class . ':default')->add($redirectToLang);
     }
 );
