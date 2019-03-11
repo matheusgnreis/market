@@ -9,14 +9,20 @@ class AdminController extends BaseController
     {
         if (!$_SESSION) {
             session_start();
-            //
-            $_SESSION['sso_login'] = true;
+
             if (!$_SESSION['sso_login']) {
                 return $response->withRedirect('./');
             }
         }
+
         $params = [
-            'params' => [],
+            'params' => [
+                'user' => [
+                    'username' => $_SESSION['username'],
+                    'sso_login' => $_SESSION['sso_login'],
+                    'store_id' => $_SESSION['store_id'],
+                ],
+            ],
         ];
         return $this->view->render(
             $response,
