@@ -26,6 +26,6 @@ class Partner extends Model
 
     public function components()
     {
-        return $this->hasMany(Components::class, 'partner_id', 'id');
+        return $this->hasMany(Widgets::class, 'partner_id', 'id');
     }
 }
