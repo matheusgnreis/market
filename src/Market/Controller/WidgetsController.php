@@ -7,7 +7,7 @@ class WidgetsController
 {
     private $_limit = 30;
     private $_offset = 0;
-    private $_fields = ['id', 'partner_id', 'title', 'slug', 'css', 'html', 'ejs', 'js', 'json_schema', 'icon'];
+    private $_fields = ['app_id', 'partner_id', 'title', 'slug', 'url_css', 'url_js', 'template', 'config', 'paid', 'icon'];
     private $_result = [];
     private $_params = ['active' => 1];
 
@@ -95,9 +95,11 @@ class WidgetsController
             'partner_id' => !empty($body['partner_id']) ? $body['partner_id'] : null,
             'title' => !empty($body['title']) ? $body['title'] : null,
             'slug' => !empty($body['slug']) ? $body['slug'] : null,
-            'ejs' => !empty($body['ejs']) ? $body['ejs'] : null,
-            'js' => !empty($body['js']) ? $body['js'] : null,
-            'json_schema' => !empty($body['json_schema']) ? $body['json_schema'] : null,
+            'url_css' => !empty($body['url_css']) ? $body['url_css'] : null,
+            'url_js' => !empty($body['url_js']) ? $body['url_js'] : null,
+            'template' => !empty($body['template']) ? $body['template'] : null,
+            'config' => !empty($body['config']) ? $body['config'] : null,
+            'paid' => !empty($body['paid']) ? $body['paid'] : null,
             'icon' => !empty($body['icon']) ? $body['icon'] : null,
         ];
 
@@ -144,13 +146,15 @@ class WidgetsController
         }
 
         $componentUpdate = [
-            'partner_id' => !empty($body['partner_id']) ? $body['partner_id'] : $component->partner_id,
-            'title' => !empty($body['title']) ? $body['title'] : $component->title,
-            'slug' => !empty($body['slug']) ? $body['slug'] : $component->slug,
-            'ejs' => !empty($body['ejs']) ? $body['ejs'] : $component->ejs,
-            'js' => !empty($body['js']) ? $body['js'] : $component->js,
-            'json_schema' => !empty($body['json_schema']) ? $body['json_schema'] : $component->json_schema,
-            'icon' => !empty($body['icon']) ? $body['icon'] : $component->icon,
+            'partner_id' => !empty($componentBody['partner_id']) ? $componentBody['partner_id'] : $component->partner_id,
+            'title' => !empty($componentBody['title']) ? $componentBody['title'] : $component->title,
+            'slug' => !empty($componentBody['slug']) ? $componentBody['slug'] : $component->slug,
+            'url_css' => !empty($componentBody['url_css']) ? $componentBody['url_css'] : $component->url_css,
+            'url_js' => !empty($componentBody['url_js']) ? $componentBody['url_js'] : $component->url_js,
+            'template' => !empty($componentBody['template']) ? $componentBody['template'] : $component->template,
+            'config' => !empty($componentBody['config']) ? $componentBody['config'] : $component->config,
+            'paid' => !empty($componentBody['paid']) ? $componentBody['paid'] : $component->paid,
+            'icon' => !empty($componentBody['icon']) ? $componentBody['icon'] : $component->icon,
         ];
 
         $update = $component->update($componentUpdate);
