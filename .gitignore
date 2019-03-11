@@ -3,3 +3,10 @@
 .env
 node_modules/
 vendor/
+
+# Template
+assets/css/core.css
+assets/css/thesaas.css
+assets/css/thesaas.css.map
+assets/js/core.js
+assets/js/thesaas.js
