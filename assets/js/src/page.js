@@ -69,7 +69,6 @@ require('./../jquery.json-viewer');
 | files and import the other files here or inside script.js.
 |
 */
-require('./md5.js');
 require('./script.js');
 require('./single.js');
 require('./login.js');
