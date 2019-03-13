@@ -4,7 +4,7 @@ use Market\Controller\LoginController;
 $app->get(
     '/session/sso_login',
     function ($request, $response, $args) {
-        $sso = new Market\Services\EcomSSO();
+        $sso = new Market\Services\EcomSSO(getenv('SSO_SECRET'));
         $user = $sso->handle_response();
 
         if ($user !== null) {
@@ -49,7 +49,7 @@ EOF;
 $app->get(
     '/session/create',
     function ($request, $response, $args) use ($app) {
-        $sso = new Market\Services\EcomSSO();
+        $sso = new Market\Services\EcomSSO(getenv('SSO_SECRET'));
         return $response->withRedirect($sso->login_url());
     }
 );
