@@ -2,6 +2,7 @@
 namespace Market\Controller;
 
 use Market\Model\Installations;
+use Market\Model\Widgets;
 
 class InstallationsController
 {
@@ -84,6 +85,47 @@ class InstallationsController
 
     public function create($body)
     {
+    }
+
+    public function installWidget($body)
+    {
+        $widget = Widgets::find($body['app_id']);
+
+        if (!$widget) {
+            return [
+                'status' => 400,
+                'message' => 'Widget not found.',
+                'user_message' => [
+                    'en_us' => 'Unexpected error, report to support or responsible developer',
+                    'pt_br' => 'Erro inesperado, reportar ao suporte ou desenvolvedor responsável',
+                ],
+            ];
+        }
+
+        $installation = [
+            'widgets_id' => $body['app_id'],
+            'store_id' => $body['store_id'],
+            'state' => isset($body['state']) ? $body['state'] : 'active',
+            'status' => isset($body['status']) ? $body['status'] : 'active',
+        ];
+
+        $install = Installations::create($installation);
+
+        if (!$install) {
+            return [
+                'status' => 400,
+                'message' => 'Error with request on this resource',
+                'user_message' => [
+                    'en_us' => 'Unexpected error, report to support or responsible developer',
+                    'pt_br' => 'Erro inesperado, reportar ao suporte ou desenvolvedor responsável',
+                ],
+            ];
+        }
+
+        return [
+            'status' => 201,
+            'installation' => $install
+        ];
     }
 
     public function update($componentId, $componentBody)
