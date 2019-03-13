@@ -13,7 +13,7 @@
 {% import "macros/main.macros.html" as main %}
 {% import "macros/scripts.macros.html" as scripts %}
 {% import "parts/components.html" as components %}
-<body>
+<body data-store="{{params.login.store_id}}" data-user="{{params.login.username}}" data-sso="{{params.login.sso}}">
   <!--
     HEADER
   -->
