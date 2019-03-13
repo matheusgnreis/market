@@ -7,7 +7,7 @@ class WidgetsController
 {
     private $_limit = 30;
     private $_offset = 0;
-    private $_fields = ['app_id', 'partner_id', 'title', 'slug', 'url_css', 'url_js', 'template', 'config', 'paid', 'icon'];
+    private $_fields = ['app_id', 'partner_id', 'title', 'slug', 'url_css', 'template', 'url_js', 'config', 'icon', 'short_description', 'description', 'category', 'version', 'version_date', 'paid', 'active', 'website', 'downloads', 'plans_json'];
     private $_result = [];
     private $_params = ['active' => 1];
 
@@ -37,11 +37,17 @@ class WidgetsController
         $result = Widgets::where($this->_params)
             ->offset($this->_offset)
             ->limit($this->_limit)
-            ->get($this->_fields)
-            ->toArray();
+            ->get($this->_fields);
+            //->toArray();
+
+        $filter = $result->filter(function ($value, $key) {
+            if ($value !== null && $value !== "") {
+                return $value;
+            }
+        });
 
         /*             $result = Widgets::limit(30)->offset(30)->get(['id']); */
-        return $this->response($result);
+        return $this->response($filter->all());
     }
 
     public function requestHasMeta($params)
@@ -86,7 +92,16 @@ class WidgetsController
 
     public function getBySlug($component)
     {
-        return Widgets::where('slug', $component)->first();
+        $widget = Widgets::where('slug', $component)->first();
+        if ($widget) {
+            return [
+                'application' => $widget->toArray(),
+                //'imagens' => $widget->imagens->toArray(),
+                //'comments' => $widget->comments->toArray(),
+                'partner' => $widget->partner->toArray(),
+            ];
+        }
+        return false;
     }
 
     public function create($body)
