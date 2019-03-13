@@ -8,7 +8,7 @@ class Widgets extends Model
     /** db table */
     protected $table = 'widgets';
     /** The attributes that are mass assignable. */
-    protected $fillable = ['app_id', 'partner_id', 'title', 'slug', 'url_css', 'url_js', 'template', 'config', 'paid', 'icon'];
+    protected $fillable = ['app_id', 'partner_id', 'title', 'slug', 'url_css', 'template', 'url_js', 'config', 'icon', 'short_description', 'description', 'category', 'version', 'version_date', 'paid', 'active', 'website', 'downloads', 'plans_json'];
     /** The attributes that will be hidden */
     protected $hidden = [];
     // primary key
