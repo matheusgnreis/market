@@ -54,8 +54,7 @@ EOF;
 $app->get(
     '/session/create',
     function ($request, $response, $args) use ($app) {
-        var_dump($response);
-        $sso = new Market\Services\EcomSSO('EUsJDhFXwZ242mszKJDCkB3nbv7p69NT');
+        $sso = new Market\Services\EcomSSO();
         return $response->withRedirect($sso->login_url());
     }
 );
