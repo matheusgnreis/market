@@ -15,11 +15,6 @@ $app->get(
                 custom.locale; custom.edit_storefront; custom.store_id;
                  */
                 if ($user['email']) {
-                    // save session cookies on domain root
-                    // expires when browser session closes
-                    setCookie('store_id', $user['custom_store_id'], 0, '/');
-                    setCookie('username', $user['username'], 0, '/');
-                    setCookie('sso_logged', true, 0, '/');
 
                     if (!$_SESSION) {
                         session_start();
