@@ -164,3 +164,11 @@
 .scope-li {
   text-transform: capitalize;
 }
+
+a.link-to button {width: 200px;}
+
+a.link-to {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
