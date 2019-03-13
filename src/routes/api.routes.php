@@ -217,11 +217,20 @@ $app->group(
                     return $response->withJson($find, 200);
                 });
                 /**
-                 * 
+                 *
                  */
                 $app->get('/{store_id}', function ($request, $response, $args) use ($controller) {
                     $find = $controller->getByStoreId($args['store_id']);
                     return $response->withJson($find, 200);
+                });
+
+                /**
+                 *
+                 */
+                $app->post('', function ($request, $response, $args) use ($controller) {
+                    $body = $request->getParsedBody();
+                    $resp = $controller->installWidget($body);
+                    return $response->withJson($resp, $resp['status']);
                 });
             }
         );
