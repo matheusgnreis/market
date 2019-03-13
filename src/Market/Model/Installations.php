@@ -8,7 +8,7 @@ class Installations extends Model
     /** db table */
     protected $table = 'widgets_installed';
     /** The attributes that are mass assignable. */
-    protected $fillable = ['id', 'widget_id', 'installed_at', 'store_id', 'state', 'status'];
+    protected $fillable = ['id', 'widgets_id', 'installed_at', 'store_id', 'state', 'status'];
     /** The attributes that will be hidden */
     protected $hidden = [];
     // primary key
