@@ -8,7 +8,7 @@ class HomeController extends BaseController
     use \Market\Services\Dictionary;
     use \Market\Services\Categories;
 
-        /**
+    /**
      * Home view
      *
      * @param [Object] $request
@@ -16,8 +16,7 @@ class HomeController extends BaseController
      * @param [Object] $args
      * @return void
      */
-    public function default($request, $response, $args)
-    {
+    function default($request, $response, $args) {
         return $response->withRedirect('/');
     }
 
@@ -79,8 +78,53 @@ class HomeController extends BaseController
      */
     public function single($request, $response, $args)
     {
+        if (!$_SESSION) {
+            session_start();
+        }
+
         $apps = new AppsController();
         $app = $apps->getBySlug($args['slug']);
+        $translate = $this->getDictionary($args['lang']);
+
+        $params = [
+            'params' => [
+                'dictionary' => $translate,
+                'categories' => [
+                    'applications' => $this->appsCategories($translate),
+                    'themes' => $this->themesCategories($translate),
+                ],
+                'page' => [
+                    'name' => 'Apps',
+                    'type' => 'apps',
+                ],
+                'data' => $app,
+                'view' => [
+                    'scripts' => [
+                        'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js',
+                    ],
+                ],
+                'login' => [
+                    'store_id' => $_SESSION['store_id'],
+                    'username' => $_SESSION['username'],
+                    'sso' => $_SESSION['sso_login'] ? $_SESSION['sso_login'] : 0,
+                ],
+            ],
+        ];
+        if ($app) {
+            return $this->view->render($response, 'single.html', $params);
+        }
+        return $this->view->render($response, '404.html', $params);
+    }
+
+    /**
+     * Single app View
+     */
+    public function widgets($request, $response, $args)
+    {
+        $apps = new AppsController();
+        $app = $apps->getBySlug($args['slug']);
+        $app = true;
         $translate = $this->getDictionary($args['lang']);
 
         $params = [
@@ -103,7 +147,50 @@ class HomeController extends BaseController
             ],
         ];
         if ($app) {
-            return $this->view->render($response, 'single.html', $params);
+            return $this->view->render($response, 'widgets.html', $params);
+        }
+        return $this->view->render($response, '404.html', $params);
+    }
+    /**
+     * Single app View
+     */
+    public function widgetSingle($request, $response, $args)
+    {
+        if (!$_SESSION) {
+            session_start();
+        }
+
+        $controller = new WidgetsController();
+        $widget = $controller->getBySlug($args['slug']);
+        $translate = $this->getDictionary($args['lang']);
+
+        $params = [
+            'params' => [
+                'dictionary' => $translate,
+                'categories' => [
+                    'applications' => $this->appsCategories($translate),
+                    'themes' => $this->themesCategories($translate),
+                ],
+                'page' => [
+                    'name' => 'Widget',
+                    'type' => 'widgets',
+                ],
+                'data' => $widget,
+                'view' => [
+                    'scripts' => [
+                        'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js',
+                    ],
+                ],
+                'login' => [
+                    'store_id' => $_SESSION['store_id'],
+                    'username' => $_SESSION['username'],
+                    'sso' => $_SESSION['sso_login'] ? $_SESSION['sso_login'] : 0,
+                ],
+            ],
+        ];
+        if ($widget) {
+            return $this->view->render($response, 'widgets.html', $params);
         }
         return $this->view->render($response, '404.html', $params);
     }
