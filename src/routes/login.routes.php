@@ -4,7 +4,7 @@ use Market\Controller\LoginController;
 $app->get(
     '/session/sso_login',
     function ($request, $response, $args) {
-        $sso = new Market\Services\EcomSSO('EUsJDhFXwZ242mszKJDCkB3nbv7p69NT');
+        $sso = new Market\Services\EcomSSO();
         $user = $sso->handle_response();
 
         if ($user !== null) {
@@ -25,15 +25,19 @@ $app->get(
                         session_start();
                     }
 
+                    $_SESSION['access_token'] = $user['access_token'];
                     $_SESSION['store_id'] = $user['custom_store_id'];
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['sso_login'] = true;
 
-                    if (isset($_COOKIE['prev_page']) && !empty($_COOKIE['prev_page'])) {
-                        return $response->withRedirect($_COOKIE['prev_page']);
-                    } else {
-                        return $response->withRedirect('/');
-                    }
+                    echo <<<EOF
+                        <script>
+                            window.onunload = refreshParent
+                            function refreshParent() {
+                                window.opener.location.reload()
+                            }
+                        </script>
+EOF;
                 }
             } else {
                 return $response->withRedirect('/session/create');
