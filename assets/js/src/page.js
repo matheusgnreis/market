@@ -71,6 +71,7 @@ require('./../jquery.json-viewer');
 */
 require('./script.js');
 require('./single.js');
+require('./widgets-single.js');
 require('./login.js');
 require('./account.js');
 require('./my-items.js');
