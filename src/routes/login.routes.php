@@ -15,33 +15,27 @@ $app->get(
                 custom.locale; custom.edit_storefront; custom.store_id;
                  */
                 if ($user['email']) {
-
                     if (!$_SESSION) {
                         session_start();
                     }
-
+                    $_SESSION['myId'] = $user['external_id'];
                     $_SESSION['access_token'] = $user['access_token'];
                     $_SESSION['store_id'] = $user['custom_store_id'];
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['sso_login'] = true;
 
-                    echo <<<EOF
+                    echo "
                         <script>
-                            window.onunload = refreshParent
-                            function refreshParent() {
-                                window.opener.location.reload()
-                            }
+                            window.opener.location.reload()
+                            window.close();
                         </script>
-EOF;
+                    ";
                 }
             } else {
                 return $response->withRedirect('/session/create');
             }
         } else {
-            // invalid request
-            if (isset($_COOKIE['prev_page'])) {
-                return $response->withRedirect($_COOKIE['prev_page']);
-            }
+            return $response->withRedirect('/session/create');
         }
     }
 );

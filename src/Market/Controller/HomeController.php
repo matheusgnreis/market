@@ -108,7 +108,16 @@ class HomeController extends BaseController
                     'store_id' => $_SESSION['store_id'],
                     'username' => $_SESSION['username'],
                     'sso' => $_SESSION['sso_login'] ? $_SESSION['sso_login'] : 0,
+                    'my_id' => $_SESSION['myId'],
+                    'token' => $_SESSION['access_token'],
                 ],
+/*                 'login' => [
+'store_id' => 1011,
+'username' => 'ecom',
+'sso' => 1,
+'my_id' => '5b1abe30a4d4531b8fe40726',
+'token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1YjFhYmUzMGE0ZDQ1MzFiOGZlNDA3MjYiLCJjb2QiOjkyODY2NzAyLCJleHAiOjE1NTI3NjAyMjE5NTZ9.es5Ae0TfdqVvPOnmajDbeJmbLXCdJ60MDqysbKm-cGM',
+], */
             ],
         ];
         if ($app) {
