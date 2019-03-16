@@ -7,11 +7,13 @@ $(function () {
   var windowSsoLogin
 
   //
-  if (window.sessionStorage.getItem('installItem') === itemId) {
-    // show modal
-    $('#modal-scope-installation').modal('show')
-    // remove item
-    window.sessionStorage.removeItem('installItem')
+  if (window.sessionStorage.getItem('installItem') !== null) {
+    if (parseInt(window.sessionStorage.getItem('installItem')) === itemId) {
+      // show modal
+      $('#modal-scope-installation').modal('show')
+      // remove item
+      window.sessionStorage.removeItem('installItem')
+    }
   }
 
   // handle installations, widget or application
