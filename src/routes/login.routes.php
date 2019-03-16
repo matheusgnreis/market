@@ -7,7 +7,7 @@ $app->get(
         $sso = new Market\Services\EcomSSO(getenv('SSO_SECRET'));
         $user = $sso->handle_response();
 
-        if ($user !== null) {
+        if ($user !== null) { 
             if ($user['logged']) {
                 /*
                 user attributes:
@@ -19,7 +19,7 @@ $app->get(
                         session_start();
                     }
                     $_SESSION['myId'] = $user['external_id'];
-                    $_SESSION['access_token'] = $user['access_token'];
+                    $_SESSION['access_token'] = $user['custom_access_token'];
                     $_SESSION['store_id'] = $user['custom_store_id'];
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['sso_login'] = true;
