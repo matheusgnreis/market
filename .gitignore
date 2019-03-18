@@ -5,8 +5,8 @@ node_modules/
 vendor/
 
 # Template
-assets/css/core.css
-assets/css/thesaas.css
-assets/css/thesaas.css.map
-assets/js/core.js
-assets/js/thesaas.js
+assets/scss/_theme.scss
+assets/plugin/
+assets/js/src/
+assets/js/page.js
+assets/js/page.js.map

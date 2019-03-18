@@ -151,7 +151,9 @@ $(function () {
     link.appendTo(content)
     modalBody.html(content)
 
-    $('#modal-install-success').modal('show')
+    setTimeout(function () {
+      $('#modal-install-success').modal('show')
+    }, 2000)
   }
 
   function openWindow() {
