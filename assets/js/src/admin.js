@@ -55,6 +55,105 @@ $(function () {
     itemContainer.fadeIn('slow')
   }
 
+  // render brutusin forms
+  var renderForms = function (application) {
+    var formDataEl = document.getElementById('application-basic-settings')
+    var formHiddenDataEl = document.getElementById('application-advanced-settings')
+    var appSettings = application.admin_settings
+    var basicSettingsData = null
+    var basicSettingsHidden = null
+    var jsonShemaHeader = function (properties) {
+      return {
+        '$schema': 'http://json-schema.org/draft-07/schema#',
+        'type': 'object',
+        'properties': properties
+      }
+    }
+
+    var BrutusinForms = brutusin["json-forms"];
+    // percorre admin settings
+    for (const key in appSettings) {
+      if (appSettings.hasOwnProperty(key)) {
+        const setting = appSettings[key]
+        // hidden_data
+        if (setting.hasOwnProperty('hide') && setting.hide === true) {
+          switch (setting.schema.type) {
+            case 'array':
+            case 'object':
+              bf['hidden_data'] = bf['hidden_data'] || []
+              bf['hidden_data']['advanced'] = bf['hidden_data']['advanced'] || []
+              bf['hidden_data']['advanced'][key] = bf['hidden_data']['advanced'][key] || []
+              bf['hidden_data']['advanced'][key] = BrutusinForms.create(jsonShemaHeader([setting.schema]));
+              bf['hidden_data']['advanced'][key].render(formHiddenDataEl, [application.hidden_data[key]]);
+              break;
+            default:
+              // bf['hidden_data'] = bf['hidden_data'] || []
+              // bf['hidden_data']['basic'] = bf['hidden_data']['basic'] || []
+              // bf['hidden_data']['basic'][key] = bf['hidden_data']['basic'][key] || []
+              // bf['hidden_data']['basic'][key] = BrutusinForms.create(jsonShemaHeader([setting.schema]));
+              // bf['hidden_data']['basic'][key].render(formHiddenDataEl, [application.hidden_data[key]]);
+              //
+              basicSettingsHidden = basicSettingsHidden || []
+              basicSettingsHidden[key] = basicSettingsHidden[key] || []
+              basicSettingsHidden[key] = setting.schema
+              break;
+          }
+        } else {
+          // data
+          switch (setting.schema.type) {
+            case 'array':
+            case 'object':
+              bf['data'] = bf['data'] || []
+              bf['data']['advanced'] = bf['data']['advanced'] || []
+              bf['data']['advanced'][key] = bf['data']['advanced'][key] || []
+              bf['data']['advanced'][key] = BrutusinForms.create(jsonShemaHeader([setting.schema]));
+              bf['data']['advanced'][key].render(formDataEl, [application.data[key]]);
+              break;
+            default:
+              // bf['data'] = bf['data'] || []
+              // bf['data']['basic'] = bf['data']['basic'] || []
+              // bf['data']['basic'][key] = bf['data']['basic'][key] || []
+              // bf['data']['basic'][key] = BrutusinForms.create(jsonShemaHeader([setting.schema]));
+              // bf['data']['basic'][key].render(formDataEl, application.data[key]);
+              //
+              basicSettingsData = basicSettingsData || []
+              basicSettingsData[key] = basicSettingsData[key] || []
+              basicSettingsData[key] = setting.schema
+              break;
+          }
+        }
+      }
+    }
+
+    // basic settings data
+    if (basicSettingsData !== null) {
+      bf['data'] = bf['data'] || []
+      bf['data']['basic'] = bf['data']['basic'] || []
+      bf['data']['basic'] = BrutusinForms.create(jsonShemaHeader(basicSettingsData));
+      bf['data']['basic'].render(formDataEl, application.data);
+    }
+
+    if (basicSettingsHidden !== null) {
+      // basic settings hidden_data
+      console.log(basicSettingsHidden)
+      console.log(typeof basicSettingsHidden)
+      bf['hidden_data'] = bf['hidden_data'] || []
+      bf['hidden_data']['basic'] = bf['hidden_data']['basic'] || []
+      bf['hidden_data']['basic'] = BrutusinForms.create(jsonShemaHeader(basicSettingsHidden));
+      bf['hidden_data']['basic'].render(formHiddenDataEl, application.hidden_data);
+    }
+  }
+
+  // get single application
+  var getAppApi = function (applicationId) {
+    return $.ajax({
+      type: 'GET',
+      url: ecomApiPath + 'applications/' + applicationId + '.json',
+      dataType: 'json',
+      headers: requestHeader
+    })
+  }
+
   // get all store aplications
   var lojApplications = function () {
     var query = '?fields=_id,app_id,title,state,updated_at,data,hidden_data,icon'
