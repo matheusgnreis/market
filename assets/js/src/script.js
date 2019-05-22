@@ -42,7 +42,7 @@ $(function () {
               })
                 .done(function (resp) {
                   var msg = 'Widget instalado com sucesso. Você pode configurá-lo clicando abaixo.'
-                  var link = 'https://app.e-com.plus/#/apps'
+                  var link = 'https://app.e-com.plus/admin/widget/' + resp._id
                   successAlert(msg, link)
                 })
                 .fail(function (xhr) {
@@ -113,7 +113,7 @@ $(function () {
                     $('#modal-scope-installation').modal('hide')
                     // show modal of configuration
                     var msg = 'Aplicativo instalado com sucesso. Você pode configurá-lo clicando abaixo.'
-                    var link = 'https://app.e-com.plus/#/apps'
+                    var link = '/admin/applications/' + json._id + '/edit'
                     successAlert(msg, link)
                   }
                 }).fail(function (xhr) {
