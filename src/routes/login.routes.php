@@ -18,7 +18,7 @@ $app->get(
                     if (!$_SESSION) {
                         session_start();
                     }
-                    $_SESSION['myId'] = $user['external_id'];
+                    $_SESSION['my_id'] = $user['external_id'];
                     $_SESSION['access_token'] = $user['custom_access_token'];
                     $_SESSION['store_id'] = $user['custom_store_id'];
                     $_SESSION['username'] = $user['username'];

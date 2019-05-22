@@ -6,14 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="keywords" content="">
-  <title>E-com Plus Market | Admin</title>
+  <title>E-com Plus Market | Settings</title>
   <!-- Styles -->
   <link href="/assets/css/page.min.css?v=1.2" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/dist/css/brutusin-json-forms.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/dist/css/brutusin-json-forms.min.css">
 </head>
 
-<body id="admin-body" data-store-id="{{params.user.store_id}}" data-store-username="{{params.user.username}}"
-  data-store-sso="{{params.user.sso_login}}">
+<!-- <body id="admin-body" data-store-id="{{params.user.store_id}}" data-store-username="{{params.user.username}}"
+  data-store-sso="{{params.user.sso_login}}"> -->
+
+<body id="admin-body" data-store="1011" data-user="talisson" data-my-id="5ca4de024a663110ea967bdf"
+  data-access="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1Y2E0ZGUwMjRhNjYzMTEwZWE5NjdiZGYiLCJjb2QiOjEzNDEwODM5LCJleHAiOjE1NTg1Mzc5NzYzMDF9.HT63737nmafPZOLP9mZo-eyC96oyHAw22D1tPRfkR-0"
+  data-sso="1">
   <aside id="admin-aside">
     <header class="sidebar-header">
       <span class="logo">
@@ -24,73 +29,25 @@
       <ul>
         <li class="active">
           <span class="icon fa fa-puzzle-piece"></span>
-          <a href="#">Aplicativos</a>
+          <a href="/admin/applications">Aplicativos</a>
         </li>
-        <!--         <li>
-          <a href="#">Avaliações</a>
+        <li class="active">
+          <span class="icon fa fa-puzzle-piece"></span>
+          <a href="/admin/widgets">Widgets</a>
         </li>
-        <li>
-          <a href="#">Configurações</a>
-        </li> -->
+        <li class="active">
+          <span class="icon fa fa-puzzle-piece"></span>
+          <a href="/admin/themes">Themes</a>
+        </li>
       </ul>
     </div>
   </aside>
   <main id="admin-main">
-    <div class="content-header">
-      <h4 id="current-section-action">Aplicativos Instalados</h4>
-    </div>
-    <section id="admin-applications">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div id="applications-content">
-              <!--
-              |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-              | Light accordion
-              |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-              !-->
-              <div class="accordion accordion-connected shadow-5" id="accordion-apps">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="admin-evaluations"></section>
-    <section id="admin-settings"></section>
+    {% block content %} {% endblock %}
   </main>
-
-  <!-- Login to ecom plus api -->
-  <div class="modal fade" id="modal-login-admin" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm" role="document">
-      <div class="modal-content">
-
-        <div class="modal-body">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <form id="form-admin">
-            <h4 class="mb-5">Sign into your account</h4>
-            <div class="form-group">
-              <input class="form-control" type="text" name="username" id="username" value="{{params.user.username}}" disabled>
-            </div>
-
-            <div class="form-group">
-              <input class="form-control" type="password" name="password" id="password" placeholder="Password">
-            </div>
-
-            <button class="btn btn-lg btn-block btn-primary" type="button" id="btn-admin-login">Login</button>
-
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
+  <div id="admin-toast"></div>
   <script src="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/src/js/brutusin-json-forms.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/src/js/brutusin-json-forms-bootstrap.js"></script>
   <script src="/assets/js/page.min.js?v=1.2"></script>
 </body>
-
 </html>
