@@ -13,16 +13,20 @@
 {% import "macros/main.macros.html" as main %}
 {% import "macros/scripts.macros.html" as scripts %}
 {% import "parts/components.html" as components %}
-<body data-store="{{params.login.store_id}}" data-user="{{params.login.username}}" data-my-id="{{params.login.my_id}}" data-access="{{params.login.token}}" data-sso="{{params.login.sso}}">
+<!-- <body data-store="{{params.login.store_id}}" data-user="{{params.login.username}}" data-my-id="{{params.login.my_id}}" data-access="{{params.login.token}}" data-sso="{{params.login.sso}}"> -->
+
+<body data-store="1002" data-user="leomp" data-my-id="5a7dfebc09c0d97a3c9aaabf"
+  data-access="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1YTdkZmViYzA5YzBkOTdhM2M5YWFhYmYiLCJjb2QiOjk5NTQxODA0LCJleHAiOjE1NTgwMzY1Njk5ODh9.sH1UTsGD0iJDqe00Azzec2ENVR3cnU4S1RnY-itemqs"
+  data-sso="1">
   <!--
     HEADER
   -->
-{{main.header(params)}}
-    <!--
+  {{main.header(params)}}
+  <!--
     MAIN-CONTENT
     -->
-    {% block content %} {% endblock %}
-    <!--
+  {% block content %} {% endblock %}
+  <!--
     FOOTER
   -->
   {{main.footer(params)}}

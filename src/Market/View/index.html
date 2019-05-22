@@ -15,7 +15,7 @@
       | Overflow content
       |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
       !-->
-<!--   <section class="section overflow-hidden">
+  <!--   <section class="section overflow-hidden">
     <div class="container">
       <div class="d-none d-lg-block">
         <div class="row flex-nowrap">
@@ -77,7 +77,7 @@
   <section class="section">
     <div class="container">
       <header class="section-header">
-        <h2>Conecte os apps e instale os temas ideias para sua loja com dois cliques.</h2>
+        <h2>{{getPageContent('home', 'main', '.section-header')}}</h2>
       </header>
       <div class="row">
         {% for application in params.data %}

@@ -1,0 +1,35 @@
+{% extends "layout/admin.html" %}
+{% block content %}
+<div class="main-content" data-app-id="{{params.application.id}}" data-action="edit">
+  <section id="admin-applications">
+    <ul class="nav nav-tabs-minimal" role="tablist">
+      <li class="nav-item" id="tab-basic" style="display: none">
+        <a class="nav-link active" data-toggle="tab" href="#tab-basic-settings"><i class="fa fa-cog"
+            aria-hidden="true"></i>
+          Configurações Básicas</a>
+      </li>
+      <li class="nav-item" id="tab-advanced" style="display: none">
+        <a class="nav-link" data-toggle="tab" href="#tab-advanced-settings"><i class="fa fa-cogs"
+            aria-hidden="true"></i>
+          Configurações Avançadas</a>
+      </li>
+    </ul>
+
+    <div class="tab-content p-4">
+      <div class="tab-pane fade show active" id="tab-basic-settings">
+        <div id="application-basic-settings">
+        </div>
+      </div>
+      <div class="tab-pane fade" id="tab-advanced-settings">
+        <div id="application-advanced-settings">
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="admin-actions">
+    <ul>
+      <li><a href="/admin/applications"><button class="btn btn-block btn-round btn-action">Voltar</button></a></li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
