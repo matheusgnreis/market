@@ -132,13 +132,18 @@ $(document).ready(function () {
           //
           $('<span>', { text: key }).appendTo(liScope)
           //
-          application.auth_scope[key].sort()
-          //
-          for (var index = 0; index < application.auth_scope[key].length; index++) {
+          if (typeof application.auth_scope[key] !== 'string') {
+            application.auth_scope[key].sort()
+
             //
-            method += (index > 0) ? ', ' : ''
-            method += translateMethod(application.auth_scope[key][index])
-            //
+            for (var index = 0; index < application.auth_scope[key].length; index++) {
+              //
+              method += (index > 0) ? ', ' : ''
+              method += translateMethod(application.auth_scope[key][index])
+              //
+            }
+          } else {
+            method += translateMethod(application.auth_scope[key])
           }
           $('<span>', { text: method }).appendTo(liScope)
           //
