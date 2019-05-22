@@ -48,6 +48,7 @@ $container['view'] = function ($c) {
     $uri = \Slim\Http\Uri::createFromEnvironment(new \Slim\Http\Environment($_SERVER));
     $view->addExtension(new \Slim\Views\TwigExtension($router, $uri));
     $view->addExtension(new \Market\Services\MarketExtensions());
+    $view->addExtension(new \Market\Services\CMSContent());
     return $view;
 };
 //Erro 404
