@@ -1,0 +1,72 @@
+{% extends "layout/partner.html" %}
+{% block content %}
+<main class="main-partner__content" id="partner-home">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <section class="my-7 mx-7 partner-wellcome">
+          <h3 class="sections-title">Bem-vindo {{params.user.name}}!</h3>
+          <h5 class="lead-1">Abaixo temos tudo que você precisa saber para começar a desenvolver conosco.</h5>
+          <div class="row my-5">
+            <div class="col-md-12">
+              <div class="media px-5 py-3">
+                <div class="mr-4 fw-600 lh-1 lead-5 text-lightest"><span class="ti-plug"></span></div>
+                <a href="https://developers.e-com.plus/docs/apps/#storefront" class="text-default">
+                  <div class="media-body">
+                    <h5>Plugins Javascript</h5>
+                    <p>Desenvolva plug-ins JS customizados para melhorar a experiência de compra.</p>
+                  </div>
+                </a>
+              </div>
+              <div class="media px-5 py-3">
+                <div class="mr-4 fw-600 lh-1 lead-5 text-lightest"><span class="ti-panel"></span></div>
+                <a href="https://developers.e-com.plus/docs/apps/#module-package" class="text-default">
+                  <div class="media-body">
+                    <h5>Dashboard Addons</h5>
+                    <p>Use javascript e personalize o paine de administração da E-com Plus</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <hr class="my-7">
+          <h3 class="sections-title">De dev pra dev!</h3>
+          <h5 class="lead-1">Desfrute da nossa suite de APIs e dê poder total a suas
+            aplicações.</h5>
+          <div class="row my-5">
+            <div class="col-md-12">
+              <div class="media px-5 py-3">
+                <div class="mr-4 fw-600 lh-1 lead-5 text-lightest"><span class="ti-search"></span></div>
+                <a href="https://developers.e-com.plus/docs/reference/search/" class="text-default">
+                  <div class="media-body">
+                    <h5>Search API</h5>
+                    <p>Busca rápida e flexível de produtos e termos</p>
+                  </div>
+                </a>
+              </div>
+              <div class="media px-5 py-3">
+                <div class="mr-4 fw-600 lh-1 lead-5 text-lightest"><span class="ti-eye"></span></div>
+                <a href="https://developers.e-com.plus/docs/reference/graphs/" class="text-default">
+                  <div class="media-body">
+                    <h5>Graphs API</h5>
+                    <p>Motor em tempo real para recomendações de produtos</p>
+                  </div>
+                </a>
+              </div>
+              <div class="media px-5 py-3">
+                <div class="mr-4 fw-600 lh-1 lead-5 text-lightest"><span class="ti-heart"></span></div>
+                <a href="https://developers.e-com.plus/docs/reference/store/" class="text-default">
+                  <div class="media-body">
+                    <h5>Store API</h5>
+                    <p>O "coração" do nosso software, acesso total a todos os dados JSON da loja</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

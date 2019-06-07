@@ -8,16 +8,13 @@
   <meta name="keywords" content="">
   <title>E-com Plus Market | {{params.page.name}}</title>
   <!-- Styles -->
-  <link href="/assets/css/page.min.css?v=1.7" rel="stylesheet">
+  <link href="/assets/css/page.min.css?v=0.1" rel="stylesheet">
 </head>
 {% import "macros/main.macros.html" as main %}
 {% import "macros/scripts.macros.html" as scripts %}
 {% import "parts/components.html" as components %}
-<!-- <body data-store="{{params.login.store_id}}" data-user="{{params.login.username}}" data-my-id="{{params.login.my_id}}" data-access="{{params.login.token}}" data-sso="{{params.login.sso}}"> -->
-
-<body data-store="1002" data-user="leomp" data-my-id="5a7dfebc09c0d97a3c9aaabf"
-  data-access="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1YTdkZmViYzA5YzBkOTdhM2M5YWFhYmYiLCJjb2QiOjk5NTQxODA0LCJleHAiOjE1NTgwMzY1Njk5ODh9.sH1UTsGD0iJDqe00Azzec2ENVR3cnU4S1RnY-itemqs"
-  data-sso="1">
+<body data-store="{{params.user.store_id}}" data-user="{{params.user.username}}" data-my-id="{{params.user.my_id}}"
+  data-sso="{{params.user.sso_login}}" data-access="{{params.user.access_token}}">
   <!--
     HEADER
   -->
@@ -38,7 +35,7 @@
     Scripts 
   -->
   {{scripts.loadScripts(params)}}
-  <script src="/assets/js/page.min.js?v=1.7"></script>
+  <script src="/assets/js/page.min.js?v=0.1"></script>
 </body>
 
 </html>

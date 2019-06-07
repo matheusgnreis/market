@@ -1,0 +1,1224 @@
+{% macro partnerHeader(user) %}
+<header class="partner__header">
+  <div class="partner-header__nav">
+    <a class="navbar-brand" href="/partners">
+      <img alt="ecomplus-logo" class="logo-dark" src="/assets/img/logo-dark.png">
+      <span class="font-weight-200">Partner</span>
+    </a>
+  </div>
+  <div class="partner-header__top-bar">
+    <div class="dropdown">
+      <span class="dropdown-toggle no-caret" data-toggle="dropdown">
+        <img class="avatar avatar-xs" src="{{user.avatar}}" alt="user">
+      </span>
+      <div class="dropdown-menu dropdown-menu-right">
+        {# <a class="dropdown-item" href="#">Profile</a>
+        <a class="dropdown-item" href="#">Inbox</a>
+        <a class="dropdown-item" href="#">Settings</a> 
+        <div class="dropdown-divider"></div> #}
+        <a class="dropdown-item" href="/logout">Logout</a>
+      </div>
+    </div>
+  </div>
+</header>
+<nav class="partner-sidenav">
+  <ul class="partner-sidenav__menu">
+    <li class="menu__item">
+      <a class="menu-item__links" href="/partners/apps">
+        <i aria-hidden="true" class="fa fa-puzzle-piece"></i>Aplicativos</a>
+    </li>
+    <!-- <li class="menu__item">
+      <a class="menu-item__links" href="/partners/themas">
+        <i aria-hidden="true" class="fa fa-paint-brush"></i>Temas</a>
+    </li> -->
+  </ul>
+</nav>
+{% endmacro %}
+
+{% macro partnerApplications(params) %}
+{% if params.partner.applications %}
+<table class="table table-hover table-my-items">
+  <thead style="background-color: #f8fafc;">
+    <tr>
+      <th class="font-size-13 font-weight-500">#</th>
+      <th class="font-size-13 font-weight-500">Título</th>
+      <th class="font-size-13 font-weight-500">Pago</th>
+      <th class="font-size-13 font-weight-500">Instalações</th>
+      <th class="font-size-13 font-weight-500">Estado</th>
+      <th class="font-size-13 font-weight-500">Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for app in params.partner.applications %}
+    <tr>
+      <td>
+        <div class="td-w-img">
+          <img src="{{app.icon}}">
+        </div>
+      </td>
+      <td>
+        <div class="td-w-txt">
+          <span class="font-size-13 font-weight-500">{{app.title}}</span>
+          <span class="font-size-12 font-weight-400">{{categories_name(app.category, params.dictionary.lang)}}</span>
+        </div>
+      </td>
+      {% if app.paid == 1 %}
+      <td>
+        <div class="td-w-txt">
+          <span class="font-size-13 font-weight-500">{{app.value_plan_basic}}</span>
+        </div>
+      </td>
+      {% else %}
+      <td>
+        <div class="td-w-txt">
+          <span class="font-size-13 font-weight-500">Free</span>
+        </div>
+      </td>
+      {% endif %}
+      <td>
+        <div class="td-w-txt">
+          <span class="font-size-13 font-weight-500">{{app.downloads}}</span>
+        </div>
+      </td>
+      {% if app.active == 1 %}
+      <td>
+        <span class="badge badge-pill badge-success font-size-13 font-weight-500">Ativo</span>
+      </td>
+      {% else %}
+      <td>
+        <span class="badge badge-pill badge-danger font-size-13 font-weight-500">Inativo</span>
+      </td>
+      {% endif %}
+      <td>
+        <div class="td-w-txt">
+          <div class="btn-group dropright">
+            <a aria-expanded="false" aria-haspopup="true" class="text-default" data-toggle="dropdown" href="#">
+              <span class="ti-more"></span>
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/partners/apps/{{app.app_id}}/edit">Editar</a>
+              <a class="dropdown-item" href="/partners/apps/{{app.app_id}}/settings">Configurações</a>
+              <a class="dropdown-item" href="/partners/apps/{{app.app_id}}/overview">Estatísticas</a>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="not-have-item border mx-1 gap-xy-5">
+  <h5 class="">
+    Você não criou nenhum aplicativo conosco ainda, precisa de
+    <a href="/partners">ajuda?
+    </a>
+  </h5>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro partnerAddApplication(params) %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form id="form-item">
+        <!-- hidden inputs -->
+        <input type="hidden" name="partner_id" id="uid" value="{{params.data.partner_id}}">
+        <input id="plans_json" name="plans_json" type="hidden" value="">
+        <input id="json_body" name="json_body" type="hidden" value="">
+        <input id="value_plan_basic" name="value_plan_basic" type="hidden" value="0">
+        <input id="auth_scope" name="auth_scope" type="hidden" value="">
+        <input id="module" name="module" type="hidden" value="">
+        <input id="icon" name="icon" type="hidden" value="">
+        <input checked class="custom-control-input" name="itemType" type="hidden" value="app">
+        <div class="row gap-y row-pre">
+          <div class="col-md-4">
+            <div class="form-pre-infor gap-xy-3">
+              <span class="font-weight-600">Informações do aplicativo</span>
+              <span class="font-size-12">Essas informações serão usadas para identificar seu aplicativo.</span>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>{{params.dictionary.word_name_of_item}}</label>
+              <input class="form-control form-control-sm" type="text" name="title"
+                placeholder="{{params.dictionary.word_max_char}}" maxlength="40" required="true">
+            </div>
+            <div class="form-group">
+              <label>Slug</label>
+              <input class="form-control form-control-sm" maxlength="80" name="slug" placeholder="Slug" required="true"
+                type="text">
+            </div>
+            <div class="form-group">
+              <label>{{params.dictionary.word_categories}}</label>
+              <select class="form-control form-control-sm" name="category" required="true">
+                <option value="">{{params.dictionary.word_select_category}}</option>
+                {% for category in params.categories.applications %}
+                <option value="{{category.page}}">{{category.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row gap-y row-pre">
+          <div class="col-md-4">
+            <div class="form-pre-infor gap-xy-3">
+              <span class="font-weight-600">Urls</span>
+              <span class="font-size-12">Abaixo você encontra informação sobre as urls.</span>
+              <span class="font-size-12">Url de redirecionamento, deve ser informada caso seu aplicativo necessite
+                de autenticação de algum serviço externo, ou até mesmo um oauth próprio.
+              </span>
+              <span class="font-size-12">Autenticação deve ser informada caso seu aplicativo consuma recursos da
+                API E-com.plus.</span>
+              <span class="font-size-12">Caso seu aplicativo utilize autenticação, será necessário informar a url
+                onde receberá callbacks de autenticação enviados pela API E-com.plus.</span>
+              <span class="font-size-12">Se o aplicativo utiliza autenticação, você pode selecionar quais recursos
+                seu aplicativo irá consumir na API para solicitar permissão do usuário na instalação do aplicativo
+                no market.</span>
+              <span class="font-size-12">Você pode informar um site oficial da sua aplicação.</span>
+              <span class="font-size-12">Também pode informar o repositório do aplicativo no Github.</span>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>Url de redirecionamento (Ou autheticação OAuth)</label>
+              <input class="form-control form-control-sm" name="redirect_uri" placeholder="https://meuapp.com/oauth"
+                type="text">
+            </div>
+            <div class="form-group">
+              <div id="autentication_callback-element">
+                <div class="form-group">
+                  <label>Url Callback</label>
+                  <input class="form-control form-control-sm" name="auth_callback_uri"
+                    placeholder="https://meuapp.com/callback" type="text">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>{{params.dictionary.word_authentication}}</label>
+                  <div class="custom-controls-stacked">
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" name="authentication" type="radio" value="1">
+                      <label class="custom-control-label">{{params.dictionary.word_yes}}</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input checked class="custom-control-input" name="authentication" type="radio" value="0">
+                      <label class="custom-control-label">{{params.dictionary.word_no}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group" id="scope-group" style="display: none">
+                  <button class="btn btn-primary" data-target="#modal-scope" data-toggle="modal" id="btn-scope"
+                    type="button">Selecionar
+                    scope</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Site do aplicativo</label>
+              <input class="form-control form-control-sm" name="script_uri" placeholder="https://meuappsite.com/"
+                type="text">
+            </div>
+            <div class="form-group">
+              <label>Github</label>
+              <input class="form-control form-control-sm" name="github_repository"
+                placeholder="https://github.com/mypage/myrepo" type="text">
+            </div>
+          </div>
+        </div>
+        <div class="row gap-y row-pre">
+          <div class="col-md-4">
+            <div class="form-pre-infor gap-xy-3">
+              <span class="font-weight-600">Icone do Aplicativo</span>
+              <span class="font-size-12">Os ícones ajudam os lojistas a reconhecer e identificar seu
+                aplicativo.</span>
+              <span class="font-size-12">É um item obrigatório, e deve ser um arquivo JPG ou PNG de no mínimo
+                512x512px.</span>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>Icon</label>
+              <div class="custom-file">
+                <input accept=".png, .jpg, .jpeg, .icon" class="custom-file-input" id="iconFile" name="files"
+                  required="true" type="file">
+                <label class="custom-file-label" for="iconFile">Icone</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row gap-y row-pre">
+          <div class="col-md-4">
+            <div class="form-pre-infor gap-xy-3">
+              <span class="font-weight-600">Pago</span>
+              <span class="font-size-12">É possível oferecer planos para uso do seu aplicativo. Basta informar se a
+                aplicação é paga e informar os planos.</span>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <div class="custom-controls-stacked">
+                <div class="custom-control custom-radio">
+                  <input class="custom-control-input" name="paid" type="radio" value="1">
+                  <label class="custom-control-label">{{params.dictionary.word_yes}}</label>
+                </div>
+                <div class="custom-control custom-radio">
+                  <input checked class="custom-control-input" name="paid" type="radio" value="0">
+                  <label class="custom-control-label">{{params.dictionary.word_no}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row gap-y row-pre">
+          <div class="col-md-4">
+            <div class="form-pre-infor gap-xy-3">
+              <span class="font-weight-600">Descrições</span>
+              <span class="font-size-12">A descrição do seu aplicativo pode ser decisiva para levar um lojista a
+                usá-lo ou não.</span>
+              <span class="font-size-12">A descrição curta é extremamente importante e obrigatório, é a descrição
+                que será exibida na
+                página inicial do market e nos resultados de busca.</span>
+              <span class="font-size-12">A descrição longa é tão importante quando a curta, é onde será exibido
+                todas as opções e
+                funcionalidades do seu aplicativo. Não poupe palavras, nesse campo é possível usar sintaxe
+                Markdown.</span>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>{{params.dictionary.word_title_short_description}}</label>
+              <textarea class="form-control" placeholder="{{params.dictionary.word_title_short_description}}"
+                name="short_description" rows="4" style="height: 100px" required="true"></textarea>
+            </div>
+            <div class="form-group">
+              <label>{{params.dictionary.word_description_single}}</label>
+              <textarea class="form-control" placeholder="{{params.dictionary.word_placeholde_description}}"
+                name="description" rows="7"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row gap-y row-pre">
+          <div class="col-md-4">
+            <div class="form-pre-infor gap-xy-3">
+              <span class="font-weight-600">Sobre o aplicativo</span>
+              <span class="font-size-12">Essa informações são usadas pelo nosso saas para entender o funcionamento
+                do seu aplicativo em nossa plataforma.</span>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group" id="type_app">
+              <label>{{params.dictionary.word_type_of_app}}</label>
+              <select class="form-control form-control-sm" name="type" required="true">
+                <option value="">{{params.dictionary.word_select_category}}</option>
+                <option value="dashboard">Dashboard</option>
+                <option value="storefront">Storefront</option>
+                <option value="module_package">Module Package</option>
+                <option value="external">External</option>
+              </select>
+            </div>
+            <div class="form-group" id="load_events-element">
+              <label>Load Events</label>
+              <select class="form-control form-control-sm" disabled id="load_events" multiple="multiple"
+                name="load_events[]">
+                <option value="applications/data">applications/data</option>
+                <option value="applications/hidden_data">applications/hidden_data</option>
+                <option value="applications">applications</option>
+                <option value="authentications/api_key">authentications/api_key</option>
+                <option value="authentications/panel_cards">authentications/panel_cards</option>
+                <option value="authentications/panel_form_fields">authentications/panel_form_fields</option>
+                <option value="authentications/permissions">authentications/permissions</option>
+                <option value="authentications">authentications</option>
+                <option value="brands/i18n">brands/i18n</option>
+                <option value="brands/metafields">brands/metafields</option>
+                <option value="brands/pictures">brands/pictures</option>
+                <option value="brands">brands</option>
+                <option value="carts/customers">carts/customers</option>
+                <option value="carts/items">carts/items</option>
+                <option value="carts/metafields">carts/metafields</option>
+                <option value="carts/orders">carts/orders</option>
+                <option value="carts">carts</option>
+                <option value="categories/childs">categories/childs</option>
+                <option value="categories/grids">categories/grids</option>
+                <option value="categories/i18n">categories/i18n</option>
+                <option value="categories/metafields">categories/metafields</option>
+                <option value="categories/parent">categories/parent</option>
+                <option value="categories/pictures">categories/pictures</option>
+                <option value="categories">categories</option>
+                <option value="collections/i18n">collections/i18n</option>
+                <option value="collections/metafields">collections/metafields</option>
+                <option value="collections/pictures">collections/pictures</option>
+                <option value="collections/products">collections/products</option>
+                <option value="collections">collections</option>
+                <option value="customers/addresses">customers/addresses</option>
+                <option value="customers/favorites">customers/favorites</option>
+                <option value="customers/gifts_list">customers/gifts_list</option>
+                <option value="customers/gifts_list_info">customers/gifts_list_info</option>
+                <option value="customers/hidden_metafields">customers/hidden_metafields</option>
+                <option value="customers/lists">customers/lists</option>
+                <option value="customers/loyalty_points">customers/loyalty_points</option>
+                <option value="customers/metafields">customers/metafields</option>
+                <option value="customers/oauth_providers">customers/oauth_providers</option>
+                <option value="customers/orders">customers/orders</option>
+                <option value="customers/seller_recommendations">customers/seller_recommendations</option>
+                <option value="customers">customers</option>
+                <option value="grids/i18n">grids/i18n</option>
+                <option value="grids/metafields">grids/metafields</option>
+                <option value="grids/options">grids/options</option>
+                <option value="grids">grids</option>
+                <option value="orders/amount">orders/amount</option>
+                <option value="orders/buyers">orders/buyers</option>
+                <option value="orders/fullfilments">orders/fullfilments</option>
+                <option value="orders/gift_to">orders/gift_to</option>
+                <option value="orders/hidden_metafields">orders/hidden_metafields</option>
+                <option value="orders/items">orders/items</option>
+                <option value="orders/loyalty_points">orders/loyalty_points</option>
+                <option value="orders/metafields">orders/metafields</option>
+                <option value="orders/payments_history">orders/payments_history</option>
+                <option value="orders/shipping_lines">orders/shipping_lines</option>
+                <option value="orders/transactions">orders/transactions</option>
+                <option value="orders">orders</option>
+                <option value="procedures">procedures</option>
+                <option value="products/brands">products/brands</option>
+                <option value="products/categories">products/categories</option>
+                <option value="products/customizations/options">products/customizations/options</option>
+                <option value="products/customizations">products/customizations</option>
+                <option value="products/grids">products/grids</option>
+                <option value="products/hidden_metafields">products/hidden_metafields</option>
+                <option value="products/i18n">products/i18n</option>
+                <option value="products/inventory_records">products/inventory_records</option>
+                <option value="products/kit_composition">products/kit_composition</option>
+                <option value="products/metafields">products/metafields</option>
+                <option value="products/other_discounts">products/other_discounts</option>
+                <option value="products/other_prices">products/other_prices</option>
+                <option value="products/payment_methods">products/payment_methods</option>
+                <option value="products/pictures">products/pictures</option>
+                <option value="products/price">products/price</option>
+                <option value="products/price_change_records">products/price_change_records</option>
+                <option value="products/quantity">products/quantity</option>
+                <option value="products/related_produts">products/related_produts</option>
+                <option value="products/shipping_methods">products/shipping_methods</option>
+                <option value="products/specifications">products/specifications</option>
+                <option value="products/variations/price">products/variations/price</option>
+                <option value="products/variations/quantity">products/variations/quantity</option>
+                <option value="products/variations/specifications">products/variations/specifications</option>
+                <option value="products/variations">products/variations</option>
+                <option value="products">products</option>
+                <option value="stores">stores</option>
+                <option value="triggers">triggers</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>{{params.dictionary.word_num_version}}</label>
+              <input class="form-control form-control-sm" name="version" placeholder="Ex: 1.0" required="true"
+                type="text">
+            </div>
+            <div class="form-group">
+              <label>{{params.dictionary.word_date_version}}</label>
+              <input class="form-control form-control-sm" type="date" name="version_date"
+                placeholder="{{dictionary.word_date_version}}">
+            </div>
+          </div>
+        </div>
+        <div class="row gap-y row-pre">
+          <div class="col-md-4">
+            <div class="form-pre-infor gap-xy-3">
+              <span class="font-weight-600">Módulos</span>
+              <span class="font-size-12">É possível que seu aplicativo faça uso de algum módulo de nossa API para
+                funcionar, temos uma infinidade de módulos disponíveis para facilitar o desenvolvimento de novas
+                funcionalidades ou incrementar funcionalidades ja existentes. Seja para realizar pagamento,
+                cálcular frete, aplicar desconto, criar transações e muito mais.
+              </span>
+              <span class="font-size-12">A definição de cada módulo pode ser encontrada
+                <a href="#">aqui</a>
+                e seu
+                aplicativo deve respeitar os schemas de requisição e resposta de cada módulo que ele irá se
+                comunicar para funcionar corretamente e ser aprovado em nossa homologação.</span>
+            </div>
+          </div>
+          <div class="col-md-8" id="modules-group">
+            <div
+              style="
+                                                                                                                                                                                                                                                                                                                  width: 100%;
+                                                                                                                                                                                                                                                                                                                  text-align: right;
+                                                                                                                                                                                                                                                                                                                  padding: 10px;
+                                                                                                                                                                                                                                                                                                                  background-color: whitesmoke;
+                                                                                                                                                                                                                                                                                                                  border-radius: 5px;
+                                                                                                                                                                                                                                                                                                                  box-shadow: 0 2px 0px 0 rgba(0,0,0,.1);
+                                                                                                                                                                                                                                                                                                                  margin-bottom: 1em;
+                                                                                                                                                                                                                                                                                                                  ">
+              <button class="btn btn-label btn-success" id="add-module" style="width: 100%" type="button">
+                <label style="padding-top: 7px;">
+                  <i aria-hidden="true" class="fa fa-plus"></i>
+                </label>
+                Adicionar Módulo
+              </button>
+              <!-- modules salvos -->
+              {{params.application.module}}
+            </div>
+          </div>
+        </div>
+        <div class="row gap-y row-pre"
+          style="
+                                                                                                                                                                                                                      border: none;
+                                                                                                                                                                                                                  ">
+          <div class="col-md-4">
+            <div class="form-pre-infor gap-xy-3">
+              <span class="font-weight-600">Configurações do Lojista</span>
+              <span class="font-size-12">Aqui você pode configurar opções que serão preenchidas pelo
+                lojista.</span>
+              <span class="font-size-12">É aqui que você define as propriedades que estaram presentes no DATA e no
+                HIDDEN_DATA do seu aplicativo.</span>
+              <span class="font-size-12">Você pode consultar nossos exemplos
+                <a data-target="#modal-admin-settings-example" data-toggle="modal" href="#">
+                  aqui
+                </a>
+                caso tenha algumas dúvida.</span>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group"
+              style="width: 100%;
+                                                                                                                                                                                                                      text-align: right;
+                                                                                                                                                                                                                      padding: 10px;
+                                                                                                                                                                                                                      background-color: whitesmoke;
+                                                                                                                                                                                                                      border-radius: 5px;
+                                                                                                                                                                                                                      box-shadow: 0 2px 0px 0 rgba(0,0,0,.1);
+                                                                                                                                                                                                                      margin-bottom: 1em;
+                                                                                                                                                                                                                      min-height:auto">
+              <button class="btn btn-label btn-success" id="add-admin-settings" style="width: 100%" type="button">
+                <label style="padding-top: 7px;">
+                  <i aria-hidden="true" class="fa fa-cogs"></i>
+                </label>
+                Adicionar Configurações
+              </button>
+            </div>
+            <div id="admin-group"></div>
+          </div>
+        </div>
+        <div class="row gap-y row-pre"
+          style="
+                                                                                                                                                                                                                      border: none;
+                                                                                                                                                                                                                  ">
+          <div class="col-md-12">
+            <div class="form-actions">
+              <a href="/partners/apps">
+                <button class="btn btn-secondary" type="button">Cancelar</button>
+              </a>
+              <button class="btn btn-success" id="submit-form" type="button">
+                Adicionar Aplicativo
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro appAuthScopes(params) %}
+<!--
+                                    application scope authorization
+                                  -->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="modal-scope" role="dialog"
+  tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="text-center font-size-14 font-weight-500" id="exampleModalLabel">AUTH SCOPE</h6>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form class="form-popup mfp-hide" id="form-scope">
+
+          <!-- FORM POPUP CONTENT -->
+          <div class="form-popup-content">
+            <h6 class="text-center font-size-13 font-weight-500 popup-title">
+              {{params.dictionary.word_description_scopes}}</h6>
+            <table class="table-scope">
+              <caption></caption>
+
+              <thead>
+                <!-- Passengers of flight 377 -->
+                <tr>
+                  <th class="font-size-12 font-weight-500">Resource</th>
+                  <th class="font-size-12 font-weight-500">GET</th>
+                  <th class="font-size-12 font-weight-500">POST</th>
+                  <th class="font-size-12 font-weight-500">PUT</th>
+                  <th class="font-size-12 font-weight-500">PATCH</th>
+                  <th class="font-size-12 font-weight-500">DELETE</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <!-- Table body -->
+
+                {% for resource in params.resources %}
+                <tr>
+                  <td class="resource-path font-size-12 font-weight-500">{{resource}}</td>
+                  <td>
+                    <div class="switch">
+                      <input type="checkbox" class="switch-input" id="item-{{resource}}-get" name="{{resource}}[]"
+                        value="GET">
+                      <label class="switch-label">On</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="switch">
+                      <input type="checkbox" class="switch-input" id="item-{{resource}}-get" name="{{resource}}[]"
+                        value="POST">
+                      <label class="switch-label">On</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="switch">
+                      <input type="checkbox" class="switch-input" id="item-{{resource}}-get" name="{{resource}}[]"
+                        value="PUT">
+                      <label class="switch-label">On</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="switch">
+                      <input type="checkbox" class="switch-input" id="item-{{resource}}-get" name="{{resource}}[]"
+                        value="PATCH">
+                      <label class="switch-label">On</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="switch">
+                      <input type="checkbox" class="switch-input" id="item-{{resource}}-get" name="{{resource}}[]"
+                        value="DELETE">
+                      <label class="switch-label">On</label>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <!-- /FORM POPUP CONTENT -->
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal" type="button">{{params.dictionary.word_close}}</button>
+        <button class="btn btn-primary" id="submit-scope" type="button">{{params.dictionary.word_save}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endmacro %}
+
+{% macro adminSettingsExample() %}
+<div class="modal fade" id="modal-admin-settings-example" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p class="font-size-12">
+          Disponibilizamos em todos os aplicativos duas propriedades que ajudam o seu aplicativo a funcionar conforme
+          esperado.</p>
+        <p class="font-size-12">
+          As propriedades são
+          <code>data</code>
+          e
+          <code>hidden_data</code>. A propriedade
+          <code>data</code>
+          é pública, e é exibida nas requisições não auteticadas. Use para salvar dados e preferências do usuário que
+          possam ser expostas. Já a propriedade
+          <code>hidden_data</code>
+          é privada e só é exibida em requisições auteticadas. Use essa propriedade para salva em seu aplicativo dados
+          sensíveis como tokens, preferências ocultas e outras definições do usuário que possam ser acessados apenas com
+          autenticação.</p>
+        <div>
+          <p class="font-size-12">
+            Para definir uma propriedade no
+            <code>data</code>
+            da sua aplicação, basta adicionar um novo campo de
+            configuração, informar o nome para a propriedade, preencha seu schema e deixe o checkbox
+            <code>hide</code>
+            desmarcado.
+            Para definir uma propriedade no
+            <code>hidden_data</code>
+            da sua aplicação, basta seguir os passos acima,
+            marcando o checkbox
+            <code>hide</code>.
+          </p>
+          <p class="font-size-12">
+            Usamos json-schema para renderizar as configurações do seu aplicativo para o lojista, por isso, o schema da
+            propriedade deve seguir as seguintes
+            <code>
+                <a href="http://json-schema.org/learn/getting-started-step-by-step.html">especificações
+                </a>
+              </code>.</p>
+          <p class="font-size-12">
+            Esse
+            <code>
+                <a href="#">link</a>
+              </code>
+            pode te ajudar com exemplo de propriedades caso suja alguma dúvida na hora de
+            definir o schema de alguma propriedade para o seu aplicativo.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro applicationOverview(params) %}
+<div class="applications-overview mx-7 my-7">
+  <div class="overview__top">
+    <div>
+      <span class="ti-angle-left"></span>
+      <a class="text-default" href="/partners/apps">Apps
+      </a>
+    </div>
+    <span class="font-size-20 font-weight-500">{{params.application.title}}</span>
+    <div>
+      <span class="ti-eye"></span>
+      <a class="font-size-12 text-default" href="/apps/{{params.application.slug}}">Ver no Market
+      </a>
+    </div>
+  </div>
+  <div class="overview__tabs my-4">
+    <ul>
+      <a class="text-default" href="/partners/apps/{{params.application_id}}/overview">
+        <li class="overview-links overview-tab-active" data-tab="app-overview" id="tab-app-overview">Geral</li>
+      </a>
+      <a class="text-default" href="/partners/apps/{{params.application_id}}/edit">
+        <li class="overview-links" data-tab="app-edit" id="tab-app-edit">Editar App</li>
+      </a>
+      <a class="text-default" href="/partners/apps/{{params.application_id}}/settings">
+        <li class="overview-links" data-tab="app-settings" id="tab-app-settings">Configurações do App</li>
+      </a>
+    </ul>
+  </div>
+  <div class="sections-wrapper">
+    <section class="overview-sections overview-sections__current my-7" id="app-overview">
+      <div class="container">
+        <div class="overview__resume">
+          <h4>Veja como seu aplicativo tem se saído no Market</h4>
+          <div class="hits-resume">
+            <div class="hits-resume__numbers">
+              <span class="font-size-20 font-weight-500">1.897.00</span>
+              <span class="font-size-15 font-weight-400">Instalações</span>
+            </div>
+            <div class="hits-resume__numbers">
+              <span class="font-size-20 font-weight-500">1.897.00</span>
+              <span class="font-size-15 font-weight-400">Desinstalações</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col card">
+            <canvas height="400" id="myChart" width="400"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+{% endmacro %}
+
+
+{% macro appEdit(params) %}
+<div class="applications-overview mx-7 my-7">
+  <div class="overview__top" style="margin-bottom: 1rem !important;">
+    <div>
+      <span class="ti-angle-left"></span>
+      <a class="text-default" href="/partners/apps">Apps
+      </a>
+    </div>
+    <span class="font-size-20 font-weight-500">{{params.application.title}}</span>
+    <div>
+      <span class="ti-eye"></span>
+      <a class="font-size-12 text-default" href="/apps/{{params.application.slug}}">Ver no Market
+      </a>
+    </div>
+  </div>
+  <div class="overview__tabs">
+    <ul>
+      <a class="text-default" href="/partners/apps/{{params.application_id}}/overview">
+        <li class="overview-links" data-tab="app-overview" id="tab-app-overview">Geral</li>
+      </a>
+      <a class="text-default" href="/partners/apps/{{params.application_id}}/edit">
+        <li class="overview-links overview-tab-active" data-tab="app-edit" id="tab-app-edit">Editar App</li>
+      </a>
+      <a class="text-default" href="/partners/apps/{{params.application_id}}/settings">
+        <li class="overview-links" data-tab="app-settings" id="tab-app-settings">Configurações do App</li>
+      </a>
+    </ul>
+  </div>
+  <div class="sections-wrapper">
+    <section class="overview-sections" id="app-edit" data-id="{{params.application_id}}">
+      <form id="form-edit-item">
+        <!-- hidden inputs -->
+        <input id="json_body" name="json_body" type="hidden" value="{{params.application_admin_settings | raw}}">
+        <input id="auth_scope" name="auth_scope" type="hidden" value="{{params.application_auth_scope | raw}}">
+        <input id="icon" name="icon" type="hidden" value="{{params.application.icon}}">
+        <input id="module" name="module" type="hidden" value="{{params.application_modules | raw}}">
+        <div
+          style="height: 100%;min-height: 550px;display: flex;flex-direction: column;justify-content: space-between;">
+          <ul class="tabs-settings my-5">
+            <li class="tabs-settings__links settings-tab-active" data-tab="tab-url">Urls</li>
+            <li class="tabs-settings__links" data-tab="tab-icon">Icone/Screenshots</li>
+            <li class="tabs-settings__links" data-tab="tab-plans">Planos</li>
+            <li class="tabs-settings__links" data-tab="tab-about">Descrições</li>
+            <li class="tabs-settings__links" data-tab="tab-type">Tipo</li>
+            <li class="tabs-settings__links" data-tab="tab-module">Módulos</li>
+            <li class="tabs-settings__links" data-tab="tab-settings">Configurações do Lojista</li>
+          </ul>
+          <div class="row gap-y row-pre-edit" style="border: none;">
+            <div class="col-md-12">
+              <div class="form-actions">
+                <a href="/partners/apps">
+                  <button class="btn btn-secondary" type="button">Cancelar</button>
+                </a>
+                <button class="btn btn-success" id="submit-form-update" type="button">
+                  Salvar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="settings-tabs">
+          <div class="my-5 tabs-contents tab-active" id="tab-url">
+            <div class="row gap-y row-pre-edit">
+              <div class="col-md-4">
+                <div class="form-pre-infor gap-xy-3">
+                  <span class="font-weight-600">Urls</span>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>Url de redirecionamento (Ou autheticação OAuth)</label>
+                  <input class="form-control form-control-sm" name="redirect_uri" placeholder="https://meuapp.com/oauth"
+                    type="text" value="{{params.application.redirect_uri}}">
+                </div>
+                <div class="form-group">
+                  <div id="autentication_callback-element">
+                    <div class="form-group">
+                      <label>Url Callback</label>
+                      <input class="form-control form-control-sm" name="auth_callback_uri"
+                        placeholder="https://meuapp.com/callback" type="text"
+                        value="{{params.application.auth_callback_uri}}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>{{params.dictionary.word_authentication}}</label>
+                      <div class="custom-controls-stacked">
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" name="authentication" type="radio" value="1"
+                            {{params.application.authentication == 1 ? 'checked': ''}}>
+                          <label class="custom-control-label">{{params.dictionary.word_yes}}</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" name="authentication" type="radio" value="0"
+                            {{params.application.authentication == 0 ? 'checked': ''}}>
+                          <label class="custom-control-label">{{params.dictionary.word_no}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group" id="scope-group" style="display: none">
+                      <button class="btn btn-primary" data-target="#modal-scope" data-toggle="modal" id="btn-scope"
+                        type="button">Selecionar
+                        scope</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Site do aplicativo</label>
+                  <input class="form-control form-control-sm" name="script_uri" placeholder="https://meuappsite.com/"
+                    type="text" value="{{params.application.script_uri}}">
+                </div>
+                <div class="form-group">
+                  <label>Github</label>
+                  <input class="form-control form-control-sm" name="github_repository"
+                    placeholder="https://github.com/mypage/myrepo" type="text"
+                    value="{{params.application.github_repository}}">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="my-5 tabs-contents" id="tab-icon">
+            <div class="row gap-y row-pre-edit">
+              <div class="col-md-4">
+                <div class="form-pre-infor gap-xy-3">
+                  <span class="font-weight-600">Icone do Aplicativo</span>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="current-icon__galery">
+                  {% if params.application.icon %}
+                  <img src="{{params.application.icon}}">
+                  {% endif %}
+                  <div class="custom-file">
+                    <input class="custom-file-input" id="iconFile" name="file" type="file">
+                    <label class="custom-file-label" for="iconFile">Icone</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row gap-y row-pre-edit">
+              <div class="col-md-4">
+                <div class="form-pre-infor gap-xy-3">
+                  <span class="font-weight-600">Screenshots do Aplicativo</span>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <div class="gallery gallery-4-type1" style="justify-content: space-between;">
+                    {% for screenshot in params.application.pictures %}
+                    <div class="gallery-item apps-gallery" href="#" id="gallery-id-{{screenshot.id}}">
+                      <img alt="..." src="{{screenshot.path_image}}">
+                      <div class="gallery-actions">
+                        <a class="gallery-actions__links" href="#" data-app-id="{{screenshot.app_id}}"
+                          data-item-id="{{screenshot.id}}" data-name="{{screenshot.name}}">
+                          <span class="ti-trash"></span>
+                        </a>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  <hr>
+                  <div id="myDropZone" class="dropzone">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="my-5 tabs-contents" id="tab-plans">
+            <div class="row gap-y row-pre-edit">
+              <div class="col-md-4">
+                <div class="form-pre-infor gap-xy-3">
+                  <span class="font-weight-600">Pago</span>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <div class="custom-controls-stacked">
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" name="paid" type="radio" value="1"
+                        {{params.application.paid == 1 ? 'checked': ''}}>
+                      <label class="custom-control-label">{{params.dictionary.word_yes}}</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" name="paid" type="radio" value="0"
+                        {{params.application.paid == 0 ? 'checked': ''}}>
+                      <label class="custom-control-label">{{params.dictionary.word_no}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="my-5 tabs-contents" id="tab-about">
+            <div class="row gap-y row-pre-edit">
+              <div class="col-md-4">
+                <div class="form-pre-infor gap-xy-3">
+                  <span class="font-weight-600">Descrições</span>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>{{params.dictionary.word_title_short_description}}</label>
+                  <textarea class="form-control" placeholder="{{params.dictionary.word_title_short_description}}"
+                    name="short_description" rows="4" style="height: 100px"
+                    required="true">{{params.application.short_description}}</textarea>
+                </div>
+                <div class="form-group">
+                  <label>{{params.dictionary.word_description_single}}</label>
+                  <textarea class="form-control" placeholder="{{params.dictionary.word_placeholde_description}}"
+                    name="description" rows="7">{{params.application.description}}</textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="my-5 tabs-contents" id="tab-type">
+            <div class="row gap-y row-pre-edit">
+              <div class="col-md-4">
+                <div class="form-pre-infor gap-xy-3">
+                  <span class="font-weight-600">Sobre o aplicativo</span>
+                  <span class="font-size-12">Essa informações são usadas pelo nosso saas para entender o
+                    funcionamento
+                    do seu aplicativo em nossa plataforma.</span>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group" id="type_app">
+                  <label>{{params.dictionary.word_type_of_app}}</label>
+                  <select class="form-control form-control-sm" name="type" required="true">
+                    <option {{params.application.type == '' ? 'selected': ''}} value="">
+                      {{params.dictionary.word_select_category}}</option>
+                    <option {{params.application.type == 'dashboard' ? 'selected': ''}} value="dashboard">Dashboard
+                    </option>
+                    <option {{params.application.type == 'storefront' ? 'selected': ''}} value="storefront">Storefront
+                    </option>
+                    <option {{params.application.type == 'module_package' ? 'selected': ''}} value="module_package">
+                      Module Package</option>
+                    <option {{params.application.type == 'external' ? 'selected': ''}} value="external">External
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group" id="load_events-element">
+                  <label>Load Events</label>
+                  <select class="form-control form-control-sm" disabled id="load_events" multiple="multiple"
+                    name="load_events[]">
+                    <option value="applications/data">applications/data</option>
+                    <option value="applications/hidden_data">applications/hidden_data</option>
+                    <option value="applications">applications</option>
+                    <option value="authentications/api_key">authentications/api_key</option>
+                    <option value="authentications/panel_cards">authentications/panel_cards</option>
+                    <option value="authentications/panel_form_fields">authentications/panel_form_fields</option>
+                    <option value="authentications/permissions">authentications/permissions</option>
+                    <option value="authentications">authentications</option>
+                    <option value="brands/i18n">brands/i18n</option>
+                    <option value="brands/metafields">brands/metafields</option>
+                    <option value="brands/pictures">brands/pictures</option>
+                    <option value="brands">brands</option>
+                    <option value="carts/customers">carts/customers</option>
+                    <option value="carts/items">carts/items</option>
+                    <option value="carts/metafields">carts/metafields</option>
+                    <option value="carts/orders">carts/orders</option>
+                    <option value="carts">carts</option>
+                    <option value="categories/childs">categories/childs</option>
+                    <option value="categories/grids">categories/grids</option>
+                    <option value="categories/i18n">categories/i18n</option>
+                    <option value="categories/metafields">categories/metafields</option>
+                    <option value="categories/parent">categories/parent</option>
+                    <option value="categories/pictures">categories/pictures</option>
+                    <option value="categories">categories</option>
+                    <option value="collections/i18n">collections/i18n</option>
+                    <option value="collections/metafields">collections/metafields</option>
+                    <option value="collections/pictures">collections/pictures</option>
+                    <option value="collections/products">collections/products</option>
+                    <option value="collections">collections</option>
+                    <option value="customers/addresses">customers/addresses</option>
+                    <option value="customers/favorites">customers/favorites</option>
+                    <option value="customers/gifts_list">customers/gifts_list</option>
+                    <option value="customers/gifts_list_info">customers/gifts_list_info</option>
+                    <option value="customers/hidden_metafields">customers/hidden_metafields</option>
+                    <option value="customers/lists">customers/lists</option>
+                    <option value="customers/loyalty_points">customers/loyalty_points</option>
+                    <option value="customers/metafields">customers/metafields</option>
+                    <option value="customers/oauth_providers">customers/oauth_providers</option>
+                    <option value="customers/orders">customers/orders</option>
+                    <option value="customers/seller_recommendations">customers/seller_recommendations</option>
+                    <option value="customers">customers</option>
+                    <option value="grids/i18n">grids/i18n</option>
+                    <option value="grids/metafields">grids/metafields</option>
+                    <option value="grids/options">grids/options</option>
+                    <option value="grids">grids</option>
+                    <option value="orders/amount">orders/amount</option>
+                    <option value="orders/buyers">orders/buyers</option>
+                    <option value="orders/fullfilments">orders/fullfilments</option>
+                    <option value="orders/gift_to">orders/gift_to</option>
+                    <option value="orders/hidden_metafields">orders/hidden_metafields</option>
+                    <option value="orders/items">orders/items</option>
+                    <option value="orders/loyalty_points">orders/loyalty_points</option>
+                    <option value="orders/metafields">orders/metafields</option>
+                    <option value="orders/payments_history">orders/payments_history</option>
+                    <option value="orders/shipping_lines">orders/shipping_lines</option>
+                    <option value="orders/transactions">orders/transactions</option>
+                    <option value="orders">orders</option>
+                    <option value="procedures">procedures</option>
+                    <option value="products/brands">products/brands</option>
+                    <option value="products/categories">products/categories</option>
+                    <option value="products/customizations/options">products/customizations/options</option>
+                    <option value="products/customizations">products/customizations</option>
+                    <option value="products/grids">products/grids</option>
+                    <option value="products/hidden_metafields">products/hidden_metafields</option>
+                    <option value="products/i18n">products/i18n</option>
+                    <option value="products/inventory_records">products/inventory_records</option>
+                    <option value="products/kit_composition">products/kit_composition</option>
+                    <option value="products/metafields">products/metafields</option>
+                    <option value="products/other_discounts">products/other_discounts</option>
+                    <option value="products/other_prices">products/other_prices</option>
+                    <option value="products/payment_methods">products/payment_methods</option>
+                    <option value="products/pictures">products/pictures</option>
+                    <option value="products/price">products/price</option>
+                    <option value="products/price_change_records">products/price_change_records</option>
+                    <option value="products/quantity">products/quantity</option>
+                    <option value="products/related_produts">products/related_produts</option>
+                    <option value="products/shipping_methods">products/shipping_methods</option>
+                    <option value="products/specifications">products/specifications</option>
+                    <option value="products/variations/price">products/variations/price</option>
+                    <option value="products/variations/quantity">products/variations/quantity</option>
+                    <option value="products/variations/specifications">products/variations/specifications</option>
+                    <option value="products/variations">products/variations</option>
+                    <option value="products">products</option>
+                    <option value="stores">stores</option>
+                    <option value="triggers">triggers</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>{{params.dictionary.word_num_version}}</label>
+                  <input class="form-control form-control-sm" name="version" placeholder="Ex: 1.0" required="true"
+                    type="text" value="{{params.application.version}}">
+                </div>
+                <div class="form-group">
+                  <label>{{params.dictionary.word_date_version}}</label>
+                  <input class="form-control form-control-sm" type="date" name="version_date"
+                    placeholder="{{dictionary.word_date_version}}" value="{{params.application.data}}">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="my-5 tabs-contents" id="tab-module">
+            <div class="row gap-y row-pre-edit">
+              <div class="col-md-4">
+                <div class="form-pre-infor gap-xy-3">
+                  <span class="font-weight-600">Módulos</span>
+                  <span class="font-size-12">É possível que seu aplicativo faça uso de algum módulo de nossa API
+                    para
+                    funcionar, temos uma infinidade de módulos disponíveis para facilitar o desenvolvimento de
+                    novas
+                    funcionalidades ou incrementar funcionalidades ja existentes. Seja para realizar pagamento,
+                    cálcular frete, aplicar desconto, criar transações e muito mais.
+                  </span>
+                  <span class="font-size-12">A definição de cada módulo pode ser encontrada
+                    <a href="#">aqui</a>
+                    e seu
+                    aplicativo deve respeitar os schemas de requisição e resposta de cada módulo que ele irá se
+                    comunicar para funcionar corretamente e ser aprovado em nossa homologação.</span>
+                </div>
+              </div>
+              <div class="col-md-8" id="modules-group">
+                <div
+                  style="
+                                                                                                                                                                                                                                                                                                                              width: 100%;
+                                                                                                                                                                                                                                                                                                                              text-align: right;
+                                                                                                                                                                                                                                                                                                                              padding: 10px;
+                                                                                                                                                                                                                                                                                                                              background-color: whitesmoke;
+                                                                                                                                                                                                                                                                                                                              border-radius: 5px;
+                                                                                                                                                                                                                                                                                                                              box-shadow: 0 2px 0px 0 rgba(0,0,0,.1);
+                                                                                                                                                                                                                                                                                                                              margin-bottom: 1em;
+                                                                                                                                                                                                                                                                                                                              ">
+                  <button class="btn btn-label btn-success" id="add-module" style="width: 100%" type="button">
+                    <label style="padding-top: 7px;">
+                      <i aria-hidden="true" class="fa fa-plus"></i>
+                    </label>
+                    Adicionar Módulo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="my-5 tabs-contents" id="tab-settings">
+            <div class="row gap-y row-pre-edit"
+              style="
+                                                                                                                                                                                                                                  border: none;
+                                                                                                                                                                                                                              ">
+              <div class="col-md-4">
+                <div class="form-pre-infor gap-xy-3">
+                  <span class="font-weight-600">Configurações do Lojista</span>
+                  <span class="font-size-12">Aqui você pode configurar opções que serão preenchidas pelo
+                    lojista.</span>
+                  <span class="font-size-12">É aqui que você define as propriedades que estaram presentes no DATA
+                    e no
+                    HIDDEN_DATA do seu aplicativo.</span>
+                  <span class="font-size-12">Você pode consultar nossos exemplos
+                    <a data-target="#modal-admin-settings-example" data-toggle="modal" href="#">
+                      aqui
+                    </a>
+                    caso tenha algumas dúvida.</span>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group"
+                  style="width: 100%;
+                                                                                                                                                                                                                                  text-align: right;
+                                                                                                                                                                                                                                  padding: 10px;
+                                                                                                                                                                                                                                  background-color: whitesmoke;
+                                                                                                                                                                                                                                  border-radius: 5px;
+                                                                                                                                                                                                                                  box-shadow: 0 2px 0px 0 rgba(0,0,0,.1);
+                                                                                                                                                                                                                                  margin-bottom: 1em;
+                                                                                                                                                                                                                                  min-height:auto">
+                  <button class="btn btn-label btn-success" id="add-admin-settings" style="width: 100%" type="button">
+                    <label style="padding-top: 7px;">
+                      <i aria-hidden="true" class="fa fa-cogs"></i>
+                    </label>
+                    Adicionar Configurações
+                  </button>
+                </div>
+                <div id="admin-group"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+{% endmacro %}
+{% macro appSettings(params) %}
+<div class="applications-overview mx-7 my-7">
+  <div class="overview__top">
+    <div>
+      <span class="ti-angle-left"></span>
+      <a class="text-default" href="/partners/apps">Apps
+      </a>
+    </div>
+    <span class="font-size-20 font-weight-500">{{params.application.title}}</span>
+    <div>
+      <span class="ti-eye"></span>
+      <a class="font-size-12 text-default" href="/apps/{{params.application.slug}}">Ver no Market
+      </a>
+    </div>
+  </div>
+  <div class="overview__tabs my-4">
+    <ul>
+      <a class="text-default" href="/partners/apps/{{params.application_id}}/overview">
+        <li class="overview-links" data-tab="app-overview" id="tab-app-overview">Geral</li>
+      </a>
+      <a class="text-default" href="/partners/apps/{{params.application_id}}/edit">
+        <li class="overview-links" data-tab="app-edit" id="tab-app-edit">Editar App</li>
+      </a>
+      <a class="text-default" href="/partners/apps/{{params.application_id}}/settings">
+        <li class="overview-links overview-tab-active" data-tab="app-settings" id="tab-app-settings">Configurações do
+          App</li>
+      </a>
+    </ul>
+  </div>
+  <div class="sections-wrapper">
+    <section class="overview-sections my-7" id="app-settings">
+      <div class="app-settings__actions">
+        <span class="font-size-14 font-weight-500">Desativar aplicativo</span>
+        <div class="switch">
+          <input type="checkbox" class="switch-input" id="disable-enable-app"
+            {{params.application.active == 1 ? 'checked': ''}} data-id="{{params.application_id}}">
+          <label class="switch-label">On</label>
+        </div>
+
+      </div>
+      <hr>
+      <div class="app-settings__actions">
+        <span class="font-size-14 font-weight-500">Excluir aplicativo</span>
+        <button class="btn btn-outline-primary" type="button" id="delete-app"
+          data-id="{{params.application_id}}">Excluir</button>
+      </div>
+    </section>
+  </div>
+</div>{% endmacro %}
