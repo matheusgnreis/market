@@ -35,12 +35,12 @@
   "home": {
     "contents": {
       "header": {
-        "#welcome-to-market": "Bem vindo a E-Com Plus Market.",
-        "#welcome": "Bem vindo a E-Com Plus Market.",
+        "#welcome-to-market": "Bem vindo a E-Com Plus Market",
+        "#welcome": "Bem vindo a E-Com Plus Market",
         "#your-project": "Seu projeto do seu jeito"
       },
       "main": {
-        ".section-header": "Conecte os apps e instale os temas ideias para sua loja com dois cliques."
+        ".section-header": "Conecte os apps e instale os temas ideias para sua loja com dois cliques"
       },
       "footer": {
         "#footer-about": "E-Com Plus Market é a loja de apps para e-commerces que utilizam a tecnologia da E-Com Plus. Você pode  integrar a loja com ferramentas externas, adaptar o painel administrativo e mudar o layout com temas, isso tudo com apenas dois cliques."
