@@ -67,7 +67,7 @@ class AppsController
                 $data['version_date'] = $application->version_date;
                 $data['type'] = $application->type;
                 if (!empty($application->module)) {
-                    $data['module'] = $application->module;
+                    $data['module'] = json_decode($application->module);
                 }
                 if (!empty($application->load_events)) {
                     $data['load_events'] = explode(',', str_replace(["\\", "[", "]", '"'], '', (string) $application->load_events));
@@ -92,6 +92,7 @@ class AppsController
                 $data['pictures'] = $application->imagens;
                 $data['comments'] = $application->comments->toArray();
                 $data['partner'] = $application->partner->toArray();
+                $data['active'] = $application->active;
                 return $data;
             });
             return $map[0];
@@ -218,6 +219,97 @@ class AppsController
         return $application;
     }
 
+    public function patch($applicationId, $requestBody)
+    {
+
+        $application = Apps::find($applicationId);
+        if (isset($requestBody['title'])) {
+            $application->title = $requestBody['title'];
+        }
+        if (isset($requestBody['slug'])) {
+            $application->slug = $requestBody['slug'];
+        }
+        if (isset($requestBody['category'])) {
+            $application->category = $requestBody['category'];
+        }
+        if (isset($requestBody['icon'])) {
+            $application->icon = $requestBody['icon'];
+        }
+        if (isset($requestBody['description'])) {
+            $application->description = $requestBody['description'];
+        }
+        if (isset($requestBody['json_body'])) {
+            $application->json_body = $requestBody['json_body'];
+        }
+        if (isset($requestBody['paid'])) {
+            $application->paid = $requestBody['paid'];
+        }
+        if (isset($requestBody['version'])) {
+            $application->version = $requestBody['version'];
+        }
+        if (isset($requestBody['version_date'])) {
+            $application->version_date = $requestBody['version_date'];
+        }
+        if (isset($requestBody['type'])) {
+            $application->type = $requestBody['type'];
+        }
+        if (isset($requestBody['module'])) {
+            $application->module = $requestBody['module'];
+        }
+        if (isset($requestBody['load_events'])) {
+            $application->load_events = $requestBody['load_events'];
+        }
+        if (isset($requestBody['script_uri'])) {
+            $application->script_uri = $requestBody['script_uri'];
+        }
+        if (isset($requestBody['github_repository'])) {
+            $application->github_repository = $requestBody['github_repository'];
+        }
+        if (isset($requestBody['authentication'])) {
+            $application->authentication = $requestBody['authentication'];
+        }
+        if (isset($requestBody['auth_callback_uri'])) {
+            $application->auth_callback_uri = $requestBody['auth_callback_uri'];
+        }
+        if (isset($requestBody['auth_scope'])) {
+            $application->auth_scope = $requestBody['auth_scope'];
+        }
+        if (isset($requestBody['avg_stars'])) {
+            $application->avg_stars = $requestBody['avg_stars'];
+        }
+        if (isset($requestBody['evaluations'])) {
+            $application->evaluations = $requestBody['evaluations'];
+        }
+        if (isset($requestBody['website'])) {
+            $application->website = $requestBody['website'];
+        }
+        if (isset($requestBody['link_video'])) {
+            $application->link_video = $requestBody['link_video'];
+        }
+        if (isset($requestBody['plans_json'])) {
+            $application->plans_json = $requestBody['plans_json'];
+        }
+        if (isset($requestBody['value_plan_basic'])) {
+            $application->value_plan_basic = $requestBody['value_plan_basic'];
+        }
+        if (isset($requestBody['active'])) {
+            $application->active = $requestBody['active'];
+        }
+        if (!$application->save()) {
+            return [
+                'erros' => true,
+                'status' => 400,
+                'message' => 'Bad-formatted JSON body, details in user_message',
+                'user_message' => [
+                    'en_us' => 'data should NOT have additional properties',
+                    'pt_br' => 'data Não são permitidas propriedades adicionais',
+                ],
+            ];
+        }
+
+        return 204;
+    }
+
     public function update($applicationId, $requestBody)
     {
         $updateBody = [
@@ -260,5 +352,16 @@ class AppsController
         }
 
         return 204;
+    }
+
+    public function delete($applicationId)
+    {
+        $application = Apps::find($applicationId);
+        if ($application) {
+            if ($application->delete()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

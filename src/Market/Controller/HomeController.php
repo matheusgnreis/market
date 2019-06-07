@@ -104,20 +104,13 @@ class HomeController extends BaseController
                         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js',
                     ],
                 ],
-                'login' => [
-                    'store_id' => $_SESSION['store_id'],
+                'user' => [
                     'username' => $_SESSION['username'],
-                    'sso' => $_SESSION['sso_login'] ? $_SESSION['sso_login'] : 0,
-                    'my_id' => $_SESSION['myId'],
-                    'token' => $_SESSION['access_token'],
+                    'sso_login' => $_SESSION['sso_login'],
+                    'store_id' => $_SESSION['store_id'],
+                    'access_token' => $_SESSION['access_token'],
+                    'my_id' => $_SESSION['my_id'],
                 ],
-/*                 'login' => [
-'store_id' => 1011,
-'username' => 'ecom',
-'sso' => 1,
-'my_id' => '5b1abe30a4d4531b8fe40726',
-'token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1YjFhYmUzMGE0ZDQ1MzFiOGZlNDA3MjYiLCJjb2QiOjkyODY2NzAyLCJleHAiOjE1NTI3NjAyMjE5NTZ9.es5Ae0TfdqVvPOnmajDbeJmbLXCdJ60MDqysbKm-cGM',
-], */
             ],
         ];
         if ($app) {
@@ -191,10 +184,12 @@ class HomeController extends BaseController
                         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js',
                     ],
                 ],
-                'login' => [
-                    'store_id' => $_SESSION['store_id'],
+                'user' => [
                     'username' => $_SESSION['username'],
-                    'sso' => $_SESSION['sso_login'] ? $_SESSION['sso_login'] : 0,
+                    'sso_login' => $_SESSION['sso_login'],
+                    'store_id' => $_SESSION['store_id'],
+                    'access_token' => $_SESSION['access_token'],
+                    'my_id' => $_SESSION['my_id'],
                 ],
             ],
         ];
