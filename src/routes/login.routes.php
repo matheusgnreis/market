@@ -7,7 +7,7 @@ $app->get(
         $sso = new Market\Services\EcomSSO(getenv('SSO_SECRET'));
         $user = $sso->handle_response();
 
-        if ($user !== null) { 
+        if ($user !== null) {
             if ($user['logged']) {
                 /*
                 user attributes:
@@ -52,5 +52,16 @@ $app->group(
     '/login',
     function () use ($app) {
         $app->post('', LoginController::class . ':login');
+    }
+);
+
+$app->group(
+    '/logout',
+    function () use ($app) {
+        $app->get('', function ($request, $response, $args) {
+            if (LoginController::logout()) {
+                return $response->withRedirect('../');
+            }
+        });
     }
 );

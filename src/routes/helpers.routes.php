@@ -12,4 +12,5 @@ $app->get(
     }
 );
 
-$app->post('/uploads', MediaController::class . ':create');
+$app->post('/uploads', MediaController::class . ':upload');
+$app->delete('/uploads/{itemId}/{appId}', MediaController::class . ':delete');
