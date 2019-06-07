@@ -1,174 +1,52 @@
-/** section default */
-.section-resume-app {
-  padding-top: 3em;
-  padding-bottom: 3em;
-
-  #item-resume {
-    flex: 0 1 40%;
-    margin-top: 44px;
-    padding: 32px 28px;
-    background-image: linear-gradient(135deg, #f9f7ff 0%, #fff 50%, #f6f3ff 100%);
-    border: 1px solid #f1f2f3 !important;
-    font-weight: 400;
-    font-size: 16px;
-
-    ul {
-      list-style: none;
-      padding: 0;
-      li {
-        padding: 4px 0;
-        display: flex;
-
-        span{
-          white-space: normal;
-          flex: 0 1 60%;
-          font-weight: 400;
-          &:first-child {
-            -ms-flex: 0 1 40%;
-            flex: 0 1 40%;
-            font-weight: 500;
-          }
-        }
-      }
-    }
-
-    h2 {
-      font-size: 1.5rem;
-    }
-  }
-
-  #application-plans {
-    .app-prices {
-      margin-bottom: 2em;
-    }
-  }
+#app-resume {
+  display: flex;
 }
-
-#resume-header {
-  
-  .container {
-    background-image: linear-gradient(135deg, #f9f7ff 0%, #fff 50%, #f6f3ff 100%);
-    border: 1px solid #f1f2f3 !important;
-    padding: 4em;
-  }
-
-  #app-resume {
-
-    .app-resume-pre {
-      display: flex;
-      align-items: flex-start;
-
-      .app-short-desc {
-        .app-actions {
-          display: flex;
-          flex-direction: column;
-          max-width: 150px;
-          width: 100%;
-        }
-      }
-      .app-icon {
-        margin-right: 15px;
-
-        img {
-          max-width: 100px;
-          border-radius: 5px;
-          box-shadow: 0 0 8px rgba(0,0,0,0.06);
-        }
-      }
-
-      .app-infor {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding-bottom: 15px;
-
-        span {
-          font-size: 1.2em;
-          font-weight: 300;
-          line-height: 28px;
-        }
-
-        .app-infor__name {
-          font-size: 2em;
-          font-weight: 300;
-          padding-bottom: 15px;
-        }
-
-        .app-infor__short {
-          padding-bottom: 15px;
-        }
-      }
-    }
-
-    .app-resume-install {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-      height: 100%;
-      padding: 0 15px;
-
-      .app-resume-install__count {
-        padding-left: 5px;
-        font-size: .95em;
-        font-weight: 500;
-        
-        &:after{
-          content:' (downloads)';
-          font-size: .75em;
-        }
-      }
-    
-      .btn-success {
-        color: #3a003b;
-        background-color: #00e679;
-        border: none;
-
-        &:hover {
-          color: #fff;
-          box-shadow: 0 1px 10px rgba(0,230,121,0.4);
-        }
-      }
-    }
-  }
+.app-resume-pre {
+  display: flex;
+  align-content: center;
+  align-items: center;
 }
-
-#resume-content {
-  padding-top: 0;
+.app-resume-pre .app-short-desc {
 }
-
-.publish-comment-col #publish-comment {
-  max-width: 250px;
+.app-resume-pre .app-short-desc .app-infor {
+  display: flex;
+  flex-direction: column;
+}
+.app-resume-pre .app-icon img {
+  max-width: 180px;
   width: 100%;
-  margin: 0 auto;
-  color: #fff;
+}
+.items-lists {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/** */
 .scope-ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
-
-.scope-li {
+.scope-ul .scope-li {
   display: flex;
   justify-content: space-between;
-  padding: .2em;
+  padding: 0.75em 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 400;
 }
 
-.scope-li:not(:last-child) {
-  border-bottom: 1px solid #f1f2f3;
+.scope-ul .scope-li:not(:last-of-type) {
+  border-bottom: 1px solid #eff8ff;
 }
 
-.scope-li {
-  text-transform: capitalize;
+#scope-list {
+  padding: 0.5rem 1.75rem;
 }
 
-a.link-to button {width: 200px;}
-
-a.link-to {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#scope-list .modal-title {
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
 }
