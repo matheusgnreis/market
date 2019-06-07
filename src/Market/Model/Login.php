@@ -21,7 +21,7 @@ class Login extends Model
         $res = $this->http->request('GET', $path, [
             'headers' => ['X-Sg-Auth' => $this->token]
         ]);
-        
+
         if (200 != $res->getStatusCode()) {
             return [
                 'error' => $res->getStatusCode()
