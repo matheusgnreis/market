@@ -77,7 +77,7 @@ $(function () {
                 application.version = appData.version
                 application.version_date = new Date(appData.version_date).toISOString()
                 application.type = appData.type
-                application.module = appData.module || {}
+                application.modules = appData.module || {}
                 application.admin_settings = appData.json_body || {}
                 application.load_events = appData.load_events
                 application.script_uri = appData.script_uri

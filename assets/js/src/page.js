@@ -72,7 +72,7 @@ require('./../jquery.json-viewer');
 require('./forms-setup.js');
 require('./pages/add-items.js');
 require('./pages/edit-items.js');
-
+require('./pages/upload-screenshorts.js')
 require('./script.js');
 require('./single.js');
 require('./widgets-single.js');
