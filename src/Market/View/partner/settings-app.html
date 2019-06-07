@@ -1,0 +1,13 @@
+{% extends "layout/partner.html" %}
+{% import "macros/partner.macros.html" as macros %}
+{% block content %}
+<main class="main-partner__content" id="partner-apps">
+  <div class="container">
+    <div class="row">
+      <div class="col partner-edit-app my-7 mx-7 card shadow-3">
+        {{macros.appSettings(params)}}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

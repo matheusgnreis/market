@@ -18,5 +18,4 @@
 
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^ index.php [QSA,L]
-  RewriteRule ^media/(.*)$ /var/www/data/uploads/$1 [R=301,L]
 </IfModule>

@@ -1,0 +1,24 @@
+{% extends "layout/partner.html" %}
+{% import "macros/partner.macros.html" as macros %}
+{% block content %}
+<main class="main-partner__content" id="partner-apps">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <section class="partner-my-apps my-7 mx-7 ">
+          <div class="my-apps-actions my-7">
+            <h3>Apps</h3>
+            <a class="text-default" href="/partners/apps/add"> <button type="button" class="btn btn-label btn-success">
+                <label style="padding-top: 7px;"><i class="fa fa-plus" aria-hidden="true"></i>
+                </label> Criar Aplicativo
+              </button></a>
+          </div>
+          <div class="my-apps shadow-3 card">
+            {{macros.partnerApplications(params)}}
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

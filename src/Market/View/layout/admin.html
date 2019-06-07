@@ -8,13 +8,13 @@
   <meta name="keywords" content="">
   <title>E-com Plus Market | Settings</title>
   <!-- Styles -->
-  <link href="/assets/css/page.min.css?v=1.2" rel="stylesheet">
+  <link href="/assets/css/page.min.css?v=0.1" rel="stylesheet">
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/dist/css/brutusin-json-forms.min.css">
 </head>
 
-<body id="admin-body" data-store-id="{{params.user.store_id}}" data-store-username="{{params.user.username}}"
-  data-store-sso="{{params.user.sso_login}}">
+<body id="admin-body" data-store="{{params.user.store_id}}" data-user="{{params.user.username}}" data-my-id="{{params.user.my_id}}"
+  data-sso="{{params.user.sso_login}}" data-access="{{params.user.access_token}}">
   <aside id="admin-aside">
     <header class="sidebar-header">
       <span class="logo">
@@ -44,6 +44,6 @@
   <div id="admin-toast"></div>
   <script src="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/src/js/brutusin-json-forms.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/src/js/brutusin-json-forms-bootstrap.js"></script>
-  <script src="/assets/js/page.min.js?v=1.2"></script>
+  <script src="/assets/js/page.min.js?v=0.1"></script>
 </body>
 </html>

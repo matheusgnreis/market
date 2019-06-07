@@ -8,13 +8,12 @@ $redirectToLang = function ($request, $response, $next) {
     $uri = $request->getUri();
     $route = $request->getAttribute('route');
     $args = $route->getArguments();
-
     if (!isset($args['lang'])) {
-        return $response->withStatus(302)->withHeader('Location', '/pt_br');
+        return $response->withStatus(302)->withHeader('Location', $uri->getBaseUrl() . '/pt_br');
     } else {
         $lang = explode('/', $uri->getPath());
         if ($lang[1] != 'pt_br' && $lang[1] != 'en_us') {
-            return $response->withStatus(302)->withHeader('Location', '/pt_br' . $uri->getPath());
+            return $response->withStatus(302)->withHeader('Location', $uri->getBaseUrl() . '/pt_br' . $uri->getPath());
         }
     }
     return $next($request, $response);
@@ -22,7 +21,7 @@ $redirectToLang = function ($request, $response, $next) {
 
 $verifyLogin = function ($request, $response, $next) {
     if (!\Market\Controller\LoginController::hasLogin()) {
-        return $response->withStatus(302)->withHeader('Location', '/pt_br');
+        //return $response->withStatus(302)->withHeader('Location', $uri->getBaseUrl());
     }
 
     return $next($request, $response);

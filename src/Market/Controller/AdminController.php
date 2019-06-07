@@ -11,7 +11,7 @@ class AdminController extends BaseController
             session_start();
 
             if (!$_SESSION['sso_login']) {
-                return $response->withRedirect('./');
+                //return $response->withRedirect('./');
                 /*
             user attributes:
             name; external_id; email; username; require_activation;
@@ -45,7 +45,7 @@ class AdminController extends BaseController
             session_start();
 
             if (!$_SESSION['sso_login']) {
-                return $response->withRedirect('./');
+                //return $response->withRedirect('./');
             }
         }
 
@@ -55,6 +55,8 @@ class AdminController extends BaseController
                     'username' => $_SESSION['username'],
                     'sso_login' => $_SESSION['sso_login'],
                     'store_id' => $_SESSION['store_id'],
+                    'access_token' => $_SESSION['access_token'],
+                    'my_id' => $_SESSION['my_id'],
                 ],
             ],
             'application' => [
@@ -74,7 +76,7 @@ class AdminController extends BaseController
             session_start();
 
             if (!$_SESSION['sso_login']) {
-                return $response->withRedirect('./');
+                //return $response->withRedirect('./');
             }
         }
 
@@ -84,6 +86,8 @@ class AdminController extends BaseController
                     'username' => $_SESSION['username'],
                     'sso_login' => $_SESSION['sso_login'],
                     'store_id' => $_SESSION['store_id'],
+                    'access_token' => $_SESSION['access_token'],
+                    'my_id' => $_SESSION['my_id'],
                 ],
                 'application' => [
                     'id' => $args['application_id'],
