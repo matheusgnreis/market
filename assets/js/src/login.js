@@ -52,7 +52,7 @@ $(function () {
           if (resp.login !== true) {
             $('.form-group-erro').show()
           } else {
-            window.location.href = window.location.origin + '/account'
+            window.location.href = window.location.origin + '/partners'
           }
         })
         .fail(function (xhr) {

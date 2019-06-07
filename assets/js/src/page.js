@@ -69,10 +69,13 @@ require('./../jquery.json-viewer');
 | files and import the other files here or inside script.js.
 |
 */
+require('./forms-setup.js');
+require('./pages/add-items.js');
+require('./pages/edit-items.js');
+
 require('./script.js');
 require('./single.js');
 require('./widgets-single.js');
 require('./login.js');
 require('./account.js');
-require('./my-items.js');
 require('./admin.js');

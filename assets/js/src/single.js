@@ -130,24 +130,27 @@ $(document).ready(function () {
           var liScope = $('<li>', { class: 'scope-li' })
           var method = ''
           //
-          $('<span>', { text: key }).appendTo(liScope)
-          //
-          if (typeof application.auth_scope[key] !== 'string') {
-            application.auth_scope[key].sort()
-
+          console.log(key.indexOf("/") === -1)
+          if (key.indexOf("/") === -1) {
+            $('<span>', { text: key }).appendTo(liScope)
             //
-            for (var index = 0; index < application.auth_scope[key].length; index++) {
+            if (typeof application.auth_scope[key] !== 'string') {
+              application.auth_scope[key].sort()
+
               //
-              method += (index > 0) ? ', ' : ''
-              method += translateMethod(application.auth_scope[key][index])
-              //
+              for (var index = 0; index < application.auth_scope[key].length; index++) {
+                //
+                method += (index > 0) ? ', ' : ''
+                method += translateMethod(application.auth_scope[key][index])
+                //
+              }
+            } else {
+              method += translateMethod(application.auth_scope[key])
             }
-          } else {
-            method += translateMethod(application.auth_scope[key])
+            $('<span>', { text: method }).appendTo(liScope)
+            //
+            liScope.appendTo(ulScope)
           }
-          $('<span>', { text: method }).appendTo(liScope)
-          //
-          liScope.appendTo(ulScope)
         }
         //
         $('#scope-list').append(ulScope)
@@ -155,18 +158,51 @@ $(document).ready(function () {
     }
   }
 
+  var translateResource = function (resource) {
+    switch (resource) {
+      case 'applications':
+        return 'Aplicativos'
+      case 'authentications':
+        return 'Autenticações'
+      case 'brands':
+        return 'Marcas'
+      case 'carts':
+        return 'Carrinhos'
+      case 'categories':
+        return 'Categorias'
+      case 'collections':
+        return 'Coleções'
+      case 'customers':
+        return 'Clientes'
+      case 'grids':
+        return 'Grids'
+      case 'orders':
+        return 'Pedidos'
+      case 'procedures':
+        return 'Procedimentos'
+      case 'products':
+        return 'Produtos'
+      case 'stores':
+        return 'Loja'
+      case 'triggers':
+        return 'Gatilhos'
+      default:
+        break;
+    }
+  }
+
   var translateMethod = function (method) {
     switch (method) {
       case 'GET':
-        return 'visualizar'
+        return 'Visualizar'
       case 'POST':
-        return 'criar'
+        return 'Criar'
       case 'PUT':
-        return 'alterar'
+        return 'Alterar'
       case 'PATCH':
-        return 'atualizar'
+        return 'Atualizar'
       case 'DELETE':
-        return 'excluir'
+        return 'Excluir'
       default:
         return ''
     }
