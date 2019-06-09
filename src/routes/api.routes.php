@@ -66,7 +66,24 @@ $app->group(
                 /**
                  * Patch Application
                  */
-                $app->patch('/{id}', AppsController::class . ':update')->add($updateApplicationIsValid);
+                $app->patch('/{id}', function ($request, $response, $args) use ($applicationController) {
+                    $application = $applicationController->patch($args['id'], $request->getParsedBody());
+                    if ($application['erros']) {
+                        return $response->withStatus(400)->withJson($application['erros']);
+                    }
+                    return $response->withStatus(204);
+                });
+
+                /**
+                 * delete
+                 */
+                $app->delete('/{id}', function ($request, $response, $args) use ($applicationController) {
+                    $delete = $applicationController->delete($args['id']);
+                    if (!$delete) {
+                        return $response->withStatus(400)->withJson(['erros' => true]);
+                    }
+                    return $response->withStatus(204);
+                });
             }
         );
 

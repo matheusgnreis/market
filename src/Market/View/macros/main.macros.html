@@ -55,7 +55,8 @@
     <div class="row gap-y">
 
       <div class="col-md-6 col-xl-5">
-        <p>E-Com Plus Market é a loja de apps para e-commerces que utilizam a tecnologia da E-Com Plus. Você pode  integrar a loja com ferramentas externas, adaptar o painel administrativo e mudar o layout com temas, isso tudo com apenas dois cliques.</p>
+        {# <p>E-Com Plus Market é a loja de apps para e-commerces que utilizam a tecnologia da E-Com Plus. Você pode  integrar a loja com ferramentas externas, adaptar o painel administrativo e mudar o layout com temas, isso tudo com apenas dois cliques.</p> #}
+        <p>{{getPageContent('home', 'footer', '#footer-about')}}</p>
       </div>
 
       <div class="col-6 col-md-3 col-xl-4">
@@ -70,10 +71,12 @@
       </div>
 
       <div class="col-6 col-md-3 col-xl-3 text-center">
-        <p><a class="btn btn-block btn-round btn-primary" href="https://docs.google.com/forms/d/1L3B2yqQyMfdzzeXLyKqQHEx0wJ8utZWBw9Hv2WdQG9o/"
+        <p><a class="btn btn-block btn-round btn-primary"
+            href="https://docs.google.com/forms/d/1L3B2yqQyMfdzzeXLyKqQHEx0wJ8utZWBw9Hv2WdQG9o/"
             target="_blank">Registrar-se</a></p>
-        <p><a class="btn btn-block btn-round btn-action" data-toggle="modal" data-target="#modal-login">Login Parceiro</a></p>
-<!--         {% if not params.user.sso_login %}
+        <p><a class="btn btn-block btn-round btn-action" data-toggle="modal" data-target="#modal-login">Login
+            Parceiro</a></p>
+        <!--         {% if not params.user.sso_login %}
           <p><a class="btn btn-block btn-round btn-action" id="login-logista" href="#">Login Logistas</a></p>
         {% else %}
           <p><a class="btn btn-block btn-round btn-action" id="admin-logista" href="/admin">Admin Logistas</a></p>
@@ -99,11 +102,12 @@
 
 {% macro headerHero(params) %}
 <!-- Header -->
-<header class="header text-white pb-10" style="background-image: linear-gradient(to bottom, #09000a, #210024, #310035);">
-  <canvas class="constellation"></canvas>
+<header class="header text-white pb-10"
+  style="background-image: linear-gradient(to bottom, #09000a, #210024, #310035);">
+  <canvas class="constellation" style="background: hsl(296, 43%, 12%);"></canvas>
   <div class="container">
-    <h1 class="display-5">Bem vindo a E-Com Plus Market.</h1>
-    <p class="lead-2" style="padding-left: 3px;">Seu projeto do seu jeito</p>
+    <h1 class="display-6 fw-400">{{getPageContent('home', 'header', '#welcome-to-market')}}</h1>
+    <p class="lead-2 text-white" style="padding-left: 3px;">{{getPageContent('home', 'header', '#your-project')}}</p>
     <div class="card shadow-4">
       <div class="card-body">
         <form class="input-round" id="search-home" action="/{{params.dictionary.lang}}/apps?title=" method="GET">

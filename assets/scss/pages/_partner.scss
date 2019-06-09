@@ -1,0 +1,383 @@
+/** PARTNER HEADER */
+.partner__header {
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 995;
+  transition: margin-left 0.3s ease;
+  background-color: #fff;
+
+  .partner-header__nav {
+    max-width: 250px;
+    width: 100% !important;
+    height: 100%;
+    border-right: 1px solid #dfe3e8;
+    border-bottom: 1px solid #dfe3e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .partner-header__top-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 64px;
+    border-bottom: 1px solid #dfe3e8;
+    padding: 0 1em;
+  }
+}
+
+/** PARTNER SIDEBAR */
+.partner-sidenav {
+  max-width: 250px;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: 0.25s linear;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 64px;
+  border-right: 1px solid #dfe3e8;
+
+  .partner-sidenav__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .menu-item__links {
+      height: 60px;
+      padding: 0 25px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      transition: 0.2s linear;
+      color: #3a0c3c;
+
+      i {
+        margin-right: 1em;
+        position: relative;
+        top: -1px;
+      }
+    }
+  }
+}
+
+/** MAIN DEFAUL */
+.main-partner__content {
+  position: absolute;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: calc(100vw - 250px);
+  position: fixed;
+  top: 64px;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  background-color: #f5f6f9;
+}
+
+.partner-wellcome {
+  .media {
+    transition: 0.25s;
+  }
+  [class^="ti-"],
+  [class*=" ti-"] {
+    color: #3a0c3c;
+    opacity: 0.7;
+  }
+}
+
+/** 
+PARTER PAGES 
+*/
+
+/** MY APPS */
+#partner-apps {
+  .partner-my-apps {
+    .my-apps-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .my-apps {
+      padding: 1em;
+    }
+  }
+  .add-new-app {
+    padding-top: 1em;
+  }
+}
+
+/** TABLE UTIL */
+.table-my-items {
+  .table-my-items thead {
+  }
+
+  .table-my-items tbody {
+  }
+
+  .table-my-items tbody tr {
+    td {
+      vertical-align: middle;
+      .td-w-img {
+        max-width: 40px;
+        width: 100%;
+        position: relative;
+        box-shadow: inset 0 0 5px rgba(158, 158, 158, 0.8);
+        border-radius: 50%;
+        margin: 0 auto;
+        img {
+          display: block;
+          border-radius: 50%;
+          position: relative;
+          z-index: 1; // -1 pra funcionse box-insert mas com a class card o bg fica branco e nao transparent
+        }
+      }
+      .td-w-txt {
+        display: flex;
+        flex-direction: column;
+        line-height: 20px;
+        letter-spacing: 0;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+table.table.table-hover.table-my-items {
+}
+
+table.table.table-hover.table-my-items thead {
+}
+
+table.table.table-hover.table-my-items tbody {
+}
+
+table.table.table-hover.table-my-items tbody tr {
+  /* height: 75px; */
+  /* display: flex; */
+  /* flex-direction: inherit; */
+}
+table.table.table-hover.table-my-items tbody tr td {
+  vertical-align: middle;
+}
+
+table.table.table-hover.table-my-items tbody tr td .td-w-img {
+  max-width: 40px;
+  width: 100%;
+  position: relative;
+  box-shadow: inset 0 0 5px rgba(158, 158, 158, 0.8);
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+table.table.table-hover.table-my-items tbody tr td .td-w-img img {
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
+
+table.table.table-hover.table-my-items tbody tr td .td-w-txt {
+  display: flex;
+  flex-direction: column;
+  line-height: 20px;
+  letter-spacing: 0;
+  font-size: 14px;
+}
+
+.table-my-items tbody tr:hover {
+  background-color: transparent !important;
+}
+
+/** ace code */
+.jsoneditor-menu {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ffffff;
+}
+
+.ace-jsoneditor .ace_gutter {
+  background-color: whitesmoke;
+}
+
+.jsoneditor-statusbar {
+  background-color: whitesmoke;
+}
+
+.jsoneditor {
+  border: thin solid #ffffff !important;
+}
+
+.jsoneditor-menu {
+  display: none;
+}
+
+.jsoneditor-statusbar {
+  display: none;
+}
+
+/** overview */
+
+.applications-overview {
+  .overview__top {
+  }
+  .overview__tabs {
+    ul {
+      list-style: none;
+      display: flex;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      li {
+        font-weight: 400;
+        opacity: 0.7;
+        cursor: pointer;
+        padding: 1em 10px;
+        font-size: 13px;
+        &.overview-tab-active {
+          font-weight: 500;
+          opacity: 2;
+          border-bottom: 2px solid #3a0c3c;
+        }
+      }
+    }
+  }
+
+  #app-overview {
+    .overview__resume {
+      display: flex;
+      justify-content: space-between;
+      & > h4 {
+        width: 40%;
+      }
+      .hits-resume {
+        display: flex;
+        /* width: 60%; */
+        .hits-resume__numbers {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          &:not(:last-child) {
+            margin-right: 3em;
+          }
+        }
+      }
+    }
+  }
+}
+
+.app-settings__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row-pre-edit {
+  margin: 0;
+  background-color: #fff;
+}
+
+ul.tabs-settings {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  list-style: none;
+  display: -webkit-box;
+  display: flex;
+  padding: 0;
+}
+
+li.tabs-settings__links {
+  /* margin-right: 1.5em; */
+  /* padding: 1em 0; */
+  font-weight: 400;
+  opacity: 0.7;
+  cursor: pointer;
+  padding: 1em 10px;
+  font-size: 13px;
+  min-width: 51px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+li.tabs-settings__links:hover {
+  background-color: #f5f6f9;
+}
+
+li.tabs-settings__links.settings-tab-active {
+  font-weight: 500;
+  opacity: 2;
+  border-bottom: 2px solid #3a0c3c;
+  background: #f5f6f9;
+}
+
+.applications-overview .overview__tabs ul li:hover {
+  background-color: #f5f6f9;
+}
+
+.tabs-contents {
+  display: none;
+}
+
+.tabs-contents.tab-active {
+  display: block;
+  width: 100%;
+}
+
+.current-icon__galery {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.current-icon__galery img {
+  max-width: 100px;
+  width: 100%;
+}
+
+.current-icon__galery .custom-file {
+  margin: 2em;
+}
+
+.gallery-item.apps-gallery {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: #f5f6f9;
+  margin: 1em;
+}
+
+.gallery-item.apps-gallery .gallery-actions {
+  position: absolute;
+  padding: 0.5em;
+}
+
+#form-edit-item {
+  display: flex;
+}
+ul.tabs-settings {
+  display: inline;
+}
+li.tabs-settings__links {
+  min-width: 270px;
+  width: 100%;
+}
+.settings-tabs {
+  width: 100%;
+}
+#myDropZone {
+  border: none;
+  background: #f5f6f9;
+}

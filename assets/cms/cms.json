@@ -1,0 +1,57 @@
+{
+  "name": "E-com Plus Market",
+  "pages": [
+    {
+      "title": "Home",
+      "slug": "home",
+      "isActive": true,
+      "path": "index.html"
+    },
+    {
+      "title": "Apps",
+      "slug": "apps",
+      "isActive": true,
+      "path": "apps.html"
+    },
+    {
+      "title": "Themes",
+      "slug": "themes",
+      "isActive": true,
+      "path": "themes.html"
+    },
+    {
+      "title": "Widgets",
+      "slug": "widgets",
+      "isActive": false,
+      "path": "widgets.html"
+    },
+    {
+      "title": "Partner",
+      "slug": "partner",
+      "isActive": false,
+      "path": "partner.html"
+    }
+  ],
+  "home": {
+    "contents": {
+      "header": {
+        "#welcome-to-market": "Bem vindo a E-Com Plus Market",
+        "#welcome": "Bem vindo a E-Com Plus Market",
+        "#your-project": "Seu projeto do seu jeito"
+      },
+      "main": {
+        ".section-header": "Conecte os apps e instale os temas ideias para sua loja com dois cliques"
+      },
+      "footer": {
+        "#footer-about": "E-Com Plus Market é a loja de apps para e-commerces que utilizam a tecnologia da E-Com Plus. Você pode  integrar a loja com ferramentas externas, adaptar o painel administrativo e mudar o layout com temas, isso tudo com apenas dois cliques."
+      }
+    }
+  },
+  "parts": {
+    "footer": {
+      "container": {
+        "#footer-about__pt-br": "E-Com Plus Market é a loja de apps para e-commerces que utilizam a tecnologia da E-Com Plus. Você pode  integrar a loja com ferramentas externas, adaptar o painel administrativo e mudar o layout com temas, isso tudo com apenas dois cliques."
+      }
+    }
+  }
+}

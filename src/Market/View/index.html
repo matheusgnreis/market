@@ -3,114 +3,47 @@
 {% import "parts/components.html" as component %}
 
 {% block content %}
-{{main.headerHero(params)}}
 <main class="main-content">
-  <!--
-      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-      | Apps Escolhidos
-      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-      !-->
-  <!--
-      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-      | Overflow content
-      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-      !-->
-<!--   <section class="section overflow-hidden">
-    <div class="container">
-      <div class="d-none d-lg-block">
-        <div class="row flex-nowrap">
-          <div class="col-4">
-            <h5>Turbine seu e-commerce.</h5>
-            <p>Meios de pagamento, soluções de envio, e-mails transacionais e muito mais.</p>
-          </div>
-
-          <div class="col-12">
-            <div class="row">
-              <div class="col-4 apps-suggestion">
-                <a href="/{{params.dictionary.lang}}/apps/wirecard"><img class="rounded" src="../assets/img/app/wirecard.jpg"
-                    alt="..."></a>
+  <div class="container">
+    <div class="row py-7">
+      <div class="col">
+        <h3 class="display-5 fw-400" style="height: 100%;display: flex;align-content: center;align-items: center;">
+          {{getPageContent('home', 'header', '#welcome-to-market')}}
+          <br>
+          {{getPageContent('home', 'header', '#your-project')}}
+        </h3>
+      </div>
+    </div>
+    <div class="row py-4">
+      <div class="col">
+        <div class="card shadow-7" id="hero-home">
+          <div class="card-body">
+            <form class="input-round shadow-7" id="search-home" action="/{{params.dictionary.lang}}/apps?title="
+              method="GET">
+              <div class="form-group input-group">
+                <input type="text" class="form-control" name="title" placeholder="Busque aplicativos">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
               </div>
-
-              <div class="col-4 apps-suggestion">
-                <a href="/{{params.dictionary.lang}}/apps/melhor-envio"><img class="rounded" src="../assets/img/app/melhorenvio.png"
-                    alt="..."></a>
-              </div>
-
-              <div class="col-4 apps-suggestion">
-                <a href="/{{params.dictionary.lang}}/apps/mailjet"><img class="rounded" src="../assets/img/app/mailjet.png"
-                    alt="..."></a>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
-      <div class="d-block d-lg-none">
+    </div>
+    <div class="row py-4">
+      <div class="col">
+        <h6 class="py-4">{{getPageContent('home', 'main', '.section-header')}}</h6>
         <div class="row">
-          <div class="col-12">
-            <h5>Turbine seu e-commerce.</h5>
-            <p>Meios de pagamento, soluções de envio, e-mails transacionais e muito mais.</p>
-          </div>
-          <div class="col-4 apps-suggestion">
-            <a href="/{{params.dictionary.lang}}/apps/wirecard"><img class="rounded" src="../assets/img/app/wirecard.jpg"
-                alt="..."></a>
-          </div>
-
-          <div class="col-4 apps-suggestion">
-            <a href="/{{params.dictionary.lang}}/apps/melhor-envio"><img class="rounded" src="../assets/img/app/melhorenvio.png"
-                alt="..."></a>
-          </div>
-
-          <div class="col-4 apps-suggestion">
-            <a href="/{{params.dictionary.lang}}/apps/mailjet"><img class="rounded" src="../assets/img/app/mailjet.png"
-                alt="..."></a>
-          </div>
+          {% for application in params.data %}
+          {{component.cards(params, application)}}
+          {%endfor%}
         </div>
-
-      </div>
-    </div>
-  </section> -->
-  <!--
-      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-      | Basic
-      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-      !-->
-  <section class="section">
-    <div class="container">
-      <header class="section-header">
-        <h2>Conecte os apps e instale os temas ideias para sua loja com dois cliques.</h2>
-      </header>
-      <div class="row">
-        {% for application in params.data %}
-        {{component.cards(params, application)}}
-        {%endfor%}
-      </div>
-      <div class="section-actions">
-        <a href="/{{params.dictionary.lang}}/apps" class="fs-12 fw-600">Ver todos os aplicativos</a>
-      </div>
-    </div>
-  </section>
-
-  <!--
-      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-      | Help cta
-      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-      !-->
-
-  <section class="section" style="background-image: linear-gradient(-31deg,  #fafafa 50%, #fafafa 100%);">
-    <div class="container">
-      <div class="row gap-y align-items-center">
-        <div class="col-md-6 text-center">
-          <img src="../assets/img/13.png" alt="...">
-        </div>
-
-        <div class="col-md-6 text-center text-md-left">
-          <h2>Precisa de ajuda?</h2>
-          <p class="lead mb-6">Visite nosso help center.</p>
-          <p><a class="btn btn-sm btn-round btn-success" href="https://community.e-com.plus/" target="_blank">Ir para
-              ajuda</a></p>
+        <div class="py-4 text-center">
+          <a href="/{{params.dictionary.lang}}/apps" class="fs-12 fw-600">Ver todos os aplicativos</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </main>
 {% endblock %}

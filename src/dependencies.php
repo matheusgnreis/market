@@ -28,7 +28,7 @@ $app->add(function ($request, $response, $next) {
 
     return $response->withHeader('Access-Control-Allow-Methods', implode(',', $methods));
 });
-$app->add(new \Slim\HttpCache\Cache('public', 3600));
+$app->add(new \Slim\HttpCache\Cache(getenv('APP_CACHE_API'), 3600));
 
 //
 $container = $app->getContainer();
@@ -38,8 +38,7 @@ $container['cache'] = function () {
 
 $container['view'] = function ($c) {
     $view = new \Slim\Views\Twig(__DIR__ . '/Market/View', [
-        'cache' => false,
-        //'cache' => 'cache/twig/cache'
+        'cache' => getenv('APP_CACHE')
     ]);
 
     $view->addExtension(new Twig_Extensions_Extension_Text());
@@ -48,6 +47,7 @@ $container['view'] = function ($c) {
     $uri = \Slim\Http\Uri::createFromEnvironment(new \Slim\Http\Environment($_SERVER));
     $view->addExtension(new \Slim\Views\TwigExtension($router, $uri));
     $view->addExtension(new \Market\Services\MarketExtensions());
+    $view->addExtension(new \Market\Services\CMSContent());
     return $view;
 };
 //Erro 404
@@ -69,8 +69,7 @@ $container['notAllowedHandler'] = function ($c) {
 // Erro 500
 $container['errorHandler'] = function ($c) {
     return function ($request, $response, $exception) use ($c) {
-            return $c['view']->render($response->withStatus(500), '500.html');
-            
+        return $c['view']->render($response->withStatus(500), '500.html');            
     };
 };
 // Monolog
