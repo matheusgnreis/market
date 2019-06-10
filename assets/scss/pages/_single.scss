@@ -1,43 +1,41 @@
-#app-resume {
-  display: flex;
-}
-.app-resume-pre {
+/** Application resume */
+.application__resume {
   display: flex;
   align-content: center;
   align-items: center;
+  &--icon {
+    display: flex;
+    flex-direction: column;
+    img {
+      max-width: 170px;
+      width: 100%;
+    }
+  }
+  &--infor {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 170px;
+  }
 }
-.app-resume-pre .app-short-desc {
-}
-.app-resume-pre .app-short-desc .app-infor {
-  display: flex;
-  flex-direction: column;
-}
-.app-resume-pre .app-icon img {
-  max-width: 180px;
-  width: 100%;
-}
-.items-lists {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  justify-content: space-between;
+/** aplication description section */
+#application-description {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.25s, opacity 25s ease;
 }
 
-.scope-ul {
+/** galery/lists */
+.application-details-list {
   list-style: none;
   padding: 0;
-}
-.scope-ul .scope-li {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75em 0;
-  font-size: 13px;
-  text-transform: uppercase;
-  font-weight: 400;
-}
-
-.scope-ul .scope-li:not(:last-of-type) {
-  border-bottom: 1px solid #eff8ff;
+  li{
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 #scope-list {
