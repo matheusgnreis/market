@@ -137,7 +137,6 @@ $(document).ready(function () {
           var liScope = $('<li>', { class: 'scope-li' })
           var method = ''
           //
-          console.log(key.indexOf("/") === -1)
           if (key.indexOf("/") === -1) {
             $('<span>', { text: key }).appendTo(liScope)
             //
