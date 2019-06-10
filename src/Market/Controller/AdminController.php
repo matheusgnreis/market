@@ -9,16 +9,6 @@ class AdminController extends BaseController
     {
         if (!$_SESSION) {
             session_start();
-
-            if (!$_SESSION['sso_login']) {
-                //return $response->withRedirect('./');
-                /*
-            user attributes:
-            name; external_id; email; username; require_activation;
-            custom.locale; custom.edit_storefront; custom.store_id;
-            custom.access_token.
-             */
-            }
         }
 
         $params = [
@@ -43,10 +33,6 @@ class AdminController extends BaseController
     {
         if (!$_SESSION) {
             session_start();
-
-            if (!$_SESSION['sso_login']) {
-                //return $response->withRedirect('./');
-            }
         }
 
         $params = [
@@ -74,10 +60,6 @@ class AdminController extends BaseController
     {
         if (!$_SESSION) {
             session_start();
-
-            if (!$_SESSION['sso_login']) {
-                //return $response->withRedirect('./');
-            }
         }
 
         $params = [

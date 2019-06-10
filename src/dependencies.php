@@ -38,7 +38,7 @@ $container['cache'] = function () {
 
 $container['view'] = function ($c) {
     $view = new \Slim\Views\Twig(__DIR__ . '/Market/View', [
-        'cache' => getenv('APP_CACHE')
+        'cache' => getenv('APP_CACHE') !== 'false' ? getenv('APP_CACHE') : false,
     ]);
 
     $view->addExtension(new Twig_Extensions_Extension_Text());
@@ -53,7 +53,7 @@ $container['view'] = function ($c) {
 //Erro 404
 $container['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
-        return $c['view']->render($response->withStatus(404), '404.html');
+        return $c['view']->render($response->withStatus(404), 'market/404.html');
     };
 };
 // Erro 405
@@ -69,9 +69,16 @@ $container['notAllowedHandler'] = function ($c) {
 // Erro 500
 $container['errorHandler'] = function ($c) {
     return function ($request, $response, $exception) use ($c) {
-        return $c['view']->render($response->withStatus(500), '500.html');            
+        if (getenv('APP_DEBUG') === 'true' || getenv('APP_DEBUG') === true) {
+            return $c['response']->withStatus(500)
+                ->withHeader('Content-Type', 'application/json')
+                ->write(json_encode(array('erro' => array('code' => 500, 'message' => 'Não foi possível processar a solicitação.', 'Exception' => htmlspecialchars($exception)))));
+        } else {
+            return $c['view']->render($response->withStatus(500), '500.html');
+        }
     };
 };
+
 // Monolog
 $container['logger'] = function ($c) {
     $settings = $c->get('settings')['logger'];

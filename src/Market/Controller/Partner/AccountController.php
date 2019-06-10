@@ -1,7 +1,6 @@
 <?php
 namespace Market\Controller\Partner;
 
-use function GuzzleHttp\json_encode;
 use Market\Controller\AppsController;
 use Market\Controller\BaseController;
 use Market\Controller\PartnerController;

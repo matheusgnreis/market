@@ -46,7 +46,7 @@ class HomeController extends BaseController
                 'data' => $all['result'],
             ],
         ];
-        return $this->view->render($response, 'index.html', $params);
+        return $this->view->render($response, 'market/index.html', $params);
     }
 
     /**
@@ -70,7 +70,7 @@ class HomeController extends BaseController
                 'data' => $all['result'],
             ],
         ];
-        return $this->view->render($response, 'apps.html', $params);
+        return $this->view->render($response, 'market/apps.html', $params);
     }
 
     /**
@@ -114,7 +114,7 @@ class HomeController extends BaseController
             ],
         ];
         if ($app) {
-            return $this->view->render($response, 'single.html', $params);
+            return $this->view->render($response, 'market/single.html', $params);
         }
         return $this->view->render($response, '404.html', $params);
     }
@@ -149,9 +149,9 @@ class HomeController extends BaseController
             ],
         ];
         if ($app) {
-            return $this->view->render($response, 'widgets.html', $params);
+            return $this->view->render($response, 'market/widgets.html', $params);
         }
-        return $this->view->render($response, '404.html', $params);
+        return $this->view->render($response, 'market/404.html', $params);
     }
     /**
      * Single app View
@@ -194,8 +194,8 @@ class HomeController extends BaseController
             ],
         ];
         if ($widget) {
-            return $this->view->render($response, 'widgets.html', $params);
+            return $this->view->render($response, 'market/widgets.html', $params);
         }
-        return $this->view->render($response, '404.html', $params);
+        return $this->view->render($response, 'market/404.html', $params);
     }
 }
