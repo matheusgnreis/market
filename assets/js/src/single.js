@@ -1,7 +1,7 @@
 $(document).ready(function () {
   //
   var apiPath = '/v1/applications/'
-  var appId = $('#app-resume').data('id')
+  var appId = $('#main-single').data('id')
   //
   var elements = {
     plans: $('#application-plans'),
@@ -115,6 +115,13 @@ $(document).ready(function () {
      */
     description: function (application) {
       elements.description.html(marked(application.description))
+      elements.description.css(
+        {
+          'visibility': 'visible',
+          'opacity': 1,
+          'transition': 'opacity .25s ease'
+        }
+      )
     },
     /**
      * 
