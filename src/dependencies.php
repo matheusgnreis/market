@@ -74,7 +74,7 @@ $container['errorHandler'] = function ($c) {
                 ->withHeader('Content-Type', 'application/json')
                 ->write(json_encode(array('erro' => array('code' => 500, 'message' => 'Não foi possível processar a solicitação.', 'Exception' => htmlspecialchars($exception)))));
         } else {
-            return $c['view']->render($response->withStatus(500), '500.html');
+            return $c['view']->render($response->withStatus(500), 'market/500.html');
         }
     };
 };
