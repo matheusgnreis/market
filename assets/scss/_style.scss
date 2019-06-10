@@ -11,30 +11,6 @@ body {
     background-color: #fff;
 }
 
-.apps-suggestion {
-  max-width: 250px;
-  width: 100%;
-}
-
-.apps-suggestion img {
-  overflow: hidden; 
-  width: 100%;
-  height: 100%;
-  position: relative; 
-}
-
-h5.card-title {
-  text-align: center;
-}
-
-.card-img img {border-radius: 50%;width: 50%;margin: 1em;}
-
-.card-img {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .navbar-brand img {
   width: 132px;
   height: 28px;
@@ -48,7 +24,7 @@ h5.card-title {
   text-transform: lowercase;
 }
 
-form#search-home .form-group {
+#search-home .form-group {
   margin-bottom: 1rem;
   margin-top:1rem;
 }
@@ -59,177 +35,34 @@ form#search-home .form-group {
   color: #fff !important;
 }
 
-
-/** cards items */
-
-.card-items {
-
-}
-
-.card-items .card-body {
+.card-item {
+  .card-item-body {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 360px;
-}
-
-.card-items .card-body .card-title {font-weight: 500;font-size: 1.125em;}
-
-.card-items .card-body .card-img {margin-bottom: .75rem;}
-
-.card-items .card-body .card-img img {width: 72px;height: 72px;border-radius: 5% !important;}
-
-.card-items .card-body .card-paid,
-.card-items .card-body .card-categories,
-.card-items .card-body .card-hits .downloads-count {
-    font-size: 0.875em;
-    font-weight: 500;
-}
-
-.card-items .card-body .card-paid {
-    margin-bottom: .75rem;
-}
-
-.card-app-divide {}
-
-.card-items .card-body .card-hits {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 40px;
-    align-items: center;
-    border-top: 1px solid #f1f2f3;
-    border-bottom: 1px solid #f1f2f3;
-    margin-bottom: .75em;
-}
-
-.card-items .card-body .card-actions {}
-
-.card-items .card-body .card-hits .downloads-count {}
-
-
-/** global */
-section.section{
-  padding-bottom: 5em;
-  padding-top: 5em;
-}
-.section-actions {
-  padding: 2em 0;
-  text-align: center;
-}
-#page-pagination {
-  margin-top: 5em;
-}
-
-/** breadcrumb */
-/* Style the list */
-ul.breadcrumb {
-  padding: 10px 5px;
-  list-style: none;
-  background-color: #fff;
-}
-
-/* Display list items side by side */
-ul.breadcrumb li {
-  display: inline;
-  font-size: .95em;
-}
-
-/* Add a slash symbol (/) before/behind each list item */
-ul.breadcrumb li+li:before {
-  padding: 8px;
-  color: #9C27B0;
-  content: "/\00a0";
-}
-
-/* Add a color to all links inside the list */
-ul.breadcrumb li a {
-  color: #ff015b;
-  text-decoration: none;
-}
-
-/* Add a color on mouse-over */
-ul.breadcrumb li a:hover {
-  color: #37003c;
-  opacity:.7;
-}
-
-
-ul.breadcrumb li:last-child {
-  font-weight: 500;
-}
-
-ul.breadcrumb li+li:last-child:before {
- font-weight: 300
-}
-
-/* single app page */
-#item-content {
-  
-}
-
-.single-content.shadow-4 {
-  padding: 1em;
-}
-
-#page-breadcrumb {
-  padding: 1em 12px;
-}
-
-
-/* singles page app resume */
-.item-single-title {
-  font-size: 1.5em;
-  text-align: center;
-  margin: 0;
-  font-weight: 500;
-}
-
-.items-lists-details {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  font-weight: 500;
-}
-
-.items-lists-details:not(:last-child) {
-border-bottom: 1px solid #eee;
-}
-
-.items-lists-details span {
-  font-size: .87em;
-}
-
-.title-h1{
-    font-size: 17px;
-    font-weight: 300;
-}
-
-/* forms */
-.form-group-erro{
-  display: none;
-  position: absolute;
-  width: 86%;
-  padding: 6px;
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.card-item .card-item-body {
-  min-height: 140px;
-}
-
-.card-item.resume {
-  justify-content: space-around;
-  width: 100%;
-}
-
-.container.erro-404 {
-  min-height: 230px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    padding: 15px;
+    .card-item-thumb {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 100px;
+      width: 100%;
+      margin-right: 15px;
+      position: relative;
+      top: 5px;
+      img {
+        max-width: 100px;
+        width: 100%;
+        box-shadow: 1px 2px 14px 1px #0000000f;
+        border-radius: 5px;
+      }
+      .card-hits{
+        .downloads-count {
+          text-align: center;
+        }
+      }
+    }
+    .card-item.resume {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }

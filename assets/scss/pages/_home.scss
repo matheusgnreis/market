@@ -8,5 +8,9 @@
   }
 }
 
-.main-content {
+.nav-navbar .nav-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
