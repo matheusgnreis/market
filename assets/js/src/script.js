@@ -30,7 +30,6 @@ $(function () {
             // remove aditional data of application market data
             // to sent for ecomplus application resource
             var data = {}
-
             data.app_id = application.app_id
             data.state = 'active'
             data.title = application.title
