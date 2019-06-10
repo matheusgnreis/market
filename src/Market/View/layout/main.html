@@ -12,25 +12,111 @@
 </head>
 {% import "macros/main.macros.html" as main %}
 {% import "macros/scripts.macros.html" as scripts %}
-{% import "parts/components.html" as components %}
+
 <body data-store="{{params.user.store_id}}" data-user="{{params.user.username}}" data-my-id="{{params.user.my_id}}"
   data-sso="{{params.user.sso_login}}" data-access="{{params.user.access_token}}">
-  <!--
-    HEADER
-  -->
-  {{main.header(params)}}
-  <!--
-    MAIN-CONTENT
-    -->
+  <!-- .navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark" data-navbar="static">
+    <div class="container">
+      <div class="navbar-left">
+        <button class="navbar-toggler" type="button">&#9776;</button>
+        <a class="navbar-brand" href="/" title="e-com.plus market">
+          <img alt="logo" class="logo-dark" src="/assets/img/logo-dark.png">
+          <img alt="logo" class="logo-light" src="/assets/img/logo-light.png">
+          <span>Market</span>
+        </a>
+      </div>
+      <section class="navbar-mobile">
+        <ul class="nav nav-navbar ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/{{params.dictionary.lang}}/apps">
+              {{ params.dictionary.word_app }}
+              <!-- <span class="arrow"></span> -->
+            </a>
+            <!--             <nav class="nav columns-1">
+              {% for category in params.categories.applications %}
+              <a class="nav-link" href="/{{params.dictionary.lang}}/apps?category={{category.page}}">
+                {{category.name}}</a>
+              {% endfor %}
+            </nav> -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/{{params.dictionary.lang}}/themes">
+              {{ params.dictionary.word_theme }}
+              <!-- <span class="arrow"></span> -->
+            </a>
+            <!--             <nav class="nav columns-1">
+            {% for category in params.categories.themes  %}
+            <a class="nav-link" href="/{{params.dictionary.lang}}/themes?category={{category.page}}">
+              {{category.name}}</a>
+            {% endfor %}
+            </nav> -->
+          </li>
+          <li class="nav-item">
+            <a href="/{{params.dictionary.lang}}/widgets" class="nav-link">{{params.dictionary.word_widgets}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/{{params.dictionary.lang}}/partner">{{params.dictionary.word_partner}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-round btn-outline-primary" href="/session/create" id="btn-login-logista">Login Lojista</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </nav>
+  <!-- .navbar -->
+  <!-- .main-content -->
   {% block content %} {% endblock %}
-  <!--
-    FOOTER
-  -->
-  {{main.footer(params)}}
+  <!-- .main-content-->
+  <!-- footer -->
+  <footer class="footer py-7">
+    <div class="container">
+      <div class="row gap-y">
+
+        <div class="col-md-6 col-xl-5">
+          {# <p>E-Com Plus Market é a loja de apps para e-commerces que utilizam a tecnologia da E-Com Plus. Você pode  integrar a loja com ferramentas externas, adaptar o painel administrativo e mudar o layout com temas, isso tudo com apenas dois cliques.</p> #}
+          <p>{{getPageContent('home', 'footer', '#footer-about')}}</p>
+        </div>
+
+        <div class="col-6 col-md-3 col-xl-4">
+          <div class="nav flex-column">
+            <a class="nav-link" href="https://community.e-com.plus" target="_blank">Community</a>
+            <a class="nav-link" href="https://e-com.plus/partners" target="_blank">Partners program</a>
+            <a class="nav-link" href="https://market.e-com.plus" target="_blank">App store</a>
+            <a class="nav-link" href="https://status.e-com.plus" target="_blank">Status</a>
+            <a class="nav-link" href="https://app.e-com.plus" target="_blank">Dashboard</a>
+            <a class="nav-link" href="https://e-com.plus" target="_blank">About</a>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-xl-3 text-center">
+          <p><a class="btn btn-block btn-round btn-primary"
+              href="https://docs.google.com/forms/d/1L3B2yqQyMfdzzeXLyKqQHEx0wJ8utZWBw9Hv2WdQG9o/"
+              target="_blank">Registrar-se</a></p>
+          <p><a class="btn btn-block btn-round btn-action" data-toggle="modal" data-target="#modal-login">Login
+              Parceiro</a></p>
+          <br>
+          <div class="social social-bordered">
+            <a class="social-facebook" href="https://www.facebook.com/ecom.clubpage/" target="_blank"
+              title="facebook"><i class="fa fa-facebook"></i></a>
+            <a class="social-twitter" href="https://twitter.com/intent/tweet?url=https://e-com.club/" target="_blank"
+              title="twitter"><i class="fa fa-twitter"></i></a>
+            <a class="social-youtube" href="https://www.youtube.com/channel/UCBlIxK5JAub0E1EX_qHdzmA" target="_blank"
+              title="youtube"><i class="fa fa-youtube"></i></a>
+            <a class="social-instagram" href="https://www.instagram.com/ecomclub/" target="_blank" title="instagram"><i
+                class="fa fa-instagram"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+  <!-- footer -->
   <!-- 
     modal
   -->
-  {{components.modals(params)}}
+  {{main.modals(params)}}
   <!-- 
     Scripts 
   -->
