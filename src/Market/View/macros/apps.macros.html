@@ -2,8 +2,7 @@
 Sidebar search apps component
 #}
 {% macro sidebarSearch(params) %}
-<h6 class="sidebar-title">
-  {{params.dictionary.word_search}}</h6>
+<h6 class="sidebar-title">{{params.dictionary.word_search}}</h6>
 <div class="row py-4">
   <div class="col">
     <div class="card shadow-7" id="hero-home">
@@ -13,7 +12,8 @@ Sidebar search apps component
           <div class="form-group input-group">
             <input type="text" class="form-control" name="title" placeholder="Busque aplicativos">
             <div class="input-group-append">
-              <button class="btn btn-primary" type="submit">Buscar</button>
+              <button class="btn btn-outline-primary" type="submit"
+                style="border-radius: 0em 5em 5em 0em;">Buscar</button>
             </div>
           </div>
         </form>
@@ -22,26 +22,16 @@ Sidebar search apps component
   </div>
 </div>
 <hr>
-<!--   <h6 class="sidebar-title">
-    {{params.dictionary.word_categories}}</h6>
-  <div class="row link-color-default fs-14 lh-24">
-    {% for category in params.categories.applications %}
-    <div class="col-6">
-      <a href="/{{params.dictionary.lang}}/apps?category={{category.page}}">
-        {{category.name}}</a>
-    </div>
-    {% endfor %}
-  </div> -->
 {% endmacro %}
 {#
 Result search component
 #}
 {% macro resultSearch(params) %}
-{% import "parts/components.html" as component %}
+{% import "macros/main.macros.html" as main %}
 <div class="row">
   {% if params.data %}
   {% for application in params.data %}
-  {{component.cards(params, application)}}
+  {{main.cards(params, application)}}
   {%endfor%}
   {% else %}
   <div id="notfound"><strong>sem resultado</strong></div>

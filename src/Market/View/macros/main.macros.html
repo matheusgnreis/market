@@ -1,125 +1,207 @@
-{% macro header(params) %}
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark" data-navbar="static">
-  <div class="container">
-    <div class="navbar-left">
-      <button class="navbar-toggler" type="button">&#9776;</button>
-      <a class="navbar-brand" href="/" title="e-com.plus market">
-        <img alt="logo" class="logo-dark" src="/assets/img/logo-dark.png">
-        <img alt="logo" class="logo-light" src="/assets/img/logo-light.png">
-        <span>Market</span>
-      </a>
-    </div>
-    <section class="navbar-mobile">
-      <ul class="nav nav-navbar ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/{{params.dictionary.lang}}/apps">
-            {{ params.dictionary.word_app }}
-            <!-- <span class="arrow"></span> -->
-          </a>
-          <!--             <nav class="nav columns-1">
-              {% for category in params.categories.applications %}
-              <a class="nav-link" href="/{{params.dictionary.lang}}/apps?category={{category.page}}">
-                {{category.name}}</a>
-              {% endfor %}
-            </nav> -->
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/{{params.dictionary.lang}}/themes">
-            {{ params.dictionary.word_theme }}
-            <!-- <span class="arrow"></span> -->
-          </a>
-          <!--             <nav class="nav columns-1">
-            {% for category in params.categories.themes  %}
-            <a class="nav-link" href="/{{params.dictionary.lang}}/themes?category={{category.page}}">
-              {{category.name}}</a>
-            {% endfor %}
-            </nav> -->
-        </li>
-        <li class="nav-item">
-          <a href="/{{params.dictionary.lang}}/widgets" class="nav-link">{{params.dictionary.word_widgets}}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/{{params.dictionary.lang}}/partner">{{params.dictionary.word_partner}}</a>
-        </li>
-      </ul>
-    </section>
-  </div>
-</nav>
-<!-- /.navbar -->
-{% endmacro %}
-
-{% macro footer(params) %}
-<footer class="footer py-7">
-  <div class="container">
-    <div class="row gap-y">
-
-      <div class="col-md-6 col-xl-5">
-        {# <p>E-Com Plus Market é a loja de apps para e-commerces que utilizam a tecnologia da E-Com Plus. Você pode  integrar a loja com ferramentas externas, adaptar o painel administrativo e mudar o layout com temas, isso tudo com apenas dois cliques.</p> #}
-        <p>{{getPageContent('home', 'footer', '#footer-about')}}</p>
+{% macro cards(params, application, colSize) %}
+<div class="{{ colSize|default('col-md-6 col-lg-6 py-4') }}">
+  <div class="card card-item shadow-4">
+    <a class="fs-12 fw-600" href="/{{params.dictionary.lang}}/apps/{{application.slug}}" class="text-default" style="position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+    /* Makes sure the link doesn't get underlined */
+    z-index: 10;"></a>
+    <div class="card-item-body">
+      <div class="card-item-thumb">
+        <img src="{{application.icon}}">
       </div>
-
-      <div class="col-6 col-md-3 col-xl-4">
-        <div class="nav flex-column">
-          <a class="nav-link" href="https://community.e-com.plus" target="_blank">Community</a>
-          <a class="nav-link" href="https://e-com.plus/partners" target="_blank">Partners program</a>
-          <a class="nav-link" href="https://market.e-com.plus" target="_blank">App store</a>
-          <a class="nav-link" href="https://status.e-com.plus" target="_blank">Status</a>
-          <a class="nav-link" href="https://app.e-com.plus" target="_blank">Dashboard</a>
-          <a class="nav-link" href="https://e-com.plus" target="_blank">About</a>
-        </div>
+      <div class="card-item resume">
+        <h5 class="fs-18">{{application.title}}</h5>
+        <small>{{application.short_description | truncate(80) }}.</small>
+        <small>
+          <a href="/{{params.dictionary.lang}}/apps?category={{application.category}}"
+            title="{{categories_name(application.category, params.dictionary.lang)}}">{{
+              categories_name(application.category, params.dictionary.lang) | truncate(20) }} </a> | Free</small>
+        </a>
       </div>
-
-      <div class="col-6 col-md-3 col-xl-3 text-center">
-        <p><a class="btn btn-block btn-round btn-primary"
-            href="https://docs.google.com/forms/d/1L3B2yqQyMfdzzeXLyKqQHEx0wJ8utZWBw9Hv2WdQG9o/"
-            target="_blank">Registrar-se</a></p>
-        <p><a class="btn btn-block btn-round btn-action" data-toggle="modal" data-target="#modal-login">Login
-            Parceiro</a></p>
-        <!--         {% if not params.user.sso_login %}
-          <p><a class="btn btn-block btn-round btn-action" id="login-logista" href="#">Login Logistas</a></p>
-        {% else %}
-          <p><a class="btn btn-block btn-round btn-action" id="admin-logista" href="/admin">Admin Logistas</a></p>
-        {% endif %} -->
-
-        <br>
-        <div class="social social-bordered">
-          <a class="social-facebook" href="https://www.facebook.com/ecom.clubpage/" target="_blank" title="facebook"><i
-              class="fa fa-facebook"></i></a>
-          <a class="social-twitter" href="https://twitter.com/intent/tweet?url=https://e-com.club/" target="_blank"
-            title="twitter"><i class="fa fa-twitter"></i></a>
-          <a class="social-youtube" href="https://www.youtube.com/channel/UCBlIxK5JAub0E1EX_qHdzmA" target="_blank"
-            title="youtube"><i class="fa fa-youtube"></i></a>
-          <a class="social-instagram" href="https://www.instagram.com/ecomclub/" target="_blank" title="instagram"><i
-              class="fa fa-instagram"></i></a>
-        </div>
-      </div>
-
     </div>
   </div>
-</footer>
+</div>
 {% endmacro %}
 
-{% macro headerHero(params) %}
-<!-- Header -->
-<header class="header text-white pb-10"
-  style="background-image: linear-gradient(to bottom, #09000a, #210024, #310035);">
-  <canvas class="constellation" style="background: hsl(296, 43%, 12%);"></canvas>
-  <div class="container">
-    <h1 class="display-6 fw-400">{{getPageContent('home', 'header', '#welcome-to-market')}}</h1>
-    <p class="lead-2 text-white" style="padding-left: 3px;">{{getPageContent('home', 'header', '#your-project')}}</p>
-    <div class="card shadow-4">
-      <div class="card-body">
-        <form class="input-round" id="search-home" action="/{{params.dictionary.lang}}/apps?title=" method="GET">
-          <div class="form-group input-group">
-            <input type="text" class="form-control" name="title" placeholder="Busque por...">
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="submit">Buscar</button>
-            </div>
+{% macro modalLogin(params) %}
+<!--
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    | Modal Login
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    !-->
+<div class="modal fade" id="modal-login" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <form class="text-center" id="form-loggin__partner">
+          <h4 class="mb-5">{{params.dictionary.word_login_account}}</h4>
+          <div class="form-group">
+            <input class="form-control" type="text" name="email" id="form_email" autocomplete="email"
+              placeholder="E-mail">
+            <div class="invalid-feedback">{{params.dictionary.word_email_invalid}}</div>
           </div>
+
+          <div class="form-group">
+            <input class="form-control" type="password" name="password" id="form_password"
+              autocomplete="current-password" placeholder="Password">
+            <div class="invalid-feedback">{{params.dictionary.word_passwd_invalid}}</div>
+          </div>
+          <button class="btn btn-lg btn-block btn-primary button-submit"
+            type="button">{{params.dictionary.word_login}}</button>
+          <div class="form-group-erro">
+            {{params.dictionary.word_invalid_login}}
+          </div>
+          <hr>
+
+          <p class="small mb-0">{{params.dictionary.word_forgot_pssw}}<a
+              href="/{{params.dictionary.lang}}/login/recovery"> {{params.dictionary.word_click_here}}</a></p>
         </form>
       </div>
+
     </div>
   </div>
-</header><!-- /.header -->
+</div>
+{% endmacro %}
+
+
+{% macro modals(params) %}
+<div class="modal fade" id="modal-login" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <form class="text-center" id="form-loggin__partner">
+          <h4 class="mb-5">{{params.dictionary.word_login_account}}</h4>
+          <div class="form-group">
+            <input class="form-control" type="text" name="email" id="form_email" autocomplete="email"
+              placeholder="E-mail">
+            <div class="invalid-feedback">{{params.dictionary.word_email_invalid}}</div>
+          </div>
+
+          <div class="form-group">
+            <input class="form-control" type="password" name="password" id="form_password"
+              autocomplete="current-password" placeholder="Password">
+            <div class="invalid-feedback">{{params.dictionary.word_passwd_invalid}}</div>
+          </div>
+          <button class="btn btn-lg btn-block btn-primary button-submit"
+            type="button">{{params.dictionary.word_login}}</button>
+          <div class="form-group-erro">
+            {{params.dictionary.word_invalid_login}}
+          </div>
+          <hr>
+
+          <p class="small mb-0">{{params.dictionary.word_forgot_pssw}}<a
+              href="/{{params.dictionary.lang}}/login/recovery"> {{params.dictionary.word_click_here}}</a></p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Login to ecom plus api -->
+<div class="modal fade" id="modal-confirm-installation" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <form class="text-center">
+          <h4 class="mb-5">Sign into your account</h4>
+          <div class="form-group">
+            <input class="form-control" type="text" name="username" id="username" value="" disabled>
+          </div>
+
+          <div class="form-group">
+            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+          </div>
+
+          <button class="btn btn-lg btn-block btn-primary" type="button" id="btn-ecom-login">Login</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Login to ecom plus api -->
+<div class="modal fade" id="modal-login-admin" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <form class="text-center">
+          <h4 class="mb-5">Sign into your account</h4>
+          <div class="form-group">
+            <input class="form-control" type="text" name="username" id="username" value="" disabled>
+          </div>
+
+          <div class="form-group">
+            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+          </div>
+
+          <button class="btn btn-lg btn-block btn-primary" type="button" id="btn-admin-login">Login</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- application scope -->
+<!-- Modal - Default -->
+<div class="modal fade" id="modal-scope-installation" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Deseja instalar o aplicativo?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="scope-list">
+        <h5 class="modal-title" id="exampleModalLabel">{{params.dictionary.word_installation_title}}</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{params.dictionary.word_cancel}}</button>
+        <button type="button" class="btn btn-primary" id="btn-confirmation">{{params.dictionary.word_install}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal - instalations success -->
+<div class="modal fade" id="modal-install-success" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body" id="modal-success-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
 {% endmacro %}
