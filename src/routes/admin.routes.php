@@ -5,14 +5,15 @@
 use Market\Controller\AdminController;
 
 $middleware = function ($request, $response, $next) {
-    if ($_SESSION) {
+    if (!$_SESSION) {
         session_start();
     }
 
     if (!$_SESSION['sso_login'] || (isset($_SESSION['sso_login']) && $_SESSION['sso_login'] !== true)) {
         return $response->withRedirect('/session/create');
+    } else {
+        return $next($request, $response);
     }
-    $next();
 };
 
 //
