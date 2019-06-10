@@ -938,6 +938,30 @@
             <div class="row gap-y row-pre-edit">
               <div class="col-md-4">
                 <div class="form-pre-infor gap-xy-3">
+                  <span class="font-weight-600">Informações do aplicativo</span>
+                  <span class="font-size-12">Essas informações serão usadas para identificar seu aplicativo.</span>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>{{params.dictionary.word_name_of_item}}</label>
+                  <input class="form-control form-control-sm" type="text" name="title"
+                    placeholder="{{params.dictionary.word_max_char}}" maxlength="40" required="true" value="{{params.application.title}}">
+                </div>
+                <div class="form-group">
+                  <label>{{params.dictionary.word_categories}}</label>
+                  <select class="form-control form-control-sm" name="category" required="true">
+                    <option value="">{{params.dictionary.word_select_category}}</option>
+                    {% for category in params.categories.applications %}
+                    <option value="{{category.page}}" {{params.application.category == category.page ? 'selected': ''}}>{{category.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row gap-y row-pre-edit">
+              <div class="col-md-4">
+                <div class="form-pre-infor gap-xy-3">
                   <span class="font-weight-600">Descrições</span>
                 </div>
               </div>
