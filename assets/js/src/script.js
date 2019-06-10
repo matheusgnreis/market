@@ -7,6 +7,13 @@ $(function () {
   var windowSsoLogin
   //
 
+  if($('body').data('sso')){
+    if($('body').data('sso') !== '' && $('body').data('sso') === 1){
+      $("#btn-login-logista").attr("href", "/admin");
+      $("#btn-login-logista").text('Painel Lojista');
+    }
+  }
+
   var installItem = function () {
     // if not sso login
     // request new
