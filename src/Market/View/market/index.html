@@ -1,6 +1,5 @@
 {% extends "layout/main.html" %}
 {% import "macros/main.macros.html" as main %}
-{% import "parts/components.html" as component %}
 
 {% block content %}
 <main class="main-content">
@@ -16,14 +15,14 @@
     </div>
     <div class="row py-4">
       <div class="col">
-        <div class="card shadow-7" id="hero-home">
+        <div class="card shadow-4" id="hero-home">
           <div class="card-body">
-            <form class="input-round shadow-7" id="search-home" action="/{{params.dictionary.lang}}/apps?title="
+            <form class="input-round" id="search-home" action="/{{params.dictionary.lang}}/apps?title="
               method="GET">
               <div class="form-group input-group">
                 <input type="text" class="form-control" name="title" placeholder="Busque aplicativos">
                 <div class="input-group-append">
-                  <button class="btn btn-primary" type="submit">Buscar</button>
+                  <button class="btn btn-outline-primary" type="submit" style="border-radius: 0em 5em 5em 0em;">Buscar</button>
                 </div>
               </div>
             </form>
@@ -36,7 +35,7 @@
         <h6 class="py-4">{{getPageContent('home', 'main', '.section-header')}}</h6>
         <div class="row">
           {% for application in params.data %}
-          {{component.cards(params, application)}}
+          {{main.cards(params, application)}}
           {%endfor%}
         </div>
         <div class="py-4 text-center">
