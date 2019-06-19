@@ -54,9 +54,7 @@ $(function () {
               delete data.github
             }
             data.status = 'active'
-            if (!(data.authentication = application.authentication) || isEmpty(application.authentication)) {
-              delete data.authentication
-            }
+            data.authentication = application.authentication
             if (!(data.auth_callback_uri = application.auth_callback_uri) || isEmpty(application.auth_callback_uri)) {
               delete data.auth_callback_uri
             }
