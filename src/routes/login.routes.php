@@ -26,7 +26,6 @@ $app->get(
 
                     echo "
                         <script>
-                            window.opener.location.reload()
                             window.close();
                         </script>
                     ";
